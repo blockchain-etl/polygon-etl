@@ -41,7 +41,7 @@ logging_basic_config()
 @click.option('-c', '--contracts', type=str, required=True, help='The JSON file containing contracts.')
 @click.option('-p', '--provider-uri', default='https://mainnet.infura.io', show_default=True, type=str,
               help='The URI of the web3 provider e.g. '
-                   'file://$HOME/Library/Ethereum/geth.ipc or https://mainnet.infura.io')
+                   'file://$HOME/Library/Bor/geth.ipc or https://mainnet.infura.io')
 @click.option('-o', '--output', default='-', show_default=True, type=str, help='The output file. If not specified stdout is used.')
 @click.option('-w', '--max-workers', default=5, show_default=True, type=int, help='The maximum number of workers.')
 def extract_tokens(contracts, provider_uri, output, max_workers):

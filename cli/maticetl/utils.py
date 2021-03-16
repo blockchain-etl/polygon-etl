@@ -76,7 +76,7 @@ def rpc_response_to_result(response):
     if result is None:
         error_message = 'result is None in response {}.'.format(response)
         if response.get('error') is None:
-            error_message = error_message + ' Make sure Ethereum node is synced.'
+            error_message = error_message + ' Make sure Matic node is synced.'
             # When nodes are behind a load balancer it makes sense to retry the request in hopes it will go to other,
             # synced node
             raise RetriableValueError(error_message)
@@ -126,9 +126,3 @@ def pairwise(iterable):
     next(b, None)
     return zip(a, b)
 
-
-def check_classic_provider_uri(chain, provider_uri):
-    if chain == 'classic' and provider_uri == 'https://mainnet.infura.io':
-        warnings.warn("ETC Chain not supported on Infura.io. Using https://ethereumclassic.network instead")
-        return 'https://ethereumclassic.network'
-    return provider_uri

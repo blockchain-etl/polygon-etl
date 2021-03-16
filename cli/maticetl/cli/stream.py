@@ -35,7 +35,7 @@ from maticetl.thread_local_proxy import ThreadLocalProxy
 @click.option('--lag', default=0, show_default=True, type=int, help='The number of blocks to lag behind the network.')
 @click.option('-p', '--provider-uri', default='https://mainnet.infura.io', show_default=True, type=str,
               help='The URI of the web3 provider e.g. '
-                   'file://$HOME/Library/Ethereum/geth.ipc or https://mainnet.infura.io')
+                   'file://$HOME/Library/Bor/geth.ipc or https://mainnet.infura.io')
 @click.option('-o', '--output', type=str,
               help='Either Google PubSub topic path e.g. projects/your-project/topics/crypto_ethereum; '
                    'or Postgres connection url e.g. postgresql+pg8000://postgres:admin@127.0.0.1:5432/ethereum. '

@@ -32,7 +32,6 @@ from web3 import Web3
 from maticetl.jobs.export_all_common import export_all_common
 from maticetl.providers.auto import get_provider_from_uri
 from maticetl.service.eth_service import EthService
-from maticetl.utils import check_classic_provider_uri
 
 logging_basic_config()
 
@@ -111,14 +110,13 @@ def get_partitions(start, end, partition_batch_size, provider_uri):
               help='The number of blocks to export in partition.')
 @click.option('-p', '--provider-uri', default='https://mainnet.infura.io', show_default=True, type=str,
               help='The URI of the web3 provider e.g. '
-                   'file://$HOME/Library/Ethereum/geth.ipc or https://mainnet.infura.io')
+                   'file://$HOME/Library/Bor/geth.ipc or https://mainnet.infura.io')
 @click.option('-o', '--output-dir', default='output', show_default=True, type=str, help='Output directory, partitioned in Hive style.')
 @click.option('-w', '--max-workers', default=5, show_default=True, type=int, help='The maximum number of workers.')
 @click.option('-B', '--export-batch-size', default=100, show_default=True, type=int, help='The number of requests in JSON RPC batches.')
-@click.option('-c', '--chain', default='ethereum', show_default=True, type=str, help='The chain network to connect to.')
+@click.option('-c', '--chain', default='matic', show_default=True, type=str, help='The chain network to connect to.')
 def export_all(start, end, partition_batch_size, provider_uri, output_dir, max_workers, export_batch_size,
-               chain='ethereum'):
+               chain='matic'):
     """Exports all data for a range of blocks."""
-    provider_uri = check_classic_provider_uri(chain, provider_uri)
     export_all_common(get_partitions(start, end, partition_batch_size, provider_uri),
                       output_dir, provider_uri, max_workers, export_batch_size)

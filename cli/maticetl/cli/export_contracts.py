@@ -29,7 +29,6 @@ from maticetl.jobs.exporters.contracts_item_exporter import contracts_item_expor
 from blockchainetl_common.logging_utils import logging_basic_config
 from maticetl.thread_local_proxy import ThreadLocalProxy
 from maticetl.providers.auto import get_provider_from_uri
-from maticetl.utils import check_classic_provider_uri
 
 logging_basic_config()
 
@@ -42,11 +41,10 @@ logging_basic_config()
 @click.option('-w', '--max-workers', default=5, show_default=True, type=int, help='The maximum number of workers.')
 @click.option('-p', '--provider-uri', default='https://mainnet.infura.io', show_default=True, type=str,
               help='The URI of the web3 provider e.g. '
-                   'file://$HOME/Library/Ethereum/geth.ipc or https://mainnet.infura.io')
-@click.option('-c', '--chain', default='ethereum', show_default=True, type=str, help='The chain network to connect to.')
-def export_contracts(batch_size, contract_addresses, output, max_workers, provider_uri, chain='ethereum'):
+                   'file://$HOME/Library/Bor/geth.ipc or https://mainnet.infura.io')
+@click.option('-c', '--chain', default='matic', show_default=True, type=str, help='The chain network to connect to.')
+def export_contracts(batch_size, contract_addresses, output, max_workers, provider_uri, chain='matic'):
     """Exports contracts bytecode and sighashes."""
-    check_classic_provider_uri(chain, provider_uri)
     with smart_open(contract_addresses, 'r') as contract_addresses_file:
         contract_addresses = (contract_address.strip() for contract_address in contract_addresses_file
                               if contract_address.strip())

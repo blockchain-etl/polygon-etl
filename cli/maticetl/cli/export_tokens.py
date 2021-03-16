@@ -31,7 +31,6 @@ from maticetl.jobs.exporters.tokens_item_exporter import tokens_item_exporter
 from blockchainetl_common.logging_utils import logging_basic_config
 from maticetl.thread_local_proxy import ThreadLocalProxy
 from maticetl.providers.auto import get_provider_from_uri
-from maticetl.utils import check_classic_provider_uri
 
 logging_basic_config()
 
@@ -43,11 +42,10 @@ logging_basic_config()
 @click.option('-w', '--max-workers', default=5, show_default=True, type=int, help='The maximum number of workers.')
 @click.option('-p', '--provider-uri', default='https://mainnet.infura.io', show_default=True, type=str,
               help='The URI of the web3 provider e.g. '
-                   'file://$HOME/Library/Ethereum/geth.ipc or https://mainnet.infura.io')
-@click.option('-c', '--chain', default='ethereum', show_default=True, type=str, help='The chain network to connect to.')
-def export_tokens(token_addresses, output, max_workers, provider_uri, chain='ethereum'):
+                   'file://$HOME/Library/Bor/geth.ipc or https://mainnet.infura.io')
+@click.option('-c', '--chain', default='matic', show_default=True, type=str, help='The chain network to connect to.')
+def export_tokens(token_addresses, output, max_workers, provider_uri, chain='matic'):
     """Exports ERC20/ERC721 tokens."""
-    provider_uri = check_classic_provider_uri(chain, provider_uri)
     with smart_open(token_addresses, 'r') as token_addresses_file:
         job = ExportTokensJob(
             token_addresses_iterable=(token_address.strip() for token_address in token_addresses_file),

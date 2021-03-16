@@ -29,7 +29,6 @@ from maticetl.jobs.exporters.receipts_and_logs_item_exporter import receipts_and
 from blockchainetl_common.logging_utils import logging_basic_config
 from maticetl.thread_local_proxy import ThreadLocalProxy
 from maticetl.providers.auto import get_provider_from_uri
-from maticetl.utils import check_classic_provider_uri
 
 logging_basic_config()
 
@@ -40,18 +39,17 @@ logging_basic_config()
               help='The file containing transaction hashes, one per line.')
 @click.option('-p', '--provider-uri', default='https://mainnet.infura.io', show_default=True, type=str,
               help='The URI of the web3 provider e.g. '
-                   'file://$HOME/Library/Ethereum/geth.ipc or https://mainnet.infura.io')
+                   'file://$HOME/Library/Bor/geth.ipc or https://mainnet.infura.io')
 @click.option('-w', '--max-workers', default=5, show_default=True, type=int, help='The maximum number of workers.')
 @click.option('--receipts-output', default=None, show_default=True, type=str,
               help='The output file for receipts. If not provided receipts will not be exported. Use "-" for stdout')
 @click.option('--logs-output', default=None, show_default=True, type=str,
               help='The output file for receipt logs. '
                    'aIf not provided receipt logs will not be exported. Use "-" for stdout')
-@click.option('-c', '--chain', default='ethereum', show_default=True, type=str, help='The chain network to connect to.')
+@click.option('-c', '--chain', default='matic', show_default=True, type=str, help='The chain network to connect to.')
 def export_receipts_and_logs(batch_size, transaction_hashes, provider_uri, max_workers, receipts_output, logs_output,
-                             chain='ethereum'):
+                             chain='matic'):
     """Exports receipts and logs."""
-    provider_uri = check_classic_provider_uri(chain, provider_uri)
     with smart_open(transaction_hashes, 'r') as transaction_hashes_file:
         job = ExportReceiptsJob(
             transaction_hashes_iterable=(transaction_hash.strip() for transaction_hash in transaction_hashes_file),

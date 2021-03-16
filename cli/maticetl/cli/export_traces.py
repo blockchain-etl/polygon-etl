@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-
+#TODO : This method does not work in geth nodes, remove 
 import click
 
 from web3 import Web3
@@ -46,9 +46,9 @@ logging_basic_config()
 @click.option('--genesis-traces/--no-genesis-traces', default=False, show_default=True, help='Whether to include genesis traces')
 @click.option('--daofork-traces/--no-daofork-traces', default=False, show_default=True, help='Whether to include daofork traces')
 @click.option('-t', '--timeout', default=60, show_default=True, type=int, help='IPC or HTTP request timeout.')
-@click.option('-c', '--chain', default='ethereum', show_default=True, type=str, help='The chain network to connect to.')
+@click.option('-c', '--chain', default='matic', show_default=True, type=str, help='The chain network to connect to.')
 def export_traces(start_block, end_block, batch_size, output, max_workers, provider_uri,
-                  genesis_traces, daofork_traces, timeout=60, chain='ethereum'):
+                  genesis_traces, daofork_traces, timeout=60, chain='matic'):
     """Exports traces from parity node."""
     if chain == 'classic' and daofork_traces == True:
         raise ValueError(
