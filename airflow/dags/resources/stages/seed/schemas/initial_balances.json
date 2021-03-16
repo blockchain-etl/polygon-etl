@@ -1,0 +1,12 @@
+[
+    {
+        "name": "address",
+        "type": "STRING",
+        "description": ""
+    },
+    {
+        "name": "balance",
+        "type": "NUMERIC",
+        "description": ""
+    }
+]
