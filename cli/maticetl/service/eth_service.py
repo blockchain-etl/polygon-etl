@@ -24,10 +24,11 @@
 from datetime import datetime, timezone
 
 from maticetl.service.graph_operations import GraphOperations, OutOfBoundsError, Point
-
+from web3.middleware import geth_poa_middleware
 
 class EthService(object):
     def __init__(self, web3):
+        web3.middleware_stack.inject(geth_poa_middleware, layer=0)
         graph = BlockTimestampGraph(web3)
         self._graph_operations = GraphOperations(graph)
 
