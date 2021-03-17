@@ -14,6 +14,6 @@ DAG = build_load_dag(
     chain='matic',
     **read_load_dag_vars(
         var_prefix='matic_',
-        load_schedule_interval='0 2 * * *'
+        schedule_interval='0 2 * * *'
     )
 )
