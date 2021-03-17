@@ -11,7 +11,18 @@ def read_export_dag_vars(var_prefix, **kwargs):
     export_end_date = read_var('export_end_date', var_prefix, False, **kwargs)
     export_end_date = datetime.strptime(export_end_date, '%Y-%m-%d') if export_end_date is not None else None
 
-    provider_uris = read_var('provider_uris', var_prefix, True, **kwargs)
+    provider_uris = read_var('def read_load_dag_vars(var_prefix, **kwargs):
+    """Read Airflow variables for Load DAG"""
+    vars = {
+        'output_bucket': read_var('output_bucket', var_prefix, True, **kwargs),
+        'destination_dataset_project_id': read_var('destination_dataset_project_id', var_prefix, True, **kwargs),
+        'notification_emails': read_var('notification_emails', None, False, **kwargs),
+        'provider_uris_archival': read_var('provider_uris_archival', None, True, **kwargs),
+        # 'success_notification_emails': read_var('success_notification_emails', None, False, **kwargs),
+        # 'load_schedule_interval': read_var('load_schedule_interval', var_prefix, True, **kwargs),
+        'load_all_partitions': parse_bool(read_var('load_all_partitions', var_prefix, False, **kwargs), default=None),
+    }
+', var_prefix, True, **kwargs)
     provider_uris = [uri.strip() for uri in provider_uris.split(',')]
 
     export_max_active_runs = read_var('export_max_active_runs', var_prefix, False, **kwargs)
@@ -37,6 +48,7 @@ def read_load_dag_vars(var_prefix, **kwargs):
         'output_bucket': read_var('output_bucket', var_prefix, True, **kwargs),
         'destination_dataset_project_id': read_var('destination_dataset_project_id', var_prefix, True, **kwargs),
         'notification_emails': read_var('notification_emails', None, False, **kwargs),
+        'provider_uris_archival': read_var('provider_uris_archival', None, True, **kwargs),
         # 'success_notification_emails': read_var('success_notification_emails', None, False, **kwargs),
         # 'load_schedule_interval': read_var('load_schedule_interval', var_prefix, True, **kwargs),
         'load_all_partitions': parse_bool(read_var('load_all_partitions', var_prefix, False, **kwargs), default=None),

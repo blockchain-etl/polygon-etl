@@ -6,7 +6,6 @@ from maticetl_airflow.variables import read_export_dag_vars
 # airflow DAG
 DAG = build_export_dag(
     dag_id='matic_export_dag',
-    chain='matic',
     **read_export_dag_vars(
         var_prefix='matic_',
         export_schedule_interval='0 1 * * *',

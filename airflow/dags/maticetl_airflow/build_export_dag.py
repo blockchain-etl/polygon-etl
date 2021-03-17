@@ -25,7 +25,6 @@ def build_export_dag(
         provider_uris,
         provider_uris_archival,
         output_bucket,
-        cloud_provider,
         export_start_date,
         notification_emails=None,
         export_schedule_interval='0 0 * * *',
@@ -66,12 +65,9 @@ def build_export_dag(
         max_active_runs=export_max_active_runs
     )
 
-    if cloud_provider == 'aws':
-        from airflow.hooks.S3_hook import S3Hook
-        cloud_storage_hook = S3Hook(aws_conn_id="aws_default")
-    else:
-        from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
-        cloud_storage_hook = GoogleCloudStorageHook(google_cloud_storage_conn_id="google_cloud_default")
+
+    from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
+    cloud_storage_hook = GoogleCloudStorageHook(google_cloud_storage_conn_id="google_cloud_default")
 
     # Export
     def export_path(directory, date):
@@ -83,33 +79,19 @@ def build_export_dag(
         logging.info('Calling copy_to_export_path({}, {})'.format(file_path, export_path))
         filename = os.path.basename(file_path)
 
-        if cloud_provider == 'aws':
-            cloud_storage_hook.load_file(
-                filename=file_path,
-                bucket_name=output_bucket,
-                key=export_path + filename,
-                replace=True,
-                encrypt=False
-            )
-        else:
-            upload_to_gcs(
-                gcs_hook=cloud_storage_hook,
-                bucket=output_bucket,
-                object=export_path + filename,
-                filename=file_path)
+   
+       
+        upload_to_gcs(
+            gcs_hook=cloud_storage_hook,
+            bucket=output_bucket,
+            object=export_path + filename,
+            filename=file_path)
 
     def copy_from_export_path(export_path, file_path):
         logging.info('Calling copy_from_export_path({}, {})'.format(export_path, file_path))
         filename = os.path.basename(file_path)
-        if cloud_provider == 'aws':
-            # boto3.s3.Object
-            s3_object = cloud_storage_hook.get_key(
-                bucket_name=output_bucket,
-                key=export_path + filename
-            )
-            s3_object.download_file(file_path)
-        else:
-            download_from_gcs(bucket=output_bucket, object=export_path + filename, filename=file_path)
+        
+        download_from_gcs(bucket=output_bucket, object=export_path + filename, filename=file_path)
 
     def get_block_range(tempdir, date, provider_uri):
         logging.info('Calling get_block_range_for_date({}, {}, ...)'.format(provider_uri, date))
