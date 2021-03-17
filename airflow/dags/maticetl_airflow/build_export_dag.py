@@ -46,14 +46,14 @@ def build_export_dag(
     if notification_emails and len(notification_emails) > 0:
         default_dag_args['email'] = [email.strip() for email in notification_emails.split(',')]
 
-    export_daofork_traces_option = kwargs.get('export_daofork_traces_option')
-    export_genesis_traces_option = kwargs.get('export_genesis_traces_option')
-    export_blocks_and_transactions_toggle = kwargs.get('export_blocks_and_transactions_toggle')
-    export_receipts_and_logs_toggle = kwargs.get('export_receipts_and_logs_toggle')
-    extract_contracts_toggle = kwargs.get('extract_contracts_toggle')
-    extract_tokens_toggle = kwargs.get('extract_tokens_toggle')
-    extract_token_transfers_toggle = kwargs.get('extract_token_transfers_toggle')
-    export_traces_toggle = kwargs.get('export_traces_toggle')
+    export_daofork_traces_option = False
+    export_genesis_traces_option = False
+    export_blocks_and_transactions_toggle = True
+    export_receipts_and_logs_toggle = True
+    extract_contracts_toggle = False
+    extract_tokens_toggle = False
+    extract_token_transfers_toggle = True
+    export_traces_toggle = False
 
     if export_max_active_runs is None:
         export_max_active_runs = configuration.conf.getint('core', 'max_active_runs_per_dag')
