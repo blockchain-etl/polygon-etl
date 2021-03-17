@@ -37,7 +37,7 @@ def read_load_dag_vars(var_prefix, **kwargs):
         'output_bucket': read_var('output_bucket', var_prefix, True, **kwargs),
         'destination_dataset_project_id': read_var('destination_dataset_project_id', var_prefix, True, **kwargs),
         'notification_emails': read_var('notification_emails', None, False, **kwargs),
-        'success_notification_emails': read_var('success_notification_emails', None, False, **kwargs),
+        # 'success_notification_emails': read_var('success_notification_emails', None, False, **kwargs),
         'load_schedule_interval': read_var('load_schedule_interval', var_prefix, True, **kwargs),
         'load_all_partitions': parse_bool(read_var('load_all_partitions', var_prefix, False, **kwargs), default=None),
     }
