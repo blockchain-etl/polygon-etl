@@ -1,0 +1,6 @@
+config:
+  PROVIDER_URI: http://eth0-service.eth-0.svc.cluster.local:8545,http://eth1-service.eth-1.svc.cluster.local:8545
+  STREAM_OUTPUT: projects/<YOUR_PROJECT_HERE>/topics/crypto_ethereum
+  ROOT_ENTITY_TYPE: block
+  ENTITY_TYPES: block,transaction,log,token_transfer
+  GCS_PREFIX: gs://<YOUR_BUCKET_HERE>/ethereum-etl/streaming

@@ -1,0 +1,13 @@
+stream:
+  image:
+    repository: blockahin-etl/matic-etl
+    tag: 1.4.0
+config:
+  GCS_PREFIX: gs://<your_bucket>
+  STREAM_OUTPUT: postgresql+pg8000://postgres:admin@127.0.0.1:5432/ethereum
+  PROVIDER_URI: https://mainnet.infura.io/v3/<your_infura_project_key>
+  ENTITY_TYPES: block,transaction,log,token_transfer
+  LAG_BLOCKS: 18
+cloudSqlProxy:
+  enabled: true
+  instanceConnectionName: "<your_gcp_project_id>:us-central1:<cloud_sql_instance_id>"

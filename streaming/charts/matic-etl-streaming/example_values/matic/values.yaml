@@ -1,0 +1,9 @@
+stream:
+  image:
+    repository: blockchainetl/matic-etl
+    tag: 1.5.1
+config:
+  PROVIDER_URI: https://mainnet.infura.io/v3/<your_infura_project_key>
+  ENTITY_TYPES: block,transaction,log,token_transfer
+  LAG_BLOCKS: 18
+  CHAIN: null

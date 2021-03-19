@@ -1,0 +1,192 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "matic-etl-streaming.fullname" . }}
+  labels:
+{{ include "matic-etl-streaming.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "matic-etl-streaming.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "matic-etl-streaming.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app: etl-streaming
+        {{- if .Values.config.CHAIN }}
+        chain: {{ .Values.config.CHAIN }}
+        {{- end }}
+        {{- if .Values.config.ROOT_ENTITY_TYPE }}
+        rootEntitiType: {{ .Values.config.ROOT_ENTITY_TYPE }}
+        {{- end }}
+    spec:
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: google-cloud-key
+          secret:
+            secretName: streaming-app-key
+        - name: last-synced-block
+          emptyDir: {}
+      automountServiceAccountToken: true
+      {{- with .Values.securityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      initContainers:
+        - name: download-last-synced-block-file
+          image: "{{ .Values.init.image.repository }}:{{ .Values.init.image.tag }}"
+          imagePullPolicy: {{ .Values.init.image.pullPolicy }}
+          command:
+            - gsutil
+            - cp
+            - $(GCS_PREFIX)/{{ .Values.lsb_file }}
+            - {{ .Values.lsb_path }}/{{ .Values.lsb_file }}
+          volumeMounts:
+            - name: last-synced-block
+              mountPath: {{ .Values.lsb_path }}
+          env:
+            - name: GCS_PREFIX
+              valueFrom:
+                configMapKeyRef:
+                  name: "{{ .Release.Name }}-config"
+                  key: GCS_PREFIX
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /var/secrets/google/key.json
+          resources:
+            {{- toYaml .Values.init.resources | nindent 12 }}
+      containers:
+        - name: stream
+          image: "{{ .Values.stream.image.repository }}:{{ .Values.stream.image.tag }}"
+          imagePullPolicy: {{ .Values.stream.image.pullPolicy }}
+          args:
+            {{- if eq .Values.stream.image.repository "maticetl/bitcoin-etl" }}
+            - "stream"
+            - "--provider-uri={{ .Values.config.PROVIDER_URI }}"
+            - "--last-synced-block-file={{ .Values.lsb_path }}/{{ .Values.lsb_file }}"
+            - "--output={{ .Values.config.STREAM_OUTPUT }}"
+            - "--chain={{ .Values.config.CHAIN }}"
+            - "--lag={{ .Values.config.LAG_BLOCKS }}"
+            - "--max-workers={{ .Values.config.MAX_WORKERS }}"
+            - "--batch-size=5"
+            - "--block-batch-size=1"
+            - "--pid-file={{ .Values.lsb_path }}/{{ .Values.pid_file }}"
+            {{- end }}
+            {{- if eq .Values.stream.image.repository "maticetl/ethereum-etl" }}
+            - "stream"
+            - "--provider-uri={{ .Values.config.PROVIDER_URI }}"
+            - "--last-synced-block-file={{ .Values.lsb_path }}/{{ .Values.lsb_file }}"
+            - "--output={{ .Values.config.STREAM_OUTPUT }}"
+            - "--lag={{ .Values.config.LAG_BLOCKS }}"
+            - "--max-workers={{ .Values.config.MAX_WORKERS }}"
+            - "--batch-size=10"
+            - "--block-batch-size=1"
+            - "--entity-types={{ .Values.config.ENTITY_TYPES }}"
+            - "--pid-file={{ .Values.lsb_path }}/{{ .Values.pid_file }}"
+            {{- end }}
+          resources:
+            {{- toYaml .Values.stream.resources | nindent 12 }}
+          volumeMounts:
+            - name: google-cloud-key
+              mountPath: /var/secrets/google
+            - name: last-synced-block
+              mountPath: {{ .Values.lsb_path }}
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /var/secrets/google/key.json
+            - name: LAST_SYNCED_BLOCK_FILE_MAX_AGE_IN_SECONDS
+              value: "{{ .Values.stream.env.LAST_SYNCED_BLOCK_FILE_MAX_AGE_IN_SECONDS }}"
+          envFrom:
+            - configMapRef:
+                name: "{{ .Release.Name }}-config"
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - "file={{ .Values.lsb_path }}/{{ .Values.lsb_file }};
+              if [ ! -f $file ]; then echo \"File $file does not exist\" && exit 1; fi;
+              file_age=$(($(date +%s) - $(date -r $file +%s)));
+              max_age={{ .Values.stream.env.LAST_SYNCED_BLOCK_FILE_MAX_AGE_IN_SECONDS }};
+              echo \"$file age is $file_age seconds. Max healthy age is $max_age seconds\";
+              if [ $file_age -lt $max_age ]; then exit 0; else exit 1; fi"
+            initialDelaySeconds: {{ .Values.stream.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.stream.livenessProbe.periodSeconds }}
+            timeoutSeconds: 5
+            failureThreshold: 1
+        - name: upload-last-synced-block-file
+          image: "{{ .Values.upload.image.repository }}:{{ .Values.upload.image.tag }}"
+          imagePullPolicy: {{ .Values.upload.image.pullPolicy }}
+          command:
+            - sh
+            - -c
+            - "apk add --no-cache tini && exec tini -e 143 watch -n 60 gsutil cp {{ .Values.lsb_path }}/{{ .Values.lsb_file }} {{ .Values.config.GCS_PREFIX }}/{{ .Values.lsb_file }}"
+          volumeMounts:
+            - name: google-cloud-key
+              mountPath: /var/secrets/google
+            - name: last-synced-block
+              mountPath: {{ .Values.lsb_path }}
+          env:
+            - name: GCS_PREFIX
+              valueFrom:
+                configMapKeyRef:
+                  name: "{{ .Release.Name }}-config"
+                  key: GCS_PREFIX
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /var/secrets/google/key.json
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - "gcloud auth activate-service-account --key-file ${GOOGLE_APPLICATION_CREDENTIALS}"
+            preStop:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - "while [ -f {{ .Values.lsb_path }}/{{ .Values.pid_file }} ]; do sleep 1; done;
+                gsutil cp {{ .Values.lsb_path }}/{{ .Values.lsb_file }} ${GCS_PREFIX}/{{ .Values.lsb_file }}"
+          resources:
+            {{- toYaml .Values.upload.resources | nindent 12 }}
+        {{- if .Values.cloudSqlProxy.enabled }}
+        - name: cloudsql-proxy
+          image: "{{ .Values.cloudSqlProxy.image.repository }}:{{ .Values.cloudSqlProxy.image.tag }}"
+          imagePullPolicy: {{ .Values.cloudSqlProxy.image.pullPolicy }}
+          command: ["/cloud_sql_proxy",
+                    "-instances={{ .Values.cloudSqlProxy.instanceConnectionName }}=tcp:{{ .Values.cloudSqlProxy.port }}",
+                    # If running on a VPC, the Cloud SQL proxy can connect via Private IP. See:
+                    # https://cloud.google.com/sql/docs/mysql/private-ip for more info.
+                    # "-ip_address_types=PRIVATE",
+                    "-credential_file=/var/secrets/google/key.json"]
+          securityContext:
+            runAsUser: 2  # non-root user
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - name: google-cloud-key
+              mountPath: /var/secrets/google
+              readOnly: true
+          resources:
+            {{- toYaml .Values.cloudSqlProxy.resources | nindent 12 }}
+        {{- end }}
