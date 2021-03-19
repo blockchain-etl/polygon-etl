@@ -2,7 +2,7 @@ def GenerateConfig(context):
     resources = []
 
     chains = ['matic']
-    entity_types = ['blocks', 'transactions', 'logs'] #'token_transfers', 'traces', 'contracts', 'tokens'
+    entity_types = ['blocks', 'transactions', 'logs', 'token_transfers', 'traces', 'contracts', 'tokens']
 
     for chain in chains:
         topic_name_prefix = 'crypto_' + chain

@@ -1,7 +1,7 @@
 # matic ETL Streaming
 
 Streams the following Matic entities to Pub/Sub or Postgres using
-[ethereum-etl stream](https://github.com/matic-etl/ethereum-etl/tree/develop/docs/commands.md#stream):
+[ethereum-etl stream](https://github.com/blockchain-etl/matic-etl/tree/develop/docs/commands.md#stream):
 
 - blocks
 - transactions
@@ -13,6 +13,13 @@ Not Supported Yet:
 - traces
 - contracts
 - tokens
+
+## Prerequisites
+
+- Kubernetes 1.8+
+- Helm 2.16
+- PV provisioner support in the underlying infrastructure
+- [gcloud](https://cloud.google.com/sdk/install)
 
 ## Deployment Instructions
 
