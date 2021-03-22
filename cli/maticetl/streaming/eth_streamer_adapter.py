@@ -15,7 +15,7 @@ from maticetl.streaming.eth_item_id_calculator import EthItemIdCalculator
 from maticetl.streaming.eth_item_timestamp_calculator import EthItemTimestampCalculator
 from maticetl.thread_local_proxy import ThreadLocalProxy
 from web3 import Web3
-
+from web3.middleware import geth_poa_middleware
 
 class EthStreamerAdapter:
     def __init__(
@@ -32,12 +32,14 @@ class EthStreamerAdapter:
         self.entity_types = entity_types
         self.item_id_calculator = EthItemIdCalculator()
         self.item_timestamp_calculator = EthItemTimestampCalculator()
+        self.web3 = Web3(self.batch_web3_provider)
+        self.web3.middleware_stack.inject(geth_poa_middleware, layer=0)
 
     def open(self):
         self.item_exporter.open()
 
     def get_current_block_number(self):
-        return int(Web3(self.batch_web3_provider).eth.getBlock("latest").number)
+        return int(self.web3.eth.getBlock("latest").number)
 
     def export_all(self, start_block, end_block):
         # Export blocks and transactions
