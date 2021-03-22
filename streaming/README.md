@@ -1,18 +1,8 @@
-# matic ETL Streaming
+# Matic ETL Streaming
 
-Streams the following Matic entities to Pub/Sub or Postgres using
-[ethereum-etl stream](https://github.com/blockchain-etl/matic-etl/tree/develop/docs/commands.md#stream):
-
-- blocks
-- transactions
-- logs
-
-Not Supported Yet:
-
-- token_transfers
-- traces
-- contracts
-- tokens
+Streams Matic data to [Google Pub/Sub](https://cloud.google.com/pubsub) using
+[matic stream](https://github.com/blockchain-etl/matic-etl/tree/develop/docs/commands.md#stream).
+Runs in Google Kubernetes Engine.
 
 ## Prerequisites
 
@@ -21,98 +11,175 @@ Not Supported Yet:
 - PV provisioner support in the underlying infrastructure
 - [gcloud](https://cloud.google.com/sdk/install)
 
-## Deployment Instructions
+## Setting Up
 
-1. Create a cluster:
+1. Create a GKE cluster:
 
-```bash
-gcloud container clusters create matic-etl-streaming \
---zone us-central1-a \
---num-nodes 1 \
---disk-size 10GB \
---machine-type custom-2-4096 \
---network default \
---subnetwork default \
---scopes pubsub,storage-rw,logging-write,monitoring-write,service-management,service-control,trace
-```
+   ```bash
+   gcloud container clusters create matic-etl-streaming \
+   --zone us-central1-a \
+   --num-nodes 1 \
+   --disk-size 10GB \
+   --machine-type n1-standard-1 \
+   --network default \
+   --subnetwork default \
+   --scopes pubsub,storage-rw,logging-write,monitoring-write,service-management,service-control,trace
 
-2. Get `kubectl` credentials:
+   gcloud container clusters get-credentials matic-etl-streaming --zone us-central1-a
 
-```bash
-gcloud container clusters get-credentials ethereum-etl-streaming \
---zone us-central1-a
-```
+   # Make sure the user has "Kubernetes Engine Admin" role.
+   helm init
+   bash patch-tiller.sh
+   ```
 
-3. Create Pub/Sub topics (use `create_pubsub_topics_ethereum.sh`). Skip this step if you need to stream to Postgres.
+2. Create Pub/Sub topics and subscriptions:
 
-- "crypto_matic.blocks"
-- "crypto_matic.transactions"
-- "crypto_matic.logs"
+   ```bash
+   gcloud deployment-manager deployments create matic-etl-pubsub-topics-0 --template deployment_manager_pubsub_topics.py
+   gcloud deployment-manager deployments create matic-etl-pubsub-subscriptions-0 --template deployment_manager_pubsub_subscriptions.py \
+   --properties topics_project:<project_where_topics_deployed>
+   ```
 
-Not Supported yet:
+3. Create GCS bucket. Upload a text file with block number you want to start streaming from to
+   `gs:/<YOUR_BUCKET_HERE>/matic-etl/streaming/last_synced_block.txt`.
 
-- "crypto_ethereum.token_transfers"
-- "crypto_ethereum.traces"
-- "crypto_ethereum.contracts"
-- "crypto_ethereum.tokens"
+4. Create "matic-etl-app" service account with roles:
 
-4. Create GCS bucket. Upload a text file with block number you want to start streaming from to
-   `gs:/<YOUR_BUCKET_HERE>/ethereum-etl/streaming/last_synced_block.txt`.
-
-5. Create "matic-etl-app" service account with roles:
    - Pub/Sub Editor
    - Storage Object Admin
-   - Cloud SQL Client
 
-Download the key. Create a Kubernetes secret:
+   Download the key. Create a Kubernetes secret:
 
-```bash
-kubectl create secret generic streaming-app-key --from-file=key.json=$HOME/Downloads/key.json
-```
+   ```bash
+   kubectl create secret generic streaming-app-key --from-file=key.json=$HOME/Downloads/key.json
+   ```
 
-6. Install [helm] (https://github.com/helm/helm#install)
+5. Copy [example_values.yaml](example_values.yaml) file to `values.yaml` and adjust it at least with
+   your bucket and project ID.
 
-```bash
-brew install helm
-helm init
-bash patch-tiller.sh
-```
+6. Install ETL apps via helm using chart from this repo and values we adjust on previous step, for example:
 
-7. Copy [example values](example_values) directory to `values` dir and adjust all the files at least with your bucket and project ID.
-8. Install ETL apps via helm using chart from this repo and values we adjust on previous step, for example:
+   ```bash
+   helm install --name matic-etl charts/matic-etl-streaming --values values.yaml
+   ```
 
-```bash
-helm install --name btc --namespace btc charts/matic-etl-streaming --values values/bitcoin/bitcoin/values.yaml
-helm install --name bch --namespace btc charts/matic-etl-streaming --values values/bitcoin/bitcoin_cash/values.yaml
-helm install --name dash --namespace btc charts/matic-etl-streaming --values values/bitcoin/dash/values.yaml
-helm install --name dogecoin --namespace btc charts/matic-etl-streaming --values values/bitcoin/dogecoin/values.yaml
-helm install --name litecoin --namespace btc charts/matic-etl-streaming --values values/bitcoin/litecoin/values.yaml
-helm install --name zcash --namespace btc charts/matic-etl-streaming --values values/bitcoin/zcash/values.yaml
+7. Use `describe` command to troubleshoot, f.e.:
 
-helm install --name eth-blocks --namespace eth charts/matic-etl-streaming \
---values values/ethereum/values.yaml --values values/ethereum/block_data/values.yaml
-helm install --name eth-traces --namespace eth charts/matic-etl-streaming \
---values values/ethereum/values.yaml --values values/ethereum/trace_data/values.yaml
+   ```bash
+   kubectl describe pods
+   kubectl describe node [NODE_NAME]
+   ```
 
-```
+## Configuration
 
-Ethereum block and trace data streaming are decoupled for higher reliability.
+The following table lists the configurable parameters of the matic-etl-streaming chart and their default values.
 
-To stream to Postgres:
+| Parameter                                              | Description                                                                                                               | Default                                       |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| `stream.image.repository`                              | Stream image source repository name                                                                                       | `blockchainetl/matic-etl`                     |
+| `stream.image.tag`                                     | Image release tag                                                                                                         | `1.0.2`                                       |
+| `stream.image.pullPolicy`                              | Image pull policy                                                                                                         | `IfNotPresent`                                |
+| `stream.resources`                                     | CPU/Memory resource request/limit                                                                                         | `100m/128Mi, 350m/512Mi`                      |
+| `stream.env.LAST_SYNCED_BLOCK_FILE_MAX_AGE_IN_SECONDS` | The number of seconds since new blocks have been pulled from the node, after which the deployment is considered unhealthy | `600`                                         |
+| `config.PROVIDER_URI`                                  | URI of matic node                                                                                                         | `grpcs://api.mainnet.matic.one:443`           |
+| `config.STREAM_OUTPUT`                                 | Google Pub Sub topic path prefix                                                                                          | `projects/<your-project>/topics/crypto_matic` |
+| `config.GCS_PREFIX`                                    | Google Storage directory of last synced block file                                                                        | `gs://<your-bucket>/matic-etl/streaming`      |
+| `config.ENTITY_TYPES`                                  | The list of entity types to export                                                                                        | ``                                            |
+| `config.LAG_BLOCKS`                                    | The number of blocks to lag behind the network                                                                            | `10`                                          |
+| `config.MAX_WORKERS`                                   | The number of workers                                                                                                     | `4`                                           |
+| `lsb_file`                                             | Last synced block file name                                                                                               | `last_synced_block.txt`                       |
 
-```bash
-helm install --name eth-postgres --namespace eth charts/matic-etl-streaming \
---values values/ethereum/values-postgres.yaml
-```
-
-Refer to https://github.com/matic-etl/ethereum-etl-postgres for table schema and initial data load.
-
-9. Use `describe` command to troubleshoot, f.e.:
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```bash
-kubectl describe pods -n btc
-kubectl describe node [NODE_NAME]
+$ helm install --name matic --values values.yaml charts/matic-etl-streaming
 ```
 
-Refer to [matic-etl-dataflow](https://github.com/matic-etl/matic-etl-dataflow)
-for connecting Pub/Sub to BigQuery.
+### Creating a Cloud Source Repository for Configuration Files
+
+Below are the commands for creating a Cloud Source Repository to hold values.yaml:
+
+```bash
+REPO_NAME=${PROJECT}-streaming-config-${ENVIRONMENT_INDEX} && echo "Repo name ${REPO_NAME}"
+gcloud source repos create ${REPO_NAME}
+gcloud source repos clone ${REPO_NAME} && cd ${REPO_NAME}
+
+# Put values.yaml to the root of the repo
+
+git add values.yaml && git commit -m "Initial commit"
+git push
+```
+
+Check a [separate file](ops.md) for operations.
+
+## Subscribing to Live matic Data Feeds
+
+Install Google Cloud SDK:
+
+```bash
+curl https://sdk.cloud.google.com | bash
+exec -l $SHELL
+gcloud init
+```
+
+Create a Pub/Sub subscription for matic actions:
+
+```bash
+gcloud pubsub subscriptions create crypto_matic.actions.test --topic=crypto_matic.actions --topic-project=public-data-finance
+```
+
+Read a single message from the subscription to test it works:
+
+```bash
+gcloud pubsub subscriptions pull crypto_matic.actions.test
+```
+
+Now you can run a subscriber and process the messages in the subscription, using this Python script:
+
+`subscribe.py`:
+
+```python
+import time
+from google.cloud import pubsub_v1
+project_id = "<your_project>"
+subscription_name = "crypto_matic.actions.test"
+subscriber = pubsub_v1.SubscriberClient()
+# The `subscription_path` method creates a fully qualified identifier
+# in the form `projects/{project_id}/subscriptions/{subscription_name}`
+subscription_path = subscriber.subscription_path(project_id, subscription_name)
+def callback(message):
+    print('Received message: {}'.format(message))
+    message.ack()
+subscriber.subscribe(subscription_path, callback=callback)
+# The subscriber is non-blocking. We must keep the main thread from
+# exiting to allow it to process messages asynchronously in the background.
+print('Listening for messages on {}'.format(subscription_path))
+while True:
+    time.sleep(60)
+```
+
+Make sure to provide project id in the script above
+
+Install the dependencies and run the script:
+
+```bash
+pip install google-cloud-pubsub==1.0.2
+python subscribe.py
+```
+
+You should see:
+
+```
+Listening for messages...
+Received message: Message {
+  data: b'{"type": "action", "version": 1, "nonce": 0, "gas_...'
+  attributes: {}
+}
+Received message: Message {
+  data: b'{"type": "action", "version": 1, "nonce": 0, "gas_...'
+  attributes: {}
+}
+...
+```
+
+You can also use Go, Java, Node.js or C#: https://cloud.google.com/pubsub/docs/pull.

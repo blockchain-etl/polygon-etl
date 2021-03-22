@@ -1,5 +1,6 @@
 steps:
   - name: "${_REGISTRY}/$PROJECT_ID/helm"
+    dir: "streaming"
     args:
       - package
       - charts/$_CHART_NAME
@@ -11,6 +12,7 @@ steps:
       - HELM_REPO_URL=$_HELM_REPO_URL
 
   - name: "${_REGISTRY}/$PROJECT_ID/helm"
+    dir: "streaming"
     args:
       - plugin
       - install
@@ -20,6 +22,7 @@ steps:
     id: "add version plugin"
 
   - name: "${_REGISTRY}/$PROJECT_ID/helm"
+    dir: "streaming"
     entrypoint: "bash"
     args:
       - -c
@@ -27,6 +30,7 @@ steps:
     id: "save version to artifact"
 
   - name: "${_REGISTRY}/$PROJECT_ID/helm"
+    dir: "streaming"
     entrypoint: "bash"
     args:
       - -c
@@ -35,6 +39,7 @@ steps:
 
   # disable caching on repo index, https://github.com/helm/helm/issues/2453#issuecomment-301904742
   - name: gcr.io/cloud-builders/gsutil
+    dir: "streaming"
     args:
       - setmeta
       - -h
@@ -46,15 +51,8 @@ substitutions:
   _ENV: dev
   _CHART_NAME: matic-etl-streaming
   _ARTIFACT_FILENAME: matic-etl-streaming-chart-version
-  _HELM_REPO_NAME: matic-k8s
-  _HELM_REPO_URL: gs://matic-k8s/charts
-  _ARTIFACT_URL: gs://artifacts-/versions/
+  _HELM_REPO_NAME: matic-etl-k8s
+  _HELM_REPO_URL: gs://matic-etl-k8s/charts
 options:
   env:
     - SKIP_CLUSTER_CONFIG=true
-
-artifacts:
-  objects:
-    location: gs://artifacts-${PROJECT_ID}/versions/${_ENV}/
-    paths:
-      - $_ARTIFACT_FILENAME
