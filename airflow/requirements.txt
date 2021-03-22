@@ -1,0 +1,7 @@
+apache-airflow[gcp]==1.10.3
+flask==1.0.4
+google-cloud-bigquery
+google-cloud-storage
+google-api-python-client
+pytest==5.4.1
+matic-etl==0.0.1

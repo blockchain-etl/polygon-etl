@@ -1,0 +1,10 @@
+stream:
+  image:
+    repository: blockchainetl/matic-etl
+    tag: 1.0.2
+config:
+  PROVIDER_URI: "grpcs://api.mainnet.matic.one:443"
+  STREAM_OUTPUT: "projects/<your_project>/topics/mainnet"
+  GCS_PREFIX: "gs://<your_bucket>/matic-etl/streaming"
+  LAG_BLOCKS: "10"
+  ENTITY_TYPES: "block,transaction,log,token_transfer"

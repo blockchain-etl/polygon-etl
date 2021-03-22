@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name:  "{{ .Release.Name }}-config"
+  labels:
+{{ include "matic-etl-streaming.labels" . | indent 4 }}
+data:
+  PROVIDER_URI: "{{ .Values.config.PROVIDER_URI }}"
+  STREAM_OUTPUT: "{{ .Values.config.STREAM_OUTPUT }}"
+  GCS_PREFIX: "{{ .Values.config.GCS_PREFIX }}"
+  LAG_BLOCKS: "{{ .Values.config.LAG_BLOCKS }}"
+  MAX_WORKERS: "{{ .Values.config.MAX_WORKERS }}"
+  ENTITY_TYPES: "{{ .Values.config.ENTITY_TYPES }}"

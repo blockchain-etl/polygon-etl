@@ -1,0 +1,58 @@
+steps:
+  - name: "${_REGISTRY}/$PROJECT_ID/helm"
+    dir: "streaming"
+    args:
+      - package
+      - charts/$_CHART_NAME
+    id: "helm package"
+    env:
+      - GCS_PLUGIN_VERSION=0.2.2
+      - HELMFILE_VERSION=v0.85.3
+      - HELM_REPO_NAME=$_HELM_REPO_NAME
+      - HELM_REPO_URL=$_HELM_REPO_URL
+
+  - name: "${_REGISTRY}/$PROJECT_ID/helm"
+    dir: "streaming"
+    args:
+      - plugin
+      - install
+      - https://github.com/mbenabda/helm-local-chart-version
+      - --version
+      - v0.0.6
+    id: "add version plugin"
+
+  - name: "${_REGISTRY}/$PROJECT_ID/helm"
+    dir: "streaming"
+    entrypoint: "bash"
+    args:
+      - -c
+      - helm local-chart-version get -c charts/$_CHART_NAME > $_ARTIFACT_FILENAME
+    id: "save version to artifact"
+
+  - name: "${_REGISTRY}/$PROJECT_ID/helm"
+    dir: "streaming"
+    entrypoint: "bash"
+    args:
+      - -c
+      - helm gcs push ${_CHART_NAME}-$(cat $_ARTIFACT_FILENAME).tgz $_HELM_REPO_NAME
+    id: "helm push"
+
+  # disable caching on repo index, https://github.com/helm/helm/issues/2453#issuecomment-301904742
+  - name: gcr.io/cloud-builders/gsutil
+    dir: "streaming"
+    args:
+      - setmeta
+      - -h
+      - "Cache-Control:private, max-age=0, no-transform"
+      - ${_HELM_REPO_URL}/index.yaml
+
+substitutions:
+  _REGISTRY: gcr.io
+  _ENV: dev
+  _CHART_NAME: matic-etl-streaming
+  _ARTIFACT_FILENAME: matic-etl-streaming-chart-version
+  _HELM_REPO_NAME: matic-etl-k8s
+  _HELM_REPO_URL: gs://matic-etl-k8s/charts
+options:
+  env:
+    - SKIP_CLUSTER_CONFIG=true
