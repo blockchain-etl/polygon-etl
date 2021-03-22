@@ -1,4 +1,4 @@
-FROM python:3.6-slim
+FROM python:3.6
 MAINTAINER Evgeny Medvedev <evge.medvedev@gmail.com>
 ENV PROJECT_DIR=matic-etl
 
