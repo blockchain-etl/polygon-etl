@@ -1,0 +1,12 @@
+[
+    {
+        "name": "tableRow",
+        "type": "STRING",
+        "description": "Failed TableRow serialized to json string"
+    },
+    {
+        "name": "errors",
+        "type": "STRING",
+        "description": "Insert errors serialized to json string"
+    }
+]
