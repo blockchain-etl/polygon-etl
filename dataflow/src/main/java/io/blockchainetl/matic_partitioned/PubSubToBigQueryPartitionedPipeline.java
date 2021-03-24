@@ -1,4 +1,4 @@
-package io.blockchainetl.ethereum_partitioned;
+package io.blockchainetl.matic_partitioned;
 
 import com.google.api.services.bigquery.model.TableRow;
 import com.google.api.services.bigquery.model.TableSchema;
