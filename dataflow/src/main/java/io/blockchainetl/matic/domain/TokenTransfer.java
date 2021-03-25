@@ -1,4 +1,4 @@
-package io.blockchainetl.ethereum.domain;
+package io.blockchainetl.matic.domain;
 
 import com.google.common.base.Objects;
 import org.apache.avro.reflect.Nullable;
