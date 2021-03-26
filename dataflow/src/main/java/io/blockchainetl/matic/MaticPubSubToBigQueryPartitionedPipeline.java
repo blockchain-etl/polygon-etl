@@ -1,4 +1,4 @@
-package io.blockchainetl.matic_partitioned;
+package io.blockchainetl.matic;
 
 import com.google.api.services.bigquery.model.TableRow;
 import io.blockchainetl.common.PubSubToBigQueryPipelineOptions;

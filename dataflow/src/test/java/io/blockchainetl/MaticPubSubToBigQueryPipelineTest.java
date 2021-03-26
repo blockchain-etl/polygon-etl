@@ -29,7 +29,7 @@ import java.util.List;
 
 
 @RunWith(JUnit4.class)
-public class maticPubSubToBigQueryPipelineTest {
+public class MaticPubSubToBigQueryPipelineTest {
 
     @Rule
     public TestPipeline p = TestPipeline.create();

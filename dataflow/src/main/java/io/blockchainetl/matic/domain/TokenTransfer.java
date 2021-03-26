@@ -1,5 +1,6 @@
 package io.blockchainetl.matic.domain;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import org.apache.avro.reflect.Nullable;
 import org.apache.beam.sdk.coders.AvroCoder;
@@ -150,7 +151,7 @@ public class TokenTransfer {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
             .add("tokenAddress", tokenAddress)
             .add("fromAddress", fromAddress)
             .add("toAddress", toAddress)
