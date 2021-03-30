@@ -14,6 +14,9 @@ def read_export_dag_vars(var_prefix, **kwargs):
     provider_uris = read_var('provider_uris', var_prefix, True, **kwargs)
     provider_uris = [uri.strip() for uri in provider_uris.split(',')]
 
+    provider_uris_archival = read_var('provider_uris_archival', var_prefix, True, **kwargs)
+    provider_uris_archival = [uri.strip() for uri in provider_uris_archival.split(',')]
+
     export_max_active_runs = read_var('export_max_active_runs', var_prefix, False, **kwargs)
     export_max_active_runs = int(export_max_active_runs) if export_max_active_runs is not None else None
 
@@ -23,7 +26,7 @@ def read_export_dag_vars(var_prefix, **kwargs):
         'export_end_date': export_end_date,
         'export_schedule_interval': read_var('export_schedule_interval', var_prefix, True, **kwargs),
         'provider_uris': provider_uris,
-        'provider_uris_archival': read_var('provider_uris_archival', None, True, **kwargs),
+        'provider_uris_archival': provider_uris_archival,
         'notification_emails': read_var('notification_emails', None, False, **kwargs),
         'export_max_active_runs': export_max_active_runs,
         'export_max_workers': int(read_var('export_max_workers', var_prefix, True, **kwargs)),
