@@ -16,7 +16,7 @@ from maticetl.cli import (
     extract_contracts,
     extract_tokens,
     extract_token_transfers,
-    export_traces,
+    export_geth_traces,
 )
 
 
@@ -53,7 +53,7 @@ def build_export_dag(
     extract_contracts_toggle = False
     extract_tokens_toggle = False
     extract_token_transfers_toggle = True
-    export_traces_toggle = False
+    export_traces_toggle = True
 
     if export_max_active_runs is None:
         export_max_active_runs = configuration.conf.getint('core', 'max_active_runs_per_dag')
@@ -226,19 +226,17 @@ def build_export_dag(
         with TemporaryDirectory() as tempdir:
             start_block, end_block = get_block_range(tempdir, execution_date, provider_uri)
 
-            logging.info('Calling export_traces({}, {}, {}, ...,{}, {}, {}, {})'.format(
+            logging.info('Calling export_geth_traces({}, {}, {}, ...,{}, {}, {}, {})'.format(
                 start_block, end_block, export_batch_size, export_max_workers, provider_uri,
                 export_genesis_traces_option, export_daofork_traces_option
             ))
-            export_traces.callback(
+            export_geth_traces.callback(
                 start_block=start_block,
                 end_block=end_block,
                 batch_size=export_batch_size,
                 output=os.path.join(tempdir, "traces.csv"),
                 max_workers=export_max_workers,
-                provider_uri=provider_uri,
-                genesis_traces=export_genesis_traces_option,
-                daofork_traces=export_daofork_traces_option,
+                provider_uri=provider_uri
             )
 
             copy_to_export_path(
@@ -286,7 +284,7 @@ def build_export_dag(
 
     export_traces_operator = add_export_task(
         export_traces_toggle,
-        "export_traces",
+        "export_geth_traces",
         add_provider_uri_fallback_loop(export_traces_command, provider_uris_archival)
     )
 
