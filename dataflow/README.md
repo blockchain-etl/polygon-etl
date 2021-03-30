@@ -1,37 +1,36 @@
 # matic ETL Dataflow
 
-[Apache Beam](https://beam.apache.org/) pipeline for moving matic data from Pub/Sub to BigQuery. 
-Deployed in [Google Dataflow](https://cloud.google.com/dataflow).  
+[Apache Beam](https://beam.apache.org/) pipeline for moving matic data from Pub/Sub to BigQuery.
+Deployed in [Google Dataflow](https://cloud.google.com/dataflow).
 
 ## Setting Up
 
 1. Create a GCS bucket used for staging and temp location:
 
-    ```bash
-    gcloud config set project <your_gcp_project>
-    PROJECT=$(gcloud config get-value project 2> /dev/null)
-    ENVIRONMENT_INDEX=0
-    BUCKET=${PROJECT}-dataflow-${ENVIRONMENT_INDEX} && echo "${BUCKET}"
-    gsutil mb gs://${BUCKET}/
-    ```                             
-   
+   ```bash
+   gcloud config set project <your_gcp_project>
+   PROJECT=$(gcloud config get-value project 2> /dev/null)
+   ENVIRONMENT_INDEX=0
+   BUCKET=${PROJECT}-dataflow-${ENVIRONMENT_INDEX} && echo "${BUCKET}"
+   gsutil mb gs://${BUCKET}/
+   ```
+
 2. Create the errors table:
 
-    ```bash
-    bq mk --table --description "matic ETL Streaming Errors" \
-     ${PROJECT}:crypto_matic.errors \
-     src/main/resources/errors-schema.json 
-    ```  
-   
+   ```bash
+   bq mk --table --description "matic ETL Streaming Errors" \
+    ${PROJECT}:crypto_matic.errors \
+    src/main/resources/errors-schema.json
+   ```
+
 3. Copy `exampleChainConfig.json` to `chainConfig.json` and update `chainConfig.json` with your values.
 
 4. Start the Dataflow job in:
 
-    ```bash
+   ```bash
    mvn -e -Pdataflow-runner compile exec:java \
-   -Dexec.mainClass=io.blockchainetl.matic.maticPubSubToBigQueryPipeline \
+   -Dexec.mainClass=io.blockchainetl.matic.MaticPubSubToBigQueryPipeline \
    -Dexec.args="--chainConfigFile=chainConfig.json \
-   --outputErrorsTable=<errors_table_project>:crypto_matic.errors \
    --tempLocation=gs://${BUCKET}/temp \
    --project=${PROJECT} \
    --runner=DataflowRunner \
@@ -41,12 +40,12 @@ Deployed in [Google Dataflow](https://cloud.google.com/dataflow).
    --diskSizeGb=30 \
    --region=us-central1 \
    --zone=us-central1-a \
-   " 
-   ``` 
+   "
+   ```
 
 ### Creating a Cloud Source Repository for Configuration Files
 
-Below are the commands for creating a Cloud Source Repository to hold chainConfig.json: 
+Below are the commands for creating a Cloud Source Repository to hold chainConfig.json:
 
 ```bash
 REPO_NAME=${PROJECT}-dataflow-config-${ENVIRONMENT_INDEX} && echo "Repo name ${REPO_NAME}"
