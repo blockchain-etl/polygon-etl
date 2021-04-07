@@ -50,10 +50,9 @@ class ExportGethTracesJob(BaseJob):
 
         self.geth_trace_mapper = EthGethTraceMapper()
 
-
     def _check_result(self, result, block_number):
         for tx_trace in result:
-            if tx_trace.get('error') is None:
+            if tx_trace.get('result') is None:
                 raise RetriableValueError(
                     'Error for trace in block {block}. Need to retry. Error: {err}, trace: {trace}'
                         .format(block=block_number, trace=json.dumps(tx_trace), err=tx_trace.get('error'))

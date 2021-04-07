@@ -24,6 +24,8 @@ from maticetl.executors.batch_work_executor import BatchWorkExecutor
 from blockchainetl_common.jobs.base_job import BaseJob
 from maticetl.mappers.trace_mapper import EthTraceMapper
 from maticetl.mappers.geth_trace_mapper import EthGethTraceMapper
+from maticetl.service.trace_id_calculator import calculate_trace_ids
+from maticetl.service.trace_status_calculator import calculate_trace_statuses
 
 
 class ExtractGethTracesJob(BaseJob):
@@ -48,11 +50,18 @@ class ExtractGethTracesJob(BaseJob):
         self.batch_work_executor.execute(self.traces_iterable, self._extract_geth_traces)
 
     def _extract_geth_traces(self, geth_traces):
+        all_traces = []
+
         for geth_trace_dict in geth_traces:
             geth_trace = self.geth_trace_mapper.json_dict_to_geth_trace(geth_trace_dict)
             traces = self.trace_mapper.geth_trace_to_traces(geth_trace)
-            for trace in traces:
-                self.item_exporter.export_item(self.trace_mapper.trace_to_dict(trace))
+            all_traces.extend(traces)
+
+        calculate_trace_statuses(all_traces)
+        calculate_trace_ids(all_traces)
+
+        for trace in all_traces:
+            self.item_exporter.export_item(self.trace_mapper.trace_to_dict(trace))
               
     def _end(self):
         self.batch_work_executor.shutdown()
