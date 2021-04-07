@@ -27,7 +27,7 @@ from maticetl.json_rpc_requests import generate_trace_block_by_number_json_rpc
 from blockchainetl_common.jobs.base_job import BaseJob
 from maticetl.mappers.geth_trace_mapper import EthGethTraceMapper
 from maticetl.utils import validate_range, rpc_response_to_result
- from maticetl.misc.retriable_value_error import RetriableValueError
+from maticetl.misc.retriable_value_error import RetriableValueError
 
 # Exports geth traces
 class ExportGethTracesJob(BaseJob):
