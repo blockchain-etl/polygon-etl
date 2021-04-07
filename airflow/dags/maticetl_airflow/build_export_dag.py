@@ -17,6 +17,7 @@ from maticetl.cli import (
     extract_tokens,
     extract_token_transfers,
     export_geth_traces,
+    extract_geth_traces
 )
 
 
@@ -234,9 +235,15 @@ def build_export_dag(
                 start_block=start_block,
                 end_block=end_block,
                 batch_size=export_batch_size,
-                output=os.path.join(tempdir, "traces.csv"),
+                output=os.path.join(tempdir, "geth_traces.json"),
                 max_workers=export_max_workers,
                 provider_uri=provider_uri
+            )
+            extract_geth_traces.callback(
+                input=os.path.join(tempdir, "geth_traces.json"),
+                output=os.path.join(tempdir, 'traces.csv'),
+                batch_size=100,
+                max_workers=1
             )
 
             copy_to_export_path(
