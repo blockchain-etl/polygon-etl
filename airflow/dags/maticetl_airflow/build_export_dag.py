@@ -239,6 +239,10 @@ def build_export_dag(
                 max_workers=export_max_workers,
                 provider_uri=provider_uri
             )
+            copy_to_export_path(
+                os.path.join(tempdir, "geth_traces.json"), export_path("traces", execution_date)
+            )
+
             extract_geth_traces.callback(
                 input=os.path.join(tempdir, "geth_traces.json"),
                 output=os.path.join(tempdir, 'traces.csv'),
