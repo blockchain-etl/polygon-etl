@@ -1,0 +1,7 @@
+{
+  "matic_destination_dataset_project_id": "rising-guide-309217",
+  "matic_export_max_active_runs": 3,
+  "matic_output_bucket": "rising-guide-309217-0",
+  "matic_provider_uris": "https://rpc-mainnet.maticvigil.com/v1/b7cc1ff98f8f64e0adf428d890fb04cc7a475be2",
+  "matic_provider_uris_archival": "https://polished-twilight-hill.matic.quiknode.pro/ab1c337372adb12a1768bc4e6f05c2bec646c32a/"
+}

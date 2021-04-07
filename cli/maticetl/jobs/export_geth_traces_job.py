@@ -56,7 +56,7 @@ class ExportGethTracesJob(BaseJob):
             if tx_trace.get('error') is None:
                 raise RetriableValueError(
                     'Error for trace in block {block}. Need to retry. Error: {err}, trace: {trace}'
-                        .format(block=block_number, trace=json.dumps(tx_trace), err=tx_trace['error'])
+                        .format(block=block_number, trace=json.dumps(tx_trace), err=tx_trace.get('error'))
                 )
 
     def _start(self):

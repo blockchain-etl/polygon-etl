@@ -51,8 +51,8 @@ def build_export_dag(
     export_genesis_traces_option = False
     export_blocks_and_transactions_toggle = True
     export_receipts_and_logs_toggle = True
-    extract_contracts_toggle = False
-    extract_tokens_toggle = False
+    extract_contracts_toggle = True
+    extract_tokens_toggle = True
     extract_token_transfers_toggle = True
     export_traces_toggle = True
 
