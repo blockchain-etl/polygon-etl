@@ -55,6 +55,9 @@ def build_export_dag(
     extract_tokens_toggle = True
     extract_token_transfers_toggle = True
     export_traces_toggle = True
+    export_traces_from_gcs = False
+
+
 
     if export_max_active_runs is None:
         export_max_active_runs = configuration.conf.getint('core', 'max_active_runs_per_dag')
@@ -231,17 +234,24 @@ def build_export_dag(
                 start_block, end_block, export_batch_size, export_max_workers, provider_uri,
                 export_genesis_traces_option, export_daofork_traces_option
             ))
-            export_geth_traces.callback(
-                start_block=start_block,
-                end_block=end_block,
-                batch_size=export_batch_size,
-                output=os.path.join(tempdir, "geth_traces.json"),
-                max_workers=export_max_workers,
-                provider_uri=provider_uri
-            )
-            copy_to_export_path(
-                os.path.join(tempdir, "geth_traces.json"), export_path("traces", execution_date)
-            )
+
+            if not export_traces_from_gcs:
+                export_geth_traces.callback(
+                    start_block=start_block,
+                    end_block=end_block,
+                    batch_size=export_batch_size,
+                    output=os.path.join(tempdir, "geth_traces.json"),
+                    max_workers=export_max_workers,
+                    provider_uri=provider_uri
+                )
+                copy_to_export_path(
+                    os.path.join(tempdir, "geth_traces.json"), export_path("traces", execution_date)
+                )
+            else:
+                copy_from_export_path(
+                   export_path("traces", execution_date), os.path.join(tempdir, "geth_traces.json"), 
+                )
+
 
             extract_geth_traces.callback(
                 input=os.path.join(tempdir, "geth_traces.json"),
