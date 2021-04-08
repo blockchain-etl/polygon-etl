@@ -137,8 +137,8 @@ def enrich_token_transfers(blocks, token_transfers):
     return result
 
 
-def enrich_traces(blocks, traces):
-    result = list(join(
+def enrich_traces(blocks, traces, transactions):
+    blocks_and_traces = list(join(
         traces, blocks, ('block_number', 'number'),
         [
             'type',
@@ -164,6 +164,39 @@ def enrich_traces(blocks, traces):
         [
             ('timestamp', 'block_timestamp'),
             ('hash', 'block_hash'),
+        ]))
+
+    for bt in blocks_and_traces:
+        bt['block_number_transaction_index'] = str(bt['block_number']) + '-' + str(bt['transaction_index'])
+    for t in transactions:
+        t['block_number_transaction_index'] = str(t['block_number']) + '-' + str(t['transaction_index'])
+
+    result = list(join(
+        blocks_and_traces, transactions, ('block_number_transaction_index', 'block_number_transaction_index'),
+        [
+            'type',
+            'transaction_index',
+            'from_address',
+            'to_address',
+            'value',
+            'input',
+            'output',
+            'trace_type',
+            'call_type',
+            'reward_type',
+            'gas',
+            'gas_used',
+            'subtraces',
+            'trace_address',
+            'error',
+            'status',
+            'block_number',
+            'trace_id'
+        ],
+        [
+            ('block_timestamp', 'block_timestamp'),
+            ('block_hash', 'block_hash'),
+            ('hash', 'transaction_hash')
         ]))
 
     if len(result) != len(traces):

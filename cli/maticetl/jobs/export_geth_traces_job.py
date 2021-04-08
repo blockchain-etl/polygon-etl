@@ -27,7 +27,7 @@ from maticetl.json_rpc_requests import generate_trace_block_by_number_json_rpc
 from blockchainetl_common.jobs.base_job import BaseJob
 from maticetl.mappers.geth_trace_mapper import EthGethTraceMapper
 from maticetl.utils import validate_range, rpc_response_to_result
-
+from maticetl.misc.retriable_value_error import RetriableValueError
 
 # Exports geth traces
 class ExportGethTracesJob(BaseJob):
@@ -50,6 +50,14 @@ class ExportGethTracesJob(BaseJob):
 
         self.geth_trace_mapper = EthGethTraceMapper()
 
+    def _check_result(self, result, block_number):
+        for tx_trace in result:
+            if tx_trace.get('result') is None:
+                raise RetriableValueError(
+                    'Error for trace in block {block}. Need to retry. Error: {err}, trace: {trace}'
+                        .format(block=block_number, trace=json.dumps(tx_trace), err=tx_trace.get('error'))
+                )
+
     def _start(self):
         self.item_exporter.open()
 
@@ -67,6 +75,7 @@ class ExportGethTracesJob(BaseJob):
         for response_item in response:
             block_number = response_item.get('id')
             result = rpc_response_to_result(response_item)
+            self._check_result(result, block_number)
 
             geth_trace = self.geth_trace_mapper.json_dict_to_geth_trace({
                 'block_number': block_number,

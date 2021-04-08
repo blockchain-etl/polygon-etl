@@ -1,5 +1,5 @@
 SELECT
-    traces.transaction_hash,
+    transactions.`hash` as transaction_hash,
     traces.transaction_index,
     traces.from_address,
     traces.to_address,
@@ -21,6 +21,9 @@ SELECT
     blocks.hash AS block_hash
 FROM {{params.dataset_name_raw}}.blocks AS blocks
     JOIN {{params.dataset_name_raw}}.traces AS traces ON blocks.number = traces.block_number
+    JOIN {{params.dataset_name_raw}}.transactions AS transactions
+        ON traces.transaction_index = transactions.transaction_index
+            and traces.block_number = transactions.block_number
 where true
     {% if not params.load_all_partitions %}
     and date(timestamp_seconds(blocks.timestamp)) = '{{ds}}'
