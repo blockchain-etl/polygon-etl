@@ -43,7 +43,7 @@ from maticetl.cli.stream import stream
 
 
 @click.group()
-@click.version_option(version='0.0.3')
+@click.version_option(version='0.0.4')
 @click.pass_context
 def cli(ctx):
     pass
