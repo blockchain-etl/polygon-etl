@@ -10,14 +10,14 @@ def read(fname):
 long_description = read('README.md') if os.path.isfile("README.md") else ""
 
 setup(
-    name='matic-etl',
+    name='polygon-etl',
     version='0.0.1',
     author='Evgeny Medvedev',
     author_email='evge.medvedev@gmail.com',
-    description='Tools for exporting Matic blockchain data to CSV or JSON',
+    description='Tools for exporting Polygon blockchain data to CSV or JSON',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/blockchain-etl/matic-etl',
+    url='https://github.com/blockchain-etl/polygon-etl',
     packages=find_packages(exclude=['schemas', 'tests']),
     classifiers=[
         'Development Status :: 5 - Production/Stable',
@@ -29,7 +29,7 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8'
     ],
-    keywords='matic',
+    keywords='polygon',
     # web3.py doesn't work on 3.5.2 and less (https://github.com/ethereum/web3.py/issues/1012)
     python_requires='>=3.5.3,<4',
     install_requires=[
