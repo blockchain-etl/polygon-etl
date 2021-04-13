@@ -1,15 +1,15 @@
-package io.blockchainetl.matic;
+package io.blockchainetl.polygon;
 
 import com.google.api.services.bigquery.model.TableRow;
 import io.blockchainetl.common.PubSubToBigQueryPipelineOptions;
 import io.blockchainetl.common.domain.ChainConfig;
-import io.blockchainetl.matic.fns.ConvertBlocksToTableRowsFn;
-import io.blockchainetl.matic.fns.ConvertContractsToTableRowsFn;
-import io.blockchainetl.matic.fns.ConvertLogsToTableRowsFn;
-import io.blockchainetl.matic.fns.ConvertTokenTransfersToTableRowsFn;
-import io.blockchainetl.matic.fns.ConvertTokensToTableRowsFn;
-import io.blockchainetl.matic.fns.ConvertTracesToTableRowsFn;
-import io.blockchainetl.matic.fns.ConvertTransactionsToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertBlocksToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertContractsToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertLogsToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertTokenTransfersToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertTokensToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertTracesToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertTransactionsToTableRowsFn;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.transforms.DoFn;
 
@@ -22,16 +22,16 @@ import static io.blockchainetl.common.PubSubToBigQueryPipeline.readChainConfigs;
 import static io.blockchainetl.common.PubSubToBigQueryPipeline.runPipeline;
 
 
-public class MaticPubSubToBigQueryPipeline {
+public class polygonPubSubToBigQueryPipeline {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         PubSubToBigQueryPipelineOptions options =
             PipelineOptionsFactory.fromArgs(args).withValidation().as(PubSubToBigQueryPipelineOptions.class);
 
-        runMaticPipeline(options);
+        runpolygonPipeline(options);
     }
 
-    static void runMaticPipeline(PubSubToBigQueryPipelineOptions options) {
+    static void runpolygonPipeline(PubSubToBigQueryPipelineOptions options) {
         List<ChainConfig> chainConfigs = readChainConfigs(options.getChainConfigFile());
 
         Map<String, Class<? extends DoFn<String, TableRow>>> entityConfigs = new HashMap<>();

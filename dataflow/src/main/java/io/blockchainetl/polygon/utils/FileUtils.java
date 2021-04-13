@@ -1,4 +1,4 @@
-package io.blockchainetl.matic.utils;
+package io.blockchainetl.polygon.utils;
 
 import java.io.IOException;
 import java.net.URL;

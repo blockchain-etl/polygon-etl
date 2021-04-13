@@ -1,4 +1,4 @@
-package io.blockchainetl.matic.domain;
+package io.blockchainetl.polygon.domain;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;

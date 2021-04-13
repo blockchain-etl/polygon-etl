@@ -4,13 +4,13 @@ import com.google.api.services.bigquery.model.TableRow;
 import io.blockchainetl.common.PubSubToBigQueryPipeline;
 import io.blockchainetl.common.TableRowsToStringsFn;
 import io.blockchainetl.common.TestUtils;
-import io.blockchainetl.matic.fns.ConvertBlocksToTableRowsFn;
-import io.blockchainetl.matic.fns.ConvertContractsToTableRowsFn;
-import io.blockchainetl.matic.fns.ConvertLogsToTableRowsFn;
-import io.blockchainetl.matic.fns.ConvertTokenTransfersToTableRowsFn;
-import io.blockchainetl.matic.fns.ConvertTokensToTableRowsFn;
-import io.blockchainetl.matic.fns.ConvertTracesToTableRowsFn;
-import io.blockchainetl.matic.fns.ConvertTransactionsToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertBlocksToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertContractsToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertLogsToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertTokenTransfersToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertTokensToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertTracesToTableRowsFn;
+import io.blockchainetl.polygon.fns.ConvertTransactionsToTableRowsFn;
 import org.apache.beam.sdk.testing.PAssert;
 import org.apache.beam.sdk.testing.TestPipeline;
 import org.apache.beam.sdk.testing.ValidatesRunner;
@@ -29,77 +29,77 @@ import java.util.List;
 
 
 @RunWith(JUnit4.class)
-public class MaticPubSubToBigQueryPipelineTest {
+public class polygonPubSubToBigQueryPipelineTest {
 
     @Rule
     public TestPipeline p = TestPipeline.create();
     
     @Test
     @Category(ValidatesRunner.class)
-    public void testmaticBlocks() throws Exception {
+    public void testpolygonBlocks() throws Exception {
         testTemplate(
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock1000000.json",
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock1000000Expected.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock1000000.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock1000000Expected.json",
             new ConvertBlocksToTableRowsFn("2015-01-01T00:00:00Z", Long.MAX_VALUE)
         );
     }
 
     @Test
     @Category(ValidatesRunner.class)
-    public void testmaticTransactions() throws Exception {
+    public void testpolygonTransactions() throws Exception {
         testTemplate(
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock1000000Transactions.json",
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock1000000TransactionsExpected.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock1000000Transactions.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock1000000TransactionsExpected.json",
             new ConvertTransactionsToTableRowsFn("2015-01-01T00:00:00Z", Long.MAX_VALUE)
         );
     }
 
     @Test
     @Category(ValidatesRunner.class)
-    public void testmaticLogs() throws Exception {
+    public void testpolygonLogs() throws Exception {
         testTemplate(
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock1000000Logs.json",
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock1000000LogsExpected.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock1000000Logs.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock1000000LogsExpected.json",
             new ConvertLogsToTableRowsFn("2015-01-01T00:00:00Z", Long.MAX_VALUE)
         );
     }
 
     @Test
     @Category(ValidatesRunner.class)
-    public void testmaticTokenTransfers() throws Exception {
+    public void testpolygonTokenTransfers() throws Exception {
         testTemplate(
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock1755634TokenTransfers.json",
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock1755634TokenTransfersExpected.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock1755634TokenTransfers.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock1755634TokenTransfersExpected.json",
             new ConvertTokenTransfersToTableRowsFn("2015-01-01T00:00:00Z", Long.MAX_VALUE)
         );
     }
 
     @Test
     @Category(ValidatesRunner.class)
-    public void testmaticTraces() throws Exception {
+    public void testpolygonTraces() throws Exception {
         testTemplate(
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock2112234Traces.json",
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock2112234TracesExpected.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock2112234Traces.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock2112234TracesExpected.json",
             new ConvertTracesToTableRowsFn("2015-01-01T00:00:00Z", Long.MAX_VALUE)
         );
     }
 
     @Test
     @Category(ValidatesRunner.class)
-    public void testmaticContracts() throws Exception {
+    public void testpolygonContracts() throws Exception {
         testTemplate(
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock2112234Contracts.json",
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock2112234ContractsExpected.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock2112234Contracts.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock2112234ContractsExpected.json",
             new ConvertContractsToTableRowsFn("2015-01-01T00:00:00Z", Long.MAX_VALUE)
         );
     }
 
     @Test
     @Category(ValidatesRunner.class)
-    public void testmaticTokens() throws Exception {
+    public void testpolygonTokens() throws Exception {
         testTemplate(
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock2112234Tokens.json",
-            "testdata/PubSubToBigQueryPipelineTest/matic/maticBlock2112234TokensExpected.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock2112234Tokens.json",
+            "testdata/PubSubToBigQueryPipelineTest/polygon/polygonBlock2112234TokensExpected.json",
             new ConvertTokensToTableRowsFn("2015-01-01T00:00:00Z", Long.MAX_VALUE)
         );
     }
@@ -109,7 +109,7 @@ public class MaticPubSubToBigQueryPipelineTest {
         PCollection<String> collection = p.apply("Input", Create.of(blockchainData));
 
         PCollection<TableRow> tableRows = PubSubToBigQueryPipeline.buildPipeline(
-            "maticEntities",
+            "polygonEntities",
             collection,
             convertFn
         );

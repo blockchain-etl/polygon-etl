@@ -1,4 +1,4 @@
-package io.blockchainetl.matic;
+package io.blockchainetl.polygon;
 
 import org.apache.beam.sdk.options.Description;
 import org.apache.beam.sdk.options.PipelineOptions;

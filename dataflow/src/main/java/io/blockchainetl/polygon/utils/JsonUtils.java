@@ -1,4 +1,4 @@
-package io.blockchainetl.matic.utils;
+package io.blockchainetl.polygon.utils;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;

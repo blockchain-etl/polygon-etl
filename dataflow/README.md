@@ -1,6 +1,6 @@
-# matic ETL Dataflow
+# polygon ETL Dataflow
 
-[Apache Beam](https://beam.apache.org/) pipeline for moving matic data from Pub/Sub to BigQuery.
+[Apache Beam](https://beam.apache.org/) pipeline for moving polygon data from Pub/Sub to BigQuery.
 Deployed in [Google Dataflow](https://cloud.google.com/dataflow).
 
 ## Setting Up
@@ -18,8 +18,8 @@ Deployed in [Google Dataflow](https://cloud.google.com/dataflow).
 2. Create the errors table:
 
    ```bash
-   bq mk --table --description "matic ETL Streaming Errors" \
-    ${PROJECT}:crypto_matic.errors \
+   bq mk --table --description "polygon ETL Streaming Errors" \
+    ${PROJECT}:crypto_polygon.errors \
     src/main/resources/errors-schema.json
    ```
 
@@ -29,12 +29,12 @@ Deployed in [Google Dataflow](https://cloud.google.com/dataflow).
 
    ```bash
    mvn -e -Pdataflow-runner compile exec:java \
-   -Dexec.mainClass=io.blockchainetl.matic.MaticPubSubToBigQueryPipeline \
+   -Dexec.mainClass=io.blockchainetl.polygon.PolygonPubSubToBigQueryPipeline \
    -Dexec.args="--chainConfigFile=chainConfig.json \
    --tempLocation=gs://${BUCKET}/temp \
    --project=${PROJECT} \
    --runner=DataflowRunner \
-   --jobName=matic-pubsub-to-bigquery-`date +"%Y%m%d-%H%M%S"` \
+   --jobName=polygon-pubsub-to-bigquery-`date +"%Y%m%d-%H%M%S"` \
    --workerMachineType=n1-standard-1 \
    --maxNumWorkers=1 \
    --diskSizeGb=30 \

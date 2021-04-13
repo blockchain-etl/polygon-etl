@@ -1,4 +1,4 @@
-package io.blockchainetl.matic.domain;
+package io.blockchainetl.polygon.domain;
 
 public class ChainConfig {
     

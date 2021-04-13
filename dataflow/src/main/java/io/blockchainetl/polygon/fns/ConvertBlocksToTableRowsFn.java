@@ -1,7 +1,7 @@
-package io.blockchainetl.matic.fns;
+package io.blockchainetl.polygon.fns;
 
 import com.google.api.services.bigquery.model.TableRow;
-import io.blockchainetl.matic.domain.Block;
+import io.blockchainetl.polygon.domain.Block;
 import io.blockchainetl.common.utils.JsonUtils;
 import io.blockchainetl.common.fns.ConvertEntitiesToTableRowsFn;
 

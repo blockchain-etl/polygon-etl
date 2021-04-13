@@ -1,4 +1,4 @@
-package io.blockchainetl.matic;
+package io.blockchainetl.polygon;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.services.bigquery.model.TableRow;
