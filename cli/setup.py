@@ -57,11 +57,11 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'maticetl=maticetl.cli:cli',
+            'polygonetl=polygonetl.cli:cli',
         ],
     },
     project_urls={
-        'Bug Reports': 'https://github.com/blockchain-etl/matic-etl/issues',
-        'Source': 'https://github.com/blockchain-etl/matic-etl',
+        'Bug Reports': 'https://github.com/blockchain-etl/polygon-etl/issues',
+        'Source': 'https://github.com/blockchain-etl/polygon-etl',
     },
 )
