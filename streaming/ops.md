@@ -1,7 +1,7 @@
 ## Operations
 
-To upgrade Helm release named `matic-etl`:
+To upgrade Helm release named `polygon-etl`:
 
 ```bash
-helm upgrade matic-etl charts/matic-etl-streaming --values values.yaml
+helm upgrade polygon-etl charts/polygon-etl-streaming --values values.yaml
 ```

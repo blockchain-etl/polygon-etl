@@ -49,10 +49,10 @@ steps:
 substitutions:
   _REGISTRY: gcr.io
   _ENV: dev
-  _CHART_NAME: matic-etl-streaming
-  _ARTIFACT_FILENAME: matic-etl-streaming-chart-version
-  _HELM_REPO_NAME: matic-etl-k8s
-  _HELM_REPO_URL: gs://matic-etl-k8s/charts
+  _CHART_NAME: polygon-etl-streaming
+  _ARTIFACT_FILENAME: polygon-etl-streaming-chart-version
+  _HELM_REPO_NAME: polygon-etl-k8s
+  _HELM_REPO_URL: gs://polygon-etl-k8s/charts
 options:
   env:
     - SKIP_CLUSTER_CONFIG=true

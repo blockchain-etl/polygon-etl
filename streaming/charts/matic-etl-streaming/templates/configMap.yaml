@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name:  "{{ .Release.Name }}-config"
   labels:
-{{ include "matic-etl-streaming.labels" . | indent 4 }}
+{{ include "polygon-etl-streaming.labels" . | indent 4 }}
 data:
   PROVIDER_URI: "{{ .Values.config.PROVIDER_URI }}"
   STREAM_OUTPUT: "{{ .Values.config.STREAM_OUTPUT }}"

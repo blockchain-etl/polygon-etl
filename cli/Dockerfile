@@ -1,6 +1,6 @@
 FROM python:3.6
 MAINTAINER Evgeny Medvedev <evge.medvedev@gmail.com>
-ENV PROJECT_DIR=matic-etl
+ENV PROJECT_DIR=polygon-etl
 
 RUN mkdir /$PROJECT_DIR
 WORKDIR /$PROJECT_DIR
@@ -12,4 +12,4 @@ ENV TINI_VERSION v0.18.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini
 
-ENTRYPOINT ["/tini", "--", "python", "maticetl"]
+ENTRYPOINT ["/tini", "--", "python", "polygonetl"]

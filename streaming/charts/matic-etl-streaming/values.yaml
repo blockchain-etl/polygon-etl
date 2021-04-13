@@ -1,4 +1,4 @@
-# Default values for matic-etl-streaming.
+# Default values for polygon-etl-streaming.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -6,14 +6,14 @@ replicaCount: 1
 
 config:
   PROVIDER_URI: "http://user:pass@localhost:8332"
-  STREAM_OUTPUT: "projects/<your-project>/topics/crypto_matic"
-  GCS_PREFIX: "gs://<your-bucket>/matic-etl/streaming"
+  STREAM_OUTPUT: "projects/<your-project>/topics/crypto_polygon"
+  GCS_PREFIX: "gs://<your-bucket>/polygon-etl/streaming"
   LAG_BLOCKS: "10"
   MAX_WORKERS: "4"
   ENTITY_TYPES: ""
 
 lsb_file: last_synced_block.txt
-lsb_path: /var/matic-etl
+lsb_path: /var/polygon-etl
 pid_file: stream.pid
 
 init:
@@ -30,7 +30,7 @@ init:
       cpu: "100m"
 stream:
   image:
-    repository: blockchainetl/matic-etl
+    repository: blockchainetl/polygon-etl
     tag: 1.0.2
     pullPolicy: IfNotPresent
   resources:
