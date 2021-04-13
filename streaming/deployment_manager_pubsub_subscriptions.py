@@ -1,7 +1,7 @@
 def GenerateConfig(context):
     resources = []
 
-    chains = ['crypto_matic']
+    chains = ['crypto_polygon']
     entity_types = ['blocks', 'transactions', 'logs', 'token_transfers', 'traces', 'contracts', 'tokens']
 
 

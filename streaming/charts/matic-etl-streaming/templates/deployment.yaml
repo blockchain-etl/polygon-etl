@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "matic-etl-streaming.fullname" . }}
+  name: {{ include "polygon-etl-streaming.fullname" . }}
   labels:
-{{ include "matic-etl-streaming.labels" . | indent 4 }}
+{{ include "polygon-etl-streaming.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "matic-etl-streaming.name" . }}
+      app.kubernetes.io/name: {{ include "polygon-etl-streaming.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "matic-etl-streaming.name" . }}
+        app.kubernetes.io/name: {{ include "polygon-etl-streaming.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app: etl-streaming
         {{- if .Values.config.CHAIN }}

@@ -1,7 +1,7 @@
-# Matic ETL Streaming
+# Polygon ETL Streaming
 
-Streams Matic data to [Google Pub/Sub](https://cloud.google.com/pubsub) using
-[matic stream](https://github.com/blockchain-etl/matic-etl/tree/develop/docs/commands.md#stream).
+Streams polygon data to [Google Pub/Sub](https://cloud.google.com/pubsub) using
+[polygon stream](https://github.com/blockchain-etl/polygon-etl/tree/develop/docs/commands.md#stream).
 Runs in Google Kubernetes Engine.
 
 ## Prerequisites
@@ -16,7 +16,7 @@ Runs in Google Kubernetes Engine.
 1. Create a GKE cluster:
 
    ```bash
-   gcloud container clusters create matic-etl-streaming \
+   gcloud container clusters create polygon-etl-streaming \
    --zone us-central1-a \
    --num-nodes 1 \
    --disk-size 10GB \
@@ -25,7 +25,7 @@ Runs in Google Kubernetes Engine.
    --subnetwork default \
    --scopes pubsub,storage-rw,logging-write,monitoring-write,service-management,service-control,trace
 
-   gcloud container clusters get-credentials matic-etl-streaming --zone us-central1-a
+   gcloud container clusters get-credentials polygon-etl-streaming --zone us-central1-a
 
    # Make sure the user has "Kubernetes Engine Admin" role.
    helm init
@@ -35,15 +35,15 @@ Runs in Google Kubernetes Engine.
 2. Create Pub/Sub topics and subscriptions:
 
    ```bash
-   gcloud deployment-manager deployments create matic-etl-pubsub-topics-0 --template deployment_manager_pubsub_topics.py
-   gcloud deployment-manager deployments create matic-etl-pubsub-subscriptions-0 --template deployment_manager_pubsub_subscriptions.py \
+   gcloud deployment-manager deployments create polygon-etl-pubsub-topics-0 --template deployment_manager_pubsub_topics.py
+   gcloud deployment-manager deployments create polygon-etl-pubsub-subscriptions-0 --template deployment_manager_pubsub_subscriptions.py \
    --properties topics_project:<project_where_topics_deployed>
    ```
 
 3. Create GCS bucket. Upload a text file with block number you want to start streaming from to
-   `gs:/<YOUR_BUCKET_HERE>/matic-etl/streaming/last_synced_block.txt`.
+   `gs:/<YOUR_BUCKET_HERE>/polygon-etl/streaming/last_synced_block.txt`.
 
-4. Create "matic-etl-app" service account with roles:
+4. Create "polygon-etl-app" service account with roles:
 
    - Pub/Sub Editor
    - Storage Object Admin
@@ -60,7 +60,7 @@ Runs in Google Kubernetes Engine.
 6. Install ETL apps via helm using chart from this repo and values we adjust on previous step, for example:
 
    ```bash
-   helm install --name matic-etl charts/matic-etl-streaming --values values.yaml
+   helm install --name polygon-etl charts/polygon-etl-streaming --values values.yaml
    ```
 
 7. Use `describe` command to troubleshoot, f.e.:
@@ -72,27 +72,27 @@ Runs in Google Kubernetes Engine.
 
 ## Configuration
 
-The following table lists the configurable parameters of the matic-etl-streaming chart and their default values.
+The following table lists the configurable parameters of the polygon-etl-streaming chart and their default values.
 
-| Parameter                                              | Description                                                                                                               | Default                                       |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| `stream.image.repository`                              | Stream image source repository name                                                                                       | `blockchainetl/matic-etl`                     |
-| `stream.image.tag`                                     | Image release tag                                                                                                         | `1.0.2`                                       |
-| `stream.image.pullPolicy`                              | Image pull policy                                                                                                         | `IfNotPresent`                                |
-| `stream.resources`                                     | CPU/Memory resource request/limit                                                                                         | `100m/128Mi, 350m/512Mi`                      |
-| `stream.env.LAST_SYNCED_BLOCK_FILE_MAX_AGE_IN_SECONDS` | The number of seconds since new blocks have been pulled from the node, after which the deployment is considered unhealthy | `600`                                         |
-| `config.PROVIDER_URI`                                  | URI of matic node                                                                                                         | `grpcs://api.mainnet.matic.one:443`           |
-| `config.STREAM_OUTPUT`                                 | Google Pub Sub topic path prefix                                                                                          | `projects/<your-project>/topics/crypto_matic` |
-| `config.GCS_PREFIX`                                    | Google Storage directory of last synced block file                                                                        | `gs://<your-bucket>/matic-etl/streaming`      |
-| `config.ENTITY_TYPES`                                  | The list of entity types to export                                                                                        | ``                                            |
-| `config.LAG_BLOCKS`                                    | The number of blocks to lag behind the network                                                                            | `10`                                          |
-| `config.MAX_WORKERS`                                   | The number of workers                                                                                                     | `4`                                           |
-| `lsb_file`                                             | Last synced block file name                                                                                               | `last_synced_block.txt`                       |
+| Parameter                                              | Description                                                                                                               | Default                                         |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `stream.image.repository`                              | Stream image source repository name                                                                                       | `blockchainetl/polygon-etl`                     |
+| `stream.image.tag`                                     | Image release tag                                                                                                         | `1.0.2`                                         |
+| `stream.image.pullPolicy`                              | Image pull policy                                                                                                         | `IfNotPresent`                                  |
+| `stream.resources`                                     | CPU/Memory resource request/limit                                                                                         | `100m/128Mi, 350m/512Mi`                        |
+| `stream.env.LAST_SYNCED_BLOCK_FILE_MAX_AGE_IN_SECONDS` | The number of seconds since new blocks have been pulled from the node, after which the deployment is considered unhealthy | `600`                                           |
+| `config.PROVIDER_URI`                                  | URI of polygon node                                                                                                       | `grpcs://api.mainnet.polygon.one:443`           |
+| `config.STREAM_OUTPUT`                                 | Google Pub Sub topic path prefix                                                                                          | `projects/<your-project>/topics/crypto_polygon` |
+| `config.GCS_PREFIX`                                    | Google Storage directory of last synced block file                                                                        | `gs://<your-bucket>/polygon-etl/streaming`      |
+| `config.ENTITY_TYPES`                                  | The list of entity types to export                                                                                        | ``                                              |
+| `config.LAG_BLOCKS`                                    | The number of blocks to lag behind the network                                                                            | `10`                                            |
+| `config.MAX_WORKERS`                                   | The number of workers                                                                                                     | `4`                                             |
+| `lsb_file`                                             | Last synced block file name                                                                                               | `last_synced_block.txt`                         |
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```bash
-$ helm install --name matic --values values.yaml charts/matic-etl-streaming
+$ helm install --name polygon --values values.yaml charts/polygon-etl-streaming
 ```
 
 ### Creating a Cloud Source Repository for Configuration Files
@@ -112,7 +112,7 @@ git push
 
 Check a [separate file](ops.md) for operations.
 
-## Subscribing to Live matic Data Feeds
+## Subscribing to Live polygon Data Feeds
 
 Install Google Cloud SDK:
 
@@ -122,16 +122,16 @@ exec -l $SHELL
 gcloud init
 ```
 
-Create a Pub/Sub subscription for matic actions:
+Create a Pub/Sub subscription for polygon actions:
 
 ```bash
-gcloud pubsub subscriptions create crypto_matic.actions.test --topic=crypto_matic.actions --topic-project=public-data-finance
+gcloud pubsub subscriptions create crypto_polygon.actions.test --topic=crypto_polygon.actions --topic-project=public-data-finance
 ```
 
 Read a single message from the subscription to test it works:
 
 ```bash
-gcloud pubsub subscriptions pull crypto_matic.actions.test
+gcloud pubsub subscriptions pull crypto_polygon.actions.test
 ```
 
 Now you can run a subscriber and process the messages in the subscription, using this Python script:
@@ -142,7 +142,7 @@ Now you can run a subscriber and process the messages in the subscription, using
 import time
 from google.cloud import pubsub_v1
 project_id = "<your_project>"
-subscription_name = "crypto_matic.actions.test"
+subscription_name = "crypto_polygon.actions.test"
 subscriber = pubsub_v1.SubscriberClient()
 # The `subscription_path` method creates a fully qualified identifier
 # in the form `projects/{project_id}/subscriptions/{subscription_name}`

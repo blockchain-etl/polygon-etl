@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "matic-etl-streaming.name" -}}
+{{- define "polygon-etl-streaming.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -11,7 +11,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "matic-etl-streaming.fullname" -}}
+{{- define "polygon-etl-streaming.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -27,16 +27,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "matic-etl-streaming.chart" -}}
+{{- define "polygon-etl-streaming.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Common labels
 */}}
-{{- define "matic-etl-streaming.labels" -}}
-app.kubernetes.io/name: {{ include "matic-etl-streaming.name" . }}
-helm.sh/chart: {{ include "matic-etl-streaming.chart" . }}
+{{- define "polygon-etl-streaming.labels" -}}
+app.kubernetes.io/name: {{ include "polygon-etl-streaming.name" . }}
+helm.sh/chart: {{ include "polygon-etl-streaming.chart" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
