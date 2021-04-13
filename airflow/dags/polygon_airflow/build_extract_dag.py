@@ -18,7 +18,7 @@ def build_extract_dag(
     schedule_interval='0 0 * * *'
 ):
 
-    bucket = 'matic-etl-bigquery'
+    bucket = 'polygon-etl-bigquery'
     default_dag_args = {
         'depends_on_past': False,
         'start_date': datetime.strptime('2021-01-18', '%Y-%m-%d'),
@@ -47,7 +47,7 @@ def build_extract_dag(
                 format=CSV, compression=GZIP
             ) AS 
             SELECT *
-            FROM `bigquery-public-data.crypto_matic.{task}` 
+            FROM `bigquery-public-data.crypto_polygon.{task}` 
             WHERE DATE(block_timestamp) = '{ds}'
             ''')
             result = query_job.result()
@@ -69,8 +69,8 @@ def build_extract_dag(
     def add_compose_tasks(task, dependencies=None):
         compose_task = BashOperator(
             task_id=f'compose_{task}',
-            bash_command=f'gsutil compose gs://{bucket}/export/{task}/block_date={{{{ds}}}}/000*.gz gs://matic-etl-bigquery/export/{task}/block_date={{{{ds}}}}/{task}.gz && '
-                         f'gsutil compose gs://{bucket}/export/{task}/block_date={{{{ds}}}}/000*.gz gs://matic-etl-bigquery/export/{task}/block_date=latest/{task}.gz',
+            bash_command=f'gsutil compose gs://{bucket}/export/{task}/block_date={{{{ds}}}}/000*.gz gs://polygon-etl-bigquery/export/{task}/block_date={{{{ds}}}}/{task}.gz && '
+                         f'gsutil compose gs://{bucket}/export/{task}/block_date={{{{ds}}}}/000*.gz gs://polygon-etl-bigquery/export/{task}/block_date=latest/{task}.gz',
             dag=dag,
             depends_on_past=False)
         if dependencies is not None and len(dependencies) > 0:

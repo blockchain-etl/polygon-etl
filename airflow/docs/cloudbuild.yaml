@@ -6,7 +6,7 @@ steps:
     args: ["gcloud", "composer", "environments", "run", "${_ENVIRONMENT_NAME}", "--location=${_LOCATION}", "variables", "--", "--i", "${_DATA_DIR}/${_VARIABLES_FILENAME}"]
 
 substitutions:
- _ENVIRONMENT_NAME: matic-etl-0
+ _ENVIRONMENT_NAME: polygon-etl-0
  _LOCATION: us-central1
  _DATA_DIR: "/home/airflow/gcs/data/"
  _VARIABLES_FILENAME: airflow_variables.json

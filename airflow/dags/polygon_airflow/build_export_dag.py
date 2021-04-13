@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 from airflow import DAG, configuration
 from airflow.operators import python_operator
 
-from maticetl.cli import (
+from polygonetl.cli import (
     get_block_range_for_date,
     extract_csv_column,
     export_blocks_and_transactions,

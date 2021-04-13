@@ -14,7 +14,7 @@ from airflow.operators.python_operator import PythonOperator
 from google.cloud import bigquery
 from google.cloud.bigquery import TimePartitioning
 
-from maticetl_airflow.bigquery_utils import submit_bigquery_job
+from polygonetl_airflow.bigquery_utils import submit_bigquery_job
 
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
@@ -24,7 +24,7 @@ def build_load_dag(
     dag_id,
     output_bucket,
     destination_dataset_project_id,
-    chain='matic',
+    chain='polygon',
     notification_emails=None,
     load_start_date=datetime(2018, 7, 1),
     schedule_interval='0 0 * * *',
@@ -283,8 +283,8 @@ def build_load_dag(
         send_email_task = EmailOperator(
             task_id='send_email',
             to=[email.strip() for email in notification_emails.split(',')],
-            subject='Matic ETL Airflow Load DAG Succeeded',
-            html_content='Matic ETL Airflow Load DAG Succeeded - {}'.format(chain),
+            subject='polygon ETL Airflow Load DAG Succeeded',
+            html_content='polygon ETL Airflow Load DAG Succeeded - {}'.format(chain),
             dag=dag
         )
         verify_blocks_count_task >> send_email_task
