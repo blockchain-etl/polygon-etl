@@ -1,0 +1,9 @@
+site_name: Polygon ETL
+nav:
+  - Overview: index.md
+  - Quickstart: quickstart.md
+  - References:
+    - Commands: commands.md
+    - Schema: schema.md
+theme: readthedocs
+repo_url: https://github.com/blockchain-etl/polygon-etl/
