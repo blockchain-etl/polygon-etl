@@ -129,8 +129,8 @@ To run integration tests:
 
 - Create a new environment following the steps in the [Setting Up](#setting-up) section.
 - On the [Configuring Airflow Variables](#configuring-airflow-variables) step specify the following additional configuration variables:
-  - `export_end_date`: `2018-06-30`
-  - `load_end_date`: `2018-06-30`
+  - `export_end_date`: `2020-05-30`
+  - `load_end_date`: `2020-05-30`
 - This will run the DAGs only for the first day. At the end of the load DAG the verification tasks will ensure
   the correctness of the result.
 
