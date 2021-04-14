@@ -136,4 +136,4 @@
 - output doesn't have `reward` traces;
 - output doesn't have `to_address`, `from_address`, `value` for `suicide` traces;
 - `gas_used` is 0 on traces with error
-- zero output of subcalls is `0x000...` in geth
+- zero output of subcalls is `0x000...`
