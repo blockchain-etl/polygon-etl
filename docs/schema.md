@@ -4,21 +4,21 @@
 
 | Column            | Type       |
 | ----------------- | ---------- |
-| number -          | bigint     |
+| number            | bigint     |
 | hash              | hex_string |
-| parent_hash -     | hex_string |
+| parent_hash       | hex_string |
 | nonce             | hex_string |
-| sha3_uncles -     | hex_string |
-| logs_bloom -      | hex_string |
+| sha3_uncles       | hex_string |
+| logs_bloom        | hex_string |
 | transactions_root | hex_string |
 | state_root        | hex_string |
 | receipts_root     | hex_string |
 | miner             | address    |
-| difficulty -      | numeric    |
+| difficulty        | numeric    |
 | total_difficulty  | numeric    |
 | size              | bigint     |
 | extra_data        | hex_string |
-| gas_limit -       | bigint     |
+| gas_limit         | bigint     |
 | gas_used          | bigint     |
 | timestamp         | bigint     |
 | transaction_count | bigint     |
