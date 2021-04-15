@@ -125,13 +125,13 @@ gcloud init
 Create a Pub/Sub subscription for polygon actions:
 
 ```bash
-gcloud pubsub subscriptions create crypto_polygon.actions.test --topic=crypto_polygon.actions --topic-project=public-data-finance
+gcloud pubsub subscriptions create crypto_polygon.blocks.test --topic=crypto_polygon.blocks --topic-project=rising-guide-309217
 ```
 
 Read a single message from the subscription to test it works:
 
 ```bash
-gcloud pubsub subscriptions pull crypto_polygon.actions.test
+gcloud pubsub subscriptions pull crypto_polygon.blocks.test
 ```
 
 Now you can run a subscriber and process the messages in the subscription, using this Python script:
