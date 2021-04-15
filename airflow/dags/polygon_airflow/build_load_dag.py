@@ -261,9 +261,9 @@ def build_load_dag(
     enrich_tokens_task = add_enrich_tasks(
         'tokens', dependencies=[load_blocks_task, load_tokens_task])
 
-    calculate_balances_task = add_enrich_tasks(
-        'balances', dependencies=[enrich_blocks_task, enrich_transactions_task, enrich_traces_task],
-        time_partitioning_field=None, always_load_all_partitions=True)
+    # calculate_balances_task = add_enrich_tasks(
+    #     'balances', dependencies=[enrich_blocks_task, enrich_transactions_task, enrich_traces_task],
+    #     time_partitioning_field=None, always_load_all_partitions=True)
 
     verify_blocks_count_task = add_verify_tasks('blocks_count', [enrich_blocks_task])
     verify_blocks_have_latest_task = add_verify_tasks('blocks_have_latest', [enrich_blocks_task])
@@ -273,7 +273,7 @@ def build_load_dag(
     verify_logs_have_latest_task = add_verify_tasks('logs_have_latest', [enrich_logs_task])
     verify_token_transfers_have_latest_task = add_verify_tasks('token_transfers_have_latest',
                                                                [enrich_token_transfers_task])
-    verify_traces_blocks_count_task = add_verify_tasks('traces_blocks_count', [enrich_blocks_task, enrich_traces_task])
+    # verify_traces_blocks_count_task = add_verify_tasks('traces_blocks_count', [enrich_blocks_task, enrich_traces_task])
     verify_traces_transactions_count_task = add_verify_tasks(
         'traces_transactions_count', [enrich_transactions_task, enrich_traces_task])
     verify_traces_contracts_count_task = add_verify_tasks(
@@ -293,10 +293,10 @@ def build_load_dag(
         verify_transactions_have_latest_task >> send_email_task
         verify_logs_have_latest_task >> send_email_task
         verify_token_transfers_have_latest_task >> send_email_task
-        verify_traces_blocks_count_task >> send_email_task
+        # verify_traces_blocks_count_task >> send_email_task
         verify_traces_transactions_count_task >> send_email_task
         verify_traces_contracts_count_task >> send_email_task
         enrich_tokens_task >> send_email_task
-        calculate_balances_task >> send_email_task
+        # calculate_balances_task >> send_email_task
 
     return dag
