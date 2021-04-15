@@ -29,7 +29,7 @@ import java.util.List;
 
 
 @RunWith(JUnit4.class)
-public class polygonPubSubToBigQueryPipelineTest {
+public class PolygonPubSubToBigQueryPipelineTest {
 
     @Rule
     public TestPipeline p = TestPipeline.create();
