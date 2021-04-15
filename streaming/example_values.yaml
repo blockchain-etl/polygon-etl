@@ -1,10 +1,10 @@
 stream:
   image:
     repository: blockchainetl/polygon-etl
-    tag: 1.0.2
+    tag: 0.0.6
 config:
   PROVIDER_URI: "grpcs://api.mainnet.polygon.one:443"
   STREAM_OUTPUT: "projects/<your_project>/topics/mainnet"
   GCS_PREFIX: "gs://<your_bucket>/polygon-etl/streaming"
   LAG_BLOCKS: "10"
-  ENTITY_TYPES: "block,transaction,log,token_transfer"
+  ENTITY_TYPES: "block,transaction,log,token_transfer,trace,contract,token"
