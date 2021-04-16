@@ -2,8 +2,8 @@ from __future__ import print_function
 
 import logging
 
-from ethereumetl_airflow.build_verify_streaming_dag import build_verify_streaming_dag
-from ethereumetl_airflow.variables import read_verify_streaming_dag_vars
+from polygonetl_airflow.build_verify_streaming_dag import build_verify_streaming_dag
+from polygonetl_airflow.variables import read_verify_streaming_dag_vars
 
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
