@@ -239,7 +239,7 @@ def build_export_dag(
                 export_geth_traces.callback(
                     start_block=start_block,
                     end_block=end_block,
-                    batch_size=export_batch_size,
+                    batch_size=1,
                     output=os.path.join(tempdir, "geth_traces.json"),
                     max_workers=export_max_workers,
                     provider_uri=provider_uri
