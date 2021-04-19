@@ -9,8 +9,10 @@ config:
   STREAM_OUTPUT: "projects/<your-project>/topics/crypto_polygon"
   GCS_PREFIX: "gs://<your-bucket>/polygon-etl/streaming"
   LAG_BLOCKS: "10"
-  MAX_WORKERS: "4"
+  MAX_WORKERS: "20"
   ENTITY_TYPES: ""
+  BATCH_SIZE: "2"
+  BLOCK_BATCH_SIZE: "20"
 
 lsb_file: last_synced_block.txt
 lsb_path: /var/polygon-etl

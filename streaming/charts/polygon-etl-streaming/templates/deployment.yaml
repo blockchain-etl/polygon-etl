@@ -84,8 +84,8 @@ spec:
             - "--output={{ .Values.config.STREAM_OUTPUT }}"
             - "--lag={{ .Values.config.LAG_BLOCKS }}"
             - "--max-workers={{ .Values.config.MAX_WORKERS }}"
-            - "--batch-size=5"
-            - "--block-batch-size=1"
+            - "--batch-size={{ .Values.config.BATCH_SIZE }}"
+            - "--block-batch-size={{ .Values.config.BLOCK_BATCH_SIZE }}"
             - "--pid-file={{ .Values.lsb_path }}/{{ .Values.pid_file }}"
           resources:
             {{- toYaml .Values.stream.resources | nindent 12 }}

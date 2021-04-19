@@ -8,3 +8,6 @@ config:
   GCS_PREFIX: "gs://<your_bucket>/polygon-etl/streaming"
   LAG_BLOCKS: "10"
   ENTITY_TYPES: "block,transaction,log,token_transfer,trace,contract,token"
+  BATCH_SIZE: "2"
+  BLOCK_BATCH_SIZE: "20"
+  MAX_WORKERS: "20"
