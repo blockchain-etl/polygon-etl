@@ -7,6 +7,8 @@ into BigQuery and Pub/Sub. It comes with [CLI tools](/cli) for exporting Polygon
 
 ## Architecture
 
+![polygon_etl_architecture.svg](polygon_etl_architecture.svg)
+
 1. The nodes are run in a Kubernetes cluster.
 
 2. [Airflow DAGs](https://airflow.apache.org/) export and load Polygon data to BigQuery daily.
