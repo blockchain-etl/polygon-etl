@@ -15,17 +15,9 @@ Deployed in [Google Dataflow](https://cloud.google.com/dataflow).
    gsutil mb gs://${BUCKET}/
    ```
 
-2. Create the errors table:
+2. Copy `exampleChainConfig.json` to `chainConfig.json` and update `chainConfig.json` with your values.
 
-   ```bash
-   bq mk --table --description "polygon ETL Streaming Errors" \
-    ${PROJECT}:crypto_polygon.errors \
-    src/main/resources/errors-schema.json
-   ```
-
-3. Copy `exampleChainConfig.json` to `chainConfig.json` and update `chainConfig.json` with your values.
-
-4. Start the Dataflow job in:
+3. Start the Dataflow job in:
 
    ```bash
    mvn -e -Pdataflow-runner compile exec:java \
