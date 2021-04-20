@@ -2,9 +2,9 @@
 
 Airflow DAGs for exporting and loading the Polygon blockchain data to Google BigQuery:
 
-- [mainnet_export_dag.py](dags/mainnet_export_dag.py) - exports mainnet Polygon data to a GCS bucket.
-- [mainnet_load_dag.py](dags/mainnet_load_dag.py) - loads mainnet Polygon data from GCS bucket to BigQuery.
-- [mainnet_verify_streaming_dag.py](dags/mainnet_verify_streaming_dag.py) - verifies the consistency and
+- [polygon_export_dag.py](dags/polygon_export_dag.py) - exports Polygon data to a GCS bucket.
+- [polygon_load_dag.py](dags/polygon_load_dag.py) - loads Polygon data from GCS bucket to BigQuery.
+- [polygon_verify_streaming_dag.py](dags/polygon_verify_streaming_dag.py) - verifies the consistency and
   data latency in crypto_polygon BigQuery tables.
 
 ## Prerequisites
@@ -52,7 +52,7 @@ Airflow DAGs for exporting and loading the Polygon blockchain data to Google Big
   [Cloud Source Repository](#creating-a-cloud-source-repository-for-airflow-variables) for your environment.
 - Copy `example_airflow_variables.json` to `airflow_variables.json`.
   Edit `airflow_variables.json` and update configuration options with your values.
-  You can find variables description in the table below. For the `mainnet_output_bucket` variable
+  You can find variables description in the table below. For the `polygon_output_bucket` variable
   specify the bucket created on step 1 above. You can get it by running `echo $BUCKET`.
 - Open Airflow UI. You can get its URL from `airflowUri` configuration option:
   `gcloud composer environments describe ${ENVIRONMENT_NAME} --location us-central1`.
@@ -61,7 +61,7 @@ Airflow DAGs for exporting and loading the Polygon blockchain data to Google Big
 
 ### Airflow Variables
 
-Note that the variable names must be prefixed with `{chain}_`, e.g. `mainnet_output_bucket`.
+Note that the variable names must be prefixed with `{chain}_`, e.g. `polygon_output_bucket`.
 
 | Variable                         | Description                                                                                                                                                     |
 | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -117,7 +117,7 @@ To automate import variables in airflow_variables.json to Cloud composer, perfor
   `./upload_dags.sh <dag_gcs_prefix>`.
 - To understand more about how the Airflow DAGs are structured
   read [this article](https://cloud.google.com/blog/products/data-analytics/ethereum-bigquery-how-we-built-dataset).
-- Note that it will take one or more days for `mainnet_export_dag` to finish exporting the historical data.
+- Note that it will take one or more days for `polygon_export_dag` to finish exporting the historical data.
 - To setup automated deployment of DAGs refer to [Cloud Build Configuration](/docs/cloudbuild-configuration.md).
 
 ## Integration Testing
