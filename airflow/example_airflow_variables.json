@@ -1,6 +1,9 @@
 {
-  "mainnet_destination_dataset_project_id": "<your_project>",
-  "mainnet_export_max_active_runs": 3,
-  "mainnet_output_bucket": "<your_output_bucket>",
-  "mainnet_provider_uris": "rpc-mainnet.maticvigil.com/v1/your_key"
+  "polygon_destination_dataset_project_id": "<your_project>",
+  "polygon_export_max_active_runs": 3,
+  "polygon_export_max_workers": 5,
+  "polygon_load_all_partitions": true,
+  "polygon_output_bucket": "<your_output_bucket>",
+  "polygon_provider_uris": "http://...",
+  "polygon_provider_uris_archival": "http://..."
 }

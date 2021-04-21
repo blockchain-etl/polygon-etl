@@ -33,7 +33,7 @@ Airflow DAGs for exporting and loading the Polygon blockchain data to Google Big
        --disk-size=30GB --machine-type=n1-standard-1 --node-count=3 --python-version=3 --image-version=composer-1.10.6-airflow-1.10.3 \
        --network=default --subnetwork=default
 
-   gcloud composer environments update $ENVIRONMENT_NAME --location=us-central1 --update-pypi-package=polygon-etl==1.0.2
+   gcloud composer environments update $ENVIRONMENT_NAME --location=us-central1 --update-pypi-package=polygon-etl==0.0.7
    ```
 
    Note that if Composer API is not enabled the command above will auto prompt to enable it.
