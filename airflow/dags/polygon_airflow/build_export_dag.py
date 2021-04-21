@@ -48,7 +48,7 @@ def build_export_dag(
         default_dag_args['email'] = [email.strip() for email in notification_emails.split(',')]
 
     export_daofork_traces_option = False
-    export_genesis_traces_option = False
+    export_genesis_traces_option = True
     export_blocks_and_transactions_toggle = True
     export_receipts_and_logs_toggle = True
     extract_contracts_toggle = True
