@@ -1,7 +1,0 @@
-steps:
-  - name: gcr.io/cloud-builders/gsutil
-    dir: 'airflow'
-    args: ["-m", "rsync", "-r", "-c", "-d", "./dags", "gs://${_BUCKET}/dags"]
-
-substitutions:
- _BUCKET: your-bucket

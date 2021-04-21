@@ -1,12 +1,35 @@
 steps:
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    args: ["gcloud", "composer", "environments", "storage", "data", "import", "--source=./${_VARIABLES_FILENAME}", "--environment=${_ENVIRONMENT_NAME}", "--location=${_LOCATION}"]
+    args:
+      [
+        "gcloud",
+        "composer",
+        "environments",
+        "storage",
+        "data",
+        "import",
+        "--source=./${_VARIABLES_FILENAME}",
+        "--environment=${_ENVIRONMENT_NAME}",
+        "--location=${_LOCATION}",
+      ]
 
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    args: ["gcloud", "composer", "environments", "run", "${_ENVIRONMENT_NAME}", "--location=${_LOCATION}", "variables", "--", "--i", "${_DATA_DIR}/${_VARIABLES_FILENAME}"]
+    args:
+      [
+        "gcloud",
+        "composer",
+        "environments",
+        "run",
+        "${_ENVIRONMENT_NAME}",
+        "--location=${_LOCATION}",
+        "variables",
+        "--",
+        "--i",
+        "${_DATA_DIR}/${_VARIABLES_FILENAME}",
+      ]
 
 substitutions:
- _ENVIRONMENT_NAME: polygon-etl-0
- _LOCATION: us-central1
- _DATA_DIR: "/home/airflow/gcs/data/"
- _VARIABLES_FILENAME: airflow_variables.json
+  _ENVIRONMENT_NAME: polygon-etl-0
+  _LOCATION: us-central1
+  _DATA_DIR: "/home/airflow/gcs/data/"
+  _VARIABLES_FILENAME: airflow_variables.json
