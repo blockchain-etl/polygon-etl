@@ -38,11 +38,17 @@ Airflow DAGs for exporting and loading the Polygon blockchain data to Google Big
 
    Note that if Composer API is not enabled the command above will auto prompt to enable it.
 
-3. Follow the steps in [Configuring Airflow Variables](#configuring-airflow-variables) to configure Airfow variables.
-4. Follow the steps in [Deploying Airflow DAGs](#deploying-airflow-dags)
+3. This will be a good time to go to the bigquery console and cretae 3 new datasets under your project.
+
+   1. crypto_polygon
+   2. crypto_polygon_raw
+   3. crypto_polygon_temp
+
+4. Follow the steps in [Configuring Airflow Variables](#configuring-airflow-variables) to configure Airfow variables.
+5. Follow the steps in [Deploying Airflow DAGs](#deploying-airflow-dags)
    to deploy Airflow DAGs to Cloud Composer Environment.
 
-5. Follow the steps [here](https://cloud.google.com/composer/docs/how-to/managing/creating#notification)
+6. Follow the steps [here](https://cloud.google.com/composer/docs/how-to/managing/creating#notification)
    to configure email notifications.
 
 ## Configuring Airflow Variables

@@ -16,7 +16,13 @@ Runs in Google Kubernetes Engine.
 1. Create a GKE cluster:
 
    ```bash
-   gcloud container clusters create polygon-etl-streaming \
+   gcloud config set project <your_gcp_project>
+   PROJECT=$(gcloud config get-value project 2> /dev/null)
+   ENVIRONMENT_INDEX=0
+   ```
+
+   ```bash
+   gcloud container clusters create ${PROJECT}-streaming \
    --zone us-central1-a \
    --num-nodes 1 \
    --disk-size 10GB \
@@ -37,7 +43,7 @@ Runs in Google Kubernetes Engine.
    ```bash
    gcloud deployment-manager deployments create polygon-etl-pubsub-topics-0 --template deployment_manager_pubsub_topics.py
    gcloud deployment-manager deployments create polygon-etl-pubsub-subscriptions-0 --template deployment_manager_pubsub_subscriptions.py \
-   --properties topics_project:<project_where_topics_deployed>
+   --properties topics_project:${PROJECT}
    ```
 
 3. Create GCS bucket. Upload a text file with block number you want to start streaming from to
