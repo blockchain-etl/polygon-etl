@@ -1,7 +1,7 @@
 [
   {
     "transformNamePrefix": "polygon",
-    "pubSubSubscriptionPrefix": "projects/<your_project>/subscriptions/mainnet.dataflow.bigquery",
-    "bigQueryDataset": "<you_project>:mainnet"
+    "pubSubSubscriptionPrefix": "projects/<your_project>/subscriptions/crypto_polygon.dataflow.bigquery",
+    "bigQueryDataset": "<you_project>:crypto_polygon"
   }
 ]
