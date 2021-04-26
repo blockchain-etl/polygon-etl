@@ -294,8 +294,10 @@ def build_load_dag(
         verify_logs_have_latest_task >> send_email_task
         verify_token_transfers_have_latest_task >> send_email_task
         # verify_traces_blocks_count_task >> send_email_task
-        verify_traces_transactions_count_task >> send_email_task
-        verify_traces_contracts_count_task >> send_email_task
+        # TODO: the tasks below fail due to the node responding with no trace data but only tx data
+        # these tasks may need to be updated once we get more info from the polygon team
+        # verify_traces_transactions_count_task >> send_email_task
+        # verify_traces_contracts_count_task >> send_email_task
         enrich_tokens_task >> send_email_task
         calculate_balances_task >> send_email_task
 
