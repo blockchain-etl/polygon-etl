@@ -28,7 +28,7 @@ from web3 import IPCProvider, HTTPProvider
 from polygonetl.providers.ipc import BatchIPCProvider
 from polygonetl.providers.rpc import BatchHTTPProvider
 
-DEFAULT_TIMEOUT = 60
+DEFAULT_TIMEOUT = 600
 
 
 def get_provider_from_uri(uri_string, timeout=DEFAULT_TIMEOUT, batch=False):
