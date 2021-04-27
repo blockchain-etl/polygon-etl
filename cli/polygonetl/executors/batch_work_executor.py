@@ -23,7 +23,7 @@
 import logging
 import time
 
-from requests.exceptions import Timeout as RequestsTimeout, HTTPError, TooManyRedirects
+from requests.exceptions import Timeout as RequestsTimeout, HTTPError, TooManyRedirects, ConnectionError as RequestsConnectionError
 from web3.utils.threads import Timeout as Web3Timeout
 
 from polygonetl.executors.bounded_executor import BoundedExecutor
@@ -32,8 +32,8 @@ from polygonetl.misc.retriable_value_error import RetriableValueError
 from polygonetl.progress_logger import ProgressLogger
 from polygonetl.utils import dynamic_batch_iterator
 
-RETRY_EXCEPTIONS = (ConnectionError, HTTPError, RequestsTimeout, TooManyRedirects, Web3Timeout, OSError,
-                    RetriableValueError)
+RETRY_EXCEPTIONS = (ConnectionError, RequestsConnectionError, HTTPError, RequestsTimeout, TooManyRedirects, Web3Timeout,
+                    OSError, RetriableValueError)
 
 BATCH_CHANGE_COOLDOWN_PERIOD_SECONDS = 2 * 60
 
@@ -98,7 +98,7 @@ class BatchWorkExecutor:
         self.progress_logger.finish()
 
 
-def execute_with_retries(func, *args, max_retries=5, retry_exceptions=RETRY_EXCEPTIONS, sleep_seconds=1):
+def execute_with_retries(func, *args, max_retries=6, retry_exceptions=RETRY_EXCEPTIONS, sleep_seconds=1):
     for i in range(max_retries):
         try:
             return func(*args)
@@ -107,6 +107,7 @@ def execute_with_retries(func, *args, max_retries=5, retry_exceptions=RETRY_EXCE
             if i < max_retries - 1:
                 logging.info('The request will be retried after {} seconds. Retry #{}'.format(sleep_seconds, i))
                 time.sleep(sleep_seconds)
+                sleep_seconds = sleep_seconds * 2
                 continue
             else:
                 raise
