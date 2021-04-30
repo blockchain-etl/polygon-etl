@@ -1,6 +1,6 @@
 with double_entry_book as (
     -- debits
-    select to_address as address, value as value
+    select to_address as address, CAST(value AS NUMERIC) as value
     from `{{params.destination_dataset_project_id}}.{{params.dataset_name}}.traces`
     where true
     and date(block_timestamp) <= '{{ds}}'
@@ -9,7 +9,7 @@ with double_entry_book as (
     and (call_type not in ('delegatecall', 'callcode', 'staticcall') or call_type is null)
     union all
     -- credits
-    select from_address as address, -value as value
+    select from_address as address, -CAST(value AS NUMERIC) as value
     from `{{params.destination_dataset_project_id}}.{{params.dataset_name}}.traces`
     where true
     and date(block_timestamp) <= '{{ds}}'
