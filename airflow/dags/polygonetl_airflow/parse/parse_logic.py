@@ -314,7 +314,7 @@ def get_source_table(
 ):
     partitioned_dataset_name = 'crypto_polygon_partitioned'
 
-    if parse_mode == ParseMode.HISTORY_ALL_DATES:
+    if parse_mode == ParseMode.HISTORY_ALL_DATES or parse_mode == ParseMode.LIVE: 
         source_project_id = public_project_id
         source_dataset_name = public_dataset_name
         if parser_type == 'log':
@@ -323,7 +323,7 @@ def get_source_table(
             source_table_name = 'traces'
         else:
             raise ValueError(f'unknown parser type {parser_type}')
-    elif parse_mode == ParseMode.HISTORY_SINGLE_DATE or parse_mode == ParseMode.LIVE:
+    elif parse_mode == ParseMode.HISTORY_SINGLE_DATE :
         if ds is None:
             raise ValueError('If history_type is "history" and parse_all_partitions is True ds must be provided')
         source_project_id = internal_project_id
