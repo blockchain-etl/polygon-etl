@@ -2,7 +2,7 @@ import os
 
 from eth_utils import event_abi_to_log_topic, function_abi_to_4byte_selector
 
-from ethereumetl_airflow.utils.template_utils import render_template
+from polygonetl_airflow.utils.template_utils import render_template
 
 
 def render_parse_udf_template(
