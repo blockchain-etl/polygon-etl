@@ -27,7 +27,7 @@ def build_load_dag(
     chain='polygon',
     notification_emails=None,
     load_start_date=datetime(2018, 7, 1),
-    schedule_interval='0 0 * * *',
+    load_schedule_interval='0 0 * * *',
     load_all_partitions=True
 ):
     # The following datasets must be created in BigQuery:
@@ -83,7 +83,7 @@ def build_load_dag(
     dag = models.DAG(
         dag_id,
         catchup=False,
-        schedule_interval=schedule_interval,
+        schedule_interval=load_schedule_interval,
         default_args=default_dag_args)
 
     dags_folder = os.environ.get('DAGS_FOLDER', '/home/airflow/gcs/dags')
@@ -261,10 +261,6 @@ def build_load_dag(
     enrich_tokens_task = add_enrich_tasks(
         'tokens', dependencies=[load_blocks_task, load_tokens_task])
 
-    calculate_balances_task = add_enrich_tasks(
-        'balances', dependencies=[enrich_blocks_task, enrich_transactions_task, enrich_traces_task],
-        time_partitioning_field=None, always_load_all_partitions=True)
-
     verify_blocks_count_task = add_verify_tasks('blocks_count', [enrich_blocks_task])
     verify_blocks_have_latest_task = add_verify_tasks('blocks_have_latest', [enrich_blocks_task])
     verify_transactions_count_task = add_verify_tasks('transactions_count',
@@ -299,6 +295,5 @@ def build_load_dag(
         # verify_traces_transactions_count_task >> send_email_task
         # verify_traces_contracts_count_task >> send_email_task
         enrich_tokens_task >> send_email_task
-        calculate_balances_task >> send_email_task
 
     return dag
