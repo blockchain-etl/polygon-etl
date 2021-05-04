@@ -53,7 +53,22 @@ def read_load_dag_vars(var_prefix, **kwargs):
 
     return vars
 
+def read_parse_dag_vars(var_prefix, dataset, **kwargs):
+    per_dataset_var_prefix = var_prefix + dataset + '_'
+    vars = {
+        'parse_destination_dataset_project_id': read_var('parse_destination_dataset_project_id', var_prefix, True, **kwargs),
+        'schedule_interval': read_var('schedule_interval', var_prefix, True, **kwargs),
+        'parse_all_partitions': parse_bool(read_var('parse_all_partitions', per_dataset_var_prefix, False), default=None),
+        'notification_emails': read_var('notification_emails', None, False, **kwargs),
+    }
 
+    parse_start_date = read_var('parse_start_date', vars, False, **kwargs)
+    if parse_start_date is not None:
+        parse_start_date = datetime.strptime(parse_start_date, '%Y-%m-%d')
+        vars['parse_start_date'] = parse_start_date
+
+    return vars
+    
 def read_verify_streaming_dag_vars(var_prefix, **kwargs):
     vars = {
         'destination_dataset_project_id': read_var('destination_dataset_project_id', var_prefix, True, **kwargs),
