@@ -91,7 +91,7 @@ def build_load_dag(
     def add_load_tasks(task, file_format, allow_quoted_newlines=False):
         wait_sensor = GoogleCloudStorageObjectSensor(
             task_id='wait_latest_{task}'.format(task=task),
-            timeout=60 * 60,
+            timeout=12 * 60 * 60,
             poke_interval=60,
             bucket=output_bucket,
             object='export/{task}/block_date={datestamp}/{task}.{file_format}'.format(
