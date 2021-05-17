@@ -1,0 +1,65 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "token0",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "token1",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "pair",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "_uint",
+                    "type": "uint256"
+                }
+            ],
+            "name": "PairCreated",
+            "type": "event"
+        },
+        "contract_address": "0xe7fb3e833efe5f9c441105eb65ef8b261266423b",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "dyfn",
+        "schema": [
+            {
+                "description": "",
+                "name": "token0",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "token1",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "pair",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_uint",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "UniswapV2Factory_event_PairCreated"
+    }
+}
