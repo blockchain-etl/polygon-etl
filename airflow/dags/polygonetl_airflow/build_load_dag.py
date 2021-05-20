@@ -294,6 +294,8 @@ def build_load_dag(
         # these tasks may need to be updated once we get more info from the polygon team
         # verify_traces_transactions_count_task >> send_email_task
         # verify_traces_contracts_count_task >> send_email_task
+        enrich_traces_task >> send_email_task
+        enrich_contracts_task >> send_email_task
         enrich_tokens_task >> send_email_task
 
     return dag
