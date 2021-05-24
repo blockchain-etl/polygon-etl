@@ -59,6 +59,13 @@ class ExportGethTracesJob(BaseJob):
                         .format(block=block_number, trace=json.dumps(tx_trace), err=tx_trace.get('error'))
                 )
 
+    def _is_insufficient_funds_error(self, response_item):
+        if response_item.get('result') is None:
+            if response_item.get('error') is not None and response_item.get('error').get('message') is not None and \
+                    'insufficient funds for transfer' in response_item.get('error').get('message'):
+                return True
+        return False
+
     def _start(self):
         self.item_exporter.open()
 
@@ -70,18 +77,15 @@ class ExportGethTracesJob(BaseJob):
         )
 
     def _export_batch(self, block_number_batch):
-        if FAULTY_BLOCK_NUMBER in block_number_batch:
-            logging.warning('14807902 block has error "insufficient funds for transfer: address 0xc74D21957b34E4b9bAE50E436a2581bD81ed581d".'
-                            ' Tracing will be skipped.')
-            block_number_batch = [n for n in block_number_batch if n != FAULTY_BLOCK_NUMBER]
-            if not block_number_batch:
-                return
-
         trace_block_rpc = list(generate_trace_block_by_number_json_rpc(block_number_batch))
         response = self.batch_web3_provider.make_batch_request(json.dumps(trace_block_rpc))
 
         for response_item in response:
             block_number = response_item.get('id')
+            if self._is_insufficient_funds_error(response_item):
+                logging.warning('The block has error "insufficient funds for transfer.'
+                                ' Tracing will be skipped.')
+                continue
             result = rpc_response_to_result(response_item)
             self._check_result(result, block_number)
 
@@ -95,6 +99,3 @@ class ExportGethTracesJob(BaseJob):
     def _end(self):
         self.batch_work_executor.shutdown()
         self.item_exporter.close()
-
-
-FAULTY_BLOCK_NUMBER = 14807902
