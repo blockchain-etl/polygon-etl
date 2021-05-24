@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 import json
+import logging
 
 from polygonetl.executors.batch_work_executor import BatchWorkExecutor
 from polygonetl.json_rpc_requests import generate_trace_block_by_number_json_rpc
@@ -69,6 +70,13 @@ class ExportGethTracesJob(BaseJob):
         )
 
     def _export_batch(self, block_number_batch):
+        if FAULTY_BLOCK_NUMBER in block_number_batch:
+            logging.warning('14807902 block has error "insufficient funds for transfer: address 0xc74D21957b34E4b9bAE50E436a2581bD81ed581d".'
+                            ' Tracing will be skipped.')
+            block_number_batch = [n for n in block_number_batch if n != FAULTY_BLOCK_NUMBER]
+            if not block_number_batch:
+                return
+
         trace_block_rpc = list(generate_trace_block_by_number_json_rpc(block_number_batch))
         response = self.batch_web3_provider.make_batch_request(json.dumps(trace_block_rpc))
 
@@ -87,3 +95,6 @@ class ExportGethTracesJob(BaseJob):
     def _end(self):
         self.batch_work_executor.shutdown()
         self.item_exporter.close()
+
+
+FAULTY_BLOCK_NUMBER = 14807902
