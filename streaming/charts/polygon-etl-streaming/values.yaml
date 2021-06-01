@@ -37,10 +37,10 @@ stream:
     pullPolicy: IfNotPresent
   resources:
     requests:
-      memory: "128Mi"
+      memory: "256Mi"
       cpu: "100m"
     limits:
-      memory: "512Mi"
+      memory: "1024Mi"
       cpu: "350m"
   env:
     LAST_SYNCED_BLOCK_FILE_MAX_AGE_IN_SECONDS: "600"
