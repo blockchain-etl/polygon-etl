@@ -270,7 +270,7 @@ def build_export_dag(
                 task_id=task_id,
                 python_callable=python_callable,
                 provide_context=True,
-                execution_timeout=timedelta(hours=15),
+                execution_timeout=timedelta(hours=24),
                 dag=dag,
             )
             if dependencies is not None and len(dependencies) > 0:
