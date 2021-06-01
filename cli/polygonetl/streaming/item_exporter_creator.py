@@ -35,7 +35,11 @@ def create_item_exporter(output):
             'trace': output + '.traces',
             'contract': output + '.contracts',
             'token': output + '.tokens',
-        })
+        },
+        batch_max_bytes=1024 * 1024 * 5,
+        batch_max_latency=5,
+        batch_max_messages=5000
+        )
     elif item_exporter_type == ItemExporterType.POSTGRES:
         from blockchainetl_common.jobs.exporters.postgres_item_exporter import PostgresItemExporter
         from blockchainetl_common.streaming.postgres_utils import create_insert_statement_for_table
