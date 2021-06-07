@@ -36,6 +36,7 @@ def create_item_exporter(output):
             'contract': output + '.contracts',
             'token': output + '.tokens',
         },
+        message_attributes=('item_id',),
         batch_max_bytes=1024 * 1024 * 5,
         batch_max_latency=5,
         batch_max_messages=1000
