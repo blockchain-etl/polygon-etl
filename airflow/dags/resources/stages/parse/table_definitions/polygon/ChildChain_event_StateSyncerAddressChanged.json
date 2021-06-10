@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "type": "log",
+        "contract_address": "0xd9c7c4ed4b66858301d0cb28cc88bf655fe34861",
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "previousAddress",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "newAddress",
+                    "type": "address"
+                }
+            ],
+            "name": "StateSyncerAddressChanged",
+            "type": "event"
+        },
+        "field_mapping": {}
+    },
+    "table": {
+        "dataset_name": "polygon",
+        "table_name": "ChildChain_event_StateSyncerAddressChanged",
+        "table_description": "",
+        "schema": [
+            {
+                "name": "previousAddress",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "newAddress",
+                "description": "",
+                "type": "STRING"
+            }
+        ]
+    }
+}

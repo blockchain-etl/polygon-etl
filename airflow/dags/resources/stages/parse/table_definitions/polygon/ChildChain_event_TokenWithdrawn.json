@@ -1,0 +1,76 @@
+{
+    "parser": {
+        "type": "log",
+        "contract_address": "0xd9c7c4ed4b66858301d0cb28cc88bf655fe34861",
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "rootToken",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "childToken",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "withrawCount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "TokenWithdrawn",
+            "type": "event"
+        },
+        "field_mapping": {}
+    },
+    "table": {
+        "dataset_name": "polygon",
+        "table_name": "ChildChain_event_TokenWithdrawn",
+        "table_description": "",
+        "schema": [
+            {
+                "name": "rootToken",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "childToken",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "user",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "amount",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "withrawCount",
+                "description": "",
+                "type": "STRING"
+            }
+        ]
+    }
+}
