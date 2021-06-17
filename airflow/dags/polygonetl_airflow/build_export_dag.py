@@ -30,7 +30,7 @@ def build_export_dag(
         notification_emails=None,
         export_schedule_interval='0 0 * * *',
         export_max_workers=10,
-        export_batch_size=10,
+        export_batch_size=100,
         export_max_active_runs=None,
         export_retries=5,
         **kwargs
