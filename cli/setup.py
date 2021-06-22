@@ -42,7 +42,7 @@ setup(
         'ethereum-dasm==0.1.4',
         'base58',
         'requests',
-        'blockchain-etl-common==1.6.0',
+        'blockchain-etl-common==1.6.1',
     ],
     extras_require={
         'streaming': [

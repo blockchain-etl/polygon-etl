@@ -70,13 +70,25 @@ def create_item_exporter(output):
                         ListFieldItemConverter('topics', 'topic', fill=4)])
     elif item_exporter_type == ItemExporterType.GCS:
         from blockchainetl_common.jobs.exporters.gcs_item_exporter import GcsItemExporter
-        item_exporter = GcsItemExporter(bucket=output.replace('gs://', ''))
+        bucket, path = get_bucket_and_path_from_gcs_output(output)
+        item_exporter = GcsItemExporter(bucket=bucket, path=path)
     elif item_exporter_type == ItemExporterType.CONSOLE:
         item_exporter = ConsoleItemExporter()
     else:
         raise ValueError('Unable to determine item exporter type for output ' + output)
 
     return item_exporter
+
+
+def get_bucket_and_path_from_gcs_output(output):
+    output = output.replace('gs://', '')
+    bucket_and_path = output.split('/', 1)
+    bucket = bucket_and_path[0]
+    if len(bucket_and_path) > 1:
+        path = bucket_and_path[1]
+    else:
+        path = ''
+    return bucket, path
 
 
 def determine_item_exporter_type(output):
