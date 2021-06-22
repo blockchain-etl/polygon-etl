@@ -21,12 +21,21 @@
 #  SOFTWARE.
 
 from blockchainetl_common.jobs.exporters.console_item_exporter import ConsoleItemExporter
+from blockchainetl_common.jobs.exporters.multi_item_exporter import MultiItemExporter
+
+
+def create_item_exporters(outputs):
+    split_outputs = [output.strip() for output in outputs.split(',')]
+
+    item_exporters = [create_item_exporter(output) for output in split_outputs]
+    return MultiItemExporter(item_exporters)
 
 
 def create_item_exporter(output):
     item_exporter_type = determine_item_exporter_type(output)
     if item_exporter_type == ItemExporterType.PUBSUB:
         from blockchainetl_common.jobs.exporters.google_pubsub_item_exporter import GooglePubSubItemExporter
+        enable_message_ordering = 'sorted' in output
         item_exporter = GooglePubSubItemExporter(item_type_to_topic_mapping={
             'block': output + '.blocks',
             'transaction': output + '.transactions',
@@ -39,8 +48,8 @@ def create_item_exporter(output):
         message_attributes=('item_id',),
         batch_max_bytes=1024 * 1024 * 5,
         batch_max_latency=5,
-        batch_max_messages=1000
-        )
+        batch_max_messages=1000,
+        enable_message_ordering=enable_message_ordering)
     elif item_exporter_type == ItemExporterType.POSTGRES:
         from blockchainetl_common.jobs.exporters.postgres_item_exporter import PostgresItemExporter
         from blockchainetl_common.streaming.postgres_utils import create_insert_statement_for_table
@@ -59,6 +68,9 @@ def create_item_exporter(output):
             },
             converters=[UnixTimestampItemConverter(), IntToDecimalItemConverter(),
                         ListFieldItemConverter('topics', 'topic', fill=4)])
+    elif item_exporter_type == ItemExporterType.GCS:
+        from blockchainetl_common.jobs.exporters.gcs_item_exporter import GcsItemExporter
+        item_exporter = GcsItemExporter(bucket=output.replace('gs://', ''))
     elif item_exporter_type == ItemExporterType.CONSOLE:
         item_exporter = ConsoleItemExporter()
     else:
@@ -72,6 +84,8 @@ def determine_item_exporter_type(output):
         return ItemExporterType.PUBSUB
     elif output is not None and output.startswith('postgresql'):
         return ItemExporterType.POSTGRES
+    elif output is not None and output.startswith('gs://'):
+        return ItemExporterType.GCS
     elif output is None or output == 'console':
         return ItemExporterType.CONSOLE
     else:
@@ -81,5 +95,6 @@ def determine_item_exporter_type(output):
 class ItemExporterType:
     PUBSUB = 'pubsub'
     POSTGRES = 'postgres'
+    GCS = 'gcs'
     CONSOLE = 'console'
     UNKNOWN = 'unknown'

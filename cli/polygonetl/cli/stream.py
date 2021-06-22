@@ -27,6 +27,7 @@ from blockchainetl_common.streaming.streaming_utils import configure_signals, co
 from polygonetl.enumeration.entity_type import EntityType
 
 from polygonetl.providers.auto import get_provider_from_uri
+from polygonetl.streaming.item_exporter_creator import create_item_exporters
 from polygonetl.thread_local_proxy import ThreadLocalProxy
 
 
@@ -67,7 +68,7 @@ def stream(last_synced_block_file, lag, provider_uri, output, start_block, entit
 
     streamer_adapter = EthStreamerAdapter(
         batch_web3_provider=ThreadLocalProxy(lambda: get_provider_from_uri(provider_uri, batch=True)),
-        item_exporter=create_item_exporter(output),
+        item_exporter=create_item_exporters(output),
         batch_size=batch_size,
         max_workers=max_workers,
         entity_types=entity_types

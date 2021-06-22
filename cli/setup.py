@@ -42,12 +42,13 @@ setup(
         'ethereum-dasm==0.1.4',
         'base58',
         'requests',
-        'blockchain-etl-common==1.3.0',
+        'blockchain-etl-common==1.6.0',
     ],
     extras_require={
         'streaming': [
             'timeout-decorator==0.4.1',
-            'google-cloud-pubsub==0.39.1',
+            'google-cloud-pubsub==2.1.0',
+            'google-cloud-storage==1.33.0',
             'sqlalchemy==1.3.13',
             'pg8000==1.13.2',
         ],
