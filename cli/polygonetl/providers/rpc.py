@@ -22,11 +22,13 @@
 
 
 from web3 import HTTPProvider
-from web3.utils.request import make_post_request
 
 
 # Mostly copied from web3.py/providers/rpc.py. Supports batch requests.
 # Will be removed once batch feature is added to web3.py https://github.com/ethereum/web3.py/issues/832
+from polygonetl.providers.request import make_post_request
+
+
 class BatchHTTPProvider(HTTPProvider):
 
     def make_batch_request(self, text):
