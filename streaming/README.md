@@ -26,7 +26,7 @@ Runs in Google Kubernetes Engine.
    --zone us-central1-a \
    --num-nodes 1 \
    --disk-size 10GB \
-   --machine-type n1-standard-1 \
+   --machine-type n2-standard-2 \
    --network default \
    --subnetwork default \
    --scopes pubsub,storage-rw,logging-write,monitoring-write,service-management,service-control,trace
