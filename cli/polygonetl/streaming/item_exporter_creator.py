@@ -25,7 +25,7 @@ from blockchainetl_common.jobs.exporters.multi_item_exporter import MultiItemExp
 
 
 def create_item_exporters(outputs):
-    split_outputs = [output.strip() for output in outputs.split(',')]
+    split_outputs = [output.strip() for output in outputs.split(',')] if outputs else ['console']
 
     item_exporters = [create_item_exporter(output) for output in split_outputs]
     return MultiItemExporter(item_exporters)
