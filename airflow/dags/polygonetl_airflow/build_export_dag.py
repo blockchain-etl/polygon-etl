@@ -229,6 +229,8 @@ def build_export_dag(
     def export_traces_command(execution_date, provider_uri, **kwargs):
         with TemporaryDirectory() as tempdir:
             start_block, end_block = get_block_range(tempdir, execution_date, provider_uri)
+            if start_block == 0:
+                start_block = 1
 
             logging.info('Calling export_geth_traces({}, {}, {}, ...,{}, {}, {}, {})'.format(
                 start_block, end_block, export_batch_size, export_max_workers, provider_uri,
