@@ -34,8 +34,8 @@ def calculate_trace_statuses(traces):
     # group by transaction
     grouped_transaction_traces = defaultdict(list)
     for trace in traces:
-        if trace.transaction_hash is not None and len(trace.transaction_hash) > 0:
-            grouped_transaction_traces[trace.transaction_hash].append(trace)
+        if trace.transaction_index is not None:
+            grouped_transaction_traces[trace.transaction_index].append(trace)
 
     # calculate statuses for each transaction
     for transaction_traces in grouped_transaction_traces.values():
@@ -56,7 +56,7 @@ def calculate_trace_statuses_for_single_transaction(all_traces):
             parent_trace = indexed_traces.get(trace_address_to_str(trace.trace_address[:-1]))
             if parent_trace is None:
                 raise ValueError('A parent trace for trace with trace_address {} in transaction {} is not found'
-                                 .format(trace.trace_address, trace.transaction_hash))
+                                 .format(trace.trace_address, trace.transaction_index))
             if parent_trace.status == 0:
                 trace.status = 0
 
