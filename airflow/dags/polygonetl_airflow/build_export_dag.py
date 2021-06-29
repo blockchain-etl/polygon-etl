@@ -57,8 +57,6 @@ def build_export_dag(
     export_traces_toggle = True
     export_traces_from_gcs = False
 
-
-
     if export_max_active_runs is None:
         export_max_active_runs = configuration.conf.getint('core', 'max_active_runs_per_dag')
 
@@ -68,7 +66,6 @@ def build_export_dag(
         default_args=default_dag_args,
         max_active_runs=export_max_active_runs
     )
-
 
     from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
     cloud_storage_hook = GoogleCloudStorageHook(google_cloud_storage_conn_id="google_cloud_default")
@@ -258,7 +255,6 @@ def build_export_dag(
             extract_geth_traces.callback(
                 input=os.path.join(tempdir, "geth_traces.json"),
                 output=os.path.join(tempdir, 'traces.csv'),
-                batch_size=100,
                 max_workers=1
             )
 

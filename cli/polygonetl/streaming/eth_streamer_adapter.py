@@ -166,7 +166,6 @@ class EthStreamerAdapter:
         exporter = InMemoryItemExporter(item_types=['trace'])
         job = ExtractGethTracesJob(
             traces_iterable=raw_traces,
-            batch_size=self.batch_size,
             max_workers=self.max_workers,
             item_exporter=exporter
         )
