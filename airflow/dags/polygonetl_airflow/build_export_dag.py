@@ -251,7 +251,6 @@ def build_export_dag(
                    export_path("traces", execution_date), os.path.join(tempdir, "geth_traces.json"), 
                 )
 
-
             extract_geth_traces.callback(
                 input=os.path.join(tempdir, "geth_traces.json"),
                 output=os.path.join(tempdir, 'traces.csv'),
