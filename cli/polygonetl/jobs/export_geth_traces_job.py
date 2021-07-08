@@ -59,13 +59,6 @@ class ExportGethTracesJob(BaseJob):
                         .format(block=block_number, trace=json.dumps(tx_trace), err=tx_trace.get('error'))
                 )
 
-    def _is_insufficient_funds_error(self, response_item):
-        if response_item.get('result') is None:
-            if response_item.get('error') is not None and response_item.get('error').get('message') is not None and \
-                    'insufficient funds for transfer' in response_item.get('error').get('message'):
-                return True
-        return False
-
     def _start(self):
         self.item_exporter.open()
 
@@ -82,10 +75,6 @@ class ExportGethTracesJob(BaseJob):
 
         for response_item in response:
             block_number = response_item.get('id')
-            if self._is_insufficient_funds_error(response_item):
-                logging.warning('The block has error "insufficient funds for transfer.'
-                                ' Tracing will be skipped.')
-                continue
             result = rpc_response_to_result(response_item)
             self._check_result(result, block_number)
 
