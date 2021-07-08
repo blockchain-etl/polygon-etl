@@ -39,7 +39,7 @@
         "type": "trace"
     },
     "table": {
-        "dataset_name": "dyfn",
+        "dataset_name": "dfyn",
         "schema": [
             {
                 "description": "",
