@@ -145,7 +145,7 @@ def build_parse_dag(
         priority_weight=0,
         mode='reschedule',
         poke_interval=5 * 60,
-        timeout=60 * 60 * 12,
+        timeout=60 * 60 * 20,
         dag=dag)
 
     json_files = get_list_of_files(dataset_folder, '*.json')
