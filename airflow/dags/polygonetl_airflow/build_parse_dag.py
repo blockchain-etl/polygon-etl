@@ -144,6 +144,7 @@ def build_parse_dag(
         execution_delta=timedelta(minutes=30),
         priority_weight=0,
         mode='reschedule',
+        retries=20,
         poke_interval=5 * 60,
         timeout=60 * 60 * 30,
         dag=dag)
