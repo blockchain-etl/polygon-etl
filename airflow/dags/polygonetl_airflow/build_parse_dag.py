@@ -31,7 +31,6 @@ def build_parse_dag(
         parse_start_date=datetime(2020, 5, 30),
         schedule_interval='0 0 * * *',
         parse_all_partitions=None,
-        send_success_email=False
 ):
 
     logging.info('parse_all_partitions is {}'.format(parse_all_partitions))
@@ -194,16 +193,6 @@ def build_parse_dag(
         checkpoint_task >> create_view_task
         final_tasks.append(create_view_task)
 
-    if notification_emails and len(notification_emails) > 0 and send_success_email:
-        send_email_task = EmailOperator(
-            task_id='send_email',
-            to=[email.strip() for email in notification_emails.split(',')],
-            subject='Polygon ETL Airflow Parse DAG Succeeded',
-            html_content='Polygon ETL Airflow Parse DAG Succeeded for {}'.format(dag_id),
-            dag=dag
-        )
-        for final_task in final_tasks:
-            final_task >> send_email_task
     return dag
 
 

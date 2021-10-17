@@ -320,14 +320,4 @@ def build_load_dag(
         enrich_tokens_task,
     ])
 
-    if notification_emails and len(notification_emails) > 0:
-        send_email_task = EmailOperator(
-            task_id='send_email',
-            to=[email.strip() for email in notification_emails.split(',')],
-            subject='polygon ETL Airflow Load DAG Succeeded',
-            html_content='polygon ETL Airflow Load DAG Succeeded - {}'.format(chain),
-            dag=dag
-        )
-        save_checkpoint_task >> send_email_task
-
     return dag
