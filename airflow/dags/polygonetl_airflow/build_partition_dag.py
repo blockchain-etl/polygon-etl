@@ -87,11 +87,9 @@ def build_partition_dag(
 
     partition_logs_task = add_partition_tasks('logs', SQL_TEMPLATE_LOGS)
     partition_traces_task = add_partition_tasks('traces', SQL_TEMPLATE_TRACES)
-    # partition_balances_task = add_partition_tasks('balances', SQL_TEMPLATE_BALANCES)
 
     wait_for_ethereum_load_dag_task >> partition_logs_task
     wait_for_ethereum_load_dag_task >> partition_traces_task
-    # wait_for_ethereum_load_dag_task >> partition_balances_task
 
     done_task = BashOperator(
         task_id='done',
@@ -101,7 +99,6 @@ def build_partition_dag(
 
     partition_logs_task >> done_task
     partition_traces_task >> done_task
-    # partition_balances_task >> done_task
 
     return dag
 
