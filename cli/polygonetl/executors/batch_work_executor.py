@@ -22,6 +22,7 @@
 
 import logging
 import time
+from json.decoder import JSONDecodeError
 
 from requests.exceptions import Timeout as RequestsTimeout, HTTPError, TooManyRedirects, ConnectionError as RequestsConnectionError
 from web3.utils.threads import Timeout as Web3Timeout
@@ -33,7 +34,7 @@ from polygonetl.progress_logger import ProgressLogger
 from polygonetl.utils import dynamic_batch_iterator
 
 RETRY_EXCEPTIONS = (ConnectionError, RequestsConnectionError, HTTPError, RequestsTimeout, TooManyRedirects, Web3Timeout,
-                    OSError, RetriableValueError)
+                    OSError, RetriableValueError, JSONDecodeError)
 
 BATCH_CHANGE_COOLDOWN_PERIOD_SECONDS = 2 * 60
 
