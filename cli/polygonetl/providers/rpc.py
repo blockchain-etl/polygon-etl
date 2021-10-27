@@ -46,7 +46,7 @@ class BatchHTTPProvider(HTTPProvider):
         try:
             response = self.decode_rpc_response(raw_response)
         except JSONDecodeError as e:
-            self.logger.error('Got a JSON error with status ' + str(status) + ' and content ' + to_text(raw_response))
+            self.logger.error('Got a JSON decode error for response with status ' + str(status) + ' and content ' + to_text(raw_response))
             raise e
 
         self.logger.debug("Getting response HTTP. URI: %s, "
