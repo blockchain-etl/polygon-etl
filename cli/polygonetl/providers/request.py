@@ -39,4 +39,4 @@ def make_post_request(endpoint_uri, data, *args, **kwargs):
         logging.error('Exception occurred while making a post request, response body was: ' + (response.text or ''))
         raise e
 
-    return response.content
+    return response.content, response.status_code

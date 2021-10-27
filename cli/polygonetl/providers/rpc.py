@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
+from json.decoder import JSONDecodeError
 
 from web3 import HTTPProvider
 
@@ -28,6 +28,9 @@ from web3 import HTTPProvider
 # Will be removed once batch feature is added to web3.py https://github.com/ethereum/web3.py/issues/832
 from polygonetl.providers.request import make_post_request
 
+from eth_utils import (
+    to_text,
+)
 
 class BatchHTTPProvider(HTTPProvider):
 
@@ -35,12 +38,17 @@ class BatchHTTPProvider(HTTPProvider):
         self.logger.debug("Making request HTTP. URI: %s, Request: %s",
                           self.endpoint_uri, text)
         request_data = text.encode('utf-8')
-        raw_response = make_post_request(
+        raw_response, status = make_post_request(
             self.endpoint_uri,
             request_data,
             **self.get_request_kwargs()
         )
-        response = self.decode_rpc_response(raw_response)
+        try:
+            response = self.decode_rpc_response(raw_response)
+        except JSONDecodeError as e:
+            self.logger.error('Got a JSON error with status ' + str(status) + ' and content ' + to_text(raw_response))
+            raise e
+
         self.logger.debug("Getting response HTTP. URI: %s, "
                           "Request: %s, Response: %s",
                           self.endpoint_uri, text, response)
