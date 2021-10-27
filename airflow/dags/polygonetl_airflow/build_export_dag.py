@@ -229,8 +229,9 @@ def build_export_dag(
             if start_block == 0:
                 start_block = 1
 
+            export_traces_batch_size = 1
             logging.info('Calling export_geth_traces({}, {}, {}, ...,{}, {}, {}, {})'.format(
-                start_block, end_block, export_batch_size, export_max_workers, provider_uri,
+                start_block, end_block, export_traces_batch_size, export_max_workers, provider_uri,
                 export_genesis_traces_option, export_daofork_traces_option
             ))
 
@@ -238,7 +239,7 @@ def build_export_dag(
                 export_geth_traces.callback(
                     start_block=start_block,
                     end_block=end_block,
-                    batch_size=1,
+                    batch_size=export_traces_batch_size,
                     output=os.path.join(tempdir, "geth_traces.json"),
                     max_workers=export_max_workers,
                     provider_uri=provider_uri
