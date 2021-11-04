@@ -7,6 +7,8 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.contrib.operators.bigquery_operator import BigQueryOperator
 
+from utils.error_handling import handle_dag_failure
+
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
 
@@ -33,7 +35,8 @@ def build_verify_streaming_dag(
         'email_on_failure': True,
         'email_on_retry': False,
         'retries': 5,
-        'retry_delay': timedelta(minutes=5)
+        'retry_delay': timedelta(minutes=5),
+        'on_failure_callback': handle_dag_failure,
     }
 
     if notification_emails and len(notification_emails) > 0:
