@@ -45,12 +45,12 @@ def build_parse_dag(
     PARTITION_DAG_ID = 'polygon_partition_dag'
 
     default_dag_args = {
-        'depends_on_past': False,
+        'depends_on_past': True,
         'start_date': parse_start_date,
         'email_on_failure': True,
         'email_on_retry': False,
         'retries': 5,
-        'retry_delay': timedelta(minutes=5)
+        'retry_delay': timedelta(minutes=5),
     }
 
     if notification_emails and len(notification_emails) > 0:
