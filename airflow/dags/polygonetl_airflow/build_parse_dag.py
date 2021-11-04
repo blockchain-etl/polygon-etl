@@ -17,6 +17,8 @@ from polygonetl_airflow.bigquery_utils import create_view
 from polygonetl_airflow.common import read_json_file, read_file
 from polygonetl_airflow.parse.parse_logic import ref_regex, parse, create_dataset
 
+from utils.error_handling import handle_dag_failure
+
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
 
@@ -51,6 +53,7 @@ def build_parse_dag(
         'email_on_retry': False,
         'retries': 5,
         'retry_delay': timedelta(minutes=5),
+        'on_failure_callback': handle_dag_failure,
     }
 
     if notification_emails and len(notification_emails) > 0:

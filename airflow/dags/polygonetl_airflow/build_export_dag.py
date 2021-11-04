@@ -20,6 +20,8 @@ from polygonetl.cli import (
     extract_geth_traces
 )
 
+from utils.error_handling import handle_dag_failure
+
 
 def build_export_dag(
         dag_id,
@@ -42,6 +44,7 @@ def build_export_dag(
         "email_on_retry": False,
         "retries": export_retries,
         "retry_delay": timedelta(minutes=5)
+        "on_failure_callback": handle_dag_failure,
     }
 
     if notification_emails and len(notification_emails) > 0:
