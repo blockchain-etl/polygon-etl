@@ -1,4 +1,5 @@
 import json
+import random
 from typing import Dict
 
 from airflow.models import Variable
@@ -33,10 +34,15 @@ def post_alert_to_discord(context: Dict) -> None:
         raise ValueError("`discord_alerts_default_owner` must be set because `discord_alerts_webhook_url` is set.")
 
     override_owner_ids = json.loads(Variable.get("discord_alerts_dag_owners", "{}"))
-    relevant_user_id = override_owner_ids.get(dag_id, default_user_id)
+    relevant_user_ids_string = override_owner_ids.get(dag_id, default_user_id)
+    relevant_user_ids = relevant_user_ids_string.split(",")
+    relevant_user_id = random.choice(relevant_user_ids)
 
     message = (
-        f'Failed DAG **{dag_id}**\nTask: **{task_id}**\nEnvironment: **{environment}**\nLogs: {log_url}\n'
+        f'Failed DAG **{dag_id}**\n'
+        f'Task: **{task_id}**\n'
+        f'Environment: **{environment}**\n'
+        f'Logs: {log_url}\n'
         f'Owner: <@{relevant_user_id}>'
     )
 
