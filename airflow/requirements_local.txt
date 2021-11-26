@@ -4,4 +4,4 @@ google-cloud-bigquery
 google-cloud-storage
 google-api-python-client
 pytest==5.4.1
-polygon-etl==0.1.7
+polygon-etl==0.1.8
