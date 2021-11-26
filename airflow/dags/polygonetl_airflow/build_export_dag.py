@@ -32,6 +32,7 @@ def build_export_dag(
         notification_emails=None,
         export_schedule_interval='0 0 * * *',
         export_max_workers=10,
+        export_traces_max_workers=10,
         export_batch_size=200,
         export_max_active_runs=None,
         export_retries=5,
@@ -244,7 +245,7 @@ def build_export_dag(
                     end_block=end_block,
                     batch_size=export_traces_batch_size,
                     output=os.path.join(tempdir, "geth_traces.json"),
-                    max_workers=export_max_workers,
+                    max_workers=export_traces_max_workers,
                     provider_uri=provider_uri
                 )
                 copy_to_export_path(

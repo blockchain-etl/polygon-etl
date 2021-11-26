@@ -30,6 +30,7 @@ def read_export_dag_vars(var_prefix, **kwargs):
         'notification_emails': read_var('notification_emails', None, False, **kwargs),
         'export_max_active_runs': export_max_active_runs,
         'export_max_workers': int(read_var('export_max_workers', var_prefix, True, **kwargs)),
+        'export_traces_max_workers': int(read_var('export_traces_max_workers', var_prefix, True, **kwargs)),
     }
 
     return vars
