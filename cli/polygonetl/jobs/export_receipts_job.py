@@ -22,6 +22,7 @@
 
 
 import json
+import logging
 
 from blockchainetl_common.jobs.base_job import BaseJob
 from polygonetl.executors.batch_work_executor import BatchWorkExecutor
@@ -67,6 +68,9 @@ class ExportReceiptsJob(BaseJob):
         response = self.batch_web3_provider.make_batch_request(json.dumps(receipts_rpc))
         results = rpc_response_batch_to_results(response)
         receipts = [self.receipt_mapper.json_dict_to_receipt(result) for result in results]
+        if len(transaction_hashes) != len(receipts):
+            logging.error('The number of receipts is not equal to the number of transaction hashes ' + ','.join(transaction_hashes))
+            raise ValueError('The number of receipts is not equal to the number of transaction hashes.')
         for receipt in receipts:
             self._export_receipt(receipt)
 
