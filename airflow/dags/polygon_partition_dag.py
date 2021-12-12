@@ -15,5 +15,5 @@ DAG = build_partition_dag(
     public_project_id = 'public-data-finance',
     public_dataset_name = 'crypto_polygon',
     load_dag_id='polygon_load_dag',
-    schedule_interval='0 3 * * *',
+    schedule_interval='0 7 * * *',
 )
