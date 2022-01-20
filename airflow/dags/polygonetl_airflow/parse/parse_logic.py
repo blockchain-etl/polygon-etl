@@ -14,6 +14,7 @@ from polygonetl_airflow.parse.templates import render_parse_udf_template, render
     render_merge_template, render_stitch_view_template
 
 ref_regex = re.compile(r"ref\(\'([^']+)\'\)")
+ethereum_address_regex = re.compile(r"(0x[a-fA-F0-9]{40})")
 
 
 def parse(
@@ -365,6 +366,10 @@ def generate_parse_sql_template(
         parse_all_partitions,
         ds):
     contract_address = table_definition['parser']['contract_address']
+
+    if contract_address is not None:
+        contract_address = lowercase_addresses_in_string(contract_address)
+
     if contract_address is not None and not contract_address.startswith('0x'):
         table_definition['parser']['contract_address_sql'] = replace_refs(
             contract_address, ref_regex, destination_project_id, dataset_name
@@ -412,6 +417,12 @@ def replace_refs(contract_address, ref_regex, project_id, dataset_name):
         r"`{project_id}.{dataset_name}.\g<1>`".format(
             project_id=project_id, dataset_name=dataset_name
         ), contract_address)
+
+
+def lowercase_addresses_in_string(s):
+    replace_callback = lambda pat: pat.group(1).lower()
+    res = ethereum_address_regex.sub(replace_callback, s)
+    return res
 
 
 def create_dataset(client, dataset_name, project=None):
