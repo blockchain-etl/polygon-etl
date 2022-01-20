@@ -369,6 +369,7 @@ def generate_parse_sql_template(
 
     if contract_address is not None:
         contract_address = lowercase_addresses_in_string(contract_address)
+        table_definition['parser']['contract_address'] = contract_address
 
     if contract_address is not None and not contract_address.startswith('0x'):
         table_definition['parser']['contract_address_sql'] = replace_refs(
