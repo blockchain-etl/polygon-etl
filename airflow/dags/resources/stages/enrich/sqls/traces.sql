@@ -15,10 +15,10 @@ SELECT
     traces.trace_address,
     traces.error,
     traces.status,
-    traces.trace_id,
     TIMESTAMP_SECONDS(blocks.timestamp) AS block_timestamp,
     blocks.number AS block_number,
-    blocks.hash AS block_hash
+    blocks.hash AS block_hash,
+    traces.trace_id
 FROM {{params.dataset_name_raw}}.blocks AS blocks
     JOIN {{params.dataset_name_raw}}.traces AS traces ON blocks.number = traces.block_number
     JOIN {{params.dataset_name_raw}}.transactions AS transactions

@@ -27,7 +27,7 @@
     },
     {
         "name": "value",
-        "type": "STRING",
+        "type": "NUMERIC",
         "description": "Value transferred in Wei"
     },
     {

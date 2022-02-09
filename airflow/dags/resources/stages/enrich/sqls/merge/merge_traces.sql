@@ -19,10 +19,10 @@ insert (
     trace_address,
     error,
     status,
-    trace_id,
     block_timestamp,
     block_number,
-    block_hash
+    block_hash,
+    trace_id
 ) values (
     transaction_hash,
     transaction_index,
@@ -40,10 +40,10 @@ insert (
     trace_address,
     error,
     status,
-    trace_id,
     block_timestamp,
     block_number,
-    block_hash
+    block_hash,
+    trace_id
 )
 when not matched by source and date(block_timestamp) = '{{ds}}' then
 delete
