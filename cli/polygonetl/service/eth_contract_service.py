@@ -33,10 +33,14 @@ class EthContractService:
             evm_code.disassemble(bytecode)
             basic_blocks = evm_code.basicblocks
             if basic_blocks and len(basic_blocks) > 0:
-                init_block = basic_blocks[0]
-                instructions = init_block.instructions
-                push4_instructions = [inst for inst in instructions if inst.name == 'PUSH4']
-                return sorted(list(set('0x' + inst.operand for inst in push4_instructions)))
+                # Look for sighashes in all blocks rather than just the first
+                # Large contract code can push sighashes out of the first block
+                push4_instructions = set()
+                for block in basic_blocks:
+                    for inst in block.instructions:
+                        if inst.name == 'PUSH4':
+                            push4_instructions.add('0x' + inst.operand)
+                return sorted(list(push4_instructions))
             else:
                 return []
         else:
@@ -46,12 +50,16 @@ class EthContractService:
     # https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/token/ERC20/ERC20.sol
     def is_erc20_contract(self, function_sighashes):
         c = ContractWrapper(function_sighashes)
-        return c.implements('totalSupply()') and \
-               c.implements('balanceOf(address)') and \
-               c.implements('transfer(address,uint256)') and \
-               c.implements('transferFrom(address,address,uint256)') and \
-               c.implements('approve(address,uint256)') and \
-               c.implements('allowance(address,address)')
+        # Omit contracts that are erc721, they share a sighash for transfer and transferFrom
+        # however the uint256 args have different meaning.   It is not possible to be both
+        # erc20 and erc721.
+        return (not self.is_erc721_contract(function_sighashes)) and \
+                c.implements('totalSupply()') and \
+                c.implements('balanceOf(address)') and \
+                c.implements('transfer(address,uint256)') and \
+                c.implements('transferFrom(address,address,uint256)') and \
+                c.implements('approve(address,uint256)') and \
+                c.implements('allowance(address,address)')
 
     # https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md
     # https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/token/ERC721/ERC721Basic.sol
