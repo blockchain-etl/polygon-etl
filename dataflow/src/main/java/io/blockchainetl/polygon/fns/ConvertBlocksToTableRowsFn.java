@@ -38,5 +38,6 @@ public class ConvertBlocksToTableRowsFn extends ConvertEntitiesToTableRowsFn {
         row.set("gas_limit", block.getGasLimit());
         row.set("gas_used", block.getGasUsed());
         row.set("transaction_count", block.getTransactionCount());
+        row.set("base_fee_per_gas", block.getBaseFeePerGas());
     }
 }
