@@ -74,6 +74,18 @@ def create_item_exporter(output):
         item_exporter = GcsItemExporter(bucket=bucket, path=path)
     elif item_exporter_type == ItemExporterType.CONSOLE:
         item_exporter = ConsoleItemExporter()
+    elif item_exporter_type == ItemExporterType.KAFKA:
+        from blockchainetl.jobs.exporters.kafka_exporter import KafkaItemExporter
+        item_exporter = KafkaItemExporter(output, item_type_to_topic_mapping={
+            'block': 'polygon_blocks',
+            'transaction': 'polygon_transactions',
+            'log': 'polygon_logs',
+            'token_transfer': 'polygon_token_transfers',
+            'token_transfer_v2': 'polygon_token_transfers_v2',
+            'trace': 'polygon_traces',
+            'contract': 'polygon_contracts',
+            'token': 'polygon_tokens',
+        })
     else:
         raise ValueError('Unable to determine item exporter type for output ' + output)
 
@@ -109,4 +121,5 @@ class ItemExporterType:
     POSTGRES = 'postgres'
     GCS = 'gcs'
     CONSOLE = 'console'
+    KAFKA = 'kafka'
     UNKNOWN = 'unknown'
