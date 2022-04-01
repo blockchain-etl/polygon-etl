@@ -9,9 +9,10 @@ from polygonetl.jobs.export_receipts_job import ExportReceiptsJob
 from polygonetl.jobs.extract_contracts_job import ExtractContractsJob
 from polygonetl.jobs.extract_geth_traces_job import ExtractGethTracesJob
 from polygonetl.jobs.extract_token_transfers_job import ExtractTokenTransfersJob
+from polygonetl.jobs.extract_token_transfers_v2_job import ExtractTokenTransfersV2Job
 from polygonetl.jobs.extract_tokens_job import ExtractTokensJob
 from polygonetl.streaming.enrich import enrich_transactions, enrich_logs, enrich_token_transfers, enrich_traces, \
-    enrich_contracts, enrich_tokens
+    enrich_contracts, enrich_tokens, enrich_token_transfers_v2
 from polygonetl.streaming.eth_item_id_calculator import EthItemIdCalculator
 from polygonetl.streaming.eth_item_timestamp_calculator import EthItemTimestampCalculator
 from polygonetl.thread_local_proxy import ThreadLocalProxy
@@ -58,6 +59,11 @@ class EthStreamerAdapter:
         if self._should_export(EntityType.TOKEN_TRANSFER):
             token_transfers = self._extract_token_transfers(logs)
 
+         # Extract token transfers
+        token_transfers_v2 = []
+        if self._should_export(EntityType.TOKEN_TRANSFER_V2):
+            token_transfers_v2 = self._extract_token_transfers_v2(logs)
+
         # Export traces
         traces = []
         if self._should_export(EntityType.TRACE):
@@ -82,6 +88,8 @@ class EthStreamerAdapter:
             if EntityType.LOG in self.entity_types else []
         enriched_token_transfers = enrich_token_transfers(blocks, token_transfers) \
             if EntityType.TOKEN_TRANSFER in self.entity_types else []
+        enriched_token_transfers_v2 = enrich_token_transfers_v2(blocks, token_transfers_v2) \
+            if EntityType.TOKEN_TRANSFER_V2 in self.entity_types else []
         enriched_traces = enrich_traces(blocks, traces, transactions) \
             if EntityType.TRACE in self.entity_types else []
         enriched_contracts = enrich_contracts(blocks, contracts) \
@@ -95,6 +103,7 @@ class EthStreamerAdapter:
             enriched_transactions + \
             enriched_logs + \
             enriched_token_transfers + \
+            enriched_token_transfers_v2 + \
             enriched_traces + \
             enriched_contracts + \
             enriched_tokens
@@ -120,6 +129,18 @@ class EthStreamerAdapter:
         blocks = blocks_and_transactions_item_exporter.get_items('block')
         transactions = blocks_and_transactions_item_exporter.get_items('transaction')
         return blocks, transactions
+
+
+    def _extract_token_transfers_v2(self, logs):
+        exporter = InMemoryItemExporter(item_types=['token_transfer_v2'])
+        job = ExtractTokenTransfersV2Job(
+            logs_iterable=logs,
+            batch_size=self.batch_size,
+            max_workers=self.max_workers,
+            item_exporter=exporter)
+        job.run()
+        token_transfers = exporter.get_items('token_transfer_v2')
+        return token_transfers
 
     def _export_receipts_and_logs(self, transactions):
         exporter = InMemoryItemExporter(item_types=['receipt', 'log'])
@@ -206,13 +227,16 @@ class EthStreamerAdapter:
                    or self._should_export(EntityType.TRACE)
 
         if entity_type == EntityType.RECEIPT:
-            return EntityType.TRANSACTION in self.entity_types or self._should_export(EntityType.TOKEN_TRANSFER)
+            return EntityType.TRANSACTION in self.entity_types or self._should_export(EntityType.TOKEN_TRANSFER) or self._should_export(EntityType.TOKEN_TRANSFER_V2)
 
         if entity_type == EntityType.LOG:
-            return EntityType.LOG in self.entity_types or self._should_export(EntityType.TOKEN_TRANSFER)
+            return EntityType.LOG in self.entity_types or self._should_export(EntityType.TOKEN_TRANSFER) or self._should_export(EntityType.TOKEN_TRANSFER_V2)
 
         if entity_type == EntityType.TOKEN_TRANSFER:
             return EntityType.TOKEN_TRANSFER in self.entity_types
+
+        if entity_type == EntityType.TOKEN_TRANSFER_V2:
+            return EntityType.TOKEN_TRANSFER_V2 in self.entity_types
 
         if entity_type == EntityType.TRACE:
             return EntityType.TRACE in self.entity_types or self._should_export(EntityType.CONTRACT)

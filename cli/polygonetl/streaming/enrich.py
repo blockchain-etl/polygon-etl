@@ -112,6 +112,30 @@ def enrich_logs(blocks, logs):
 
     return result
 
+def enrich_token_transfers_v2(blocks, token_transfers_v2):
+    result = list(join(
+        token_transfers_v2, blocks, ('block_number', 'number'),
+        [
+            'type',
+            'contract_address',
+            'from_address',
+            'to_address',
+            'amount',
+            'token_id',
+            'transaction_hash',
+            'log_index',
+            'block_number',
+            'token_type',
+        ],
+        [
+            ('timestamp', 'block_timestamp'),
+            ('hash', 'block_hash'),
+        ]))
+
+    if len(result) != len(token_transfers_v2):
+        raise ValueError('The number of token transfers v2 is wrong ' + str(result))
+
+    return result
 
 def enrich_token_transfers(blocks, token_transfers):
     result = list(join(
