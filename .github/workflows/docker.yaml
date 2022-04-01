@@ -1,0 +1,17 @@
+name: Docker
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/docker.yaml
+      - cli/Dockerfile
+  push:
+    branches: [develop]
+
+jobs:
+  publish:
+    uses: BitskiCo/bitski-internal-sdk/.github/workflows/docker.yaml@v1
+    with:
+      push: ${{ github.event_name != 'pull_request' }}
+      file: ./cli/Dockerfile
+      context: ./cli
