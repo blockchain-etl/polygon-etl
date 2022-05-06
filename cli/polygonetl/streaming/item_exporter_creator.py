@@ -110,6 +110,8 @@ def determine_item_exporter_type(output):
         return ItemExporterType.POSTGRES
     elif output is not None and output.startswith('gs://'):
         return ItemExporterType.GCS
+    elif output is not None and output.startswith('kafka/'):
+        return ItemExporterType.KAFKA
     elif output is None or output == 'console':
         return ItemExporterType.CONSOLE
     else:
