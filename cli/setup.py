@@ -48,6 +48,7 @@ setup(
         'streaming': [
             'timeout-decorator==0.4.1',
             'google-cloud-pubsub==2.1.0',
+            'kafka-python==2.0.2',
             'google-cloud-storage==1.33.0',
             'sqlalchemy==1.3.13',
             'pg8000==1.13.2',
