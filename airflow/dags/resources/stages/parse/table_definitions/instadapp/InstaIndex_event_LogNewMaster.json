@@ -1,0 +1,32 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "master",
+                    "type": "address"
+                }
+            ],
+            "name": "LogNewMaster",
+            "type": "event"
+        },
+        "contract_address": "0xa9b99766e6c676cf1975c0d3166f96c0848ff5ad",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "instadapp",
+        "schema": [
+            {
+                "description": "",
+                "name": "master",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "InstaIndex_event_LogNewMaster"
+    }
+}
