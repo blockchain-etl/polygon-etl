@@ -11,4 +11,3 @@ class EthTokenTransferV2(object):
         self.transaction_hash = None
         self.log_index = None
         self.block_number = None
-        self.chain_id = 137

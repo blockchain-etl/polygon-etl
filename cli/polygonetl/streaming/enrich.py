@@ -126,6 +126,7 @@ def enrich_token_transfers_v2(blocks, token_transfers_v2):
             'log_index',
             'block_number',
             'token_type',
+            'chain_id',
         ],
         [
             ('timestamp', 'block_timestamp'),
