@@ -32,6 +32,7 @@ def build_load_dag(
     checkpoint_bucket,
     destination_dataset_project_id,
     chain='polygon',
+    custom_dag=models.DAG,
     notification_emails=None,
     load_start_date=datetime(2018, 7, 1),
     load_schedule_interval='0 0 * * *',
@@ -88,7 +89,7 @@ def build_load_dag(
         default_dag_args['email'] = [email.strip() for email in notification_emails.split(',')]
 
     # Define a DAG (directed acyclic graph) of tasks.
-    dag = models.DAG(
+    dag = custom_dag(
         dag_id,
         catchup=False,
         schedule_interval=load_schedule_interval,

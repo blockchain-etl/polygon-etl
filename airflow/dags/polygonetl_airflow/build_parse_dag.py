@@ -29,6 +29,7 @@ def build_parse_dag(
         dag_id,
         dataset_folder,
         parse_destination_dataset_project_id,
+        custom_dag=models.DAG,
         notification_emails=None,
         parse_start_date=datetime(2020, 5, 30),
         schedule_interval='0 0 * * *',
@@ -59,7 +60,7 @@ def build_parse_dag(
     if notification_emails and len(notification_emails) > 0:
         default_dag_args['email'] = [email.strip() for email in notification_emails.split(',')]
 
-    dag = models.DAG(
+    dag = custom_dag(
         dag_id,
         catchup=False,
         schedule_interval=schedule_interval,

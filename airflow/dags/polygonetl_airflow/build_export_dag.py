@@ -29,6 +29,7 @@ def build_export_dag(
         provider_uris_archival,
         output_bucket,
         export_start_date,
+        custom_dag = DAG,
         notification_emails=None,
         export_schedule_interval='0 0 * * *',
         export_max_workers=10,
@@ -64,7 +65,7 @@ def build_export_dag(
     if export_max_active_runs is None:
         export_max_active_runs = configuration.conf.getint('core', 'max_active_runs_per_dag')
 
-    dag = DAG(
+    dag = custom_dag(
         dag_id,
         schedule_interval=export_schedule_interval,
         default_args=default_dag_args,
