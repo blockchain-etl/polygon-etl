@@ -50,8 +50,9 @@ from polygonetl.thread_local_proxy import ThreadLocalProxy
 @click.option('-w', '--max-workers', default=5, show_default=True, type=int, help='The number of workers')
 @click.option('--log-file', default=None, show_default=True, type=str, help='Log file')
 @click.option('--pid-file', default=None, show_default=True, type=str, help='pid file')
+@click.option('--testnet', default=False, show_default=True, type=bool, help='If the provider specified via -p points to a testnet or not')
 def stream(last_synced_block_file, lag, provider_uri, output, start_block, entity_types,
-           period_seconds=10, batch_size=2, block_batch_size=10, max_workers=5, log_file=None, pid_file=None):
+           period_seconds=10, batch_size=2, block_batch_size=10, max_workers=5, log_file=None, pid_file=None, testnet=False):
     """Streams all data types to console or Google Pub/Sub."""
     configure_logging(log_file)
     configure_signals()
@@ -68,7 +69,7 @@ def stream(last_synced_block_file, lag, provider_uri, output, start_block, entit
 
     streamer_adapter = EthStreamerAdapter(
         batch_web3_provider=ThreadLocalProxy(lambda: get_provider_from_uri(provider_uri, batch=True)),
-        item_exporter=create_item_exporters(output),
+        item_exporter=create_item_exporters(output, testnet),
         batch_size=batch_size,
         max_workers=max_workers,
         entity_types=entity_types

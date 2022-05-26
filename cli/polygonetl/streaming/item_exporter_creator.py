@@ -23,15 +23,36 @@
 from blockchainetl_common.jobs.exporters.console_item_exporter import ConsoleItemExporter
 from blockchainetl_common.jobs.exporters.multi_item_exporter import MultiItemExporter
 
+DEFAULT_KAFKA_TOPIC_MAPPING = {
+    'block': 'polygon_blocks',
+    'transaction': 'polygon_transactions',
+    'log': 'polygon_logs',
+    'token_transfer': 'polygon_token_transfers',
+    'token_transfer_v2': 'polygon_token_transfers_v2',
+    'trace': 'polygon_traces',
+    'contract': 'polygon_contracts',
+    'token': 'polygon_tokens',
+}
 
-def create_item_exporters(outputs):
+TESTNET_KAFKA_TOPIC_MAPPING = {
+    'block': 'testnet_polygon_blocks',
+    'transaction': 'testnet_polygon_transactions',
+    'log': 'testnet_polygon_logs',
+    'token_transfer': 'testnet_polygon_token_transfers',
+    'token_transfer_v2': 'testnet_polygon_token_transfers_v2',
+    'trace': 'testnet_polygon_traces',
+    'contract': 'testnet_polygon_contracts',
+    'token': 'testnet_polygon_tokens',
+}
+
+def create_item_exporters(outputs, testnet=False):
     split_outputs = [output.strip() for output in outputs.split(',')] if outputs else ['console']
 
-    item_exporters = [create_item_exporter(output) for output in split_outputs]
+    item_exporters = [create_item_exporter(output, testnet) for output in split_outputs]
     return MultiItemExporter(item_exporters)
 
 
-def create_item_exporter(output):
+def create_item_exporter(output, testnet):
     item_exporter_type = determine_item_exporter_type(output)
     if item_exporter_type == ItemExporterType.PUBSUB:
         from blockchainetl_common.jobs.exporters.google_pubsub_item_exporter import GooglePubSubItemExporter
@@ -76,16 +97,7 @@ def create_item_exporter(output):
         item_exporter = ConsoleItemExporter()
     elif item_exporter_type == ItemExporterType.KAFKA:
         from blockchainetl.jobs.exporters.kafka_exporter import KafkaItemExporter
-        item_exporter = KafkaItemExporter(output, item_type_to_topic_mapping={
-            'block': 'polygon_blocks',
-            'transaction': 'polygon_transactions',
-            'log': 'polygon_logs',
-            'token_transfer': 'polygon_token_transfers',
-            'token_transfer_v2': 'polygon_token_transfers_v2',
-            'trace': 'polygon_traces',
-            'contract': 'polygon_contracts',
-            'token': 'polygon_tokens',
-        })
+        item_exporter = KafkaItemExporter(output, item_type_to_topic_mapping=TESTNET_KAFKA_TOPIC_MAPPING) if testnet else KafkaItemExporter(output, item_type_to_topic_mapping=DEFAULT_KAFKA_TOPIC_MAPPING); 
     else:
         raise ValueError('Unable to determine item exporter type for output ' + output)
 
