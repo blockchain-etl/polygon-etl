@@ -97,7 +97,8 @@ def create_item_exporter(output, testnet):
         item_exporter = ConsoleItemExporter()
     elif item_exporter_type == ItemExporterType.KAFKA:
         from blockchainetl.jobs.exporters.kafka_exporter import KafkaItemExporter
-        item_exporter = KafkaItemExporter(output, item_type_to_topic_mapping=TESTNET_KAFKA_TOPIC_MAPPING) if testnet else KafkaItemExporter(output, item_type_to_topic_mapping=DEFAULT_KAFKA_TOPIC_MAPPING); 
+        from blockchainetl.jobs.exporters.converters.testnet_chainid_converter import TestnetChainIDConverter
+        item_exporter = KafkaItemExporter(output, item_type_to_topic_mapping=TESTNET_KAFKA_TOPIC_MAPPING, converters=[TestnetChainIDConverter()]) if testnet else KafkaItemExporter(output, item_type_to_topic_mapping=DEFAULT_KAFKA_TOPIC_MAPPING); 
     else:
         raise ValueError('Unable to determine item exporter type for output ' + output)
 

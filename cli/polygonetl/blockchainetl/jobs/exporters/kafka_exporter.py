@@ -32,6 +32,7 @@ class KafkaItemExporter:
     def export_item(self, item):
         item_type = item.get('type')
         if item_type is not None and item_type in self.item_type_to_topic_mapping:
+            item = self.converter.convert_item(item)
             data = json.dumps(item).encode('utf-8')
             print(data)
             return self.producer.send(self.item_type_to_topic_mapping[item_type], value=data)
