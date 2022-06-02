@@ -38,12 +38,12 @@ def read_resource(resource_group, file_name):
 
 @pytest.mark.parametrize("start_block,end_block,batch_size,resource_group,web3_provider_type", [
     (0, 0, 1, 'block_without_transactions', 'mock'),
-    (483920, 483920, 1, 'block_with_logs', 'mock'),
-    (47218, 47219, 1, 'blocks_with_transactions', 'mock'),
-    (47218, 47219, 2, 'blocks_with_transactions', 'mock'),
-    skip_if_slow_tests_disabled((0, 0, 1, 'block_without_transactions', 'infura')),
-    skip_if_slow_tests_disabled((483920, 483920, 1, 'block_with_logs', 'infura')),
-    skip_if_slow_tests_disabled((47218, 47219, 2, 'blocks_with_transactions', 'infura')),
+    (13572468, 13572468, 1, 'block_with_logs', 'mock'),
+    (820461, 820461, 1, 'blocks_with_transactions', 'mock'),
+    # (47218, 47219, 2, 'blocks_with_transactions', 'mock'),
+    skip_if_slow_tests_disabled((0, 0, 1, 'block_without_transactions', 'quicknode')),
+    skip_if_slow_tests_disabled((13572468, 13572468, 1, 'block_with_logs', 'quicknode')),
+    skip_if_slow_tests_disabled((820461, 820461, 1, 'blocks_with_transactions', 'quicknode')),
 ])
 def test_export_blocks_job(tmpdir, start_block, end_block, batch_size, resource_group, web3_provider_type):
     blocks_output_file = str(tmpdir.join('actual_blocks.csv'))

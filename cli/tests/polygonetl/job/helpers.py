@@ -21,6 +21,12 @@ def get_web3_provider(provider_type, read_resource_lambda=None, batch=False):
             provider = BatchHTTPProvider(provider_url)
         else:
             provider = HTTPProvider(provider_url)
+    elif provider_type == 'quicknode':
+        provider_url = os.environ.get('PROVIDER_URL', 'https://polished-twilight-hill.matic.quiknode.pro/ab1c337372adb12a1768bc4e6f05c2bec646c32a')
+        if batch:
+            provider = BatchHTTPProvider(provider_url)
+        else:
+            provider = HTTPProvider(provider_url)
     else:
         raise ValueError('Provider type {} is unexpected'.format(provider_type))
     return provider

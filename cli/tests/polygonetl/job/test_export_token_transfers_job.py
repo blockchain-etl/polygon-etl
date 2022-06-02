@@ -29,7 +29,7 @@ from polygonetl.jobs.export_token_transfers_job import ExportTokenTransfersJob
 from polygonetl.jobs.exporters.token_transfers_item_exporter import token_transfers_item_exporter
 from polygonetl.thread_local_proxy import ThreadLocalProxy
 from tests.polygonetl.job.helpers import get_web3_provider
-from tests.helpers import compare_lines_ignore_order, read_file
+from tests.helpers import compare_lines_ignore_order, read_file, skip_if_slow_tests_disabled
 
 RESOURCE_GROUP = 'test_export_token_transfers_job'
 
@@ -39,7 +39,8 @@ def read_resource(resource_group, file_name):
 
 
 @pytest.mark.parametrize("start_block,end_block,batch_size,resource_group,web3_provider_type", [
-    (483920, 483920, 1, 'block_with_transfers', 'mock')
+    (884816, 884816, 1, 'block_with_transfers', 'mock'),
+    skip_if_slow_tests_disabled((884816, 884816, 1, 'block_with_transfers', 'quicknode')),
 ])
 def test_export_token_transfers_job(tmpdir, start_block, end_block, batch_size, resource_group, web3_provider_type):
     output_file = str(tmpdir.join('token_transfers.csv'))

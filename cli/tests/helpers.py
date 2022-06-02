@@ -53,7 +53,7 @@ def read_file(path):
         return file.read()
 
 
-run_slow_tests_variable = os.environ.get('polygon_ETL_RUN_SLOW_TESTS', 'False')
+run_slow_tests_variable = os.environ.get('POLYGON_ETL_RUN_SLOW_TESTS', 'False')
 run_slow_tests = run_slow_tests_variable.lower() in ['1', 'true', 'yes']
 
 
