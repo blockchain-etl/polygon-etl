@@ -95,16 +95,10 @@ def test_export_receipts_job(
     )
     job.run()
 
-    # with open(f'cli/tests/resources/test_export_receipts_job/receipts_with_logs/{receipts_output_file.split("/")[-1]}', mode="w") as file:
-    #     file.write(read_file(receipts_output_file))
-
     compare_lines_ignore_order(
         read_resource(resource_group, "expected_receipts." + output_format),
         read_file(receipts_output_file),
     )
-
-    # with open(f'cli/tests/resources/test_export_receipts_job/receipts_with_logs/{logs_output_file.split("/")[-1]}', mode="w") as file:
-    #     file.write(read_file(logs_output_file))
 
     compare_lines_ignore_order(
         read_resource(resource_group, "expected_logs." + output_format),

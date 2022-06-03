@@ -41,7 +41,9 @@ def read_resource(resource_group, file_name):
     return tests.resources.read_resource([RESOURCE_GROUP, resource_group], file_name)
 
 
-CONTRACT_ADDRESSES_UNDER_TEST = ["0x06012c8cf97bead5deae237070f9587f8e7a266d"]
+CONTRACT_ADDRESSES_UNDER_TEST = [
+    "0xc949e60318fa01478267fbb598de54b507d45569"
+]
 
 
 @pytest.mark.parametrize(
@@ -49,7 +51,7 @@ CONTRACT_ADDRESSES_UNDER_TEST = ["0x06012c8cf97bead5deae237070f9587f8e7a266d"]
     [
         (1, CONTRACT_ADDRESSES_UNDER_TEST, "json", "erc721_contract", "mock"),
         skip_if_slow_tests_disabled(
-            (1, CONTRACT_ADDRESSES_UNDER_TEST, "json", "erc721_contract", "infura")
+            (1, CONTRACT_ADDRESSES_UNDER_TEST, "json", "erc721_contract", "online")
         ),
     ],
 )
