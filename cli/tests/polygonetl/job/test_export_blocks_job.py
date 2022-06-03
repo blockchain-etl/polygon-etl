@@ -21,50 +21,78 @@
 # SOFTWARE.
 
 import pytest
+from polygonetl.jobs.export_blocks_job import ExportBlocksJob
+from polygonetl.jobs.exporters.blocks_and_transactions_item_exporter import (
+    blocks_and_transactions_item_exporter,
+)
+from polygonetl.thread_local_proxy import ThreadLocalProxy
 
 import tests.resources
-from polygonetl.jobs.export_blocks_job import ExportBlocksJob
-from polygonetl.jobs.exporters.blocks_and_transactions_item_exporter import blocks_and_transactions_item_exporter
-from polygonetl.thread_local_proxy import ThreadLocalProxy
+from tests.helpers import (
+    compare_lines_ignore_order,
+    read_file,
+    skip_if_slow_tests_disabled,
+)
 from tests.polygonetl.job.helpers import get_web3_provider
-from tests.helpers import compare_lines_ignore_order, read_file, skip_if_slow_tests_disabled
 
-RESOURCE_GROUP = 'test_export_blocks_job'
+RESOURCE_GROUP = "test_export_blocks_job"
 
 
 def read_resource(resource_group, file_name):
     return tests.resources.read_resource([RESOURCE_GROUP, resource_group], file_name)
 
 
-@pytest.mark.parametrize("start_block,end_block,batch_size,resource_group,web3_provider_type", [
-    (0, 0, 1, 'block_without_transactions', 'mock'),
-    (13572468, 13572468, 1, 'block_with_logs', 'mock'),
-    (820461, 820461, 1, 'blocks_with_transactions', 'mock'),
-    # (47218, 47219, 2, 'blocks_with_transactions', 'mock'),
-    skip_if_slow_tests_disabled((0, 0, 1, 'block_without_transactions', 'quicknode')),
-    skip_if_slow_tests_disabled((13572468, 13572468, 1, 'block_with_logs', 'quicknode')),
-    skip_if_slow_tests_disabled((820461, 820461, 1, 'blocks_with_transactions', 'quicknode')),
-])
-def test_export_blocks_job(tmpdir, start_block, end_block, batch_size, resource_group, web3_provider_type):
-    blocks_output_file = str(tmpdir.join('actual_blocks.csv'))
-    transactions_output_file = str(tmpdir.join('actual_transactions.csv'))
+@pytest.mark.parametrize(
+    "start_block,end_block,batch_size,resource_group,web3_provider_type",
+    [
+        (0, 0, 1, "block_without_transactions", "mock"),
+        (13572468, 13572468, 1, "block_with_logs", "mock"),
+        (9013760, 9013761, 1, "blocks_with_transactions", "mock"),
+        (9013760, 9013761, 2, "blocks_with_transactions", "mock"),
+        skip_if_slow_tests_disabled((0, 0, 1, "block_without_transactions", "online")),
+        skip_if_slow_tests_disabled(
+            (13572468, 13572468, 1, "block_with_logs", "online")
+        ),
+        skip_if_slow_tests_disabled(
+            (9013760, 9013761, 1, "blocks_with_transactions", "online")
+        ),
+        skip_if_slow_tests_disabled(
+            (9013760, 9013761, 2, "blocks_with_transactions", "online")
+        ),
+    ],
+)
+def test_export_blocks_job(
+    tmpdir, start_block, end_block, batch_size, resource_group, web3_provider_type
+):
+    blocks_output_file = str(tmpdir.join("actual_blocks.csv"))
+    transactions_output_file = str(tmpdir.join("actual_transactions.csv"))
 
     job = ExportBlocksJob(
-        start_block=start_block, end_block=end_block, batch_size=batch_size,
+        start_block=start_block,
+        end_block=end_block,
+        batch_size=batch_size,
         batch_web3_provider=ThreadLocalProxy(
-            lambda: get_web3_provider(web3_provider_type, lambda file: read_resource(resource_group, file), batch=True)
+            lambda: get_web3_provider(
+                web3_provider_type,
+                lambda file: read_resource(resource_group, file),
+                batch=True,
+            )
         ),
         max_workers=5,
-        item_exporter=blocks_and_transactions_item_exporter(blocks_output_file, transactions_output_file),
+        item_exporter=blocks_and_transactions_item_exporter(
+            blocks_output_file, transactions_output_file
+        ),
         export_blocks=blocks_output_file is not None,
-        export_transactions=transactions_output_file is not None
+        export_transactions=transactions_output_file is not None,
     )
     job.run()
 
     compare_lines_ignore_order(
-        read_resource(resource_group, 'expected_blocks.csv'), read_file(blocks_output_file)
+        read_resource(resource_group, "expected_blocks.csv"),
+        read_file(blocks_output_file),
     )
 
     compare_lines_ignore_order(
-        read_resource(resource_group, 'expected_transactions.csv'), read_file(transactions_output_file)
+        read_resource(resource_group, "expected_transactions.csv"),
+        read_file(transactions_output_file),
     )

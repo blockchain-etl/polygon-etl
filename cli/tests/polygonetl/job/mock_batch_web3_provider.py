@@ -27,7 +27,6 @@ from tests.polygonetl.job.mock_web3_provider import MockWeb3Provider, build_file
 
 
 class MockBatchWeb3Provider(MockWeb3Provider):
-
     def __init__(self, read_resource):
         super().__init__(read_resource)
         self.read_resource = read_resource
@@ -36,8 +35,8 @@ class MockBatchWeb3Provider(MockWeb3Provider):
         batch = json.loads(text)
         web3_response = []
         for req in batch:
-            method = req['method']
-            params = req['params']
+            method = req["method"]
+            params = req["params"]
             file_name = build_file_name(method, params)
             file_content = self.read_resource(file_name)
             web3_response.append(json.loads(file_content))

@@ -37,13 +37,21 @@ class MockWeb3Provider(IPCProvider):
 
 
 def build_file_name(method, params):
-    return 'web3_response.' + method + '_' + '_'.join([param_to_str(param) for param in params]) + '.json'
+    return (
+        "web3_response."
+        + method
+        + "_"
+        + "_".join([param_to_str(param) for param in params])
+        + ".json"
+    )
 
 
 def param_to_str(param):
     if isinstance(param, dict):
-        return '_'.join([str(key) + '_' + param_to_str(param[key]) for key in sorted(param)])
+        return "_".join(
+            [str(key) + "_" + param_to_str(param[key]) for key in sorted(param)]
+        )
     elif isinstance(param, list):
-        return '_'.join([param_to_str(param_item) for param_item in param])
+        return "_".join([param_to_str(param_item) for param_item in param])
     else:
         return str(param).lower()

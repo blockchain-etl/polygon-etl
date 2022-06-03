@@ -22,55 +22,91 @@
 
 
 import pytest
+from polygonetl.jobs.export_receipts_job import ExportReceiptsJob
+from polygonetl.jobs.exporters.receipts_and_logs_item_exporter import (
+    receipts_and_logs_item_exporter,
+)
+from polygonetl.thread_local_proxy import ThreadLocalProxy
 
 import tests.resources
-from polygonetl.jobs.export_receipts_job import ExportReceiptsJob
-from polygonetl.jobs.exporters.receipts_and_logs_item_exporter import receipts_and_logs_item_exporter
-from polygonetl.thread_local_proxy import ThreadLocalProxy
+from tests.helpers import (
+    compare_lines_ignore_order,
+    read_file,
+    skip_if_slow_tests_disabled,
+)
 from tests.polygonetl.job.helpers import get_web3_provider
-from tests.helpers import compare_lines_ignore_order, read_file, skip_if_slow_tests_disabled
 
-RESOURCE_GROUP = 'test_export_receipts_job'
+RESOURCE_GROUP = "test_export_receipts_job"
 
 
 def read_resource(resource_group, file_name):
     return tests.resources.read_resource([RESOURCE_GROUP, resource_group], file_name)
 
 
-DEFAULT_TX_HASHES = ['0x04cbcb236043d8fb7839e07bbc7f5eed692fb2ca55d897f1101eac3e3ad4fab8',
-                     '0x463d53f0ad57677a3b430a007c1c31d15d62c37fab5eee598551697c297c235c',
-                     '0x05287a561f218418892ab053adfb3d919860988b19458c570c5c30f51c146f02',
-                     '0xcea6f89720cc1d2f46cc7a935463ae0b99dd5fad9c91bb7357de5421511cee49']
+DEFAULT_TX_HASHES = [
+    "0xe82597905c3a0ddc3377affa286038fd56d68878a1cc22b1f8a549ad4ad61003",
+    "0xb7ef38d1a0da9bfcf362c9f02e60f5977cdb0f40fe4343ee3e655c185c4dbda3",
+    "0x7ef447a3a37326c3033480b39956f88ab281744032eb430bfc5595fb23009ddb",
+    "0x01a776a4ed599573efdd5caf4a97debf42a9363d754a90c1bf29307831e613a1",
+]
 
 
-@pytest.mark.parametrize("batch_size,transaction_hashes,output_format,resource_group,web3_provider_type", [
-    (1, DEFAULT_TX_HASHES, 'csv', 'receipts_with_logs', 'mock'),
-    (2, DEFAULT_TX_HASHES, 'csv', 'receipts_with_logs', 'mock'),
-    (2, DEFAULT_TX_HASHES, 'json', 'receipts_with_logs', 'mock'),
-    skip_if_slow_tests_disabled((1, DEFAULT_TX_HASHES, 'csv', 'receipts_with_logs', 'infura')),
-    skip_if_slow_tests_disabled((2, DEFAULT_TX_HASHES, 'json', 'receipts_with_logs', 'infura'))
-])
-def test_export_receipts_job(tmpdir, batch_size, transaction_hashes, output_format, resource_group, web3_provider_type):
-    receipts_output_file = str(tmpdir.join('actual_receipts.' + output_format))
-    logs_output_file = str(tmpdir.join('actual_logs.' + output_format))
+@pytest.mark.parametrize(
+    "batch_size,transaction_hashes,output_format,resource_group,web3_provider_type",
+    [
+        (1, DEFAULT_TX_HASHES, "csv", "receipts_with_logs", "mock"),
+        (2, DEFAULT_TX_HASHES, "csv", "receipts_with_logs", "mock"),
+        (2, DEFAULT_TX_HASHES, "json", "receipts_with_logs", "mock"),
+        skip_if_slow_tests_disabled(
+            (1, DEFAULT_TX_HASHES, "csv", "receipts_with_logs", "online")
+        ),
+        skip_if_slow_tests_disabled(
+            (2, DEFAULT_TX_HASHES, "json", "receipts_with_logs", "online")
+        ),
+    ],
+)
+def test_export_receipts_job(
+    tmpdir,
+    batch_size,
+    transaction_hashes,
+    output_format,
+    resource_group,
+    web3_provider_type,
+):
+    receipts_output_file = str(tmpdir.join("actual_receipts." + output_format))
+    logs_output_file = str(tmpdir.join("actual_logs." + output_format))
 
     job = ExportReceiptsJob(
         transaction_hashes_iterable=transaction_hashes,
         batch_size=batch_size,
         batch_web3_provider=ThreadLocalProxy(
-            lambda: get_web3_provider(web3_provider_type, lambda file: read_resource(resource_group, file), batch=True)
+            lambda: get_web3_provider(
+                web3_provider_type,
+                lambda file: read_resource(resource_group, file),
+                batch=True,
+            )
         ),
         max_workers=5,
-        item_exporter=receipts_and_logs_item_exporter(receipts_output_file, logs_output_file),
+        item_exporter=receipts_and_logs_item_exporter(
+            receipts_output_file, logs_output_file
+        ),
         export_receipts=receipts_output_file is not None,
-        export_logs=logs_output_file is not None
+        export_logs=logs_output_file is not None,
     )
     job.run()
 
-    compare_lines_ignore_order(
-        read_resource(resource_group, 'expected_receipts.' + output_format), read_file(receipts_output_file)
-    )
+    # with open(f'cli/tests/resources/test_export_receipts_job/receipts_with_logs/{receipts_output_file.split("/")[-1]}', mode="w") as file:
+    #     file.write(read_file(receipts_output_file))
 
     compare_lines_ignore_order(
-        read_resource(resource_group, 'expected_logs.' + output_format), read_file(logs_output_file)
+        read_resource(resource_group, "expected_receipts." + output_format),
+        read_file(receipts_output_file),
+    )
+
+    # with open(f'cli/tests/resources/test_export_receipts_job/receipts_with_logs/{logs_output_file.split("/")[-1]}', mode="w") as file:
+    #     file.write(read_file(logs_output_file))
+
+    compare_lines_ignore_order(
+        read_resource(resource_group, "expected_logs." + output_format),
+        read_file(logs_output_file),
     )
