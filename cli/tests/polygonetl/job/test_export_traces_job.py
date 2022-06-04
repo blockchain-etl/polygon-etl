@@ -27,11 +27,7 @@ from polygonetl.thread_local_proxy import ThreadLocalProxy
 from web3 import Web3
 
 import tests.resources
-from tests.helpers import (
-    compare_lines_ignore_order,
-    read_file,
-    skip_if_slow_tests_disabled,
-)
+from tests.helpers import compare_lines_ignore_order, read_file
 from tests.polygonetl.job.helpers import get_web3_provider
 
 RESOURCE_GROUP = "test_export_traces_job"
