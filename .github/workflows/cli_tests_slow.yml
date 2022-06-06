@@ -1,4 +1,4 @@
-name: cliTestsTrue
+name: cliTestsSlow
 
 # Since this is a slow test can run on merge to main
 on: pull_request
