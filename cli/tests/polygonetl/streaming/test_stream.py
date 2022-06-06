@@ -63,11 +63,7 @@ def read_resource(resource_group, file_name):
                 9013767,
                 1,
                 "blocks_9013765_9013767",
-                EntityType.ALL_FOR_INFURA + [
-                    "trace",
-                    "contract",
-                    "token"
-                ],
+                EntityType.ALL_FOR_INFURA + ["trace", "contract", "token"],
                 "online",
             )
         ),
