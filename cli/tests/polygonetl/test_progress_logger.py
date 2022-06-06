@@ -33,9 +33,11 @@ def test_progress_logger():
     progress_logger.finish()
 
     assert len(logger_mock.logs) == 12
-    assert logger_mock.logs[0] == 'Started work.'
-    assert logger_mock.logs[1] == '1000 items processed.'
-    assert logger_mock.logs[11].startswith('Finished work. Total items processed: 10000. Took ')
+    assert logger_mock.logs[0] == "Started work."
+    assert logger_mock.logs[1] == "1000 items processed."
+    assert logger_mock.logs[11].startswith(
+        "Finished work. Total items processed: 10000. Took "
+    )
 
 
 def test_progress_logger_with_total_items():
@@ -47,10 +49,12 @@ def test_progress_logger_with_total_items():
     progress_logger.finish()
 
     assert len(logger_mock.logs) == 102
-    assert logger_mock.logs[0] == 'Started work. Items to process: 1234.'
-    assert logger_mock.logs[1] == '99 items processed. Progress is 8%.'
-    assert logger_mock.logs[100] == '9900 items processed. Progress is 802%!!!'
-    assert logger_mock.logs[101].startswith('Finished work. Total items processed: 9900. Took ')
+    assert logger_mock.logs[0] == "Started work. Items to process: 1234."
+    assert logger_mock.logs[1] == "99 items processed. Progress is 8%."
+    assert logger_mock.logs[100] == "9900 items processed. Progress is 802%!!!"
+    assert logger_mock.logs[101].startswith(
+        "Finished work. Total items processed: 9900. Took "
+    )
 
 
 class LoggerMock:

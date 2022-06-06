@@ -21,8 +21,8 @@
 # SOFTWARE.
 
 
-import os
 import json
+import os
 
 import pytest
 
@@ -48,14 +48,19 @@ def compare_lines_ignore_order(expected, actual):
 
 def read_file(path):
     if not os.path.exists(path):
-        return ''
+        return ""
     with open(path) as file:
         return file.read()
 
 
-run_slow_tests_variable = os.environ.get('POLYGON_ETL_RUN_SLOW_TESTS', 'False')
-run_slow_tests = run_slow_tests_variable.lower() in ['1', 'true', 'yes']
+run_slow_tests_variable = os.environ.get("POLYGON_ETL_RUN_SLOW_TESTS", "False")
+run_slow_tests = run_slow_tests_variable.lower() in ["1", "true", "yes"]
 
 
 def skip_if_slow_tests_disabled(data):
-    return pytest.param(*data, marks=pytest.mark.skipif(not run_slow_tests, reason='Skipping slow running tests'))
+    return pytest.param(
+        *data,
+        marks=pytest.mark.skipif(
+            not run_slow_tests, reason="Skipping slow running tests"
+        )
+    )

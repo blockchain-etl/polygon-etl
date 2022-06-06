@@ -28,7 +28,11 @@ from polygonetl.jobs.exporters.geth_traces_item_exporter import (
 from polygonetl.thread_local_proxy import ThreadLocalProxy
 
 import tests.resources
-from tests.helpers import compare_lines_ignore_order, read_file, skip_if_slow_tests_disabled
+from tests.helpers import (
+    compare_lines_ignore_order,
+    read_file,
+    skip_if_slow_tests_disabled,
+)
 from tests.polygonetl.job.helpers import get_web3_provider
 
 # use same resources for testing export/extract jobs

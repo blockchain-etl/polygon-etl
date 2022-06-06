@@ -41,9 +41,7 @@ def read_resource(resource_group, file_name):
     return tests.resources.read_resource([RESOURCE_GROUP, resource_group], file_name)
 
 
-CONTRACT_ADDRESSES_UNDER_TEST = [
-    "0xc949e60318fa01478267fbb598de54b507d45569"
-]
+CONTRACT_ADDRESSES_UNDER_TEST = ["0xc949e60318fa01478267fbb598de54b507d45569"]
 
 
 @pytest.mark.parametrize(
