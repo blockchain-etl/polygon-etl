@@ -1,0 +1,29 @@
+name: cliTestsFast
+
+# Since this is a fast test can run on PR
+on: pull_request
+
+# TODO: move this to secrets
+env:
+  POLYGONETL_RUN_SLOW_TESTS: false
+  POLYGONETL_PROVIDER_URI: ""
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: polygon-etl cli fast test
+    steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.7"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          cd cli
+          pip install -e .[dev,streaming]
+          pip install pytest
+
+      - name: Run pytest on cli
+        run: python -m pytest -vv cli/tests/

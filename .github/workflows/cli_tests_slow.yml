@@ -1,0 +1,32 @@
+name: cliTestsTrue
+
+# Since this is a slow test can run on merge to main
+on:
+  push:
+    tags:
+       - '*'
+
+# TODO: move this to secrets
+env:
+  POLYGONETL_RUN_SLOW_TESTS: true
+  POLYGONETL_PROVIDER_URI: https://polished-twilight-hill.matic.quiknode.pro/ab1c337372adb12a1768bc4e6f05c2bec646c32a/
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: polygon-etl cli slow test
+    steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.7"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          cd cli
+          pip install -e .[dev,streaming]
+          pip install pytest
+
+      - name: Run pytest on cli
+        run: python -m pytest -vv cli/tests/
