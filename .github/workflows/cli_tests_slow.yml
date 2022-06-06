@@ -1,10 +1,10 @@
 name: cliTestsTrue
 
 # Since this is a slow test can run on merge to main
-on:
-  push:
-    tags:
-       - '*'
+on: pull_request
+  # push:
+  #   tags:
+  #      - '*'
 
 # TODO: move this to secrets
 env:
