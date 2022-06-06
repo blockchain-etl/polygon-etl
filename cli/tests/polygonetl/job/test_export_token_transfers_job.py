@@ -27,7 +27,7 @@ from polygonetl.jobs.exporters.token_transfers_item_exporter import (
     token_transfers_item_exporter,
 )
 from polygonetl.thread_local_proxy import ThreadLocalProxy
-from web3 import Web3
+from polygonetl.web3_utils import build_web3
 
 import tests.resources
 from tests.helpers import (
@@ -63,7 +63,7 @@ def test_export_token_transfers_job(
         end_block=end_block,
         batch_size=batch_size,
         web3=ThreadLocalProxy(
-            lambda: Web3(
+            build_web3(
                 get_web3_provider(
                     web3_provider_type, lambda file: read_resource(resource_group, file)
                 )
