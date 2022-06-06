@@ -28,7 +28,7 @@ from polygonetl.jobs.exporters.geth_traces_item_exporter import (
 from polygonetl.thread_local_proxy import ThreadLocalProxy
 
 import tests.resources
-from tests.helpers import compare_lines_ignore_order, read_file
+from tests.helpers import compare_lines_ignore_order, read_file, skip_if_slow_tests_disabled
 from tests.polygonetl.job.helpers import get_web3_provider
 
 # use same resources for testing export/extract jobs
@@ -47,6 +47,8 @@ def read_resource(resource_group, file_name):
         (1011973, 1011973, "block_with_suicide", "mock"),
         (1000000, 1000000, "block_with_subtraces", "mock"),
         (1000895, 1000895, "block_with_error", "mock"),
+        # (829, 829, "block_with_create_online", "mock"),
+        # skip_if_slow_tests_disabled((829, 829, "block_with_create_online", "online")),
     ],
 )
 def test_export_geth_traces_job(
