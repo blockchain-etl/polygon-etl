@@ -23,7 +23,8 @@ jobs:
           python -m pip install --upgrade pip
           cd cli
           pip install -e .[dev,streaming]
-          pip install pytest
 
       - name: Run pytest on cli
-        run: python -m pytest -vv cli/tests/
+        run: |
+          cd cli
+          pytest -vv

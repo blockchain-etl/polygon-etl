@@ -9,7 +9,7 @@ on: pull_request
 # TODO: move this to secrets
 env:
   POLYGONETL_RUN_SLOW_TESTS: true
-  POLYGONETL_PROVIDER_URI: https://polished-twilight-hill.matic.quiknode.pro/ab1c337372adb12a1768bc4e6f05c2bec646c32a/
+  POLYGONETL_PROVIDER_URI: grpcs://api.mainnet.polygon.one:443
 
 jobs:
   test:
@@ -26,7 +26,8 @@ jobs:
           python -m pip install --upgrade pip
           cd cli
           pip install -e .[dev,streaming]
-          pip install pytest
 
       - name: Run pytest on cli
-        run: python -m pytest -vv cli/tests/
+        run: |
+          cd cli
+          pytest -vv

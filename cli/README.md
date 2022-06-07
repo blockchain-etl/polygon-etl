@@ -18,7 +18,7 @@ Export blocks, actions and logs ([Schema](../docs/schema.md), [Reference](../doc
 
 ```bash
 > polygonetl export_blocks_and_transactions --start-block 0 --end-block 500000 \
---provider-uri $POLYGONETL_PROVIDER_URI \
+--provider-uri grpcs://api.mainnet.polygon.one:443 \
 --blocks-output blocks.csv --transactions-output transactions.csv
 ```
 
