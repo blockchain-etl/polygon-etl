@@ -27,11 +27,11 @@ from blockchainetl_common.jobs.exporters.composite_item_exporter import (
     CompositeItemExporter,
 )
 from blockchainetl_common.streaming.streamer import Streamer
+
+import tests.resources
 from polygonetl.enumeration.entity_type import EntityType
 from polygonetl.streaming.eth_streamer_adapter import EthStreamerAdapter
 from polygonetl.thread_local_proxy import ThreadLocalProxy
-
-import tests.resources
 from tests.helpers import (
     compare_lines_ignore_order,
     read_file,

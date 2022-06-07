@@ -22,11 +22,11 @@
 
 
 import pytest
+
+import tests.resources
 from polygonetl.jobs.export_contracts_job import ExportContractsJob
 from polygonetl.jobs.exporters.contracts_item_exporter import contracts_item_exporter
 from polygonetl.thread_local_proxy import ThreadLocalProxy
-
-import tests.resources
 from tests.helpers import (
     compare_lines_ignore_order,
     read_file,

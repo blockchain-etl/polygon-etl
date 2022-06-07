@@ -22,12 +22,12 @@
 
 
 import pytest
+
+import tests.resources
 from polygonetl.jobs.export_tokens_job import ExportTokensJob
 from polygonetl.jobs.exporters.tokens_item_exporter import tokens_item_exporter
 from polygonetl.thread_local_proxy import ThreadLocalProxy
 from polygonetl.web3_utils import build_web3
-
-import tests.resources
 from tests.helpers import (
     compare_lines_ignore_order,
     read_file,
@@ -66,7 +66,7 @@ def test_export_tokens_job(tmpdir, token_addresses, resource_group, web3_provide
     job = ExportTokensJob(
         token_addresses_iterable=token_addresses,
         web3=ThreadLocalProxy(
-            build_web3(
+            lambda: build_web3(
                 get_web3_provider(
                     web3_provider_type, lambda file: read_resource(resource_group, file)
                 )

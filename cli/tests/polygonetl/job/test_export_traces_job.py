@@ -21,12 +21,12 @@
 # SOFTWARE.
 
 import pytest
+
+import tests.resources
 from polygonetl.jobs.export_traces_job import ExportTracesJob
 from polygonetl.jobs.exporters.traces_item_exporter import traces_item_exporter
 from polygonetl.thread_local_proxy import ThreadLocalProxy
 from polygonetl.web3_utils import build_web3
-
-import tests.resources
 from tests.helpers import compare_lines_ignore_order, read_file
 from tests.polygonetl.job.helpers import get_web3_provider
 
@@ -57,7 +57,7 @@ def test_export_traces_job(
         end_block=end_block,
         batch_size=1,
         web3=ThreadLocalProxy(
-            build_web3(
+            lambda: build_web3(
                 get_web3_provider(
                     web3_provider_type, lambda file: read_resource(resource_group, file)
                 )

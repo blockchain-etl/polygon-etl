@@ -21,13 +21,13 @@
 # SOFTWARE.
 
 import pytest
+
+import tests.resources
 from polygonetl.jobs.export_blocks_job import ExportBlocksJob
 from polygonetl.jobs.exporters.blocks_and_transactions_item_exporter import (
     blocks_and_transactions_item_exporter,
 )
 from polygonetl.thread_local_proxy import ThreadLocalProxy
-
-import tests.resources
 from tests.helpers import (
     compare_lines_ignore_order,
     read_file,
@@ -45,11 +45,10 @@ def read_resource(resource_group, file_name):
 @pytest.mark.parametrize(
     "start_block,end_block,batch_size,resource_group,web3_provider_type",
     [
-        (0, 0, 1, "block_without_transactions", "mock"),
         (13572468, 13572468, 1, "block_with_logs", "mock"),
         (9013760, 9013761, 1, "blocks_with_transactions", "mock"),
         (9013760, 9013761, 2, "blocks_with_transactions", "mock"),
-        skip_if_slow_tests_disabled((0, 0, 1, "block_without_transactions", "online")),
+        (0, 0, 1, "block_without_transactions", "mock"),
         skip_if_slow_tests_disabled(
             (13572468, 13572468, 1, "block_with_logs", "online")
         ),
@@ -59,6 +58,7 @@ def read_resource(resource_group, file_name):
         skip_if_slow_tests_disabled(
             (9013760, 9013761, 2, "blocks_with_transactions", "online")
         ),
+        skip_if_slow_tests_disabled((0, 0, 1, "block_without_transactions", "online")),
     ],
 )
 def test_export_blocks_job(

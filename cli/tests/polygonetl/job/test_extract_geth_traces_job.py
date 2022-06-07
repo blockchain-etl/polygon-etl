@@ -23,10 +23,10 @@
 import json
 
 import pytest
-from polygonetl.jobs.exporters.traces_item_exporter import traces_item_exporter
-from polygonetl.jobs.extract_geth_traces_job import ExtractGethTracesJob
 
 import tests.resources
+from polygonetl.jobs.exporters.traces_item_exporter import traces_item_exporter
+from polygonetl.jobs.extract_geth_traces_job import ExtractGethTracesJob
 from tests.helpers import compare_lines_ignore_order, read_file
 
 RESOURCE_GROUP = "test_extract_geth_traces_job"
@@ -53,7 +53,6 @@ def test_extract_traces_job(tmpdir, resource_group):
     traces_iterable = (json.loads(line) for line in geth_traces_content.splitlines())
     job = ExtractGethTracesJob(
         traces_iterable=traces_iterable,
-        # batch_size=2,
         item_exporter=traces_item_exporter(output_file),
         max_workers=5,
     )

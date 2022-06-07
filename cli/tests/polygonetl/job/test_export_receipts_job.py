@@ -22,13 +22,13 @@
 
 
 import pytest
+
+import tests.resources
 from polygonetl.jobs.export_receipts_job import ExportReceiptsJob
 from polygonetl.jobs.exporters.receipts_and_logs_item_exporter import (
     receipts_and_logs_item_exporter,
 )
 from polygonetl.thread_local_proxy import ThreadLocalProxy
-
-import tests.resources
 from tests.helpers import (
     compare_lines_ignore_order,
     read_file,

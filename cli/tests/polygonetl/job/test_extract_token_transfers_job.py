@@ -24,12 +24,12 @@ import csv
 import io
 
 import pytest
+
+import tests.resources
 from polygonetl.jobs.exporters.token_transfers_item_exporter import (
     token_transfers_item_exporter,
 )
 from polygonetl.jobs.extract_token_transfers_job import ExtractTokenTransfersJob
-
-import tests.resources
 from tests.helpers import compare_lines_ignore_order, read_file
 
 RESOURCE_GROUP = "test_extract_token_transfers_job"
