@@ -1,6 +1,6 @@
 import os
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 
 def read(fname):
@@ -36,8 +36,6 @@ setup(
         'web3==4.7.2',
         'eth-utils==1.8.4',
         'eth-abi==1.3.0',
-        # TODO: This has to be removed when "ModuleNotFoundError: No module named 'eth_utils.toolz'" is fixed at eth-abi
-        'python-dateutil==2.7.0',
         'click==7.0',
         'ethereum-dasm==0.1.4',
         'base58',
@@ -53,7 +51,7 @@ setup(
             'pg8000==1.13.2',
         ],
         'dev': [
-            'pytest~=4.3.0'
+            'pytest==7.1.2', 'black==20.8b0', 'isort==5.10.1',
         ]
     },
     entry_points={
