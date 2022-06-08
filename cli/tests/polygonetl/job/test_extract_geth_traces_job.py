@@ -39,11 +39,11 @@ def read_resource(resource_group, file_name):
 @pytest.mark.parametrize(
     "resource_group",
     [
-        "block_without_transactions",
-        "block_with_create",
-        "block_with_suicide",
-        "block_with_subtraces",
-        "block_with_error",
+        "online/block_without_transactions",
+        "online/block_with_create",
+        "online/block_with_suicide",
+        "online/block_with_subtraces",
+        "online/block_with_error",
     ],
 )
 def test_extract_traces_job(tmpdir, resource_group):

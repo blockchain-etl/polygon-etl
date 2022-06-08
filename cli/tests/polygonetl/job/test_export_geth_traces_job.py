@@ -28,7 +28,11 @@ from polygonetl.jobs.exporters.geth_traces_item_exporter import (
     geth_traces_item_exporter,
 )
 from polygonetl.thread_local_proxy import ThreadLocalProxy
-from tests.helpers import compare_lines_ignore_order, read_file
+from tests.helpers import (
+    compare_lines_ignore_order,
+    read_file,
+    skip_if_slow_tests_disabled,
+)
 from tests.polygonetl.job.helpers import get_web3_provider
 
 # use same resources for testing export/extract jobs
@@ -42,11 +46,26 @@ def read_resource(resource_group, file_name):
 @pytest.mark.parametrize(
     "start_block,end_block,resource_group,web3_provider_type",
     [
-        (1, 1, "block_without_transactions", "mock"),
-        (1000690, 1000690, "block_with_create", "mock"),
-        (1011973, 1011973, "block_with_suicide", "mock"),
-        (1000000, 1000000, "block_with_subtraces", "mock"),
-        (1000895, 1000895, "block_with_error", "mock"),
+        (1, 1, "mock/block_without_transactions", "mock"),
+        (2233682, 2233682, "mock/block_with_create", "mock"),
+        (21187247, 21187247, "mock/block_with_suicide", "mock"),
+        (905, 905, "mock/block_with_subtraces", "mock"),
+        (7170308, 7170308, "mock/block_with_error", "mock"),
+        skip_if_slow_tests_disabled(
+            (1, 1, "online/block_without_transactions", "online")
+        ),
+        skip_if_slow_tests_disabled(
+            (2233682, 2233682, "online/block_with_create", "online")
+        ),
+        skip_if_slow_tests_disabled(
+            (21187247, 21187247, "online/block_with_suicide", "online")
+        ),
+        skip_if_slow_tests_disabled(
+            (905, 905, "online/block_with_subtraces", "online")
+        ),
+        skip_if_slow_tests_disabled(
+            (7170308, 7170308, "online/block_with_error", "online")
+        ),
     ],
 )
 def test_export_geth_traces_job(
