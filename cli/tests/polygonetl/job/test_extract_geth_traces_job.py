@@ -53,6 +53,7 @@ def test_extract_traces_job(tmpdir, resource_group):
     traces_iterable = (json.loads(line) for line in geth_traces_content.splitlines())
     job = ExtractGethTracesJob(
         traces_iterable=traces_iterable,
+        batch_size=2,
         item_exporter=traces_item_exporter(output_file),
         max_workers=5,
     )
