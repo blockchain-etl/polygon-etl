@@ -50,14 +50,21 @@ def read_resource(resource_group, file_name):
             "token_with_invalid_data",
             "mock",
         ),
-        (["0xb0897686c545045afc77cf20ec7a532e3120e0f1"], "token_normal", "mock"),
         skip_if_slow_tests_disabled(
-            (["0xb0897686c545045afc77cf20ec7a532e3120e0f1"], "token_normal", "online")
+            (
+                ["0xf763be8b3263c268e9789abfb3934564a7b80054"],
+                "token_with_invalid_data",
+                "mock",
+            )
         ),
-        # (['0x86fa049857e0209aa7d9e616f7eb3b3b78ecfdb0'], 'token_with_alternative_return_type', 'mock'),
-        # skip_if_slow_tests_disabled(
-        #     (['0x86fa049857e0209aa7d9e616f7eb3b3b78ecfdb0'], 'token_with_alternative_return_type', 'online')
-        # ),
+        (["0xb0897686c545045afc77cf20ec7a532e3120e0f1"], "token_normal_erc20", "mock"),
+        skip_if_slow_tests_disabled(
+            (
+                ["0xb0897686c545045afc77cf20ec7a532e3120e0f1"],
+                "token_normal_erc20",
+                "online",
+            )
+        ),
     ],
 )
 def test_export_tokens_job(tmpdir, token_addresses, resource_group, web3_provider_type):
