@@ -50,20 +50,64 @@ def read_resource(resource_group, file_name):
     "start_block, end_block, batch_size, resource_group, entity_types, provider_type",
     [
         (
+            2233682,
+            2233682,
+            1,
+            "block_with_contracts",
+            [
+                "block",
+                "transaction",
+                "log",
+                "token_transfer",
+            ],
+            "online",
+        ),
+        (
             9013765,
             9013767,
             1,
-            "blocks_9013765_9013767",
-            EntityType.ALL_FOR_INFURA,
+            "blocks_with_transfers",
+            [
+                "block",
+                "transaction",
+                "log",
+                "token_transfer",
+            ],
             "mock",
+        ),
+        skip_if_slow_tests_disabled(
+            (
+                2233682,
+                2233682,
+                1,
+                "block_with_contracts",
+                [
+                    "block",
+                    "transaction",
+                    "log",
+                    "token_transfer",
+                    "trace",
+                    "contract",
+                    "token",
+                ],
+                "online",
+            )
         ),
         skip_if_slow_tests_disabled(
             (
                 9013765,
                 9013767,
                 1,
-                "blocks_9013765_9013767",
-                EntityType.ALL_FOR_INFURA + ["trace", "contract", "token"],
+                "blocks_with_transfers",
+                [
+                    "block",
+                    "transaction",
+                    "log",
+                    "token_transfer",
+                    "trace",
+                    "contract",
+                    "token",
+                ],
                 "online",
             )
         ),
