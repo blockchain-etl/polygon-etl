@@ -41,15 +41,56 @@ def read_resource(resource_group, file_name):
     return tests.resources.read_resource([RESOURCE_GROUP, resource_group], file_name)
 
 
-CONTRACT_ADDRESSES_UNDER_TEST = ["0xc949e60318fa01478267fbb598de54b507d45569"]
-
-
 @pytest.mark.parametrize(
     "batch_size,contract_addresses,output_format,resource_group,web3_provider_type",
     [
-        (1, CONTRACT_ADDRESSES_UNDER_TEST, "json", "erc721_contract", "mock"),
+        (
+            1,
+            ["0x5d71998541ae48387f3664768deaf7d74898b75b"],
+            "json",
+            "erc20_contract",
+            "mock",
+        ),
+        (
+            1,
+            ["0x1312dd389b08a8a5a60b0b058921386a13699267"],
+            "json",
+            "erc721_contract",
+            "mock",
+        ),
+        (
+            1,
+            ["0x3afd673cd8406ef33812abd669b6f7d0f9ba2957"],
+            "json",
+            "non_token_contract",
+            "mock",
+        ),
         skip_if_slow_tests_disabled(
-            (1, CONTRACT_ADDRESSES_UNDER_TEST, "json", "erc721_contract", "online")
+            (
+                1,
+                ["0x5d71998541ae48387f3664768deaf7d74898b75b"],
+                "json",
+                "erc20_contract",
+                "online",
+            )
+        ),
+        skip_if_slow_tests_disabled(
+            (
+                1,
+                ["0x1312dd389b08a8a5a60b0b058921386a13699267"],
+                "json",
+                "erc721_contract",
+                "online",
+            )
+        ),
+        skip_if_slow_tests_disabled(
+            (
+                1,
+                ["0x3afd673cd8406ef33812abd669b6f7d0f9ba2957"],
+                "json",
+                "non_token_contract",
+                "online",
+            )
         ),
     ],
 )
