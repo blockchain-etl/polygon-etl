@@ -29,7 +29,6 @@ from blockchainetl_common.jobs.exporters.composite_item_exporter import (
 from blockchainetl_common.streaming.streamer import Streamer
 
 import tests.resources
-from polygonetl.enumeration.entity_type import EntityType
 from polygonetl.streaming.eth_streamer_adapter import EthStreamerAdapter
 from polygonetl.thread_local_proxy import ThreadLocalProxy
 from tests.helpers import (
