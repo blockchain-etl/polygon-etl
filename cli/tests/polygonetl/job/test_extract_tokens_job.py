@@ -46,8 +46,8 @@ def read_resource(resource_group, file_name):
 @pytest.mark.parametrize(
     "resource_group,web3_provider_type",
     [
-        ("block_with_erc20_token_and_non_token", "mock"),
-        skip_if_slow_tests_disabled(("block_with_erc20_token_and_non_token", "online")),
+        ("erc20_and_non_token_contracts", "mock"),
+        skip_if_slow_tests_disabled(("erc20_and_non_token_contracts", "online")),
     ],
 )
 def test_export_tokens_job(tmpdir, resource_group, web3_provider_type):
