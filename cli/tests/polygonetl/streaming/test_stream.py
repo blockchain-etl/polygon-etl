@@ -60,7 +60,7 @@ def read_resource(resource_group, file_name):
                 "log",
                 "token_transfer",
             ],
-            "online",
+            "mock",
         ),
         (
             9013765,
