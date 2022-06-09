@@ -74,9 +74,7 @@ def test_export_token_transfers_job(
     )
     job.run()
 
-    print(read_file(output_file))
-
-    # compare_lines_ignore_order(
-    #     read_resource(resource_group, "expected_token_transfers.csv"),
-    #     read_file(output_file),
-    # )
+    compare_lines_ignore_order(
+        read_resource(resource_group, "expected_token_transfers.csv"),
+        read_file(output_file),
+    )
