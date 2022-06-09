@@ -55,7 +55,6 @@ DEFAULT_TX_HASHES = [
     "batch_size,transaction_hashes,output_format,resource_group,web3_provider_type",
     [
         (1, DEFAULT_TX_HASHES, "csv", "receipts_with_logs", "mock"),
-        (2, DEFAULT_TX_HASHES, "csv", "receipts_with_logs", "mock"),
         (2, DEFAULT_TX_HASHES, "json", "receipts_with_logs", "mock"),
         skip_if_slow_tests_disabled(
             (1, DEFAULT_TX_HASHES, "csv", "receipts_with_logs", "online")

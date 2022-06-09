@@ -45,23 +45,23 @@ def read_resource(resource_group, file_name):
 @pytest.mark.parametrize(
     "token_addresses,resource_group,web3_provider_type",
     [
+        (["0xb0897686c545045afc77cf20ec7a532e3120e0f1"], "token_erc20", "mock"),
         (
-            ["0xf763be8b3263c268e9789abfb3934564a7b80054"],
-            "token_with_invalid_data",
+            ["0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0"],
+            "token_invalid",
             "mock",
         ),
         skip_if_slow_tests_disabled(
             (
-                ["0xf763be8b3263c268e9789abfb3934564a7b80054"],
-                "token_with_invalid_data",
-                "mock",
+                ["0xb0897686c545045afc77cf20ec7a532e3120e0f1"],
+                "token_erc20",
+                "online",
             )
         ),
-        (["0xb0897686c545045afc77cf20ec7a532e3120e0f1"], "token_normal_erc20", "mock"),
         skip_if_slow_tests_disabled(
             (
-                ["0xb0897686c545045afc77cf20ec7a532e3120e0f1"],
-                "token_normal_erc20",
+                ["0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0"],
+                "token_invalid",
                 "online",
             )
         ),
