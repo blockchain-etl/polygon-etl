@@ -6,7 +6,6 @@ on: pull_request
   #   tags:
   #      - '*'
 
-# TODO: move this to secrets
 env:
   POLYGONETL_RUN_SLOW_TESTS: true
   POLYGONETL_PROVIDER_URI: ${{ secrets.POLYGONETL_PROVIDER_URI }}

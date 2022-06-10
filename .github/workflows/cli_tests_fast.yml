@@ -3,7 +3,6 @@ name: cliTestsFast
 # Since this is a fast test can run on PR
 on: pull_request
 
-# TODO: move this to secrets
 env:
   POLYGONETL_RUN_SLOW_TESTS: false
   POLYGONETL_PROVIDER_URI: ""
