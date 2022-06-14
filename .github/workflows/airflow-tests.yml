@@ -1,4 +1,4 @@
-name: Airflow Tests
+name: airflowTests
 
 on:
   pull_request:
@@ -20,8 +20,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
           cd airflow
+          pip install --upgrade pip
           pip install -r requirements_local.txt -r requirements.txt
 
       - name: Run pytest on airflow
