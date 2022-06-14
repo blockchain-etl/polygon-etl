@@ -148,3 +148,15 @@ Read [Airflow UI overview](https://airflow.apache.org/docs/stable/ui.html) and
 
 In rare cases you may need to inspect GKE cluster logs in
 [GKE console](https://console.cloud.google.com/kubernetes/workload?project=polygon-etl-dev).
+
+## Local testing
+Note that on Mac OS, installing Python 3.6.10 may fail locally (using brew, pyenv, etc.)
+The closest working alternative (3.6.15) may seem to work, but you are likely to run into errors.
+Therefore it's recommended that you use the Dockerfile supplied for this purpose:
+
+```
+docker build -t polygon-etl-airflow-tests .
+docker run polygon-etl-airflow-tests
+```
+
+(this closely mirrors the github action used by CI/CD `.github/workflows/airflow-tests.yml`)

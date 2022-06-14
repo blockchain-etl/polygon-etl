@@ -1,0 +1,30 @@
+name: Airflow Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: polygon-etl airflow tests
+    steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.6.10"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          cd airflow
+          pip install -r requirements_local.txt -r requirements.txt
+
+      - name: Run pytest on airflow
+        run: |
+          cd airflow/dags
+          python -m pytest -vv
