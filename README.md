@@ -32,3 +32,15 @@ into BigQuery and Pub/Sub. It comes with [CLI tools](/cli) for exporting Polygon
 
 3. Follow the instructions in [Polygon ETL Dataflow](/dataflow) to deploy the Dataflow component. Monitor
    "verify_streaming" DAG in Airflow console, once the Dataflow job catches up the latest block, the DAG will succeed.
+
+## Code quality
+
+Over time, we intend to format python files in this repo using isort and black.
+At the moment, we are *only formatting any changed or added files*
+
+We have not implemented any sort of automation (e.g. pre-commit), but a requirements_dev.txt is provided for contributors to use.
+
+## Testing
+
+Various tests are implemented (`airflow/tests`, `cli/tests` and `./tests`).
+As part of an effort towards consistency, they all source the same requirements_test.txt.

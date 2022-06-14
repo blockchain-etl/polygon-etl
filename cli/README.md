@@ -49,7 +49,7 @@ For the latest version, check out the repo and call
 ## Running Tests
 
 ```bash
-> pip3 install -e .[dev,streaming]
+> pip3 install -r ../requirements_test.txt -e .[streaming]
 > export POLYGONETL_PROVIDER_URI=grpcs://api.mainnet.polygon.one:443
 > pytest -vv
 ```

@@ -6,16 +6,20 @@ FROM python:3.6.10
 
 WORKDIR /airflow
 
+COPY requirements_test.txt requirements_test.txt
 COPY airflow/requirements_local.txt requirements_local.txt
-RUN pip install --upgrade pip && \
-    pip install -r requirements_local.txt
+COPY airflow/requirements.txt requirements.txt
+
+RUN pip install \
+    --upgrade pip \
+    -r requirements_test.txt \
+    -r requirements_local.txt
 
 COPY cli ../cli
-RUN pip install -e ../cli
+RUN pip install \
+    -e ../cli \
+    -r requirements.txt
 
-COPY airflow/requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-
+COPY airflow/tests tests
 COPY airflow/dags dags
-CMD cd dags && \
-    python -m pytest -vv
+ENTRYPOINT pytest -vv

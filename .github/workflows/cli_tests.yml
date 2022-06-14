@@ -2,11 +2,9 @@ name: cliTests
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [main]
   push:
-    branches:
-      - main
+    branches: [main]
 
 env:
   # include "slow" tests that make node requests, as well as mocks
@@ -20,16 +18,14 @@ jobs:
     steps:
       - uses: actions/setup-python@v2
         with:
-          python-version: "3.7"
+          python-version: "3.6.10"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install dependencies
         run: |
-          cd cli
-          python -m pip install --upgrade pip
-          pip install -e .[dev,streaming]
-
-      - name: Run pytest on cli
-        run: |
-          cd cli
-          python -m pytest -vv
+          pip install \
+            --upgrade pip \
+            -r requirements_test.txt \
+            -e cli[streaming]
+      - name: Run pytest on cli/tests
+        run: pytest -vv cli

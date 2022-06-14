@@ -50,11 +50,6 @@ setup(
             "sqlalchemy==1.3.13",
             "timeout-decorator==0.4.1",
         ],
-        "dev": [
-            "black==20.8b0",
-            "isort==5.10.1",
-            "pytest==7.1.2",
-        ],
     },
     entry_points={
         "console_scripts": [

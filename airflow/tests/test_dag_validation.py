@@ -20,12 +20,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import sys
 from pathlib import Path
 
 import pytest
 from airflow.models import DagBag, Variable
 
-DAGS_FOLDER = str(Path(__file__).resolve().parent.parent)
+DAGS_FOLDER = f"{Path(__file__).resolve().parent.parent}/dags"
+
+# Add to PATH to fix relative imports, like Airflow running dynamically
+# https://airflow.apache.org/docs/apache-airflow/stable/modules_management.html#built-in-pythonpath-entries-in-airflow
+sys.path.append(DAGS_FOLDER)
 
 MOCK_ENV_VARS = {
     "AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT": "google-cloud-platform://",

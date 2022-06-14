@@ -1,4 +1,4 @@
-name: airflowTests
+name: validateJsonTest
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    name: polygon-etl airflow tests
+    name: polygon-etl validate json test
     steps:
       - uses: actions/setup-python@v2
         with:
@@ -20,9 +20,6 @@ jobs:
         run: |
           pip install \
             --upgrade pip \
-            -r requirements_test.txt \
-            -r airflow/requirements_local.txt \
-            -e cli \
-            -r airflow/requirements.txt
-      - name: Run pytest on airflow/tests
-        run: pytest -vv airflow
+            -r requirements_test.txt
+      - name: Run pytest on tests
+        run: pytest -vv tests
