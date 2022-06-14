@@ -1,2 +1,6 @@
+# Extra dependencies not included in Cloud Composer
+# During local dev & testing, you can `pip install -e ../cli` first
+# pip will then prioritise the local polygon-etl package over pypi
+
 discord-webhook==0.14.0
 polygon-etl==0.1.9

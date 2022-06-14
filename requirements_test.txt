@@ -1,2 +1,4 @@
+# These dependencies are shared by various tests: airflow/tests, cli/tests & tests
+
 jsonschema==3.0.2
 pytest==6.1.2

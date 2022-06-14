@@ -1,2 +1,6 @@
+# Over time, we intend to format python files in this repo using isort and black.
+# At the moment, we are *only formatting any changed or added files*
+# We have not implemented any sort of automation (e.g. pre-commit)
+
 black==20.8b0
 isort==5.10.1
