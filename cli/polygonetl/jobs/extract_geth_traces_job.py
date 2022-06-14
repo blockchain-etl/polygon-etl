@@ -32,11 +32,12 @@ class ExtractGethTracesJob(BaseJob):
     def __init__(
             self,
             traces_iterable,
+            batch_size,
             max_workers,
             item_exporter):
         self.traces_iterable = traces_iterable
 
-        self.batch_work_executor = BatchWorkExecutor(1, max_workers)
+        self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers)
         self.item_exporter = item_exporter
 
         self.trace_mapper = EthTraceMapper()

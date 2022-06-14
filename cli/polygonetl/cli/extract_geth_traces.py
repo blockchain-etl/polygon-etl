@@ -45,6 +45,7 @@ def extract_geth_traces(input, output, max_workers):
             traces_iterable = (trace for trace in csv.DictReader(geth_traces_file))
         job = ExtractGethTracesJob(
             traces_iterable=traces_iterable,
+            batch_size=1,
             max_workers=max_workers,
             item_exporter=traces_item_exporter(output))
 

@@ -17,8 +17,9 @@ pip3 install polygon-etl
 Export blocks, actions and logs ([Schema](../docs/schema.md), [Reference](../docs/commands.md)):
 
 ```bash
-> polygonetl export_blocks --start-block 1 --end-block 500000 \
---output-dir output --provider-uri grpcs://api.mainnet.polygon.one:443
+> polygonetl export_blocks_and_transactions --start-block 0 --end-block 500000 \
+--provider-uri grpcs://api.mainnet.polygon.one:443 \
+--blocks-output blocks.csv --transactions-output transactions.csv
 ```
 
 ---
