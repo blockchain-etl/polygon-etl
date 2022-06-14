@@ -1,3 +1,6 @@
+# Intended to match `composer-1.10.6-airflow-1.10.3` packages closely
+# https://cloud.google.com/composer/docs/concepts/versioning/composer-versions#images
+
 apache-airflow==1.10.3
 Flask==1.0.4
 google-api-python-client==1.7.8
