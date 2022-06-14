@@ -22,7 +22,7 @@ jobs:
         run: |
           cd airflow
           pip install --upgrade pip
-          pip install -r requirements_local.txt -r requirements.txt
+          pip install -r requirements_local.txt -e ../cli -r requirements.txt
 
       - name: Run pytest on airflow
         run: |

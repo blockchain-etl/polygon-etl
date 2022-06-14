@@ -152,10 +152,11 @@ In rare cases you may need to inspect GKE cluster logs in
 ## Local testing
 Note that on Mac OS, installing Python 3.6.10 may fail locally (using brew, pyenv, etc.)
 The closest working alternative (3.6.15) may seem to work, but you are likely to run into errors.
-Therefore it's recommended that you use the Dockerfile supplied for this purpose:
+You may prefer to use the Dockerfile supplied for this purpose.
+Expected context is repository root. This makes cli folder is accessible to the Dockerfile
 
 ```
-docker build -t polygon-etl-airflow-tests .
+docker build -f . -t polygon-etl-airflow-tests ..
 docker run polygon-etl-airflow-tests
 ```
 
