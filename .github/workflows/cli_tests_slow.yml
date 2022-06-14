@@ -1,10 +1,10 @@
 name: cliTestsSlow
 
 # Since this is a slow test can run on merge to main
-on: pull_request
-  # push:
-  #   tags:
-  #      - '*'
+on:
+  push:
+    tags:
+       - '*'
 
 env:
   POLYGONETL_RUN_SLOW_TESTS: true
@@ -29,4 +29,4 @@ jobs:
       - name: Run pytest on cli
         run: |
           cd cli
-          pytest -vv
+          python -m pytest -vv

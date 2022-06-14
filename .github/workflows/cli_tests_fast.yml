@@ -26,4 +26,4 @@ jobs:
       - name: Run pytest on cli
         run: |
           cd cli
-          pytest -vv
+          python -m pytest -vv
