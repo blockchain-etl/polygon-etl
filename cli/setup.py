@@ -24,14 +24,16 @@ setup(
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
     keywords="polygon",
     # web3.py doesn't work on 3.5.2 and less (https://github.com/ethereum/web3.py/issues/1012)
-    python_requires=">=3.5.3,<4",
+    # google-cloud-pubsub==2.1.0 requires >=3.6 (https://pypi.org/project/google-cloud-pubsub/2.1.0/)
+    # collections.Mapping unsupported in 3.10 (https://bugs.python.org/issue44737)
+    python_requires=">=3.6,<3.10",
     install_requires=[
         "base58",
         "blockchain-etl-common==1.6.1",
