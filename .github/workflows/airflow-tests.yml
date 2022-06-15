@@ -1,4 +1,4 @@
-name: cliTests
+name: airflowTests
 
 on:
   pull_request:
@@ -6,15 +6,10 @@ on:
   push:
     branches: [main]
 
-env:
-  # include "slow" tests that make node requests, as well as mocks
-  POLYGONETL_RUN_SLOW_TESTS: true
-  POLYGONETL_PROVIDER_URI: ${{ secrets.POLYGONETL_PROVIDER_URI }}
-
 jobs:
   test:
     runs-on: ubuntu-latest
-    name: polygon-etl cli tests
+    name: polygon-etl airflow tests
     steps:
       - uses: actions/setup-python@v2
         with:
@@ -26,6 +21,8 @@ jobs:
           pip install \
             --upgrade pip \
             -r requirements_test.txt \
-            -e cli[streaming]
-      - name: Run pytest on cli/tests
-        run: pytest -vv cli
+            -r airflow/requirements_local.txt \
+            -e cli \
+            -r airflow/requirements.txt
+      - name: Run pytest on airflow/tests
+        run: pytest -vv airflow

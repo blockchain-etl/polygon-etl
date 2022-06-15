@@ -1,4 +1,4 @@
-name: cliTests
+name: validateJsonTest
 
 on:
   pull_request:
@@ -6,15 +6,10 @@ on:
   push:
     branches: [main]
 
-env:
-  # include "slow" tests that make node requests, as well as mocks
-  POLYGONETL_RUN_SLOW_TESTS: true
-  POLYGONETL_PROVIDER_URI: ${{ secrets.POLYGONETL_PROVIDER_URI }}
-
 jobs:
   test:
     runs-on: ubuntu-latest
-    name: polygon-etl cli tests
+    name: polygon-etl validate json test
     steps:
       - uses: actions/setup-python@v2
         with:
@@ -25,7 +20,6 @@ jobs:
         run: |
           pip install \
             --upgrade pip \
-            -r requirements_test.txt \
-            -e cli[streaming]
-      - name: Run pytest on cli/tests
-        run: pytest -vv cli
+            -r requirements_test.txt
+      - name: Run pytest on tests
+        run: pytest -vv tests

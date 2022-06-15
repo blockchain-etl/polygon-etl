@@ -49,7 +49,8 @@ For the latest version, check out the repo and call
 ## Running Tests
 
 ```bash
-> pip3 install -e .[dev,streaming]
+> pip3 install -r ../requirements_test.txt -e .[streaming]
+> export POLYGONETL_RUN_SLOW_TESTS=true
 > export POLYGONETL_PROVIDER_URI=grpcs://api.mainnet.polygon.one:443
 > pytest -vv
 ```
@@ -57,7 +58,9 @@ For the latest version, check out the repo and call
 ### Running Tox Tests
 
 ```bash
-> pip3 install tox
+> pip3 install -r ../requirements_test.txt
+> export POLYGONETL_RUN_SLOW_TESTS=true
+> export POLYGONETL_PROVIDER_URI=grpcs://api.mainnet.polygon.one:443
 > tox
 ```
 
