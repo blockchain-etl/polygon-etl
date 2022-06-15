@@ -50,7 +50,7 @@ def read_resource(resource_group, file_name):
         skip_if_slow_tests_disabled(("erc20_and_non_token_contracts", "online")),
     ],
 )
-def test_export_tokens_job(tmpdir, resource_group, web3_provider_type):
+def test_extract_tokens_job(tmpdir, resource_group, web3_provider_type):
     output_file = str(tmpdir.join("actual_tokens.csv"))
 
     contracts_content = read_resource(resource_group, "contracts.json")
