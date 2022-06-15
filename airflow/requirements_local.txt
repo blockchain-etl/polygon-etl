@@ -5,4 +5,3 @@ apache-airflow[gcp]==2.2.5
 Flask==1.1.2
 google-cloud-bigquery==2.34.3
 google-cloud-storage==1.44.0
-jsonschema==3.2.0
