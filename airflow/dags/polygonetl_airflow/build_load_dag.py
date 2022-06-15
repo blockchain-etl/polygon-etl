@@ -8,18 +8,15 @@ from datetime import datetime, timedelta
 from tempfile import TemporaryDirectory
 
 from airflow import models
-from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
 from airflow.contrib.operators.bigquery_operator import BigQueryOperator
 from airflow.contrib.sensors.gcs_sensor import GoogleCloudStorageObjectSensor
-from airflow.operators.email_operator import EmailOperator
 from airflow.operators.python_operator import PythonOperator
+from airflow.providers.google.cloud.hooks.gcs import GCSHook
 from google.cloud import bigquery
 from google.cloud.bigquery import TimePartitioning
 
 from polygonetl_airflow.bigquery_utils import submit_bigquery_job
-
 from polygonetl_airflow.gcs_utils import upload_to_gcs
-
 from utils.error_handling import handle_dag_failure
 
 logging.basicConfig()
@@ -236,7 +233,7 @@ def build_load_dag(
         sql = read_file(sql_path)
         verify_task = BigQueryOperator(
             task_id='verify_{task}'.format(task=task),
-            bql=sql,
+            sql=sql,
             params=environment,
             use_legacy_sql=False,
             dag=dag)
@@ -254,7 +251,7 @@ def build_load_dag(
                 )
                 open(local_path, mode='a').close()
                 upload_to_gcs(
-                    gcs_hook=GoogleCloudStorageHook(google_cloud_storage_conn_id="google_cloud_default"),
+                    gcs_hook=GCSHook(gcp_conn_id="google_cloud_default"),
                     bucket=checkpoint_bucket,
                     object=remote_path,
                     filename=local_path)
