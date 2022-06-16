@@ -4,8 +4,8 @@ import logging
 from datetime import datetime, timedelta
 
 from airflow import models
-from airflow.operators.bash_operator import BashOperator
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 from airflow.sensors.external_task import ExternalTaskSensor
 from google.cloud import bigquery
 
@@ -67,7 +67,6 @@ def build_partition_dag(
         extract_operator = PythonOperator(
             task_id=f'partition_{task}',
             python_callable=enrich_task,
-            provide_context=True,
             execution_timeout=timedelta(minutes=60),
             dag=dag
         )
@@ -116,8 +115,8 @@ OPTIONS(
 )
 AS
 
-SELECT 
-  MOD(ABS(FARM_FINGERPRINT(topics[SAFE_OFFSET(0)])), 3999) as _topic_partition_index, 
+SELECT
+  MOD(ABS(FARM_FINGERPRINT(topics[SAFE_OFFSET(0)])), 3999) as _topic_partition_index,
   *
 FROM `{public_project_id}.{public_dataset_name}.logs`
 WHERE date(block_timestamp) = '{ds}'
@@ -133,8 +132,8 @@ OPTIONS(
 )
 AS
 
-SELECT 
-  MOD(ABS(FARM_FINGERPRINT(SUBSTRING(input, 0, 10))), 3999) as _input_partition_index, 
+SELECT
+  MOD(ABS(FARM_FINGERPRINT(SUBSTRING(input, 0, 10))), 3999) as _input_partition_index,
   *
 FROM `{public_project_id}.{public_dataset_name}.traces`
 WHERE date(block_timestamp) = '{ds}'

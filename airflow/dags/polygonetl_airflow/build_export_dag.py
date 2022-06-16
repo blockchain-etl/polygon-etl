@@ -6,7 +6,7 @@ from datetime import timedelta
 from tempfile import TemporaryDirectory
 
 from airflow import DAG, configuration
-from airflow.operators import python_operator
+from airflow.operators.python import PythonOperator
 
 from polygonetl.cli import (
     get_block_range_for_date,
@@ -268,10 +268,9 @@ def build_export_dag(
 
     def add_export_task(toggle, task_id, python_callable, dependencies=None):
         if toggle:
-            operator = python_operator.PythonOperator(
+            operator = PythonOperator(
                 task_id=task_id,
                 python_callable=python_callable,
-                provide_context=True,
                 execution_timeout=timedelta(hours=24),
                 dag=dag,
             )

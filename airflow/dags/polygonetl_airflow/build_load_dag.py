@@ -8,9 +8,9 @@ from datetime import datetime, timedelta
 from tempfile import TemporaryDirectory
 
 from airflow import models
-from airflow.contrib.operators.bigquery_operator import BigQueryOperator
-from airflow.contrib.sensors.gcs_sensor import GoogleCloudStorageObjectSensor
-from airflow.operators.python_operator import PythonOperator
+from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator
+from airflow.providers.google.cloud.sensors.gcs import GCSObjectExistenceSensor
+from airflow.operators.python import PythonOperator
 from airflow.providers.google.cloud.hooks.gcs import GCSHook
 from google.cloud import bigquery
 from google.cloud.bigquery import TimePartitioning
@@ -94,7 +94,7 @@ def build_load_dag(
     dags_folder = os.environ.get('DAGS_FOLDER', '/home/airflow/gcs/dags')
 
     def add_load_tasks(task, file_format, allow_quoted_newlines=False):
-        wait_sensor = GoogleCloudStorageObjectSensor(
+        wait_sensor = GCSObjectExistenceSensor(
             task_id='wait_latest_{task}'.format(task=task),
             timeout=12 * 60 * 60,
             poke_interval=60,
@@ -215,7 +215,6 @@ def build_load_dag(
         enrich_operator = PythonOperator(
             task_id='enrich_{task}'.format(task=task),
             python_callable=enrich_task,
-            provide_context=True,
             execution_timeout=timedelta(minutes=60),
             dag=dag
         )
@@ -231,7 +230,7 @@ def build_load_dag(
         # and legacy SQL can't be used to query partitioned tables.
         sql_path = os.path.join(dags_folder, 'resources/stages/verify/sqls/{task}.sql'.format(task=task))
         sql = read_file(sql_path)
-        verify_task = BigQueryOperator(
+        verify_task = BigQueryExecuteQueryOperator(
             task_id='verify_{task}'.format(task=task),
             sql=sql,
             params=environment,
@@ -259,7 +258,6 @@ def build_load_dag(
         save_checkpoint_task = PythonOperator(
             task_id='save_checkpoint',
             python_callable=save_checkpoint,
-            provide_context=True,
             execution_timeout=timedelta(hours=1),
             dag=dag,
         )
