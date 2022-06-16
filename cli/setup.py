@@ -11,7 +11,7 @@ long_description = read("README.md") if os.path.isfile("README.md") else ""
 
 setup(
     name="polygon-etl",
-    version="0.1.9",
+    version="0.1.10",
     author="Evgeny Medvedev",
     author_email="evge.medvedev@gmail.com",
     description="Tools for exporting Polygon blockchain data to CSV or JSON",
@@ -36,21 +36,21 @@ setup(
     python_requires=">=3.6,<3.10",
     install_requires=[
         "base58",
-        "blockchain-etl-common==1.6.1",
-        "click==7.0",
-        "eth-abi==1.3.0",
-        "eth-utils==1.8.4",
-        "ethereum-dasm==0.1.4",
-        "requests",
+        "blockchain-etl-common>=1.6.1",
+        "click>=7.0",
+        "eth-abi>=1.3.0",
+        "eth-utils>=1.8.4",
+        "ethereum-dasm>=0.1.4",
+        "requests>=2.27.1",
         "web3==4.7.2",
     ],
     extras_require={
         "streaming": [
-            "google-cloud-pubsub==2.1.0",
-            "google-cloud-storage==1.33.0",
-            "pg8000==1.13.2",
-            "sqlalchemy==1.3.13",
-            "timeout-decorator==0.4.1",
+            "google-cloud-pubsub>=2.1.0",
+            "google-cloud-storage>=1.33.0",
+            "pg8000>=1.13.2",
+            "sqlalchemy>=1.3.13",
+            "timeout-decorator>=0.4.1",
         ],
     },
     entry_points={

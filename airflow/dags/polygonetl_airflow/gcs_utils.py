@@ -9,7 +9,7 @@ def upload_to_gcs(gcs_hook, bucket, object, filename, mime_type='application/oct
     https://stackoverflow.com/questions/47610283/cant-upload-2gb-to-google-cloud-storage,
     https://developers.google.com/api-client-library/python/guide/media_upload#resumable-media-chunked-upload
     """
-    from apiclient.http import MediaFileUpload
+    from googleapiclient.http import MediaFileUpload
     from googleapiclient import errors
 
     service = gcs_hook.get_conn()

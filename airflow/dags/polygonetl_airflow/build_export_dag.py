@@ -6,7 +6,7 @@ from datetime import timedelta
 from tempfile import TemporaryDirectory
 
 from airflow import DAG, configuration
-from airflow.operators import python_operator
+from airflow.operators.python import PythonOperator
 
 from polygonetl.cli import (
     get_block_range_for_date,
@@ -71,8 +71,8 @@ def build_export_dag(
         max_active_runs=export_max_active_runs
     )
 
-    from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
-    cloud_storage_hook = GoogleCloudStorageHook(google_cloud_storage_conn_id="google_cloud_default")
+    from airflow.providers.google.cloud.hooks.gcs import GCSHook
+    cloud_storage_hook = GCSHook(gcp_conn_id="google_cloud_default")
 
     # Export
     def export_path(directory, date):
@@ -268,10 +268,9 @@ def build_export_dag(
 
     def add_export_task(toggle, task_id, python_callable, dependencies=None):
         if toggle:
-            operator = python_operator.PythonOperator(
+            operator = PythonOperator(
                 task_id=task_id,
                 python_callable=python_callable,
-                provide_context=True,
                 execution_timeout=timedelta(hours=24),
                 dag=dag,
             )
@@ -352,7 +351,7 @@ MEGABYTE = 1024 * 1024
 # Helps avoid OverflowError: https://stackoverflow.com/questions/47610283/cant-upload-2gb-to-google-cloud-storage
 # https://developers.google.com/api-client-library/python/guide/media_upload#resumable-media-chunked-upload
 def upload_to_gcs(gcs_hook, bucket, object, filename, mime_type='application/octet-stream'):
-    from apiclient.http import MediaFileUpload
+    from googleapiclient.http import MediaFileUpload
     from googleapiclient import errors
 
     service = gcs_hook.get_conn()
