@@ -47,6 +47,7 @@ class EthReceiptMapper(object):
 
         receipt.root = json_dict.get('root')
         receipt.status = hex_to_dec(json_dict.get('status'))
+        receipt.effective_gas_price = hex_to_dec(json_dict.get('effectiveGasPrice'))
 
         if 'logs' in json_dict:
             receipt.logs = [
@@ -66,5 +67,6 @@ class EthReceiptMapper(object):
             'gas_used': receipt.gas_used,
             'contract_address': receipt.contract_address,
             'root': receipt.root,
-            'status': receipt.status
+            'status': receipt.status,
+            'effective_gas_price': receipt.effective_gas_price
         }
