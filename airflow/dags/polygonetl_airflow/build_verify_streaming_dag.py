@@ -16,6 +16,7 @@ logging.getLogger().setLevel(logging.DEBUG)
 def build_verify_streaming_dag(
         dag_id,
         destination_dataset_project_id,
+        custom_dag=DAG,
         chain='polygon',
         notification_emails=None,
         start_date=datetime(2018, 7, 1),
@@ -43,7 +44,7 @@ def build_verify_streaming_dag(
         default_dag_args['email'] = [email.strip() for email in notification_emails.split(',')]
 
     # Define a DAG (directed acyclic graph) of tasks.
-    dag = DAG(
+    dag = custom_dag(
         dag_id,
         catchup=False,
         schedule_interval=schedule_interval,

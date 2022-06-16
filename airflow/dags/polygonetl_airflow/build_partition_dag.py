@@ -22,6 +22,7 @@ def build_partition_dag(
         public_project_id,
         public_dataset_name,
         load_dag_id,
+        custom_dag=models.DAG,
         notification_emails=None,
         schedule_interval='0 0 * * *'
 ):
@@ -40,7 +41,7 @@ def build_partition_dag(
         default_dag_args['email'] = [email.strip() for email in notification_emails.split(',')]
 
     # Define a DAG (directed acyclic graph) of tasks.
-    dag = models.DAG(
+    dag = custom_dag(
         dag_id,
         catchup=False,
         schedule_interval=schedule_interval,
