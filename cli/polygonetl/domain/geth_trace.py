@@ -25,3 +25,9 @@ class EthGethTrace(object):
     def __init__(self):
         self.block_number = None
         self.transaction_traces = None
+
+    def __repr__(self):
+        return repr(
+            f"EthGethTrace block_number {self.block_number}, "
+            f"transaction_traces {self.transaction_traces}"
+        )
