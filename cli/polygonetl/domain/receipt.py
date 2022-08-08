@@ -35,7 +35,7 @@ class EthReceipt(object):
         self.status = None
 
     def __repr__(self):
-        return repr(
+        return (
             f"EthReceipt block_number {self.block_number}, "
             f"block_hash {self.block_hash}, "
             f"transaction_hash {self.transaction_hash}"

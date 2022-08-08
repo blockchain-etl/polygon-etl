@@ -33,7 +33,7 @@ class EthReceiptLog(object):
         self.topics = []
 
     def __repr__(self):
-        return repr(
+        return (
             f"EthReceiptLog block_number {self.block_number}, "
             f"transaction_hash {self.transaction_hash}, "
             f"log_index {self.log_index}"

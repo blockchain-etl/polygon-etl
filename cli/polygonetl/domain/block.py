@@ -45,4 +45,4 @@ class EthBlock(object):
         self.transaction_count = 0
 
     def __repr__(self):
-        return repr(f"EthBlock number {self.number}, hash {self.hash}")
+        return f"EthBlock number {self.number}, hash {self.hash}"

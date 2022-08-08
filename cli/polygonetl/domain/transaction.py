@@ -36,7 +36,7 @@ class EthTransaction(object):
         self.input = None
 
     def __repr__(self):
-        return repr(
+        return (
             f"EthTransaction block_number {self.block_number}, "
             f"hash {self.hash}, "
             f"transaction_index {self.transaction_index}"

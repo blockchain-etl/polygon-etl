@@ -32,7 +32,7 @@ class EthTokenTransfer(object):
         self.block_number = None
 
     def __repr__(self):
-        return repr(
+        return (
             f"EthTokenTransfer block_number {self.block_number}, "
             f"transaction_hash {self.transaction_hash}, "
             f"log_index {self.log_index}, "

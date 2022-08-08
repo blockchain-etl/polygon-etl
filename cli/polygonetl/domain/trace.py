@@ -43,7 +43,7 @@ class EthTrace(object):
         self.trace_id = None
 
     def __repr__(self):
-        return repr(
+        return (
             f"EthTrace block_number {self.block_number}, "
             f"transaction_hash {self.transaction_hash}, "
             f"transaction_index {self.transaction_index}, "

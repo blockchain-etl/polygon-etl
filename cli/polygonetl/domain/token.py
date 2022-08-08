@@ -31,6 +31,4 @@ class EthToken(object):
         self.block_number = None
 
     def __repr__(self):
-        return repr(
-            f"EthToken block_number {self.block_number}, address {self.address}"
-        )
+        return f"EthToken block_number {self.block_number}, address {self.address}"

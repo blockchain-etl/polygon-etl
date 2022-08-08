@@ -31,6 +31,4 @@ class EthContract(object):
         self.block_number = None
 
     def __repr__(self):
-        return repr(
-            f"EthContract block_number {self.block_number}, " f"address {self.address}"
-        )
+        return f"EthContract block_number {self.block_number}, address {self.address}"
