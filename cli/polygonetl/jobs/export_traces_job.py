@@ -20,12 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from polygonetl.executors.batch_work_executor import BatchWorkExecutor
+
 from blockchainetl_common.jobs.base_job import BaseJob
+from polygonetl.executors.batch_work_executor import BatchWorkExecutor
 from polygonetl.mainnet_daofork_state_changes import DAOFORK_BLOCK_NUMBER
 from polygonetl.mappers.trace_mapper import EthTraceMapper
 from polygonetl.service.eth_special_trace_service import EthSpecialTraceService
-
 from polygonetl.service.trace_id_calculator import calculate_trace_ids
 from polygonetl.service.trace_status_calculator import calculate_trace_statuses
 from polygonetl.utils import validate_range
@@ -33,15 +33,16 @@ from polygonetl.utils import validate_range
 
 class ExportTracesJob(BaseJob):
     def __init__(
-            self,
-            start_block,
-            end_block,
-            batch_size,
-            web3,
-            item_exporter,
-            max_workers,
-            include_genesis_traces=False,
-            include_daofork_traces=False):
+        self,
+        start_block,
+        end_block,
+        batch_size,
+        web3,
+        item_exporter,
+        max_workers,
+        include_genesis_traces=False,
+        include_daofork_traces=False,
+    ):
         validate_range(start_block, end_block)
         self.start_block = start_block
         self.end_block = end_block
@@ -65,7 +66,7 @@ class ExportTracesJob(BaseJob):
         self.batch_work_executor.execute(
             range(self.start_block, self.end_block + 1),
             self._export_batch,
-            total_items=self.end_block - self.start_block + 1
+            total_items=self.end_block - self.start_block + 1,
         )
 
     def _export_batch(self, block_number_batch):
@@ -89,9 +90,14 @@ class ExportTracesJob(BaseJob):
         json_traces = self.web3.parity.traceBlock(block_number)
 
         if json_traces is None:
-            raise ValueError('Response from the node is None. Is the node fully synced?')
+            raise ValueError(
+                "Response from the node is None. Is the node fully synced?"
+            )
 
-        traces = [self.trace_mapper.json_dict_to_trace(json_trace) for json_trace in json_traces]
+        traces = [
+            self.trace_mapper.json_dict_to_trace(json_trace)
+            for json_trace in json_traces
+        ]
         all_traces.extend(traces)
 
         calculate_trace_statuses(all_traces)
