@@ -3,4 +3,4 @@
 # pip will then prioritise the local polygon-etl package over pypi
 
 discord-webhook==0.14.0
-polygon-etl==0.1.9
+polygon-etl==0.2.0
