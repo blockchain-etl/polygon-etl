@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import sys
 
 from blockchainetl_common.jobs.base_job import BaseJob
 from polygonetl.executors.batch_work_executor import BatchWorkExecutor
@@ -30,8 +29,6 @@ from polygonetl.service.eth_special_trace_service import EthSpecialTraceService
 from polygonetl.service.trace_id_calculator import calculate_trace_ids
 from polygonetl.service.trace_status_calculator import calculate_trace_statuses
 from polygonetl.utils import validate_range
-
-sys.setrecursionlimit(1200)
 
 
 class ExportTracesJob(BaseJob):

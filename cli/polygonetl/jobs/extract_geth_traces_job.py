@@ -20,16 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import sys
-
 from blockchainetl_common.jobs.base_job import BaseJob
 from polygonetl.executors.batch_work_executor import BatchWorkExecutor
 from polygonetl.mappers.geth_trace_mapper import EthGethTraceMapper
 from polygonetl.mappers.trace_mapper import EthTraceMapper
 from polygonetl.service.trace_id_calculator import calculate_trace_ids
 from polygonetl.service.trace_status_calculator import calculate_trace_statuses
-
-sys.setrecursionlimit(1200)
 
 
 class ExtractGethTracesJob(BaseJob):
