@@ -4,4 +4,4 @@
 
 # nansen-airflow-errors==0.0.4
 discord-webhook==0.14.0
-polygon-etl==0.1.10
+polygon-etl==0.2.0

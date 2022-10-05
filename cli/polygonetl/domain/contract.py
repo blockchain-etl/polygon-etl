@@ -29,3 +29,6 @@ class EthContract(object):
         self.is_erc20 = False
         self.is_erc721 = False
         self.block_number = None
+
+    def __repr__(self):
+        return f"EthContract block_number {self.block_number}, address {self.address}"

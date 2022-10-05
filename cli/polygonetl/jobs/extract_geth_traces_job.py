@@ -20,21 +20,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from polygonetl.executors.batch_work_executor import BatchWorkExecutor
 from blockchainetl_common.jobs.base_job import BaseJob
-from polygonetl.mappers.trace_mapper import EthTraceMapper
+from polygonetl.executors.batch_work_executor import BatchWorkExecutor
 from polygonetl.mappers.geth_trace_mapper import EthGethTraceMapper
+from polygonetl.mappers.trace_mapper import EthTraceMapper
 from polygonetl.service.trace_id_calculator import calculate_trace_ids
 from polygonetl.service.trace_status_calculator import calculate_trace_statuses
 
 
 class ExtractGethTracesJob(BaseJob):
-    def __init__(
-            self,
-            traces_iterable,
-            batch_size,
-            max_workers,
-            item_exporter):
+    def __init__(self, traces_iterable, batch_size, max_workers, item_exporter):
         self.traces_iterable = traces_iterable
 
         self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers)
@@ -47,7 +42,9 @@ class ExtractGethTracesJob(BaseJob):
         self.item_exporter.open()
 
     def _export(self):
-        self.batch_work_executor.execute(self.traces_iterable, self._extract_geth_traces)
+        self.batch_work_executor.execute(
+            self.traces_iterable, self._extract_geth_traces
+        )
 
     def _extract_geth_traces(self, geth_traces):
         all_traces = []
@@ -62,7 +59,7 @@ class ExtractGethTracesJob(BaseJob):
 
         for trace in all_traces:
             self.item_exporter.export_item(self.trace_mapper.trace_to_dict(trace))
-              
+
     def _end(self):
         self.batch_work_executor.shutdown()
         self.item_exporter.close()

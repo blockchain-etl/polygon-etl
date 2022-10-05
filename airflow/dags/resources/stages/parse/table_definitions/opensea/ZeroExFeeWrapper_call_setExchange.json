@@ -1,0 +1,32 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "exchange",
+                    "type": "address"
+                }
+            ],
+            "name": "setExchange",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0xf715beb51ec8f63317d66f491e37e7bb048fcc2d",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "opensea",
+        "schema": [
+            {
+                "description": "",
+                "name": "exchange",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "ZeroExFeeWrapper_call_setExchange"
+    }
+}

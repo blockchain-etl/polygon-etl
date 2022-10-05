@@ -1,0 +1,211 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "offerer",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "zone",
+                            "type": "address"
+                        },
+                        {
+                            "components": [
+                                {
+                                    "internalType": "enum ItemType",
+                                    "name": "itemType",
+                                    "type": "uint8"
+                                },
+                                {
+                                    "internalType": "address",
+                                    "name": "token",
+                                    "type": "address"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "identifierOrCriteria",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "startAmount",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "endAmount",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "internalType": "struct OfferItem[]",
+                            "name": "offer",
+                            "type": "tuple[]"
+                        },
+                        {
+                            "components": [
+                                {
+                                    "internalType": "enum ItemType",
+                                    "name": "itemType",
+                                    "type": "uint8"
+                                },
+                                {
+                                    "internalType": "address",
+                                    "name": "token",
+                                    "type": "address"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "identifierOrCriteria",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "startAmount",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "endAmount",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "address payable",
+                                    "name": "recipient",
+                                    "type": "address"
+                                }
+                            ],
+                            "internalType": "struct ConsiderationItem[]",
+                            "name": "consideration",
+                            "type": "tuple[]"
+                        },
+                        {
+                            "internalType": "enum OrderType",
+                            "name": "orderType",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "startTime",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "endTime",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "zoneHash",
+                            "type": "bytes32"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "salt",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "conduitKey",
+                            "type": "bytes32"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "counter",
+                            "type": "uint256"
+                        }
+                    ],
+                    "internalType": "struct OrderComponents",
+                    "name": "order",
+                    "type": "tuple"
+                }
+            ],
+            "name": "getOrderHash",
+            "outputs": [
+                {
+                    "internalType": "bytes32",
+                    "name": "orderHash",
+                    "type": "bytes32"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        "contract_address": "0x00000000006c3852cbef3e08e8df289169ede581",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "seaport",
+        "schema": [
+            {
+                "description": "",
+                "fields": [
+                    {
+                        "description": "",
+                        "name": "offerer",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "zone",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "offer",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "consideration",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "orderType",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "startTime",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "endTime",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "zoneHash",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "salt",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "conduitKey",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "counter",
+                        "type": "STRING"
+                    }
+                ],
+                "name": "order",
+                "type": "RECORD"
+            }
+        ],
+        "table_description": "",
+        "table_name": "Seaport_call_getOrderHash"
+    }
+}

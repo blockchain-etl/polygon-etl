@@ -34,3 +34,10 @@ class EthTransaction(object):
         self.gas = None
         self.gas_price = None
         self.input = None
+
+    def __repr__(self):
+        return (
+            f"EthTransaction block_number {self.block_number}, "
+            f"hash {self.hash}, "
+            f"transaction_index {self.transaction_index}"
+        )
