@@ -40,7 +40,7 @@ def read_resource(resource_group, file_name):
 
 
 @pytest.mark.parametrize("resource_group", ["logs"])
-def test_export_token_transfers_job(tmpdir, resource_group):
+def test_extract_token_transfers_job(tmpdir, resource_group):
     output_file = str(tmpdir.join("token_transfers.csv"))
 
     logs_content = read_resource(resource_group, "logs.csv")
