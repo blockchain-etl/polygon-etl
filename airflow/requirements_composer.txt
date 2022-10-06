@@ -1,0 +1,33 @@
+# Combined dependencies for Cloud Composer
+#
+# This assumes that polygonetl is not installed from pypi
+# Instead `../cli/polygonetl` is copied into dags folder
+# Mostly this helps during testing in dev composer
+# When testing locally you may prefer to use `requirements_airflow.txt`
+#
+# These packages are essentially cli base requirements (see `../cli/setup.py`)
+# Plus packages from `requirements.txt`
+# Minus polygonetl (since we're running locally)
+# Minus click and requests (already installed in Composer)
+# Versions pinned and eth-rlp
+# And 
+#
+# Remove whitespace and comments before uploading:
+# ```
+# grep -o '^[^#| ]*' requirements_composer.txt > pypi_packages.txt
+# gcloud composer environments update \
+#   "$ENVIRONMENT_NAME" \
+#   --project="$PROJECT" \
+#   --location="$LOCATION" \
+#   --update-pypi-packages-from-file="pypi_packages.txt"
+# ```
+# 
+
+base58==2.1.1
+blockchain-etl-common==1.6.1
+discord-webhook==0.14.0
+eth-abi==1.3.0
+eth-rlp==0.2.1         # Fixes install conflicts issue in Composer
+eth-utils=1.8.4
+ethereum-dasm==0.1.4
+web3==4.7.2
