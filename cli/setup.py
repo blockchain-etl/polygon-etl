@@ -35,13 +35,13 @@ setup(
     # collections.Mapping unsupported in 3.10 (https://bugs.python.org/issue44737)
     python_requires=">=3.6,<3.10",
     install_requires=[
-        "base58",
+        "base58==2.1.1",
         "blockchain-etl-common==1.6.1",
-        "click==7.0",
+        "click>=7.0",
         "eth-abi==1.3.0",
         "eth-utils==1.8.4",
         "ethereum-dasm==0.1.4",
-        "requests",
+        "requests>=2.23",
         "web3==4.7.2",
     ],
     extras_require={
