@@ -4,7 +4,7 @@ import logging
 from datetime import datetime, timedelta
 
 from airflow import models
-from airflow.operators.bash_operator import BashOperator
+from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.sensors import ExternalTaskSensor
 from google.cloud import bigquery
