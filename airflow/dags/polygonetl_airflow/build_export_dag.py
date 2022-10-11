@@ -71,8 +71,8 @@ def build_export_dag(
         max_active_runs=export_max_active_runs
     )
 
-    from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
-    cloud_storage_hook = GoogleCloudStorageHook(google_cloud_storage_conn_id="google_cloud_default")
+    from airflow.providers.google.cloud.hooks.gcs import GCSHook
+    cloud_storage_hook = GCSHook(gcp_conn_id="google_cloud_default")
 
     # Export
     def export_path(directory, date):
