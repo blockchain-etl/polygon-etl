@@ -33,7 +33,7 @@ Airflow DAGs for exporting and loading the Polygon blockchain data to Google Big
        --disk-size=30GB --machine-type=n1-standard-1 --node-count=3 --python-version=3 --image-version=composer-1.10.6-airflow-1.10.3 \
        --network=default --subnetwork=default
 
-   gcloud composer environments update $ENVIRONMENT_NAME --location=us-central1 --update-pypi-packages-from-file=requirements.txt
+   gcloud composer environments update $ENVIRONMENT_NAME --location=us-central1 --update-pypi-packages-from-file=requirements_airflow.txt
    ```
 
    Note that if Composer API is not enabled the command above will auto prompt to enable it.
@@ -150,9 +150,10 @@ In rare cases you may need to inspect GKE cluster logs in
 [GKE console](https://console.cloud.google.com/kubernetes/workload?project=polygon-etl-dev).
 
 ## Local testing
-Note that on Mac OS, installing Python 3.6.10 may fail locally (using brew, pyenv, etc.)
-The closest working alternative (3.6.15) may seem to work, but you are likely to run into errors.
-You may prefer to use the Dockerfile supplied for this purpose.
+Python 3.8.12 does not suffer the same installation issues as 3.6 on Mac OS
+So you should be able to install using brew, pyenv, venv, etc.
+
+Or you may prefer to use the Dockerfile supplied for this purpose.
 Expected context is repository root. This makes cli folder is accessible to the Dockerfile
 
 ```

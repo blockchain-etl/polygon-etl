@@ -2,13 +2,13 @@
 # This makes cli folder is accessible for copy and install
 # docker build -f . -t polygon-etl-airflow-tests ..
 
-FROM python:3.6.10
+FROM python:3.8.12
 
 WORKDIR /airflow
 
 COPY requirements_test.txt requirements_test.txt
 COPY airflow/requirements_local.txt requirements_local.txt
-COPY airflow/requirements.txt requirements.txt
+COPY airflow/requirements_airflow.txt requirements_airflow.txt
 
 RUN pip install \
     --upgrade pip \
@@ -18,7 +18,7 @@ RUN pip install \
 COPY cli ../cli
 RUN pip install \
     -e ../cli \
-    -r requirements.txt
+    -r requirements_airflow.txt
 
 COPY airflow/tests tests
 COPY airflow/dags dags

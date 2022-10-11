@@ -1,10 +1,10 @@
 name: airflowTests
 
-on:
-  pull_request:
-    branches: [main]
-  push:
-    branches: [main]
+on: workflow_dispatch
+#   pull_request:
+#     branches: [main]
+#   push:
+#     branches: [main]
 
 jobs:
   test:
@@ -13,16 +13,16 @@ jobs:
     steps:
       - uses: actions/setup-python@v2
         with:
-          python-version: "3.6.10"
+          python-version: "3.8.12"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install dependencies
         run: |
+          pip install --upgrade pip &&
           pip install \
-            --upgrade pip \
             -r requirements_test.txt \
             -r airflow/requirements_local.txt \
             -e cli \
-            -r airflow/requirements.txt
+            -r airflow/requirements_airflow.txt
       - name: Run pytest on airflow/tests
         run: pytest -vv airflow
