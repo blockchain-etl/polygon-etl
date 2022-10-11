@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 from airflow import models
 from airflow.operators.bash import BashOperator
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python import PythonOperator
 from airflow.operators.sensors import ExternalTaskSensor
 from google.cloud import bigquery
 
@@ -67,7 +67,6 @@ def build_partition_dag(
         extract_operator = PythonOperator(
             task_id=f'partition_{task}',
             python_callable=enrich_task,
-            provide_context=True,
             execution_timeout=timedelta(minutes=60),
             dag=dag
         )

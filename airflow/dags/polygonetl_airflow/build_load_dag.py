@@ -11,7 +11,7 @@ from airflow import models
 from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
 from airflow.contrib.operators.bigquery_operator import BigQueryOperator
 from airflow.contrib.sensors.gcs_sensor import GoogleCloudStorageObjectSensor
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python import PythonOperator
 from google.cloud import bigquery
 from google.cloud.bigquery import TimePartitioning
 
@@ -217,7 +217,6 @@ def build_load_dag(
         enrich_operator = PythonOperator(
             task_id='enrich_{task}'.format(task=task),
             python_callable=enrich_task,
-            provide_context=True,
             execution_timeout=timedelta(minutes=60),
             dag=dag
         )
@@ -261,7 +260,6 @@ def build_load_dag(
         save_checkpoint_task = PythonOperator(
             task_id='save_checkpoint',
             python_callable=save_checkpoint,
-            provide_context=True,
             execution_timeout=timedelta(hours=1),
             dag=dag,
         )
