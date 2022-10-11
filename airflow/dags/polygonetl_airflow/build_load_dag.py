@@ -10,7 +10,7 @@ from tempfile import TemporaryDirectory
 from airflow import models
 from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
 from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator
-from airflow.contrib.sensors.gcs_sensor import GoogleCloudStorageObjectSensor
+from airflow.providers.google.cloud.sensors.gcs import GCSObjectExistenceSensor
 from airflow.operators.python import PythonOperator
 from google.cloud import bigquery
 from google.cloud.bigquery import TimePartitioning
@@ -96,7 +96,7 @@ def build_load_dag(
     dags_folder = os.environ.get('DAGS_FOLDER', '/home/airflow/gcs/dags')
 
     def add_load_tasks(task, file_format, allow_quoted_newlines=False):
-        wait_sensor = GoogleCloudStorageObjectSensor(
+        wait_sensor = GCSObjectExistenceSensor(
             task_id='wait_latest_{task}'.format(task=task),
             timeout=12 * 60 * 60,
             poke_interval=60,
