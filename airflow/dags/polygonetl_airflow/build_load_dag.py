@@ -11,7 +11,6 @@ from airflow import models
 from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
 from airflow.contrib.operators.bigquery_operator import BigQueryOperator
 from airflow.contrib.sensors.gcs_sensor import GoogleCloudStorageObjectSensor
-from airflow.operators.email_operator import EmailOperator
 from airflow.operators.python_operator import PythonOperator
 from google.cloud import bigquery
 from google.cloud.bigquery import TimePartitioning

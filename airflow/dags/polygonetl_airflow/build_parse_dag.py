@@ -8,7 +8,6 @@ from glob import glob
 
 from airflow import models
 from airflow.operators.bash import BashOperator
-from airflow.operators.email_operator import EmailOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.sensors import ExternalTaskSensor
 from google.cloud import bigquery
