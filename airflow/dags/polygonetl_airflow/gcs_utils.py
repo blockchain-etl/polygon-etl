@@ -1,45 +1,12 @@
-import logging
-import os
-
 MEGABYTE = 1024 * 1024
 
 
-def upload_to_gcs(gcs_hook, bucket, object, filename, mime_type='application/octet-stream'):
-    """Upload a file to GCS. Helps avoid OverflowError:
-    https://stackoverflow.com/questions/47610283/cant-upload-2gb-to-google-cloud-storage,
-    https://developers.google.com/api-client-library/python/guide/media_upload#resumable-media-chunked-upload
-    """
-    from apiclient.http import MediaFileUpload
-    from googleapiclient import errors
-
+def upload_to_gcs(gcs_hook, bucket, object, filename):
+    """Upload a file to GCS."""
     service = gcs_hook.get_conn()
-
-    if os.path.getsize(filename) > 10 * MEGABYTE:
-        media = MediaFileUpload(filename, mime_type, resumable=True)
-
-        try:
-            request = service.objects().insert(bucket=bucket, name=object, media_body=media)
-            response = None
-            while response is None:
-                status, response = request.next_chunk()
-                if status:
-                    logging.info("Uploaded %d%%." % int(status.progress() * 100))
-
-            return True
-        except errors.HttpError as ex:
-            if ex.resp['status'] == '404':
-                return False
-            raise
-    else:
-        media = MediaFileUpload(filename, mime_type)
-
-        try:
-            service.objects().insert(bucket=bucket, name=object, media_body=media).execute()
-            return True
-        except errors.HttpError as ex:
-            if ex.resp['status'] == '404':
-                return False
-            raise
+    bucket = service.get_bucket(bucket)
+    blob = bucket.blob(object, chunk_size=10 * MEGABYTE)
+    blob.upload_from_filename(filename)
 
 
 def download_from_gcs(bucket, object, filename):
