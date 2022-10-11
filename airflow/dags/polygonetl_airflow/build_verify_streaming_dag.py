@@ -5,7 +5,7 @@ import os
 from datetime import datetime, timedelta
 
 from airflow import DAG
-from airflow.contrib.operators.bigquery_operator import BigQueryOperator
+from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator
 
 from utils.error_handling import handle_dag_failure
 
@@ -57,12 +57,12 @@ def build_verify_streaming_dag(
         # and legacy SQL can't be used to query partitioned tables.
         sql_path = os.path.join(dags_folder, 'resources/stages/verify_streaming/sqls/{task}.sql'.format(task=task))
         sql = read_file(sql_path)
-        verify_task = BigQueryOperator(
-            task_id='verify_{task}'.format(task=task),
-            sql=sql,
-            use_legacy_sql=False,
+        verify_task = BigQueryInsertJobOperator(
+            task_id=f"verify_{task}",
+            configuration={"query": {"query": sql, "useLegacySql": False}},
             params=environment,
-            dag=dag)
+            dag=dag,
+        )
         if dependencies is not None and len(dependencies) > 0:
             for dependency in dependencies:
                 dependency >> verify_task

@@ -9,7 +9,7 @@ from tempfile import TemporaryDirectory
 
 from airflow import models
 from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
-from airflow.contrib.operators.bigquery_operator import BigQueryOperator
+from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator
 from airflow.contrib.sensors.gcs_sensor import GoogleCloudStorageObjectSensor
 from airflow.operators.python import PythonOperator
 from google.cloud import bigquery
@@ -232,12 +232,12 @@ def build_load_dag(
         # and legacy SQL can't be used to query partitioned tables.
         sql_path = os.path.join(dags_folder, 'resources/stages/verify/sqls/{task}.sql'.format(task=task))
         sql = read_file(sql_path)
-        verify_task = BigQueryOperator(
-            task_id='verify_{task}'.format(task=task),
-            bql=sql,
+        verify_task = BigQueryInsertJobOperator(
+            task_id=f"verify_{task}",
+            configuration={"query": {"query": sql, "useLegacySql": False}},
             params=environment,
-            use_legacy_sql=False,
-            dag=dag)
+            dag=dag,
+        )
         if dependencies is not None and len(dependencies) > 0:
             for dependency in dependencies:
                 dependency >> verify_task
