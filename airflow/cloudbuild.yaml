@@ -1,6 +1,6 @@
 steps:
   - name: gcr.io/cloud-builders/gsutil
-    args: ["-m", "rsync", "-x", "'airflow_monitoring|.*\.pyc$'", "-cdr", "./airflow/dags", "gs://${_BUCKET}/dags"]
+    args: ["-m", "rsync", "-x", "airflow_monitoring|.*\.pyc$", "-cdr", "./airflow/dags", "gs://${_BUCKET}/dags"]
 
 substitutions:
  _BUCKET: your-bucket
