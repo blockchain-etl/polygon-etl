@@ -20,17 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import sys
 from pathlib import Path
 
 import pytest
 from airflow.models import DagBag, Variable
 
 DAGS_FOLDER = f"{Path(__file__).resolve().parent.parent}/dags"
-
-# Add to PATH to fix relative imports, like Airflow running dynamically
-# https://airflow.apache.org/docs/apache-airflow/stable/modules_management.html#built-in-pythonpath-entries-in-airflow
-sys.path.append(DAGS_FOLDER)
 
 MOCK_ENV_VARS = {
     "AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT": "google-cloud-platform://",
@@ -73,23 +68,3 @@ def dag_bag(monkeypatch):
 
 def test_no_import_errors(dag_bag):
     assert len(dag_bag.import_errors) == 0, "No Import Failures"
-
-
-def test_dag_ids(dag_bag):
-    expected_dag_ids = [
-        "polygon_export_dag",
-        "polygon_load_dag",
-        "polygon_parse_balancer_dag",
-        "polygon_parse_common_dag",
-        "polygon_parse_dfyn_dag",
-        "polygon_parse_instadapp_dag",
-        "polygon_parse_opensea_dag",
-        "polygon_parse_polygon_dag",
-        "polygon_parse_quickswap_dag",
-        "polygon_parse_seaport_dag",
-        "polygon_parse_sushiswap_dag",
-        "polygon_parse_uniswap_dag",
-        "polygon_partition_dag",
-        "polygon_verify_streaming_dag",
-    ]
-    assert sorted(dag_bag.dag_ids) == expected_dag_ids
