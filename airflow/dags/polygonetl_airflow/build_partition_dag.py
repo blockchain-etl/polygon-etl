@@ -22,13 +22,14 @@ def build_partition_dag(
         public_project_id,
         public_dataset_name,
         load_dag_id,
+        partition_start_date=datetime(2015, 7, 30),
+        partition_schedule_interval='0 0 * * *',
         notification_emails=None,
-        schedule_interval='0 0 * * *'
 ):
 
     default_dag_args = {
         'depends_on_past': False,
-        'start_date': datetime.strptime('2015-07-30', '%Y-%m-%d'),
+        'start_date': partition_start_date,
         'email_on_failure': True,
         'email_on_retry': False,
         'retries': 5,
@@ -43,7 +44,7 @@ def build_partition_dag(
     dag = models.DAG(
         dag_id,
         catchup=False,
-        schedule_interval=schedule_interval,
+        schedule_interval=partition_schedule_interval,
         default_args=default_dag_args)
 
     def add_partition_tasks(task, sql_template, dependencies=None):

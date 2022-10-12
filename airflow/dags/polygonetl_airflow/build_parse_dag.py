@@ -28,9 +28,12 @@ def build_parse_dag(
         dag_id,
         dataset_folder,
         parse_destination_dataset_project_id,
+        source_project_id,
+        source_dataset_name,
+        internal_project_id,
         notification_emails=None,
         parse_start_date=datetime(2020, 5, 30),
-        schedule_interval='0 0 * * *',
+        parse_schedule_interval='0 0 * * *',
         parse_all_partitions=None,
 ):
 
@@ -38,10 +41,6 @@ def build_parse_dag(
 
     if parse_all_partitions:
         dag_id = dag_id + '_FULL'
-
-
-    SOURCE_PROJECT_ID = 'public-data-finance'
-    SOURCE_DATASET_NAME = 'crypto_polygon'
 
     PARTITION_DAG_ID = 'polygon_partition_dag'
 
@@ -61,7 +60,7 @@ def build_parse_dag(
     dag = models.DAG(
         dag_id,
         catchup=False,
-        schedule_interval=schedule_interval,
+        schedule_interval=parse_schedule_interval,
         default_args=default_dag_args)
 
     validation_error = None
@@ -93,9 +92,10 @@ def build_parse_dag(
                 bigquery_client=client,
                 table_definition=table_definition,
                 ds=ds,
-                source_project_id=SOURCE_PROJECT_ID,
-                source_dataset_name=SOURCE_DATASET_NAME,
+                source_project_id=source_project_id,
+                source_dataset_name=source_dataset_name,
                 destination_project_id=parse_destination_dataset_project_id,
+                internal_project_id=internal_project_id,
                 sqls_folder=os.path.join(dags_folder, 'resources/stages/parse/sqls'),
                 parse_all_partitions=parse_all_partitions
             )

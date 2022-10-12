@@ -49,6 +49,7 @@ MOCK_AIRFLOW_VARS = {
     "polygon_max_lag_in_minutes": "30",
     "polygon_output_bucket": "test_polygon_output_bucket",
     "polygon_parse_destination_dataset_project_id": "test_polygon_parse_destination_dataset_project_id",
+    "polygon_partitioned_project_id": "test_polygon_partitioned_project_id",
     "polygon_provider_uris": "test_polygon_provider_uri_0, test_polygon_provider_uri_1",
     "polygon_provider_uris_archival": "test_polygon_provider_uri_archival",
 }
