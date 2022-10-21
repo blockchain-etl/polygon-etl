@@ -24,9 +24,10 @@ for folder in glob(table_definitions_folder):
     globals()[dag_id] = build_parse_dag(
         dag_id=dag_id,
         dataset_folder=folder,
+        source_dataset_name="crypto_polygon",
         **read_parse_dag_vars(
             var_prefix=var_prefix,
             dataset=dataset,
-            schedule_interval='30 7 * * *'
+            parse_schedule_interval='30 7 * * *'
         )
     )

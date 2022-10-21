@@ -29,9 +29,31 @@ Airflow DAGs for exporting and loading the Polygon blockchain data to Google Big
 
    ```bash
    ENVIRONMENT_NAME=${PROJECT}-${ENVIRONMENT_INDEX} && echo "Environment name is ${ENVIRONMENT_NAME}"
-   gcloud composer environments create ${ENVIRONMENT_NAME} --location=us-central1 --zone=us-central1-a \
-       --disk-size=30GB --machine-type=n1-standard-1 --node-count=3 --python-version=3 --image-version=composer-1.10.6-airflow-1.10.3 \
-       --network=default --subnetwork=default
+
+   AIRFLOW_CONFIGS_ARR=(
+     "celery-worker_concurrency=16"
+     "webserver-instance_name=${ENVIRONMENT_NAME}"
+   )
+   AIRFLOW_CONFIGS=$(IFS=, ; echo "${AIRFLOW_CONFIGS_ARR[*]}")
+
+   gcloud composer environments create \
+     ${ENVIRONMENT_NAME} \
+     --location=us-central1 \
+     --image-version=composer-2.0.28-airflow-2.2.5 \
+     --environment-size=small \
+     --scheduler-cpu=2 \
+     --scheduler-memory=4 \
+     --scheduler-storage=1 \
+     --scheduler-count=1 \
+     --web-server-cpu=1 \
+     --web-server-memory=2 \
+     --web-server-storage=512MB \
+     --worker-cpu=2 \
+     --worker-memory=13 \
+     --worker-storage=1 \
+     --min-workers=1 \
+     --max-workers=4 \
+     --airflow-configs=${AIRFLOW_CONFIGS}
 
    gcloud composer environments update $ENVIRONMENT_NAME --location=us-central1 --update-pypi-packages-from-file=requirements_airflow.txt
    ```

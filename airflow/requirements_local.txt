@@ -1,10 +1,5 @@
-# Intended to match `composer-1.10.6-airflow-1.10.3` packages closely
-# https://cloud.google.com/composer/docs/concepts/versioning/composer-versions#images
-
-apache-airflow==1.10.3
-Flask==1.0.4
-google-api-python-client==1.7.8
-google-cloud-bigquery==1.10.1
-google-cloud-storage==1.13.2
-pandas==0.25.1
-pandas-gbq==0.9.0
+apache-airflow[google]==2.2.5       # similar to `composer-2.0.28-airflow-2.2.5`
+Flask==1.1.2                        # matches `composer-2.0.28-airflow-2.2.5`
+google-api-core==2.8.2              # matches `composer-2.0.28-airflow-2.2.5`
+google-cloud-bigquery==2.34.4       # matches `composer-2.0.28-airflow-2.2.5`
+google-cloud-storage==1.44.0        # matches `composer-2.0.28-airflow-2.2.5`

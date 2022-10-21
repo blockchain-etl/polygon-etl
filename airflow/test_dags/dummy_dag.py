@@ -5,7 +5,7 @@ In order to test this DAG, put it directly in the `dags` folder in the destinati
 from datetime import datetime, timedelta
 
 from airflow import models
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python import PythonOperator
 
 from utils.error_handling import handle_dag_failure
 

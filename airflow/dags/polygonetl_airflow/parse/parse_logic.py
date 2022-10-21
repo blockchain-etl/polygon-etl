@@ -23,14 +23,15 @@ def parse(
         source_project_id,
         source_dataset_name,
         destination_project_id,
+        internal_project_id,
         sqls_folder,
         parse_all_partitions,
         time_func=time.time
 ):
 
     # Refer to this issue for more detail https://github.com/blockchain-etl/ethereum-etl-airflow/issues/80.
-
-    internal_project_id = destination_project_id + '-internal'
+    if internal_project_id is None:
+        internal_project_id = destination_project_id + '-internal'
     dataset_name = 'polygon_' + table_definition['table']['dataset_name']
 
     create_or_replace_internal_view(
