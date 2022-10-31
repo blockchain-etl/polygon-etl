@@ -1,0 +1,87 @@
+{
+    "parser": {
+        "type": "log",
+        "contract_address": "0x8dff5e27ea6b7ac08ebfdf9eb090f32ee9a30fcf",
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "target",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "initiator",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "premium",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint16",
+                    "name": "referralCode",
+                    "type": "uint16"
+                }
+            ],
+            "name": "FlashLoan",
+            "type": "event"
+        },
+        "field_mapping": {}
+    },
+    "table": {
+        "dataset_name": "Aave_V2",
+        "table_name": "Aave_Lending_Pool_V2_event_FlashLoan",
+        "table_description": "",
+        "schema": [
+            {
+                "name": "target",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "initiator",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "asset",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "amount",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "premium",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "referralCode",
+                "description": "",
+                "type": "STRING"
+            }
+        ]
+    }
+}

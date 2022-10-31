@@ -1,0 +1,98 @@
+{
+    "parser": {
+        "type": "log",
+        "contract_address": "0x8dff5e27ea6b7ac08ebfdf9eb090f32ee9a30fcf",
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "reserve",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "onBehalfOf",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "borrowRateMode",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "borrowRate",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "uint16",
+                    "name": "referral",
+                    "type": "uint16"
+                }
+            ],
+            "name": "Borrow",
+            "type": "event"
+        },
+        "field_mapping": {}
+    },
+    "table": {
+        "dataset_name": "Aave_V2",
+        "table_name": "Aave_Lending_Pool_V2_event_Borrow",
+        "table_description": "",
+        "schema": [
+            {
+                "name": "reserve",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "user",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "onBehalfOf",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "amount",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "borrowRateMode",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "borrowRate",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "referral",
+                "description": "",
+                "type": "STRING"
+            }
+        ]
+    }
+}
