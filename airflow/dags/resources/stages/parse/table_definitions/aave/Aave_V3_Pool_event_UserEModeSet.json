@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "type": "log",
+        "contract_address": "0x794a61358d6845594f94dc1db02a252b5b4814ad",
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint8",
+                    "name": "categoryId",
+                    "type": "uint8"
+                }
+            ],
+            "name": "UserEModeSet",
+            "type": "event"
+        },
+        "field_mapping": {}
+    },
+    "table": {
+        "dataset_name": "Aave_V3",
+        "table_name": "Aave_V3_Pool_event_UserEModeSet",
+        "table_description": "",
+        "schema": [
+            {
+                "name": "user",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "categoryId",
+                "description": "",
+                "type": "STRING"
+            }
+        ]
+    }
+}
