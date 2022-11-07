@@ -42,7 +42,7 @@
         "field_mapping": {}
     },
     "table": {
-        "dataset_name": "Aave_V2",
+        "dataset_name": "aave",
         "table_name": "Aave_Lending_Pool_V2_event_Deposit",
         "table_description": "",
         "schema": [

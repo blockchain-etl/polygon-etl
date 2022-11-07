@@ -24,7 +24,7 @@
         "field_mapping": {}
     },
     "table": {
-        "dataset_name": "Aave_V3",
+        "dataset_name": "aave",
         "table_name": "Aave_V3_Pool_event_ReserveUsedAsCollateralDisabled",
         "table_description": "",
         "schema": [
