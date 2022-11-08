@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "type": "log",
+        "contract_address": "0x8dff5e27ea6b7ac08ebfdf9eb090f32ee9a30fcf",
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "reserve",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                }
+            ],
+            "name": "ReserveUsedAsCollateralEnabled",
+            "type": "event"
+        },
+        "field_mapping": {}
+    },
+    "table": {
+        "dataset_name": "aave",
+        "table_name": "Aave_Lending_Pool_V2_event_ReserveUsedAsCollateralEnabled",
+        "table_description": "",
+        "schema": [
+            {
+                "name": "reserve",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "user",
+                "description": "",
+                "type": "STRING"
+            }
+        ]
+    }
+}
