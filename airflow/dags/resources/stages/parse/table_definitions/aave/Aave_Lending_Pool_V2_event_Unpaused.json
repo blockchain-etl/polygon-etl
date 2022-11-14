@@ -1,0 +1,19 @@
+{
+    "parser": {
+        "type": "log",
+        "contract_address": "0x8dff5e27ea6b7ac08ebfdf9eb090f32ee9a30fcf",
+        "abi": {
+            "anonymous": false,
+            "inputs": [],
+            "name": "Unpaused",
+            "type": "event"
+        },
+        "field_mapping": {}
+    },
+    "table": {
+        "dataset_name": "aave",
+        "table_name": "Aave_Lending_Pool_V2_event_Unpaused",
+        "table_description": "",
+        "schema": []
+    }
+}

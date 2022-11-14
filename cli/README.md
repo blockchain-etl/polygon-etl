@@ -17,8 +17,9 @@ pip3 install polygon-etl
 Export blocks, actions and logs ([Schema](../docs/schema.md), [Reference](../docs/commands.md)):
 
 ```bash
-> polygonetl export_blocks --start-block 1 --end-block 500000 \
---output-dir output --provider-uri grpcs://api.mainnet.polygon.one:443
+> polygonetl export_blocks_and_transactions --start-block 0 --end-block 500000 \
+--provider-uri grpcs://api.mainnet.polygon.one:443 \
+--blocks-output blocks.csv --transactions-output transactions.csv
 ```
 
 ---
@@ -48,7 +49,8 @@ For the latest version, check out the repo and call
 ## Running Tests
 
 ```bash
-> pip3 install -e .[dev,streaming]
+> pip3 install -r ../requirements_test.txt -e .[streaming]
+> export POLYGONETL_RUN_SLOW_TESTS=true
 > export POLYGONETL_PROVIDER_URI=grpcs://api.mainnet.polygon.one:443
 > pytest -vv
 ```
@@ -56,7 +58,9 @@ For the latest version, check out the repo and call
 ### Running Tox Tests
 
 ```bash
-> pip3 install tox
+> pip3 install -r ../requirements_test.txt
+> export POLYGONETL_RUN_SLOW_TESTS=true
+> export POLYGONETL_PROVIDER_URI=grpcs://api.mainnet.polygon.one:443
 > tox
 ```
 

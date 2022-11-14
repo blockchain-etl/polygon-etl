@@ -29,3 +29,6 @@ class EthToken(object):
         self.decimals = None
         self.total_supply = None
         self.block_number = None
+
+    def __repr__(self):
+        return f"EthToken block_number {self.block_number}, address {self.address}"

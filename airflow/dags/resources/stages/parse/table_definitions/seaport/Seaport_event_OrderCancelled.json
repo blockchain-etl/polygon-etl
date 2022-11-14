@@ -1,0 +1,54 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "orderHash",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "offerer",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "zone",
+                    "type": "address"
+                }
+            ],
+            "name": "OrderCancelled",
+            "type": "event"
+        },
+        "contract_address": "0x00000000006c3852cbef3e08e8df289169ede581",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "seaport",
+        "schema": [
+            {
+                "description": "",
+                "name": "orderHash",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "offerer",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "zone",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "Seaport_event_OrderCancelled"
+    }
+}

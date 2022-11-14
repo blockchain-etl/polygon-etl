@@ -7,13 +7,12 @@ from datetime import datetime, timedelta
 from glob import glob
 
 from airflow import models
-from airflow.operators.bash_operator import BashOperator
-from airflow.operators.email_operator import EmailOperator
-from airflow.operators.python_operator import PythonOperator
-from airflow.operators.sensors import ExternalTaskSensor
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
+from airflow.sensors.external_task import ExternalTaskSensor
 from google.cloud import bigquery
 
-from polygonetl_airflow.bigquery_utils import create_view
+from polygonetl_airflow.bigquery_utils import create_view, share_dataset_all_users_read
 from polygonetl_airflow.common import read_json_file, read_file
 from polygonetl_airflow.parse.parse_logic import ref_regex, parse, create_dataset
 
@@ -29,9 +28,12 @@ def build_parse_dag(
         dag_id,
         dataset_folder,
         parse_destination_dataset_project_id,
+        source_project_id,
+        source_dataset_name,
+        internal_project_id,
         notification_emails=None,
         parse_start_date=datetime(2020, 5, 30),
-        schedule_interval='0 0 * * *',
+        parse_schedule_interval='0 0 * * *',
         parse_all_partitions=None,
 ):
 
@@ -39,10 +41,6 @@ def build_parse_dag(
 
     if parse_all_partitions:
         dag_id = dag_id + '_FULL'
-
-
-    SOURCE_PROJECT_ID = 'public-data-finance'
-    SOURCE_DATASET_NAME = 'crypto_polygon'
 
     PARTITION_DAG_ID = 'polygon_partition_dag'
 
@@ -62,7 +60,7 @@ def build_parse_dag(
     dag = models.DAG(
         dag_id,
         catchup=False,
-        schedule_interval=schedule_interval,
+        schedule_interval=parse_schedule_interval,
         default_args=default_dag_args)
 
     validation_error = None
@@ -79,7 +77,6 @@ def build_parse_dag(
         validation_error_operator = PythonOperator(
             task_id='validation_error',
             python_callable=raise_validation_error,
-            provide_context=True,
             execution_timeout=timedelta(minutes=10),
             dag=dag
         )
@@ -95,9 +92,10 @@ def build_parse_dag(
                 bigquery_client=client,
                 table_definition=table_definition,
                 ds=ds,
-                source_project_id=SOURCE_PROJECT_ID,
-                source_dataset_name=SOURCE_DATASET_NAME,
+                source_project_id=source_project_id,
+                source_dataset_name=source_dataset_name,
                 destination_project_id=parse_destination_dataset_project_id,
+                internal_project_id=internal_project_id,
                 sqls_folder=os.path.join(dags_folder, 'resources/stages/parse/sqls'),
                 parse_all_partitions=parse_all_partitions
             )
@@ -106,7 +104,6 @@ def build_parse_dag(
         parsing_operator = PythonOperator(
             task_id=table_name,
             python_callable=parse_task,
-            provide_context=True,
             execution_timeout=timedelta(minutes=60),
             dag=dag
         )
@@ -132,12 +129,32 @@ def build_parse_dag(
         create_view_operator = PythonOperator(
             task_id=f'create_view_{view_name}',
             python_callable=create_view_task,
-            provide_context=True,
             execution_timeout=timedelta(minutes=10),
             dag=dag
         )
 
         return create_view_operator
+
+    def create_share_dataset_task(dataset_name):
+        def share_dataset_task(**_):
+            if parse_destination_dataset_project_id != "blockchain-etl":
+                logging.info("Skipping sharing dataset.")
+            else:
+                client = bigquery.Client()
+                share_dataset_all_users_read(
+                    client, f"{parse_destination_dataset_project_id}.{dataset_name}"
+                )
+                share_dataset_all_users_read(
+                    client,
+                    f"{parse_destination_dataset_project_id}-internal.{dataset_name}",
+                )
+
+        return PythonOperator(
+            task_id="share_dataset",
+            python_callable=share_dataset_task,
+            execution_timeout=timedelta(minutes=10),
+            dag=dag,
+        )
 
     wait_for_ethereum_load_dag_task = ExternalTaskSensor(
         task_id='wait_for_polygon_partition_dag',
@@ -195,6 +212,10 @@ def build_parse_dag(
         create_view_task = create_add_view_task(full_dataset_name, view_name, sql)
         checkpoint_task >> create_view_task
         final_tasks.append(create_view_task)
+
+    share_dataset_task = create_share_dataset_task(full_dataset_name)
+    checkpoint_task >> share_dataset_task
+    final_tasks.append(share_dataset_task)
 
     return dag
 

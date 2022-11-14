@@ -34,3 +34,10 @@ class EthReceipt(object):
         self.root = None
         self.status = None
         self.effective_gas_price = None
+
+    def __repr__(self):
+        return (
+            f"EthReceipt block_number {self.block_number}, "
+            f"block_hash {self.block_hash}, "
+            f"transaction_hash {self.transaction_hash}"
+        )

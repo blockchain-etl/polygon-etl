@@ -20,4 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import sys
 
+# Fix for RecursionError in traces
+sys.setrecursionlimit(1200)

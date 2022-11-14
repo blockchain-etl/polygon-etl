@@ -1,0 +1,31 @@
+name: cliTests
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+env:
+  # include "slow" tests that make node requests, as well as mocks
+  POLYGONETL_RUN_SLOW_TESTS: true
+  POLYGONETL_PROVIDER_URI: ${{ secrets.POLYGONETL_PROVIDER_URI }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: polygon-etl cli tests
+    steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.8.12"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip &&
+          pip install \
+            -r requirements_test.txt \
+            -e cli[streaming]
+      - name: Run pytest on cli/tests
+        run: pytest -vv cli

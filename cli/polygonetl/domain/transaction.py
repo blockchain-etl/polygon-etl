@@ -37,3 +37,10 @@ class EthTransaction(object):
         self.max_fee_per_gas = None
         self.max_priority_fee_per_gas = None
         self.transaction_type = None
+
+    def __repr__(self):
+        return (
+            f"EthTransaction block_number {self.block_number}, "
+            f"hash {self.hash}, "
+            f"transaction_index {self.transaction_index}"
+        )

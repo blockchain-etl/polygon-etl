@@ -1,0 +1,48 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "target",
+                    "type": "address"
+                },
+                {
+                    "internalType": "bytes",
+                    "name": "callData",
+                    "type": "bytes"
+                }
+            ],
+            "name": "proxyCall",
+            "outputs": [
+                {
+                    "internalType": "bytes",
+                    "name": "",
+                    "type": "bytes"
+                }
+            ],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        "contract_address": "0xf715beb51ec8f63317d66f491e37e7bb048fcc2d",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "opensea",
+        "schema": [
+            {
+                "description": "",
+                "name": "target",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "callData",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "ZeroExFeeWrapper_call_proxyCall"
+    }
+}
