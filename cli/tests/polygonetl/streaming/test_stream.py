@@ -74,6 +74,19 @@ def read_resource(resource_group, file_name):
             ],
             "mock",
         ),
+        (
+            23887160,
+            23887160,
+            1,
+            "block_eip_1559",
+            [
+                "block",
+                "transaction",
+                "log",
+                "token_transfer",
+            ],
+            "mock",
+        ),
         skip_if_slow_tests_disabled(
             (
                 2233682,
@@ -98,6 +111,24 @@ def read_resource(resource_group, file_name):
                 9013767,
                 1,
                 "blocks_with_transfers",
+                [
+                    "block",
+                    "transaction",
+                    "log",
+                    "token_transfer",
+                    "trace",
+                    "contract",
+                    "token",
+                ],
+                "online",
+            )
+        ),
+        skip_if_slow_tests_disabled(
+            (
+                23887160,
+                23887160,
+                1,
+                "block_eip_1559",
                 [
                     "block",
                     "transaction",
