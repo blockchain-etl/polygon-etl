@@ -25,7 +25,7 @@ with double_entry_book as (
     join `{{params.destination_dataset_project_id}}.{{params.dataset_name}}.blocks` as blocks on blocks.number = transactions.block_number
     where true
     and date(transactions.block_timestamp) <= '{{ds}}'
-    group by blocks.miner
+    group by blocks.number, blocks.miner
     union all
     -- transaction fees credits
     select
