@@ -48,6 +48,7 @@ setup(
             "google-cloud-pubsub==2.1.0",
             "google-cloud-storage==1.33.0",
             "pg8000==1.13.2",
+            "pytz==2022.1",
             "sqlalchemy==1.3.13",
             "timeout-decorator==0.4.1",
         ],
