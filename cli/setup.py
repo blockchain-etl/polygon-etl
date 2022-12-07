@@ -46,6 +46,7 @@ setup(
     extras_require={
         "streaming": [
             "google-cloud-pubsub==2.1.0",
+            "pytz",  # See https://github.com/googleapis/python-pubsub/issues/468
             "google-cloud-storage==1.33.0",
             "pg8000==1.13.2",
             "sqlalchemy==1.3.13",
