@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "type": "log",
+        "contract_address": "0x8145edddf43f50276641b55bd3ad95944510021e",
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "uint128",
+                    "name": "oldFlashloanPremiumTotal",
+                    "type": "uint128"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint128",
+                    "name": "newFlashloanPremiumTotal",
+                    "type": "uint128"
+                }
+            ],
+            "name": "FlashloanPremiumTotalUpdated",
+            "type": "event"
+        },
+        "field_mapping": {}
+    },
+    "table": {
+        "dataset_name": "aave",
+        "table_name": "PoolConfigurator_v3_event_FlashloanPremiumTotalUpdated",
+        "table_description": "",
+        "schema": [
+            {
+                "name": "oldFlashloanPremiumTotal",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "newFlashloanPremiumTotal",
+                "description": "",
+                "type": "STRING"
+            }
+        ]
+    }
+}

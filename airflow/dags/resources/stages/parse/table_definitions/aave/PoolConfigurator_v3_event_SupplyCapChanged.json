@@ -1,0 +1,54 @@
+{
+    "parser": {
+        "type": "log",
+        "contract_address": "0x8145edddf43f50276641b55bd3ad95944510021e",
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "oldSupplyCap",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "newSupplyCap",
+                    "type": "uint256"
+                }
+            ],
+            "name": "SupplyCapChanged",
+            "type": "event"
+        },
+        "field_mapping": {}
+    },
+    "table": {
+        "dataset_name": "aave",
+        "table_name": "PoolConfigurator_v3_event_SupplyCapChanged",
+        "table_description": "",
+        "schema": [
+            {
+                "name": "asset",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "oldSupplyCap",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "newSupplyCap",
+                "description": "",
+                "type": "STRING"
+            }
+        ]
+    }
+}

@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "type": "log",
+        "contract_address": "0x8145edddf43f50276641b55bd3ad95944510021e",
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "asset",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bool",
+                    "name": "paused",
+                    "type": "bool"
+                }
+            ],
+            "name": "ReservePaused",
+            "type": "event"
+        },
+        "field_mapping": {}
+    },
+    "table": {
+        "dataset_name": "aave",
+        "table_name": "PoolConfigurator_v3_event_ReservePaused",
+        "table_description": "",
+        "schema": [
+            {
+                "name": "asset",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "paused",
+                "description": "",
+                "type": "STRING"
+            }
+        ]
+    }
+}
