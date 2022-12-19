@@ -11,7 +11,7 @@ long_description = read("README.md") if os.path.isfile("README.md") else ""
 
 setup(
     name="polygon-etl",
-    version="0.2.2",
+    version="0.3.0",
     author="Evgeny Medvedev",
     author_email="evge.medvedev@gmail.com",
     description="Tools for exporting Polygon blockchain data to CSV or JSON",
@@ -49,6 +49,7 @@ setup(
             "pytz",  # See https://github.com/googleapis/python-pubsub/issues/468
             "google-cloud-storage==1.33.0",
             "pg8000==1.13.2",
+            "pytz==2022.1",
             "sqlalchemy==1.3.13",
             "timeout-decorator==0.4.1",
         ],

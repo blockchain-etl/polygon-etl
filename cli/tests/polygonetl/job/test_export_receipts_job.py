@@ -49,19 +49,25 @@ DEFAULT_TX_HASHES = [
     "0x7ef447a3a37326c3033480b39956f88ab281744032eb430bfc5595fb23009ddb",
     "0x01a776a4ed599573efdd5caf4a97debf42a9363d754a90c1bf29307831e613a1",
 ]
-
+EIP_1559_TX_HASHES = [
+    "0xcc6321f62e241e512bdbf7f466adfd2bd78543ee4a8efb69c2d58a5451ddb25d"
+]
 
 @pytest.mark.parametrize(
     "batch_size,transaction_hashes,output_format,resource_group,web3_provider_type",
     [
         (1, DEFAULT_TX_HASHES, "csv", "receipts_with_logs", "mock"),
         (2, DEFAULT_TX_HASHES, "json", "receipts_with_logs", "mock"),
+        (1, EIP_1559_TX_HASHES, "json", "receipts_with_logs_eip_1559", "mock"),
         skip_if_slow_tests_disabled(
             (1, DEFAULT_TX_HASHES, "csv", "receipts_with_logs", "online")
         ),
         skip_if_slow_tests_disabled(
             (2, DEFAULT_TX_HASHES, "json", "receipts_with_logs", "online")
         ),
+        skip_if_slow_tests_disabled(
+            (1, EIP_1559_TX_HASHES, "json", "receipts_with_logs_eip_1559", "mock")
+        ),        
     ],
 )
 def test_export_receipts_job(
