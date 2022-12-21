@@ -10,8 +10,8 @@ from tempfile import TemporaryDirectory
 from airflow import models
 from airflow.providers.google.cloud.hooks.gcs import GCSHook
 from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator
-from airflow.providers.google.cloud.sensors.gcs import GCSObjectExistenceSensor
 from airflow.operators.python import PythonOperator
+from airflow.sensors.external_task import ExternalTaskSensor
 from google.cloud import bigquery
 from google.cloud.bigquery import TimePartitioning
 
@@ -95,17 +95,20 @@ def build_load_dag(
 
     dags_folder = os.environ.get('DAGS_FOLDER', '/home/airflow/gcs/dags')
 
-    def add_load_tasks(task, file_format, allow_quoted_newlines=False):
-        wait_sensor = GCSObjectExistenceSensor(
-            task_id='wait_latest_{task}'.format(task=task),
-            timeout=12 * 60 * 60,
-            poke_interval=60,
-            bucket=output_bucket,
-            object='export/{task}/block_date={datestamp}/{task}.{file_format}'.format(
-                task=task, datestamp='{{ds}}', file_format=file_format),
-            dag=dag
+    if not load_all_partitions:
+        wait_sensor = ExternalTaskSensor(
+            task_id="wait_export_dag",
+            external_dag_id=f"{chain}_export_dag",
+            external_task_id="export_complete",
+            execution_delta=timedelta(hours=1),
+            priority_weight=0,
+            mode="reschedule",
+            poke_interval=5 * 60,
+            timeout=8 * 60 * 60,
+            dag=dag,
         )
 
+    def add_load_tasks(task, file_format, allow_quoted_newlines=False):
         def load_task(ds, **kwargs):
             client = bigquery.Client()
             job_config = bigquery.LoadJobConfig()
@@ -155,7 +158,9 @@ def build_load_dag(
             dag=dag
         )
 
-        wait_sensor >> load_operator
+        if not load_all_partitions:
+            wait_sensor >> load_operator
+
         return load_operator
 
     def add_enrich_tasks(task, time_partitioning_field='block_timestamp', dependencies=None, always_load_all_partitions=False):
