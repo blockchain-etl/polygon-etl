@@ -121,7 +121,7 @@ def build_export_dag(
                 output=os.path.join(tempdir, block_range_filename),
             )
         else:
-            block_range_filename = f"blocks_meta{hour:02}.txt"
+            block_range_filename = f"blocks_meta_{hour:02}.txt"
 
             start_datetime = datetime.combine(
                 date,
