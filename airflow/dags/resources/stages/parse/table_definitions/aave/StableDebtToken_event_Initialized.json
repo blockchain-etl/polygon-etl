@@ -54,7 +54,7 @@
         "type": "log"
     },
     "table": {
-        "dataset_name": "polygon_aave",
+        "dataset_name": "aave",
         "schema": [
             {
                 "description": "",
