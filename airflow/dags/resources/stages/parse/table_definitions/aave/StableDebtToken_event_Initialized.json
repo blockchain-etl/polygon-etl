@@ -49,7 +49,7 @@
             "name": "Initialized",
             "type": "event"
         },
-        "contract_address": "SELECT stableDebtToken FROM ref(`PoolConfigurator_v3_event_ReserveInitialized`) GROUP BY stableDebtToken",
+        "contract_address": "SELECT stableDebtToken FROM ref('PoolConfigurator_v3_event_ReserveInitialized') GROUP BY stableDebtToken",
         "field_mapping": {},
         "type": "log"
     },
