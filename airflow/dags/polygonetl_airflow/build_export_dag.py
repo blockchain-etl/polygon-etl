@@ -55,7 +55,7 @@ def build_export_dag(
         "email_on_retry": False,
         "retries": export_retries,
         "retry_delay": timedelta(minutes=5),
-        "on_failure_callback": handle_dag_failure
+        "on_failure_callback": handle_dag_failure,
     }
 
     if notification_emails and len(notification_emails) > 0:

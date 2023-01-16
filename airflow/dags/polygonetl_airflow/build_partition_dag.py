@@ -34,7 +34,7 @@ def build_partition_dag(
         'email_on_retry': False,
         'retries': 5,
         'retry_delay': timedelta(minutes=5),
-        'on_failure_callback': handle_dag_failure
+        'on_failure_callback': handle_dag_failure,
     }
 
     if notification_emails and len(notification_emails) > 0:
