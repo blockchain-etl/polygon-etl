@@ -45,7 +45,7 @@ def build_export_dag(
         export_traces_max_workers=10,
         export_batch_size=200,
         export_max_active_runs=None,
-        export_retries=1,
+        export_retries=0,
         **kwargs
 ):
     default_dag_args = {
