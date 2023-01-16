@@ -45,7 +45,7 @@ def build_export_dag(
         export_traces_max_workers=10,
         export_batch_size=200,
         export_max_active_runs=None,
-        export_retries=0,
+        export_retries=5,
         **kwargs
 ):
     default_dag_args = {
@@ -150,7 +150,6 @@ def build_export_dag(
         return int(start_block), int(end_block)
 
     def export_blocks_and_transactions_command(logical_date, provider_uri, **kwargs):
-        raise ValueError("Force error")
         with TemporaryDirectory(dir=TEMP_DIR) as tempdir:
             start_block, end_block = get_block_range(tempdir, logical_date, provider_uri)
 
