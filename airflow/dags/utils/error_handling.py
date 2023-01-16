@@ -43,17 +43,23 @@ def handle_dag_failure(context: Dict) -> None:
     owner_tags = [f"<@{relevant_user_id}>" for relevant_user_id in relevant_user_ids]
     owner_text = ", ".join(owner_tags)
 
-    message = (
-        f'Failed DAG **{dag_id}**\n'
-        f'Task: **{task_id}**\n'
-        f'Environment: **{environment}**\n'
-        f'Logs: {log_url}\n'
-        f'Owner: {owner_text}'
-    )
-
     if platform == "discord":
+        message = (
+            f'Failed DAG **{dag_id}**\n'
+            f'Task: **{task_id}**\n'
+            f'Environment: **{environment}**\n'
+            f'Logs: {log_url}\n'
+            f'Owner: {owner_text}'
+        )
         publish_message_to_discord(webhook_url, message)
     elif platform == "slack":
+        message = (
+            f'Failed DAG: *{dag_id}*\n'
+            f'Task: {task_id}\n'
+            f'Environment: {environment}\n'
+            f'Logs: {log_url}\n'
+            f'Owner: {owner_text}'
+        )   
         publish_message_to_slack(webhook_url, message)
     else:
         raise ValueError(f"Allowed values for `alert_platform` are `discord` and `slack`.")
