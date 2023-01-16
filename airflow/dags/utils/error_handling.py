@@ -41,7 +41,7 @@ def handle_dag_failure(context: Dict) -> None:
     relevant_user_ids_string = override_owner_ids.get(dag_id, default_user_id)
     relevant_user_ids = relevant_user_ids_string.split(",")
     owner_tags = [f"<@{relevant_user_id}>" for relevant_user_id in relevant_user_ids]
-    owner_text = owner_tags.join(", ")
+    owner_text = ", ".join(owner_tags)
 
     message = (
         f'Failed DAG **{dag_id}**\n'
