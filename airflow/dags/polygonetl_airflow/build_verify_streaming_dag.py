@@ -5,6 +5,7 @@ import os
 from datetime import datetime, timedelta
 
 from airflow import DAG
+from airflow.models import Variable
 from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator
 
 from utils.error_handling import handle_dag_failure
@@ -36,7 +37,9 @@ def build_verify_streaming_dag(
         'email_on_retry': False,
         'retries': 5,
         'retry_delay': timedelta(minutes=5),
-        'on_failure_callback': handle_dag_failure,
+        'on_failure_callback': lambda context: handle_dag_failure(
+                context, Variable.get("alert_platform", "discord")
+            )
     }
 
     if notification_emails and len(notification_emails) > 0:

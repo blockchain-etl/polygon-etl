@@ -20,7 +20,9 @@ with models.DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2021, 11, 1),
     catchup=False,
-    default_args={'on_failure_callback': handle_dag_failure},
+    default_args={'on_failure_callback': lambda context: handle_dag_failure(
+                context, models.Variable.get("alert_platform", "discord")
+            )}
 ) as dag:
     PythonOperator(
         task_id='do_something',
