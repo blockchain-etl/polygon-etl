@@ -51,9 +51,7 @@ def build_parse_dag(
         'email_on_retry': False,
         'retries': 5,
         'retry_delay': timedelta(minutes=5),
-        'on_failure_callback': lambda context: handle_dag_failure(
-                context, models.Variable.get("alert_platform", "discord")
-            )
+        'on_failure_callback': handle_dag_failure
     }
 
     if notification_emails and len(notification_emails) > 0:

@@ -7,7 +7,6 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from airflow import DAG, configuration
-from airflow.models import Variable
 from airflow.operators.dummy import DummyOperator
 from airflow.operators.python import PythonOperator
 
@@ -56,9 +55,7 @@ def build_export_dag(
         "email_on_retry": False,
         "retries": export_retries,
         "retry_delay": timedelta(minutes=5),
-        "on_failure_callback": lambda context: handle_dag_failure(
-                context, Variable.get("alert_platform", "discord")
-            )
+        "on_failure_callback": handle_dag_failure
     }
 
     if notification_emails and len(notification_emails) > 0:

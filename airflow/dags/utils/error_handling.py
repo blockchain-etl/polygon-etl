@@ -11,7 +11,7 @@ from utils.slack import publish_message_to_slack
 environment = Variable.get('environment', 'dev')
 
 
-def handle_dag_failure(context: Dict, platform="discord") -> None:
+def handle_dag_failure(context: Dict) -> None:
     """
     This function should be set as the value of 'on_failure_callback' option in the DAG definition.
 
@@ -26,6 +26,8 @@ def handle_dag_failure(context: Dict, platform="discord") -> None:
         f"Handling DAG failure: dag_id: {dag_id},"
         f"task_id: {task_id}, log_url: {log_url}, context: {context}",
     )
+
+    platform = Variable.get(f"alert_platform", "discord")
 
     webhook_url = Variable.get(f"{platform}_alerts_webhook_url")
     if not webhook_url:
