@@ -1,0 +1,65 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "payer",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "decreaseShares",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "totalShares",
+                    "type": "uint256"
+                }
+            ],
+            "name": "SellShares",
+            "type": "event"
+        },
+        "contract_address": "SELECT DSP FROM ref('DSPFactory_event_NewDSP')",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "kyber",
+        "schema": [
+            {
+                "description": "",
+                "name": "payer",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "to",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "decreaseShares",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "totalShares",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "DSP_event_SellShares"
+    }
+}
