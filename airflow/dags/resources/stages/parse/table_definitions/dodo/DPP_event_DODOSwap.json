@@ -48,7 +48,7 @@
         "type": "log"
     },
     "table": {
-        "dataset_name": "kyber",
+        "dataset_name": "dodo",
         "schema": [
             {
                 "description": "",
