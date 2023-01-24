@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "contract IComptroller",
+                    "name": "oldComptroller",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "contract IComptroller",
+                    "name": "newComptroller",
+                    "type": "address"
+                }
+            ],
+            "name": "NewComptroller",
+            "type": "event"
+        },
+        "contract_address": "SELECT oToken FROM ref('Unitroller_event_MarketListed')",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "0vix",
+        "schema": [
+            {
+                "description": "",
+                "name": "oldComptroller",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "newComptroller",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "oToken_event_NewComptroller"
+    }
+}
