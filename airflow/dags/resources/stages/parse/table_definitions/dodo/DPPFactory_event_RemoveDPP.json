@@ -1,0 +1,32 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "dpp",
+                    "type": "address"
+                }
+            ],
+            "name": "RemoveDPP",
+            "type": "event"
+        },
+        "contract_address": "0xd24153244066f0afa9415563bfc7ba248bfb7a51",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "dodo",
+        "schema": [
+            {
+                "description": "",
+                "name": "dpp",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "DPPFactory_event_RemoveDPP"
+    }
+}

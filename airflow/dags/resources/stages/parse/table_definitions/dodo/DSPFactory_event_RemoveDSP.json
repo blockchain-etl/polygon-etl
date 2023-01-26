@@ -1,0 +1,32 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "DSP",
+                    "type": "address"
+                }
+            ],
+            "name": "RemoveDSP",
+            "type": "event"
+        },
+        "contract_address": "0x43c49f8dd240e1545f147211ec9f917376ac1e87",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "dodo",
+        "schema": [
+            {
+                "description": "",
+                "name": "DSP",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "DSPFactory_event_RemoveDSP"
+    }
+}
