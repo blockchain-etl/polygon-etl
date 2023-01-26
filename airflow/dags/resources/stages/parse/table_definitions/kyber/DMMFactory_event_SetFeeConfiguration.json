@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "feeTo",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint16",
+                    "name": "governmentFeeBps",
+                    "type": "uint16"
+                }
+            ],
+            "name": "SetFeeConfiguration",
+            "type": "event"
+        },
+        "contract_address": "0x5f1fe642060b5b9658c15721ea22e982643c095c",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "kyber",
+        "schema": [
+            {
+                "description": "",
+                "name": "feeTo",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "governmentFeeBps",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "DMMFactory_event_SetFeeConfiguration"
+    }
+}
