@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "uint8",
+                    "name": "communityFee0New",
+                    "type": "uint8"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint8",
+                    "name": "communityFee1New",
+                    "type": "uint8"
+                }
+            ],
+            "name": "CommunityFee",
+            "type": "event"
+        },
+        "contract_address": "SELECT pool FROM ref('AlgebraFactory_event_Pool')",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "quickswap",
+        "schema": [
+            {
+                "description": "",
+                "name": "communityFee0New",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "communityFee1New",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "AlgebraPool_event_CommunityFee"
+    }
+}
