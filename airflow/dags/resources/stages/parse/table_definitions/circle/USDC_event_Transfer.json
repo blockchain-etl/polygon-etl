@@ -1,0 +1,54 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "value",
+                    "type": "uint256"
+                }
+            ],
+            "name": "Transfer",
+            "type": "event"
+        },
+        "contract_address": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "circle",
+        "schema": [
+            {
+                "description": "",
+                "name": "from",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "to",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "value",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "USDC_event_Transfer"
+    }
+}
