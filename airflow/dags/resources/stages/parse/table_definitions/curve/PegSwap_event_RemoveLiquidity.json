@@ -1,0 +1,61 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "name": "provider",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "token_amounts",
+                    "type": "uint256[3]"
+                },
+                {
+                    "indexed": false,
+                    "name": "fees",
+                    "type": "uint256[3]"
+                },
+                {
+                    "indexed": false,
+                    "name": "token_supply",
+                    "type": "uint256"
+                }
+            ],
+            "name": "RemoveLiquidity",
+            "type": "event"
+        },
+        "contract_address": "(SELECT pool FROM ref('MainRegistry_event_PoolAdded') EXCEPT DISTINCT SELECT pool FROM ref('MainRegistry_event_PoolRemoved')) UNION ALL SELECT '0x447646e84498552e62ecf097cc305eabfff09308' UNION ALL SELECT '0xadf577b69eeac9df325536cf1af106372f2da263' UNION ALL SELECT '0xad326c253a84e9805559b73a08724e11e49ca651' UNION ALL SELECT '0xfba3b7bb043415035220b1c44fb4756434639392' UNION ALL SELECT '0x2c3cc8e698890271c8141be9f6fd6243d56b39f1' UNION ALL SELECT '0x0f110c55efe62c16d553a3d3464b77e1853d0e97' UNION ALL SELECT '0x2f3e9ca3bff85b91d9fe6a9f3e8f9b1a6a4c3cf4' UNION ALL SELECT '0x2ffbce9099cbed86984286a54e5932414af4b717' UNION ALL SELECT '0xda43bfd7ecc6835aa6f1761ced30b986a574c0d2' UNION ALL SELECT '0xef75e9c7097842acc5d0869e1db4e5fddf4bfdda' UNION ALL SELECT '0x9a30e9a76afbdf52f44b8b8bc2dc3cd941282789' UNION ALL SELECT '0xa138341185a9d0429b0021a11fb717b225e13e1f4' UNION ALL SELECT '0xa69b0d5c0c401bba2d5162138613b5e38584f63f' UNION ALL SELECT '0xe8dcea7fb2baf7a9f4d9af608f06d78a687f8d9a' UNION ALL SELECT '0xdde5fdb48b2ec6bc26bb4487f8e3a4eb99b3d633' UNION ALL SELECT '0xaa91cdd7abb47f821cf07a2d38cc8668deaf1bdc'",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "curve",
+        "schema": [
+            {
+                "description": "",
+                "name": "provider",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "token_amounts",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "fees",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "token_supply",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "PegSwap_event_RemoveLiquidity"
+    }
+}
