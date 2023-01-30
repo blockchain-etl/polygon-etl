@@ -27,7 +27,7 @@ def handle_dag_failure(context: Dict) -> None:
         f"task_id: {task_id}, log_url: {log_url}, context: {context}",
     )
 
-    platform = Variable.get(f"alert_platform", "discord")
+    platform = Variable.get("alert_platform", "discord")
 
     webhook_url = Variable.get(f"{platform}_alerts_webhook_url")
     if not webhook_url:
