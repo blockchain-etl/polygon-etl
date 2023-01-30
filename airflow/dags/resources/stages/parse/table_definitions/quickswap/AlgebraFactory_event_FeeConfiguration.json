@@ -1,0 +1,120 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "uint16",
+                    "name": "alpha1",
+                    "type": "uint16"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint16",
+                    "name": "alpha2",
+                    "type": "uint16"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint32",
+                    "name": "beta1",
+                    "type": "uint32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint32",
+                    "name": "beta2",
+                    "type": "uint32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint16",
+                    "name": "gamma1",
+                    "type": "uint16"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint16",
+                    "name": "gamma2",
+                    "type": "uint16"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint32",
+                    "name": "volumeBeta",
+                    "type": "uint32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint16",
+                    "name": "volumeGamma",
+                    "type": "uint16"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint16",
+                    "name": "baseFee",
+                    "type": "uint16"
+                }
+            ],
+            "name": "FeeConfiguration",
+            "type": "event"
+        },
+        "contract_address": "0x411b0facc3489691f28ad58c47006af5e3ab3a28",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "quickswap",
+        "schema": [
+            {
+                "description": "",
+                "name": "alpha1",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "alpha2",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "beta1",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "beta2",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "gamma1",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "gamma2",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "volumeBeta",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "volumeGamma",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "baseFee",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "AlgebraFactory_event_FeeConfiguration"
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "newVaultAddress",
+                    "type": "address"
+                }
+            ],
+            "name": "VaultAddress",
+            "type": "event"
+        },
+        "contract_address": "0x411b0facc3489691f28ad58c47006af5e3ab3a28",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "quickswap",
+        "schema": [
+            {
+                "description": "",
+                "name": "newVaultAddress",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "AlgebraFactory_event_VaultAddress"
+    }
+}
