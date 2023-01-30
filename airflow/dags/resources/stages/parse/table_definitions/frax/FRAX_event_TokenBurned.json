@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "TokenBurned",
+            "type": "event"
+        },
+        "contract_address": "0x45c32fa6df82ead1e2ef74d17b76547eddfaff89",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "frax",
+        "schema": [
+            {
+                "description": "",
+                "name": "from",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "amount",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "FRAX_event_TokenBurned"
+    }
+}
