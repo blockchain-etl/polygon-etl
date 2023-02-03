@@ -1,0 +1,54 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "uint256",
+                    "name": "profileId",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "followNFT",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "FollowNFTDeployed",
+            "type": "event"
+        },
+        "contract_address": "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "lens_protocol",
+        "schema": [
+            {
+                "description": "",
+                "name": "profileId",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "followNFT",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "timestamp",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "LensHub_event_FollowNFTDeployed"
+    }
+}

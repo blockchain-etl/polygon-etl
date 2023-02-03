@@ -1,0 +1,65 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "uint256",
+                    "name": "profileId",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "followModule",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bytes",
+                    "name": "followModuleReturnData",
+                    "type": "bytes"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "FollowModuleSet",
+            "type": "event"
+        },
+        "contract_address": "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "lens_protocol",
+        "schema": [
+            {
+                "description": "",
+                "name": "profileId",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "followModule",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "followModuleReturnData",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "timestamp",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "LensHub_event_FollowModuleSet"
+    }
+}
