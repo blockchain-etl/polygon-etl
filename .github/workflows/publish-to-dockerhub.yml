@@ -7,12 +7,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Publish to DockerHub
         if: startsWith(github.event.ref, 'refs/tags/v')
-        uses: elgohr/Publish-Docker-Github-Action@2.18
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: blockchainetl/polygon-etl
           workdir: cli
