@@ -11,7 +11,7 @@ long_description = read("README.md") if os.path.isfile("README.md") else ""
 
 setup(
     name="polygon-etl",
-    version="0.3.0",
+    version="0.3.1",
     author="Evgeny Medvedev",
     author_email="evge.medvedev@gmail.com",
     description="Tools for exporting Polygon blockchain data to CSV or JSON",
