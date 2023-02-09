@@ -245,7 +245,7 @@
         "type": "trace"
     },
     "table": {
-        "dataset_name": "<INSERT_DATASET_NAME>",
+        "dataset_name": "oneplanet",
         "schema": [
             {
                 "description": "",
@@ -274,6 +274,6 @@
             }
         ],
         "table_description": "",
-        "table_name": "<TABLE_PREFIX>_event_fulfillAvailableOrders"
+        "table_name": "OnePlanet_call_fulfillAvailableOrders"
     }
 }
