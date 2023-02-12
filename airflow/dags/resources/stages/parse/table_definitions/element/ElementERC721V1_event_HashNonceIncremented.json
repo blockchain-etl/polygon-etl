@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "type": "log",
+        "contract_address": "0xeaf5453b329eb38be159a872a6ce91c9a8fb0260",
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "maker",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "newHashNonce",
+                    "type": "uint256"
+                }
+            ],
+            "name": "HashNonceIncremented",
+            "type": "event"
+        },
+        "field_mapping": {}
+    },
+    "table": {
+        "dataset_name": "element",
+        "table_name": "ElementERC721V1_event_HashNonceIncremented",
+        "table_description": "",
+        "schema": [
+            {
+                "name": "maker",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "newHashNonce",
+                "description": "",
+                "type": "STRING"
+            }
+        ]
+    }
+}
