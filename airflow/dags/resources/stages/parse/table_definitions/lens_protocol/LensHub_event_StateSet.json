@@ -1,0 +1,65 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "caller",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "enum DataTypes.ProtocolState",
+                    "name": "prevState",
+                    "type": "uint8"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "enum DataTypes.ProtocolState",
+                    "name": "newState",
+                    "type": "uint8"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "StateSet",
+            "type": "event"
+        },
+        "contract_address": "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "lens_protocol",
+        "schema": [
+            {
+                "description": "",
+                "name": "caller",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "prevState",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "newState",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "timestamp",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "LensHub_event_StateSet"
+    }
+}
