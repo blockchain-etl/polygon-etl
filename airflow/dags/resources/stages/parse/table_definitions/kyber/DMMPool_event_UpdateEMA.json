@@ -1,0 +1,65 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "shortEMA",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "longEMA",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint128",
+                    "name": "lastBlockVolume",
+                    "type": "uint128"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "skipBlock",
+                    "type": "uint256"
+                }
+            ],
+            "name": "UpdateEMA",
+            "type": "event"
+        },
+        "contract_address": "SELECT pool FROM ref('DMMFactory_event_PoolCreated')",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "kyber",
+        "schema": [
+            {
+                "description": "",
+                "name": "shortEMA",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "longEMA",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "lastBlockVolume",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "skipBlock",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "DMMPool_event_UpdateEMA"
+    }
+}

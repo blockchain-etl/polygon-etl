@@ -8,9 +8,10 @@ on:
 jobs:
   build-n-publish:
     name: Build and publish to PyPI and TestPyPI
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Set up Python 3.8.12
         uses: actions/setup-python@v2
         with:
@@ -19,14 +20,14 @@ jobs:
         run: cd cli && python setup.py sdist
       - name: Publish distribution to Test PyPI
         if: startsWith(github.event.ref, 'refs/tags/v')
-        uses: pypa/gh-action-pypi-publish@master
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.test_pypi_password }}
           repository_url: https://test.pypi.org/legacy/
           packages_dir: cli/dist/
       - name: Publish distribution to PyPI
         if: startsWith(github.event.ref, 'refs/tags/v')
-        uses: pypa/gh-action-pypi-publish@master
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.pypi_password }}
           packages_dir: cli/dist/

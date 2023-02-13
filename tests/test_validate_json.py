@@ -25,18 +25,8 @@ schema = load_json_file(schema_path)
 
 def validate_json(filename):
     """REF: https://json-schema.org/ """
-    # Describe what kind of json you expect.
     json_data = load_json_file(filename)
-
-    try:
-        jsonschema.validate(instance=json_data, schema=schema)
-    except jsonschema.exceptions.ValidationError as err:
-        err = f"Given JSON data is InValid for file {filename}: \n {str(err)}"
-        print(err)
-        return False, err
-
-    message = "Given JSON data is Valid"
-    return True, message
+    jsonschema.validate(instance=json_data, schema=schema)
 
 
 def get_json_files_in_dir(dir):
@@ -50,22 +40,21 @@ def get_json_files_in_dir(dir):
 
 @pytest.mark.parametrize("filename", pass_tests)
 def test_correct_cases(filename):
-    valid, msg = validate_json(filename)
-    assert (valid == True)
+    validate_json(filename)
 
 
 @pytest.mark.parametrize("filename", fail_tests)
 def test_wrong_cases(filename):
-    valid, msg = validate_json(filename)
-    assert (valid == False)
+    with pytest.raises(jsonschema.exceptions.ValidationError):
+        validate_json(filename)
 
 
 all_files = get_json_files_in_dir('./airflow/dags/resources/stages/parse/')
 
+
 @pytest.mark.parametrize("filename", all_files)
 def test_file(filename):
-    valid, msg = validate_json(filename)
-    assert (valid == True)
+    validate_json(filename)
 
 
 @pytest.mark.parametrize("filename", all_files)
@@ -74,3 +63,11 @@ def test_dataset_name_is_correct(filename):
     dataset_name = json_data.get('table', {}).get('dataset_name', None)
     assert os.path.split(filename)[0].split("/")[-1] == dataset_name
 
+
+@pytest.mark.parametrize("filename", all_files)
+def test_table_name_is_correct(filename):
+    json_data = load_json_file(filename)
+    table_name = json_data.get('table', {}).get('table_name', None)
+    basename = os.path.basename(filename)
+    expected_table_name = basename.replace('.json', '')
+    assert expected_table_name == table_name

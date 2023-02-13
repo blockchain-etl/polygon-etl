@@ -16,8 +16,9 @@ SELECT
     blocks.extra_data,
     blocks.gas_limit,
     blocks.gas_used,
-    blocks.transaction_count
-FROM {{params.dataset_name_raw}}.blocks AS blocks
+    blocks.transaction_count,
+    blocks.base_fee_per_gas
+FROM {{params.dataset_name_raw}}.blocks{{params.ds_postfix}} AS blocks
 where true
     {% if not params.load_all_partitions %}
     and date(timestamp_seconds(blocks.timestamp)) = '{{ds}}'

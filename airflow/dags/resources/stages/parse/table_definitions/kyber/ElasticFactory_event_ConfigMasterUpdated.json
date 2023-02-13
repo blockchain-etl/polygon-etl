@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "oldConfigMaster",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "newConfigMaster",
+                    "type": "address"
+                }
+            ],
+            "name": "ConfigMasterUpdated",
+            "type": "event"
+        },
+        "contract_address": "0x5f1dddbf348ac2fbe22a163e30f99f9ece3dd50a",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "kyber",
+        "schema": [
+            {
+                "description": "",
+                "name": "oldConfigMaster",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "newConfigMaster",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "ElasticFactory_event_ConfigMasterUpdated"
+    }
+}

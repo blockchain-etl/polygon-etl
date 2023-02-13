@@ -1,0 +1,65 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "vReserve0",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "vReserve1",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "reserve0",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "reserve1",
+                    "type": "uint256"
+                }
+            ],
+            "name": "Sync",
+            "type": "event"
+        },
+        "contract_address": "SELECT pool FROM ref('DMMFactory_event_PoolCreated')",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "kyber",
+        "schema": [
+            {
+                "description": "",
+                "name": "vReserve0",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "vReserve1",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "reserve0",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "reserve1",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "DMMPool_event_Sync"
+    }
+}

@@ -1,0 +1,143 @@
+{
+    "parser": {
+        "type": "log",
+        "contract_address": "0xeaf5453b329eb38be159a872a6ce91c9a8fb0260",
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "orderHash",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "maker",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "taker",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "nonce",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "contract IERC20",
+                    "name": "erc20Token",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "erc20FillAmount",
+                    "type": "uint256"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "recipient",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        }
+                    ],
+                    "indexed": false,
+                    "internalType": "struct INFTOrdersFeature.Fee[]",
+                    "name": "fees",
+                    "type": "tuple[]"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "erc1155Token",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "erc1155TokenId",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint128",
+                    "name": "erc1155FillAmount",
+                    "type": "uint128"
+                }
+            ],
+            "name": "ERC1155BuyOrderFilled",
+            "type": "event"
+        },
+        "field_mapping": {}
+    },
+    "table": {
+        "dataset_name": "element",
+        "table_name": "ElementERC1155_event_ERC1155BuyOrderFilled",
+        "table_description": "",
+        "schema": [
+            {
+                "name": "orderHash",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "maker",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "taker",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "nonce",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "erc20Token",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "erc20FillAmount",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "fees",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "erc1155Token",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "erc1155TokenId",
+                "description": "",
+                "type": "STRING"
+            },
+            {
+                "name": "erc1155FillAmount",
+                "description": "",
+                "type": "STRING"
+            }
+        ]
+    }
+}

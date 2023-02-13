@@ -34,6 +34,9 @@ class EthTransaction(object):
         self.gas = None
         self.gas_price = None
         self.input = None
+        self.max_fee_per_gas = None
+        self.max_priority_fee_per_gas = None
+        self.transaction_type = None
 
     def __repr__(self):
         return (

@@ -49,6 +49,7 @@ def read_resource(resource_group, file_name):
         (9013760, 9013761, 1, "blocks_with_transactions", "mock"),
         (9013760, 9013761, 2, "blocks_with_transactions", "mock"),
         (0, 0, 1, "block_without_transactions", "mock"),
+        (23887160, 23887160, 1, "block_with_transaction_eip_1559", "mock"),
         skip_if_slow_tests_disabled(
             (13572468, 13572468, 1, "block_with_logs", "online")
         ),
@@ -59,6 +60,7 @@ def read_resource(resource_group, file_name):
             (9013760, 9013761, 2, "blocks_with_transactions", "online")
         ),
         skip_if_slow_tests_disabled((0, 0, 1, "block_without_transactions", "online")),
+        skip_if_slow_tests_disabled((23887160, 23887160, 1, "block_with_transaction_eip_1559", "mock")),
     ],
 )
 def test_export_blocks_job(

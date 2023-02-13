@@ -10,8 +10,8 @@ from tempfile import TemporaryDirectory
 from airflow import models
 from airflow.providers.google.cloud.hooks.gcs import GCSHook
 from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator
-from airflow.providers.google.cloud.sensors.gcs import GCSObjectExistenceSensor
 from airflow.operators.python import PythonOperator
+from airflow.sensors.external_task import ExternalTaskSensor
 from google.cloud import bigquery
 from google.cloud.bigquery import TimePartitioning
 
@@ -95,18 +95,21 @@ def build_load_dag(
 
     dags_folder = os.environ.get('DAGS_FOLDER', '/home/airflow/gcs/dags')
 
-    def add_load_tasks(task, file_format, allow_quoted_newlines=False):
-        wait_sensor = GCSObjectExistenceSensor(
-            task_id='wait_latest_{task}'.format(task=task),
-            timeout=12 * 60 * 60,
-            poke_interval=60,
-            bucket=output_bucket,
-            object='export/{task}/block_date={datestamp}/{task}.{file_format}'.format(
-                task=task, datestamp='{{ds}}', file_format=file_format),
-            dag=dag
+    if not load_all_partitions:
+        wait_sensor = ExternalTaskSensor(
+            task_id="wait_export_dag",
+            external_dag_id=f"{chain}_export_dag",
+            external_task_id="export_complete",
+            execution_delta=timedelta(hours=1),
+            priority_weight=0,
+            mode="reschedule",
+            poke_interval=5 * 60,
+            timeout=8 * 60 * 60,
+            dag=dag,
         )
 
-        def load_task():
+    def add_load_tasks(task, file_format, allow_quoted_newlines=False):
+        def load_task(ds, **kwargs):
             client = bigquery.Client()
             job_config = bigquery.LoadJobConfig()
             schema_path = os.path.join(dags_folder, 'resources/stages/raw/schemas/{task}.json'.format(task=task))
@@ -119,12 +122,34 @@ def build_load_dag(
             job_config.ignore_unknown_values = True
 
             export_location_uri = 'gs://{bucket}/export'.format(bucket=output_bucket)
-            uri = '{export_location_uri}/{task}/*.{file_format}'.format(
-                export_location_uri=export_location_uri, task=task, file_format=file_format)
-            table_ref = client.dataset(dataset_name_raw).table(task)
+            if load_all_partitions:
+                # Support export files that are missing EIP-1559 fields (exported before EIP-1559 upgrade)
+                job_config.allow_jagged_rows = True
+
+                uri = "{export_location_uri}/{task}/*.{file_format}".format(
+                    export_location_uri=export_location_uri,
+                    task=task,
+                    file_format=file_format,
+                )
+                table_ref = client.dataset(dataset_name_raw).table(task)
+            else:
+                uri = "{export_location_uri}/{task}/block_date={ds}/*.{file_format}".format(
+                    export_location_uri=export_location_uri,
+                    task=task,
+                    ds=ds,
+                    file_format=file_format,
+                )
+                table_name = f'{task}_{ds.replace("-", "_")}'
+                table_ref = client.dataset(dataset_name_raw).table(table_name)
+
             load_job = client.load_table_from_uri(uri, table_ref, job_config=job_config)
             submit_bigquery_job(load_job, job_config)
             assert load_job.state == 'DONE'
+
+            if not load_all_partitions:
+                table = client.get_table(table_ref)
+                table.expires = datetime.now() + timedelta(days=3)
+                client.update_table(table, ["expires"])
 
         load_operator = PythonOperator(
             task_id='load_{task}'.format(task=task),
@@ -133,7 +158,9 @@ def build_load_dag(
             dag=dag
         )
 
-        wait_sensor >> load_operator
+        if not load_all_partitions:
+            wait_sensor >> load_operator
+
         return load_operator
 
     def add_enrich_tasks(task, time_partitioning_field='block_timestamp', dependencies=None, always_load_all_partitions=False):
@@ -141,6 +168,11 @@ def build_load_dag(
             template_context = kwargs.copy()
             template_context['ds'] = ds
             template_context['params'] = environment
+
+            if load_all_partitions or always_load_all_partitions:
+                template_context["params"]["ds_postfix"] = ""
+            else:
+                template_context["params"]["ds_postfix"] = "_" + ds.replace("-", "_")
 
             client = bigquery.Client()
 

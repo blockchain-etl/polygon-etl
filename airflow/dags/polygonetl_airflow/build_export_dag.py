@@ -2,15 +2,17 @@ from __future__ import print_function
 
 import os
 import logging
-from datetime import timedelta
+from datetime import datetime, time, timedelta, timezone
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from airflow import DAG, configuration
+from airflow.operators.dummy import DummyOperator
 from airflow.operators.python import PythonOperator
 
 from polygonetl.cli import (
     get_block_range_for_date,
+    get_block_range_for_timestamps,
     extract_csv_column,
     export_blocks_and_transactions,
     export_receipts_and_logs,
@@ -106,13 +108,42 @@ def build_export_dag(
         
         download_from_gcs(bucket=output_bucket, object=export_path + filename, filename=file_path)
 
-    def get_block_range(tempdir, date, provider_uri):
-        logging.info('Calling get_block_range_for_date({}, {}, ...)'.format(provider_uri, date))
-        get_block_range_for_date.callback(
-            provider_uri=provider_uri, date=date, output=os.path.join(tempdir, "blocks_meta.txt")
-        )
+    def get_block_range(tempdir, date, provider_uri, hour=None):
+        if hour is None:
+            block_range_filename = "blocks_meta.txt"
 
-        with open(os.path.join(tempdir, "blocks_meta.txt")) as block_range_file:
+            logging.info(
+                f"Calling get_block_range_for_date({provider_uri}, {date}, ...)"
+            )
+            get_block_range_for_date.callback(
+                provider_uri=provider_uri,
+                date=date,
+                output=os.path.join(tempdir, block_range_filename),
+            )
+        else:
+            block_range_filename = f"blocks_meta_{hour:02}.txt"
+
+            start_datetime = datetime.combine(
+                date,
+                time(hour=hour, minute=0, second=0, tzinfo=timezone.utc),
+            )
+            end_datetime = datetime.combine(
+                date,
+                time(hour=hour, minute=59, second=59, tzinfo=timezone.utc),
+            )
+
+            logging.info(
+                "Calling get_block_range_for_timestamp"
+                f"({provider_uri}, {start_datetime} to {end_datetime}, ...)"
+            )
+            get_block_range_for_timestamps.callback(
+                provider_uri=provider_uri,
+                start_timestamp=start_datetime.timestamp(),
+                end_timestamp=end_datetime.timestamp(),
+                output=os.path.join(tempdir, block_range_filename),
+            )
+
+        with open(os.path.join(tempdir, block_range_filename)) as block_range_file:
             block_range = block_range_file.read()
             start_block, end_block = block_range.split(",")
 
@@ -176,42 +207,46 @@ def build_export_dag(
             )
             copy_to_export_path(os.path.join(tempdir, "logs.json"), export_path("logs", logical_date))
 
-    def extract_contracts_command(logical_date, **kwargs):
+    def extract_contracts_command(logical_date, hour, **kwargs):
         with TemporaryDirectory(dir=TEMP_DIR) as tempdir:
             copy_from_export_path(
-                export_path("traces", logical_date), os.path.join(tempdir, "traces.csv")
+                export_path("traces", logical_date),
+                os.path.join(tempdir, f"traces_{hour:02}.csv"),
             )
 
             logging.info('Calling extract_contracts(..., {}, {})'.format(
                 export_batch_size, export_max_workers
             ))
             extract_contracts.callback(
-                traces=os.path.join(tempdir, "traces.csv"),
-                output=os.path.join(tempdir, "contracts.json"),
+                traces=os.path.join(tempdir, f"traces_{hour:02}.csv"),
+                output=os.path.join(tempdir, f"contracts_{hour:02}.json"),
                 batch_size=export_batch_size,
                 max_workers=export_max_workers,
             )
 
             copy_to_export_path(
-                os.path.join(tempdir, "contracts.json"), export_path("contracts", logical_date)
+                os.path.join(tempdir, f"contracts_{hour:02}.json"),
+                export_path("contracts", logical_date),
             )
 
-    def extract_tokens_command(logical_date, provider_uri, **kwargs):
+    def extract_tokens_command(logical_date, provider_uri, hour, **kwargs):
         with TemporaryDirectory(dir=TEMP_DIR) as tempdir:
             copy_from_export_path(
-                export_path("contracts", logical_date), os.path.join(tempdir, "contracts.json")
+                export_path("contracts", logical_date),
+                os.path.join(tempdir, f"contracts_{hour:02}.json"),
             )
 
             logging.info('Calling extract_tokens(..., {}, {})'.format(export_max_workers, provider_uri))
             extract_tokens.callback(
-                contracts=os.path.join(tempdir, "contracts.json"),
-                output=os.path.join(tempdir, "tokens.csv"),
+                contracts=os.path.join(tempdir, f"contracts_{hour:02}.json"),
+                output=os.path.join(tempdir, f"tokens_{hour:02}.csv"),
                 max_workers=export_max_workers,
                 provider_uri=provider_uri,
             )
 
             copy_to_export_path(
-                os.path.join(tempdir, "tokens.csv"), export_path("tokens", logical_date)
+                os.path.join(tempdir, f"tokens_{hour:02}.csv"),
+                export_path("tokens", logical_date),
             )
 
     def extract_token_transfers_command(logical_date, **kwargs):
@@ -235,9 +270,11 @@ def build_export_dag(
                 export_path("token_transfers", logical_date),
             )
 
-    def export_traces_command(logical_date, provider_uri, **kwargs):
+    def export_traces_command(logical_date, provider_uri, hour, **kwargs):
         with TemporaryDirectory(dir=TEMP_DIR) as tempdir:
-            start_block, end_block = get_block_range(tempdir, logical_date, provider_uri)
+            start_block, end_block = get_block_range(
+                tempdir, logical_date, provider_uri, hour
+            )
             if start_block == 0:
                 start_block = 1
 
@@ -252,34 +289,44 @@ def build_export_dag(
                     start_block=start_block,
                     end_block=end_block,
                     batch_size=export_traces_batch_size,
-                    output=os.path.join(tempdir, "geth_traces.json"),
+                    output=os.path.join(tempdir, f"geth_traces_{hour:02}.json"),
                     max_workers=export_traces_max_workers,
-                    provider_uri=provider_uri
+                    provider_uri=provider_uri,
                 )
                 copy_to_export_path(
-                    os.path.join(tempdir, "geth_traces.json"), export_path("traces", logical_date)
+                    os.path.join(tempdir, f"geth_traces_{hour:02}.json"),
+                    export_path("traces", logical_date),
                 )
             else:
                 copy_from_export_path(
-                   export_path("traces", logical_date), os.path.join(tempdir, "geth_traces.json"), 
+                   export_path("traces", logical_date),
+                   os.path.join(tempdir, f"geth_traces_{hour:02}.json"), 
                 )
 
             extract_geth_traces.callback(
-                input=os.path.join(tempdir, "geth_traces.json"),
-                output=os.path.join(tempdir, 'traces.csv'),
-                max_workers=1
+                input=os.path.join(tempdir, f"geth_traces_{hour:02}.json"),
+                output=os.path.join(tempdir, f"traces_{hour:02}.csv"),
+                max_workers=1,
             )
 
             copy_to_export_path(
-                os.path.join(tempdir, "traces.csv"), export_path("traces", logical_date)
+                os.path.join(tempdir, f"traces_{hour:02}.csv"),
+                export_path("traces", logical_date),
             )
 
-    def add_export_task(toggle, task_id, python_callable, dependencies=None):
+    def add_export_task(
+        toggle,
+        task_id,
+        python_callable,
+        op_kwargs=None,
+        dependencies=None,
+    ):
         if toggle:
             operator = PythonOperator(
                 task_id=task_id,
                 python_callable=python_callable,
                 execution_timeout=timedelta(hours=24),
+                op_kwargs=op_kwargs,
                 dag=dag,
             )
             if dependencies is not None and len(dependencies) > 0:
@@ -291,6 +338,7 @@ def build_export_dag(
             return None
 
     # Operators
+    export_complete = DummyOperator(task_id="export_complete", dag=dag)
 
     export_blocks_and_transactions_operator = add_export_task(
         export_blocks_and_transactions_toggle,
@@ -311,26 +359,35 @@ def build_export_dag(
         extract_token_transfers_command,
         dependencies=[export_receipts_and_logs_operator],
     )
+    extract_token_transfers_operator >> export_complete
 
-    export_traces_operator = add_export_task(
-        export_traces_toggle,
-        "export_geth_traces",
-        add_provider_uri_fallback_loop(export_traces_command, provider_uris_archival)
-    )
+    for hour in range(24):
+        export_traces_operator = add_export_task(
+            export_traces_toggle,
+            f"export_geth_traces_{hour:02}",
+            add_provider_uri_fallback_loop(
+                export_traces_command,
+                provider_uris_archival,
+            ),
+            op_kwargs={"hour": hour},
+        )
 
-    extract_contracts_operator = add_export_task(
-        extract_contracts_toggle,
-        "extract_contracts",
-        extract_contracts_command,
-        dependencies=[export_traces_operator],
-    )
+        extract_contracts_operator = add_export_task(
+            extract_contracts_toggle,
+            f"extract_contracts_{hour:02}",
+            extract_contracts_command,
+            op_kwargs={"hour": hour},
+            dependencies=[export_traces_operator],
+        )
 
-    extract_tokens_operator = add_export_task(
-        extract_tokens_toggle,
-        "extract_tokens",
-        add_provider_uri_fallback_loop(extract_tokens_command, provider_uris),
-        dependencies=[extract_contracts_operator],
-    )
+        extract_tokens_operator = add_export_task(
+            extract_tokens_toggle,
+            f"extract_tokens_{hour:02}",
+            add_provider_uri_fallback_loop(extract_tokens_command, provider_uris),
+            op_kwargs={"hour": hour},
+            dependencies=[extract_contracts_operator],
+        )
+        extract_tokens_operator >> export_complete
 
     return dag
 

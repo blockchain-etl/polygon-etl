@@ -1,0 +1,32 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "account",
+                    "type": "address"
+                }
+            ],
+            "name": "UnBlacklisted",
+            "type": "event"
+        },
+        "contract_address": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "circle",
+        "schema": [
+            {
+                "description": "",
+                "name": "account",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "USDC_event_UnBlacklisted"
+    }
+}
