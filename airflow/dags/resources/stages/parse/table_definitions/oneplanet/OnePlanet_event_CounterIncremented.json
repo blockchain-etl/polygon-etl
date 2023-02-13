@@ -24,13 +24,7 @@
         "type": "log"
     },
     "table": {
-<<<<<<<< HEAD:airflow/dags/resources/stages/parse/table_definitions/oneplanet/OnePlanet_event_CounterIncremented.json
         "dataset_name": "oneplanet",
-========
-        "dataset_name": "element",
-        "table_name": "ElementERC721V1_event_ERC721OrderCancelled",
-        "table_description": "",
->>>>>>>> 985e8f1f0122cfb469413d032b6ef917413541a2:airflow/dags/resources/stages/parse/table_definitions/oneplanet/ElementERC721V1_event_ERC721OrderCancelled.json
         "schema": [
             {
                 "description": "",
