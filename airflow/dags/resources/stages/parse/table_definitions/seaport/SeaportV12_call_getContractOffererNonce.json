@@ -33,6 +33,6 @@
             }
         ],
         "table_description": "",
-        "table_name": "SeaportV12_event_getContractOffererNonce"
+        "table_name": "SeaportV12_call_getContractOffererNonce"
     }
 }
