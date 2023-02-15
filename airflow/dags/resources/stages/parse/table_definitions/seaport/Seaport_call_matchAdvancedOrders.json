@@ -303,6 +303,6 @@
             }
         ],
         "table_description": "",
-        "table_name": "Seaport_call_matchAdvancedOrders"
+        "table_name": "seaport_call_matchAdvancedOrders"
     }
 }

@@ -161,77 +161,8 @@
         "schema": [
             {
                 "description": "",
-                "fields": [
-                    {
-                        "description": "",
-                        "fields": [
-                            {
-                                "description": "",
-                                "name": "offerer",
-                                "type": "STRING"
-                            },
-                            {
-                                "description": "",
-                                "name": "zone",
-                                "type": "STRING"
-                            },
-                            {
-                                "description": "",
-                                "name": "offer",
-                                "type": "STRING"
-                            },
-                            {
-                                "description": "",
-                                "name": "consideration",
-                                "type": "STRING"
-                            },
-                            {
-                                "description": "",
-                                "name": "orderType",
-                                "type": "STRING"
-                            },
-                            {
-                                "description": "",
-                                "name": "startTime",
-                                "type": "STRING"
-                            },
-                            {
-                                "description": "",
-                                "name": "endTime",
-                                "type": "STRING"
-                            },
-                            {
-                                "description": "",
-                                "name": "zoneHash",
-                                "type": "STRING"
-                            },
-                            {
-                                "description": "",
-                                "name": "salt",
-                                "type": "STRING"
-                            },
-                            {
-                                "description": "",
-                                "name": "conduitKey",
-                                "type": "STRING"
-                            },
-                            {
-                                "description": "",
-                                "name": "totalOriginalConsiderationItems",
-                                "type": "STRING"
-                            }
-                        ],
-                        "name": "parameters",
-                        "type": "RECORD"
-                    },
-                    {
-                        "description": "",
-                        "name": "signature",
-                        "type": "STRING"
-                    }
-                ],
                 "name": "order",
-                "type": "RECORD"
+                "type": "STRING"
             },
             {
                 "description": "",
