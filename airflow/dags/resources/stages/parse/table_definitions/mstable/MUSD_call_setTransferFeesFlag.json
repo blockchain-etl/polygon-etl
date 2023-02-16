@@ -1,0 +1,42 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_bAsset",
+                    "type": "address"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "_flag",
+                    "type": "bool"
+                }
+            ],
+            "name": "setTransferFeesFlag",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0xe840b73e5287865eec17d250bfb1536704b43b21",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_bAsset",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_flag",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "MUSD_call_setTransferFeesFlag"
+    }
+}

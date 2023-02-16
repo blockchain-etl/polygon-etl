@@ -1,0 +1,102 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_mAsset",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_save",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_vault",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_bAsset",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_amount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_minOut",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "_stake",
+                    "type": "bool"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_referrer",
+                    "type": "address"
+                }
+            ],
+            "name": "saveViaMint",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0xfd8932f4887e39d8eed05dc407924124026bd902",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_mAsset",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_save",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_vault",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_bAsset",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_amount",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_minOut",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_stake",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_referrer",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "SaveWrapper_call_saveViaMint"
+    }
+}

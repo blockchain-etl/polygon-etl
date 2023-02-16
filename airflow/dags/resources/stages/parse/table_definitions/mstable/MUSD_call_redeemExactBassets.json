@@ -1,0 +1,68 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address[]",
+                    "name": "_outputs",
+                    "type": "address[]"
+                },
+                {
+                    "internalType": "uint256[]",
+                    "name": "_outputQuantities",
+                    "type": "uint256[]"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxMassetQuantity",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_recipient",
+                    "type": "address"
+                }
+            ],
+            "name": "redeemExactBassets",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "mAssetQuantity",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0xe840b73e5287865eec17d250bfb1536704b43b21",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_outputs",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_outputQuantities",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_maxMassetQuantity",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_recipient",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "MUSD_call_redeemExactBassets"
+    }
+}

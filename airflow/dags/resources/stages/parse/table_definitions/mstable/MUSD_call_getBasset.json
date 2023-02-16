@@ -1,0 +1,77 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_bAsset",
+                    "type": "address"
+                }
+            ],
+            "name": "getBasset",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "addr",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "integrator",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "bool",
+                            "name": "hasTxFee",
+                            "type": "bool"
+                        },
+                        {
+                            "internalType": "enum BassetStatus",
+                            "name": "status",
+                            "type": "uint8"
+                        }
+                    ],
+                    "internalType": "struct BassetPersonal",
+                    "name": "personal",
+                    "type": "tuple"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "uint128",
+                            "name": "ratio",
+                            "type": "uint128"
+                        },
+                        {
+                            "internalType": "uint128",
+                            "name": "vaultBalance",
+                            "type": "uint128"
+                        }
+                    ],
+                    "internalType": "struct BassetData",
+                    "name": "bData",
+                    "type": "tuple"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        "contract_address": "0xe840b73e5287865eec17d250bfb1536704b43b21",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_bAsset",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "MUSD_call_getBasset"
+    }
+}

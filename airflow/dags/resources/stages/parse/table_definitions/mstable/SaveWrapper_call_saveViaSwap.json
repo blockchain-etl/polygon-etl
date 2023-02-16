@@ -1,0 +1,102 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_mAsset",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_save",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_vault",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_feeder",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_fAsset",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_fAssetQuantity",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_minOutputQuantity",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "_stake",
+                    "type": "bool"
+                }
+            ],
+            "name": "saveViaSwap",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0xfd8932f4887e39d8eed05dc407924124026bd902",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_mAsset",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_save",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_vault",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_feeder",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_fAsset",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_fAssetQuantity",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_minOutputQuantity",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_stake",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "SaveWrapper_call_saveViaSwap"
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [],
+            "name": "mintDeficit",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "mintAmount",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0xe840b73e5287865eec17d250bfb1536704b43b21",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [],
+        "table_description": "",
+        "table_name": "MUSD_call_mintDeficit"
+    }
+}
