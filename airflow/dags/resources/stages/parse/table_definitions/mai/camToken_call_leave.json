@@ -1,0 +1,34 @@
+{
+    "parser": {
+        "abi": {
+            "constant": false,
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_share",
+                    "type": "uint256"
+                }
+            ],
+            "name": "leave",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "SELECT * FROM UNNEST(['0x22965e296d9a0cd0e917d6d70ef2573009f8a1bb', '0xe6c23289ba5a9f0ef31b8eb36241d5c800889b7b', '0x0470cd31c8fcc42671465880ba81d631f0b76c1d', '0xb3911259f435b28ec072e4ff6ff5a2c604fea0fb', '0x7068ea5255cb05931efa8026bd04b18f3deb8b0b', '0xea4040b21cb68afb94889cb60834b13427cfc4eb', '0xba6273a78a23169e01317bd0f6338547f869e8df'])",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mai",
+        "schema": [
+            {
+                "description": "",
+                "name": "_share",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "camToken_call_leave"
+    }
+}
