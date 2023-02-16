@@ -1,0 +1,38 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "toVault",
+                    "type": "address"
+                }
+            ],
+            "name": "createVault",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "SELECT vaultManager FROM ref('Treasury_event_VaultManagerToggled')",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "angle",
+        "schema": [
+            {
+                "description": "",
+                "name": "toVault",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "VaultManager_call_createVault"
+    }
+}

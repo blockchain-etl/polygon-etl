@@ -1,0 +1,52 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "contract IERC20[]",
+                    "name": "tokens",
+                    "type": "address[]"
+                },
+                {
+                    "internalType": "address[]",
+                    "name": "spenders",
+                    "type": "address[]"
+                },
+                {
+                    "internalType": "uint256[]",
+                    "name": "amounts",
+                    "type": "uint256[]"
+                }
+            ],
+            "name": "changeAllowance",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0x595ab88628cd1af06706e25f10c485b651c47aa8",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "angle",
+        "schema": [
+            {
+                "description": "",
+                "name": "tokens",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "spenders",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "amounts",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "AngleRouterV2_call_changeAllowance"
+    }
+}

@@ -1,0 +1,136 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "vaultManager",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "owner",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "bool",
+                            "name": "approved",
+                            "type": "bool"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "deadline",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint8",
+                            "name": "v",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "r",
+                            "type": "bytes32"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "s",
+                            "type": "bytes32"
+                        }
+                    ],
+                    "internalType": "struct PermitVaultManagerType[]",
+                    "name": "paramsPermitVaultManager",
+                    "type": "tuple[]"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "token",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "owner",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "value",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "deadline",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint8",
+                            "name": "v",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "r",
+                            "type": "bytes32"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "s",
+                            "type": "bytes32"
+                        }
+                    ],
+                    "internalType": "struct PermitType[]",
+                    "name": "paramsPermit",
+                    "type": "tuple[]"
+                },
+                {
+                    "internalType": "enum ActionType[]",
+                    "name": "actions",
+                    "type": "uint8[]"
+                },
+                {
+                    "internalType": "bytes[]",
+                    "name": "data",
+                    "type": "bytes[]"
+                }
+            ],
+            "name": "mixerVaultManagerPermit",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        "contract_address": "0x595ab88628cd1af06706e25f10c485b651c47aa8",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "angle",
+        "schema": [
+            {
+                "description": "",
+                "name": "paramsPermitVaultManager",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "paramsPermit",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "actions",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "data",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "AngleRouterV2_call_mixerVaultManagerPermit"
+    }
+}
