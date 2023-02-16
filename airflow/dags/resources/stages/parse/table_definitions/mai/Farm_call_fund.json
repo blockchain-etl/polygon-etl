@@ -1,0 +1,34 @@
+{
+    "parser": {
+        "abi": {
+            "constant": false,
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "fund",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "SELECT * FROM UNNEST(['0x9f9f0456005ed4e7248199b6260752e95682a883', '0xcc54afcecd0d89e0b2db58f5d9e58468e7ad20dc', '0x1871178527a5f423f344b2c668e64a02d8783b8b', '0xbd9e831826786d9f2561695a140231f3353c608c', '0x8a75d9337e96d20c10e2632dffe093e5cdbf52bd', '0x574fe4e8120c4da1741b5fd45584de7a5b521f0f', '0x0635af5ab29fc7bba007b8cebad27b7a3d3d1958', '0xffd2aa58cca3a44120aaa42cea2852348a9c2ea6', '0xbd9e831826786d9f2561695a140231f3353c608c'])",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mai",
+        "schema": [
+            {
+                "description": "",
+                "name": "_amount",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "Farm_call_fund"
+    }
+}
