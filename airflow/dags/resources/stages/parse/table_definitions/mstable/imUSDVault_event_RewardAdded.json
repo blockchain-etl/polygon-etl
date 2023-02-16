@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "reward",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "platformReward",
+                    "type": "uint256"
+                }
+            ],
+            "name": "RewardAdded",
+            "type": "event"
+        },
+        "contract_address": "0x32aba856dc5ffd5a56bcd182b13380e5c855aa29",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "reward",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "platformReward",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "imUSDVault_event_RewardAdded"
+    }
+}

@@ -1,0 +1,87 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "redeemer",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "recipient",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "mAssetQuantity",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address[]",
+                    "name": "outputs",
+                    "type": "address[]"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256[]",
+                    "name": "outputQuantity",
+                    "type": "uint256[]"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "scaledFee",
+                    "type": "uint256"
+                }
+            ],
+            "name": "RedeemedMulti",
+            "type": "event"
+        },
+        "contract_address": "0xb30a907084ac8a0d25dddab4e364827406fd09f0",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "redeemer",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "recipient",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "mAssetQuantity",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "outputs",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "outputQuantity",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "scaledFee",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "FeederPoolMUSDFRAX_event_RedeemedMulti"
+    }
+}
