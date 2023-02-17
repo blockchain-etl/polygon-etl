@@ -33,6 +33,6 @@
             }
         ],
         "table_description": "",
-        "table_name": "imUSD_call_event_redeem"
+        "table_name": "imUSD_call_redeem"
     }
 }

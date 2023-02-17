@@ -37,6 +37,6 @@
             }
         ],
         "table_description": "",
-        "table_name": imUSDVault_call_stake"
+        "table_name": "imUSDVault_call_stake"
     }
 }

@@ -73,6 +73,6 @@
             }
         ],
         "table_description": "",
-        "table_name": "FeederPoolMUSDFRAX_call_event_swap"
+        "table_name": "FeederPoolMUSDFRAX_call_swap"
     }
 }
