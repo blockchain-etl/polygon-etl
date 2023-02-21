@@ -1,0 +1,58 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_mAssetQuantity",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256[]",
+                    "name": "_minOutputQuantities",
+                    "type": "uint256[]"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_recipient",
+                    "type": "address"
+                }
+            ],
+            "name": "redeemMasset",
+            "outputs": [
+                {
+                    "internalType": "uint256[]",
+                    "name": "outputQuantities",
+                    "type": "uint256[]"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0xe840b73e5287865eec17d250bfb1536704b43b21",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_mAssetQuantity",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_minOutputQuantities",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_recipient",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "MUSD_call_redeemMasset"
+    }
+}

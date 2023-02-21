@@ -1,0 +1,58 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_input",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_output",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_inputQuantity",
+                    "type": "uint256"
+                }
+            ],
+            "name": "getSwapOutput",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "swapOutput",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        "contract_address": "0xe840b73e5287865eec17d250bfb1536704b43b21",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_input",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_output",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_inputQuantity",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "MUSD_call_getSwapOutput"
+    }
+}

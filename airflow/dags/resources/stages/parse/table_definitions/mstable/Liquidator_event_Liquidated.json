@@ -1,0 +1,65 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "sellToken",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "mUSD",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "mUSDAmount",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "buyToken",
+                    "type": "address"
+                }
+            ],
+            "name": "Liquidated",
+            "type": "event"
+        },
+        "contract_address": "0x9f1c06cc13edc7691a2cf02e31faaa64d57867e2",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "sellToken",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "mUSD",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "mUSDAmount",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "buyToken",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "Liquidator_event_Liquidated"
+    }
+}

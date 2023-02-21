@@ -1,0 +1,108 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_amount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "_isCreditAmt",
+                    "type": "bool"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_minAmountOut",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_output",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_beneficiary",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_router",
+                    "type": "address"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "_isBassetOut",
+                    "type": "bool"
+                }
+            ],
+            "name": "redeemAndUnwrap",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "creditsBurned",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "massetReturned",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "outputQuantity",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0x5290ad3d83476ca6a2b178cd9727ee1ef72432af",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_amount",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_isCreditAmt",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_minAmountOut",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_output",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_beneficiary",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_router",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_isBassetOut",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "imUSD_call_redeemAndUnwrap"
+    }
+}

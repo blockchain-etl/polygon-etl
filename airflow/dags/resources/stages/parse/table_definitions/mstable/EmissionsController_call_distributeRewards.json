@@ -1,0 +1,32 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address[]",
+                    "name": "_endRecipients",
+                    "type": "address[]"
+                }
+            ],
+            "name": "distributeRewards",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0x82182ac492fef111fb458fce8f4228553ed59a19",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_endRecipients",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "EmissionsController_call_distributeRewards"
+    }
+}

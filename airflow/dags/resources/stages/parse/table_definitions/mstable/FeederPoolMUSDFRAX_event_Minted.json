@@ -1,0 +1,76 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "minter",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "recipient",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "output",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "input",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "inputQuantity",
+                    "type": "uint256"
+                }
+            ],
+            "name": "Minted",
+            "type": "event"
+        },
+        "contract_address": "0xb30a907084ac8a0d25dddab4e364827406fd09f0",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "minter",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "recipient",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "output",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "input",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "inputQuantity",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "FeederPoolMUSDFRAX_event_Minted"
+    }
+}
