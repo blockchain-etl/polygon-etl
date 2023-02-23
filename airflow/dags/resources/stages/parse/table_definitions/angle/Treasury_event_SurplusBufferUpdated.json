@@ -1,0 +1,32 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "surplusBufferValue",
+                    "type": "uint256"
+                }
+            ],
+            "name": "SurplusBufferUpdated",
+            "type": "event"
+        },
+        "contract_address": "0x2f2e0ba9746aae15888cf234c4eb5b301710927e",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "angle",
+        "schema": [
+            {
+                "description": "",
+                "name": "surplusBufferValue",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "Treasury_event_SurplusBufferUpdated"
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "gaugeUser",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address[]",
+                    "name": "liquidityGauges",
+                    "type": "address[]"
+                }
+            ],
+            "name": "claimRewards",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0x892bf71463bd9fa57f3c2266ab74dbe1b96decea",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "angle",
+        "schema": [
+            {
+                "description": "",
+                "name": "gaugeUser",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "liquidityGauges",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "AngleRouterV1_call_claimRewards"
+    }
+}

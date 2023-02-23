@@ -1,0 +1,95 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "uint256[]",
+                    "name": "vaultIDs",
+                    "type": "uint256[]"
+                },
+                {
+                    "internalType": "uint256[]",
+                    "name": "amounts",
+                    "type": "uint256[]"
+                },
+                {
+                    "internalType": "address",
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "to",
+                    "type": "address"
+                }
+            ],
+            "name": "liquidate",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "uint256",
+                            "name": "stablecoinAmountToReceive",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "collateralAmountToGive",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "badDebtFromLiquidation",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "oracleValue",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "newInterestAccumulator",
+                            "type": "uint256"
+                        }
+                    ],
+                    "internalType": "struct LiquidatorData",
+                    "name": "",
+                    "type": "tuple"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "SELECT vaultManager FROM ref('Treasury_event_VaultManagerToggled')",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "angle",
+        "schema": [
+            {
+                "description": "",
+                "name": "vaultIDs",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "amounts",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "from",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "to",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "VaultManager_call_liquidate"
+    }
+}
