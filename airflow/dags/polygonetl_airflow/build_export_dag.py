@@ -45,6 +45,7 @@ def build_export_dag(
         export_traces_max_workers=10,
         export_batch_size=200,
         export_max_active_runs=None,
+        export_max_active_tasks=None,
         export_retries=5,
         **kwargs
 ):
@@ -74,11 +75,15 @@ def build_export_dag(
     if export_max_active_runs is None:
         export_max_active_runs = configuration.conf.getint('core', 'max_active_runs_per_dag')
 
+    if export_max_active_tasks is None:
+        export_max_active_tasks = configuration.conf.getint('core', 'max_active_tasks_per_dag')
+
     dag = DAG(
         dag_id,
         schedule_interval=export_schedule_interval,
         default_args=default_dag_args,
-        max_active_runs=export_max_active_runs
+        max_active_runs=export_max_active_runs,
+        max_active_tasks=export_max_active_tasks,
     )
 
     from airflow.providers.google.cloud.hooks.gcs import GCSHook

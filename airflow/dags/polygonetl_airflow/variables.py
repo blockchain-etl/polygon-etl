@@ -20,6 +20,9 @@ def read_export_dag_vars(var_prefix, **kwargs):
     export_max_active_runs = read_var('export_max_active_runs', var_prefix, False, **kwargs)
     export_max_active_runs = int(export_max_active_runs) if export_max_active_runs is not None else None
 
+    export_max_active_tasks = read_var('export_max_active_tasks', var_prefix, False, **kwargs)
+    export_max_active_tasks = int(export_max_active_tasks) if export_max_active_tasks is not None else None
+
     vars = {
         'output_bucket': read_var('output_bucket', var_prefix, True, **kwargs),
         'export_start_date': export_start_date,
@@ -29,6 +32,7 @@ def read_export_dag_vars(var_prefix, **kwargs):
         'provider_uris_archival': provider_uris_archival,
         'notification_emails': read_var('notification_emails', None, False, **kwargs),
         'export_max_active_runs': export_max_active_runs,
+        'export_max_active_tasks': export_max_active_tasks,
         'export_max_workers': int(read_var('export_max_workers', var_prefix, True, **kwargs)),
         'export_traces_max_workers': int(read_var('export_traces_max_workers', var_prefix, True, **kwargs)),
     }
