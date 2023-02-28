@@ -100,7 +100,7 @@ def build_load_dag(
             task_id="wait_export_dag",
             external_dag_id=f"{chain}_export_dag",
             external_task_id="export_complete",
-            execution_delta=timedelta(hours=1),
+            execution_delta=timedelta(hours=5),
             priority_weight=0,
             mode="reschedule",
             poke_interval=5 * 60,
