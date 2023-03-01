@@ -16,6 +16,6 @@ DAG = build_partition_dag(
     public_dataset_name = 'crypto_polygon',
     **read_partition_dag_vars(
         var_prefix="polygon_",
-        partition_schedule_interval="0 7 * * *",
+        partition_schedule_interval="0 8 * * *",
     ),
 )
