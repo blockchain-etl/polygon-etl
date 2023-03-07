@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "_bAsset",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "_pToken",
+                    "type": "address"
+                }
+            ],
+            "name": "PTokenAdded",
+            "type": "event"
+        },
+        "contract_address": "0xeab7831c96876433db9b8953b4e7e8f66c3125c3",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_bAsset",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_pToken",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "PAaveIntegration_event_PTokenAdded"
+    }
+}

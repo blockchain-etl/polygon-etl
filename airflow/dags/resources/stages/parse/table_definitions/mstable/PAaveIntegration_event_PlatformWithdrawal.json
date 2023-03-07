@@ -1,0 +1,65 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "bAsset",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "pToken",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "totalAmount",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "userAmount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "PlatformWithdrawal",
+            "type": "event"
+        },
+        "contract_address": "0xeab7831c96876433db9b8953b4e7e8f66c3125c3",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "bAsset",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "pToken",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "totalAmount",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "userAmount",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "PAaveIntegration_event_PlatformWithdrawal"
+    }
+}
