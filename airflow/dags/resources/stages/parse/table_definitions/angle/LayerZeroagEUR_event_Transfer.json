@@ -6,35 +6,23 @@
                 {
                     "indexed": true,
                     "internalType": "address",
-                    "name": "_sender",
+                    "name": "from",
                     "type": "address"
                 },
                 {
                     "indexed": true,
-                    "internalType": "uint16",
-                    "name": "_dstChainId",
-                    "type": "uint16"
-                },
-                {
-                    "indexed": true,
-                    "internalType": "bytes",
-                    "name": "_toAddress",
-                    "type": "bytes"
+                    "internalType": "address",
+                    "name": "to",
+                    "type": "address"
                 },
                 {
                     "indexed": false,
                     "internalType": "uint256",
-                    "name": "_amount",
+                    "name": "value",
                     "type": "uint256"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "uint64",
-                    "name": "_nonce",
-                    "type": "uint64"
                 }
             ],
-            "name": "SendToChain",
+            "name": "Transfer",
             "type": "event"
         },
         "contract_address": "0x0c1ebbb61374da1a8c57cb6681bf27178360d36f",
@@ -46,31 +34,21 @@
         "schema": [
             {
                 "description": "",
-                "name": "_sender",
+                "name": "from",
                 "type": "STRING"
             },
             {
                 "description": "",
-                "name": "_dstChainId",
+                "name": "to",
                 "type": "STRING"
             },
             {
                 "description": "",
-                "name": "_toAddress",
-                "type": "STRING"
-            },
-            {
-                "description": "",
-                "name": "_amount",
-                "type": "STRING"
-            },
-            {
-                "description": "",
-                "name": "_nonce",
+                "name": "value",
                 "type": "STRING"
             }
         ],
         "table_description": "",
-        "table_name": "LZagEUR_event_SendToChain"
+        "table_name": "LayerZeroagEUR_event_Transfer"
     }
 }

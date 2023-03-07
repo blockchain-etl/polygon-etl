@@ -4,37 +4,31 @@
             "anonymous": false,
             "inputs": [
                 {
-                    "indexed": true,
+                    "indexed": false,
                     "internalType": "uint16",
                     "name": "_srcChainId",
                     "type": "uint16"
                 },
                 {
-                    "indexed": true,
+                    "indexed": false,
                     "internalType": "bytes",
                     "name": "_srcAddress",
                     "type": "bytes"
-                },
-                {
-                    "indexed": true,
-                    "internalType": "address",
-                    "name": "_toAddress",
-                    "type": "address"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "uint256",
-                    "name": "_amount",
-                    "type": "uint256"
                 },
                 {
                     "indexed": false,
                     "internalType": "uint64",
                     "name": "_nonce",
                     "type": "uint64"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bytes",
+                    "name": "_payload",
+                    "type": "bytes"
                 }
             ],
-            "name": "ReceiveFromChain",
+            "name": "MessageFailed",
             "type": "event"
         },
         "contract_address": "0x0c1ebbb61374da1a8c57cb6681bf27178360d36f",
@@ -56,21 +50,16 @@
             },
             {
                 "description": "",
-                "name": "_toAddress",
-                "type": "STRING"
-            },
-            {
-                "description": "",
-                "name": "_amount",
-                "type": "STRING"
-            },
-            {
-                "description": "",
                 "name": "_nonce",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_payload",
                 "type": "STRING"
             }
         ],
         "table_description": "",
-        "table_name": "LZagEUR_event_ReceiveFromChain"
+        "table_name": "LayerZeroagEUR_event_MessageFailed"
     }
 }

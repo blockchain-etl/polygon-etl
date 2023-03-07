@@ -4,31 +4,37 @@
             "anonymous": false,
             "inputs": [
                 {
-                    "indexed": false,
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "_sender",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
                     "internalType": "uint16",
-                    "name": "_srcChainId",
+                    "name": "_dstChainId",
                     "type": "uint16"
                 },
                 {
-                    "indexed": false,
+                    "indexed": true,
                     "internalType": "bytes",
-                    "name": "_srcAddress",
+                    "name": "_toAddress",
                     "type": "bytes"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "_amount",
+                    "type": "uint256"
                 },
                 {
                     "indexed": false,
                     "internalType": "uint64",
                     "name": "_nonce",
                     "type": "uint64"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "bytes",
-                    "name": "_payload",
-                    "type": "bytes"
                 }
             ],
-            "name": "MessageFailed",
+            "name": "SendToChain",
             "type": "event"
         },
         "contract_address": "0x0c1ebbb61374da1a8c57cb6681bf27178360d36f",
@@ -40,26 +46,31 @@
         "schema": [
             {
                 "description": "",
-                "name": "_srcChainId",
+                "name": "_sender",
                 "type": "STRING"
             },
             {
                 "description": "",
-                "name": "_srcAddress",
+                "name": "_dstChainId",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_toAddress",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_amount",
                 "type": "STRING"
             },
             {
                 "description": "",
                 "name": "_nonce",
                 "type": "STRING"
-            },
-            {
-                "description": "",
-                "name": "_payload",
-                "type": "STRING"
             }
         ],
         "table_description": "",
-        "table_name": "LZagEUR_event_MessageFailed"
+        "table_name": "LayerZeroagEUR_event_SendToChain"
     }
 }

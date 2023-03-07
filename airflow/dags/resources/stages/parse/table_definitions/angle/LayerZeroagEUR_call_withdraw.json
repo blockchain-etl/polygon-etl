@@ -6,10 +6,21 @@
                     "internalType": "uint256",
                     "name": "amount",
                     "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "recipient",
+                    "type": "address"
                 }
             ],
-            "name": "mint",
-            "outputs": [],
+            "name": "withdraw",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "amountMinted",
+                    "type": "uint256"
+                }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
         },
@@ -24,9 +35,14 @@
                 "description": "",
                 "name": "amount",
                 "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "recipient",
+                "type": "STRING"
             }
         ],
         "table_description": "",
-        "table_name": "LZagEUR_call_mint"
+        "table_name": "LayerZeroagEUR_call_withdraw"
     }
 }

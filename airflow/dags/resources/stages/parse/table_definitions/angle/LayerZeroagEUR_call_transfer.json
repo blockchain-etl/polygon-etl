@@ -3,13 +3,24 @@
         "abi": {
             "inputs": [
                 {
+                    "internalType": "address",
+                    "name": "recipient",
+                    "type": "address"
+                },
+                {
                     "internalType": "uint256",
                     "name": "amount",
                     "type": "uint256"
                 }
             ],
-            "name": "burn",
-            "outputs": [],
+            "name": "transfer",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
             "stateMutability": "nonpayable",
             "type": "function"
         },
@@ -22,11 +33,16 @@
         "schema": [
             {
                 "description": "",
+                "name": "recipient",
+                "type": "STRING"
+            },
+            {
+                "description": "",
                 "name": "amount",
                 "type": "STRING"
             }
         ],
         "table_description": "",
-        "table_name": "LZagEUR_call_burn"
+        "table_name": "LayerZeroagEUR_call_transfer"
     }
 }
