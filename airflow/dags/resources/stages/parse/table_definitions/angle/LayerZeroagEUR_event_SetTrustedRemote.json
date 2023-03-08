@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "uint16",
+                    "name": "_srcChainId",
+                    "type": "uint16"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bytes",
+                    "name": "_srcAddress",
+                    "type": "bytes"
+                }
+            ],
+            "name": "SetTrustedRemote",
+            "type": "event"
+        },
+        "contract_address": "0x0c1ebbb61374da1a8c57cb6681bf27178360d36f",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "angle",
+        "schema": [
+            {
+                "description": "",
+                "name": "_srcChainId",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_srcAddress",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "LayerZeroagEUR_event_SetTrustedRemote"
+    }
+}
