@@ -31,7 +31,7 @@
             "name": "RewardClaimed",
             "type": "event"
         },
-        "contract_address": "0x1b0e765f6224c21223aea2af16c1c46e38885a40",
+        "contract_address": "0x45939657d1ca34a8fa39a924b71d28fe8431e581",
         "field_mapping": {},
         "type": "log"
     },

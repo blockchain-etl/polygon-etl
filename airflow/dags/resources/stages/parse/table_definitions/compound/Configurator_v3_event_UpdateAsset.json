@@ -99,7 +99,7 @@
             "name": "UpdateAsset",
             "type": "event"
         },
-        "contract_address": "0x316f9708bb98af7da9c68c1c3b5e79039cd336e3",
+        "contract_address": "0x83e0f742cacbe66349e3701b171ee2487a26e738",
         "field_mapping": {},
         "type": "log"
     },
