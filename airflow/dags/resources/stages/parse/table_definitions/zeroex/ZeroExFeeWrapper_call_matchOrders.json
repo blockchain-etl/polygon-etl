@@ -1,0 +1,244 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "makerAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "takerAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "feeRecipientAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "senderAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "makerAssetAmount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "takerAssetAmount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "makerFee",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "takerFee",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "expirationTimeSeconds",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "salt",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "bytes",
+                            "name": "makerAssetData",
+                            "type": "bytes"
+                        },
+                        {
+                            "internalType": "bytes",
+                            "name": "takerAssetData",
+                            "type": "bytes"
+                        },
+                        {
+                            "internalType": "bytes",
+                            "name": "makerFeeAssetData",
+                            "type": "bytes"
+                        },
+                        {
+                            "internalType": "bytes",
+                            "name": "takerFeeAssetData",
+                            "type": "bytes"
+                        }
+                    ],
+                    "internalType": "struct LibOrder.Order",
+                    "name": "leftOrder",
+                    "type": "tuple"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "makerAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "takerAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "feeRecipientAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "senderAddress",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "makerAssetAmount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "takerAssetAmount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "makerFee",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "takerFee",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "expirationTimeSeconds",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "salt",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "bytes",
+                            "name": "makerAssetData",
+                            "type": "bytes"
+                        },
+                        {
+                            "internalType": "bytes",
+                            "name": "takerAssetData",
+                            "type": "bytes"
+                        },
+                        {
+                            "internalType": "bytes",
+                            "name": "makerFeeAssetData",
+                            "type": "bytes"
+                        },
+                        {
+                            "internalType": "bytes",
+                            "name": "takerFeeAssetData",
+                            "type": "bytes"
+                        }
+                    ],
+                    "internalType": "struct LibOrder.Order",
+                    "name": "rightOrder",
+                    "type": "tuple"
+                },
+                {
+                    "internalType": "bytes",
+                    "name": "leftSignature",
+                    "type": "bytes"
+                },
+                {
+                    "internalType": "bytes",
+                    "name": "rightSignature",
+                    "type": "bytes"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "recipient",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "paymentTokenAmount",
+                            "type": "uint256"
+                        }
+                    ],
+                    "internalType": "struct ZeroExFeeWrapper.FeeData[]",
+                    "name": "feeData",
+                    "type": "tuple[]"
+                },
+                {
+                    "internalType": "address",
+                    "name": "paymentTokenAddress",
+                    "type": "address"
+                }
+            ],
+            "name": "matchOrders",
+            "outputs": [
+                {
+                    "internalType": "bytes",
+                    "name": "",
+                    "type": "bytes"
+                }
+            ],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        "contract_address": "0xf715beb51ec8f63317d66f491e37e7bb048fcc2d",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "zeroex",
+        "schema": [
+            {
+                "description": "",
+                "name": "leftOrder",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "rightOrder",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "leftSignature",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "rightSignature",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "feeData",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "paymentTokenAddress",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "ZeroExFeeWrapper_call_matchOrders"
+    }
+}
