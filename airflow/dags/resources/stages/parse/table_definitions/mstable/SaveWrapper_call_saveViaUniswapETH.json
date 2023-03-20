@@ -1,0 +1,102 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_mAsset",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_save",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_vault",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_uniswap",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_amountOutMin",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address[]",
+                    "name": "_path",
+                    "type": "address[]"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_minOutMStable",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "_stake",
+                    "type": "bool"
+                }
+            ],
+            "name": "saveViaUniswapETH",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        "contract_address": "0xfd8932f4887e39d8eed05dc407924124026bd902",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_mAsset",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_save",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_vault",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_uniswap",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_amountOutMin",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_path",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_minOutMStable",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_stake",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "SaveWrapper_call_saveViaUniswapETH"
+    }
+}

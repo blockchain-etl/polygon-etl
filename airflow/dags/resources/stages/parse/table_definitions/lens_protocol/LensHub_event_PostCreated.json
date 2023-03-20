@@ -1,0 +1,109 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "uint256",
+                    "name": "profileId",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "uint256",
+                    "name": "pubId",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "contentURI",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "collectModule",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bytes",
+                    "name": "collectModuleReturnData",
+                    "type": "bytes"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "referenceModule",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bytes",
+                    "name": "referenceModuleReturnData",
+                    "type": "bytes"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "PostCreated",
+            "type": "event"
+        },
+        "contract_address": "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "lens_protocol",
+        "schema": [
+            {
+                "description": "",
+                "name": "profileId",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "pubId",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "contentURI",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "collectModule",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "collectModuleReturnData",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "referenceModule",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "referenceModuleReturnData",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "timestamp",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "LensHub_event_PostCreated"
+    }
+}

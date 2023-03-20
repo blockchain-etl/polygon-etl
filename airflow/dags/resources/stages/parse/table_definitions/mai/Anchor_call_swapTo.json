@@ -1,0 +1,33 @@
+{
+    "parser": {
+        "abi": {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "swapTo",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "SELECT * FROM UNNEST(['0x947d711c25220d8301c087b25ba111fe8cbf6672', '0x6062e92599a77e62e0cc9749261eb2eac3abd44f', '0xa4742a65f24291aa421497221aaf64c70b098d98'])",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mai",
+        "schema": [
+            {
+                "description": "",
+                "name": "amount",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "Anchor_call_swapTo"
+    }
+}

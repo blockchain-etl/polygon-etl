@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "creditor",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "amt",
+                    "type": "uint256"
+                }
+            ],
+            "name": "SurplusBurned",
+            "type": "event"
+        },
+        "contract_address": "0xe840b73e5287865eec17d250bfb1536704b43b21",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "creditor",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "amt",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "MUSD_event_SurplusBurned"
+    }
+}

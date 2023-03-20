@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "mAsset",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "amountSent",
+                    "type": "uint256"
+                }
+            ],
+            "name": "InterestDistributed",
+            "type": "event"
+        },
+        "contract_address": "0x10bfccae079f31c451033798a4fd9d2c33ea5487",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "mAsset",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "amountSent",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "SavingsManager_event_InterestDistributed"
+    }
+}

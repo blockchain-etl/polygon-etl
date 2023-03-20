@@ -1,0 +1,26 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [],
+            "name": "name",
+            "outputs": [
+                {
+                    "internalType": "string",
+                    "name": "contractName",
+                    "type": "string"
+                }
+            ],
+            "stateMutability": "pure",
+            "type": "function"
+        },
+        "contract_address": "0xcbbecf690e030d096794f7685a1bf4a58378a575",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "oneplanet",
+        "schema": [],
+        "table_description": "",
+        "table_name": "OnePlanet_call_name"
+    }
+}

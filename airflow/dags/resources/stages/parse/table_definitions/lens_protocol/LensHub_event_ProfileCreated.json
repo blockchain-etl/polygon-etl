@@ -1,0 +1,120 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "uint256",
+                    "name": "profileId",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "creator",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "handle",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "imageURI",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "followModule",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bytes",
+                    "name": "followModuleReturnData",
+                    "type": "bytes"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "followNFTURI",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "ProfileCreated",
+            "type": "event"
+        },
+        "contract_address": "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "lens_protocol",
+        "schema": [
+            {
+                "description": "",
+                "name": "profileId",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "creator",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "to",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "handle",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "imageURI",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "followModule",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "followModuleReturnData",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "followNFTURI",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "timestamp",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "LensHub_event_ProfileCreated"
+    }
+}

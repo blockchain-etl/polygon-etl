@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "oldGovernor",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "newGovernor",
+                    "type": "address"
+                }
+            ],
+            "name": "GovernorTransferred",
+            "type": "event"
+        },
+        "contract_address": "0x83e0f742cacbe66349e3701b171ee2487a26e738",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "compound",
+        "schema": [
+            {
+                "description": "",
+                "name": "oldGovernor",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "newGovernor",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "Configurator_v3_event_GovernorTransferred"
+    }
+}

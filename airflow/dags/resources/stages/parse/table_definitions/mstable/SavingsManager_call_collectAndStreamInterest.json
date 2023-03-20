@@ -1,0 +1,32 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_mAsset",
+                    "type": "address"
+                }
+            ],
+            "name": "collectAndStreamInterest",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0x10bfccae079f31c451033798a4fd9d2c33ea5487",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_mAsset",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "SavingsManager_call_collectAndStreamInterest"
+    }
+}

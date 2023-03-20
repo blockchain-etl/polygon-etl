@@ -1,0 +1,54 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "endBlock",
+                    "type": "uint256"
+                }
+            ],
+            "name": "Enter",
+            "type": "event"
+        },
+        "contract_address": "0x880decade22ad9c58a8a4202ef143c4f305100b3",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "mai",
+        "schema": [
+            {
+                "description": "",
+                "name": "user",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "amount",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "endBlock",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "escrowedQi_event_Enter"
+    }
+}

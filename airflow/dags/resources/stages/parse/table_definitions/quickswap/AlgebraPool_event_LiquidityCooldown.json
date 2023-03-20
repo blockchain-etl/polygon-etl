@@ -1,0 +1,32 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "uint32",
+                    "name": "liquidityCooldown",
+                    "type": "uint32"
+                }
+            ],
+            "name": "LiquidityCooldown",
+            "type": "event"
+        },
+        "contract_address": "SELECT pool FROM ref('AlgebraFactory_event_Pool')",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "quickswap",
+        "schema": [
+            {
+                "description": "",
+                "name": "liquidityCooldown",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "AlgebraPool_event_LiquidityCooldown"
+    }
+}

@@ -28,6 +28,6 @@ for folder in glob(table_definitions_folder):
         **read_parse_dag_vars(
             var_prefix=var_prefix,
             dataset=dataset,
-            parse_schedule_interval='30 7 * * *'
+            parse_schedule_interval='30 8 * * *'
         )
     )

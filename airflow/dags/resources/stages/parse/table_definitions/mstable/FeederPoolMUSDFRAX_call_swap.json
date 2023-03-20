@@ -1,0 +1,78 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "_input",
+                    "type": "address"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_output",
+                    "type": "address"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_inputQuantity",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_minOutputQuantity",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_recipient",
+                    "type": "address"
+                }
+            ],
+            "name": "swap",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "swapOutput",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0xb30a907084ac8a0d25dddab4e364827406fd09f0",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_input",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_output",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_inputQuantity",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_minOutputQuantity",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_recipient",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "FeederPoolMUSDFRAX_call_swap"
+    }
+}

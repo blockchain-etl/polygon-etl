@@ -1,0 +1,76 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "_sender",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "uint16",
+                    "name": "_dstChainId",
+                    "type": "uint16"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "bytes",
+                    "name": "_toAddress",
+                    "type": "bytes"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "_amount",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint64",
+                    "name": "_nonce",
+                    "type": "uint64"
+                }
+            ],
+            "name": "SendToChain",
+            "type": "event"
+        },
+        "contract_address": "0x0c1ebbb61374da1a8c57cb6681bf27178360d36f",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "angle",
+        "schema": [
+            {
+                "description": "",
+                "name": "_sender",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_dstChainId",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_toAddress",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_amount",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_nonce",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "LayerZeroagEUR_event_SendToChain"
+    }
+}

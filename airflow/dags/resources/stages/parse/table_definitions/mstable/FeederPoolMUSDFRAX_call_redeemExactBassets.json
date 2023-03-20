@@ -1,0 +1,68 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "address[]",
+                    "name": "_outputs",
+                    "type": "address[]"
+                },
+                {
+                    "internalType": "uint256[]",
+                    "name": "_outputQuantities",
+                    "type": "uint256[]"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "_maxInputQuantity",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "_recipient",
+                    "type": "address"
+                }
+            ],
+            "name": "redeemExactBassets",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "fpTokenQuantity",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "0xb30a907084ac8a0d25dddab4e364827406fd09f0",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "_outputs",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_outputQuantities",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_maxInputQuantity",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "_recipient",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "FeederPoolMUSDFRAX_call_redeemExactBassets"
+    }
+}

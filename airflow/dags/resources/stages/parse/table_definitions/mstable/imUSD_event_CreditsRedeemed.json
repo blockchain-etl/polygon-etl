@@ -1,0 +1,54 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "redeemer",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "creditsRedeemed",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "savingsCredited",
+                    "type": "uint256"
+                }
+            ],
+            "name": "CreditsRedeemed",
+            "type": "event"
+        },
+        "contract_address": "0x5290ad3d83476ca6a2b178cd9727ee1ef72432af",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "mstable",
+        "schema": [
+            {
+                "description": "",
+                "name": "redeemer",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "creditsRedeemed",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "savingsCredited",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "imUSD_event_CreditsRedeemed"
+    }
+}

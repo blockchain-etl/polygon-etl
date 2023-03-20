@@ -1,0 +1,76 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "fromToken",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "toToken",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "sender",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "fromAmount",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "returnAmount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "OrderHistory",
+            "type": "event"
+        },
+        "contract_address": "0xa222e6a71d1a1dd5f279805fbe38d5329c1d0e70",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "dodo",
+        "schema": [
+            {
+                "description": "",
+                "name": "fromToken",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "toToken",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "sender",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "fromAmount",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "returnAmount",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "DODORouteProxy_v2_event_OrderHistory"
+    }
+}

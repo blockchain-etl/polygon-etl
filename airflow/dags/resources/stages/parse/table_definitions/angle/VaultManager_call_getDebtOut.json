@@ -1,0 +1,62 @@
+{
+    "parser": {
+        "abi": {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "vaultID",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "stablecoinAmount",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "senderBorrowFee",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "senderRepayFee",
+                    "type": "uint256"
+                }
+            ],
+            "name": "getDebtOut",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        "contract_address": "SELECT vaultManager FROM ref('Treasury_event_VaultManagerToggled')",
+        "field_mapping": {},
+        "type": "trace"
+    },
+    "table": {
+        "dataset_name": "angle",
+        "schema": [
+            {
+                "description": "",
+                "name": "vaultID",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "stablecoinAmount",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "senderBorrowFee",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "senderRepayFee",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "VaultManager_call_getDebtOut"
+    }
+}
