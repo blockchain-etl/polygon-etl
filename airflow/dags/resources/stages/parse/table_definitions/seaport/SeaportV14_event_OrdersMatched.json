@@ -1,0 +1,32 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32[]",
+                    "name": "orderHashes",
+                    "type": "bytes32[]"
+                }
+            ],
+            "name": "OrdersMatched",
+            "type": "event"
+        },
+        "contract_address": "0x00000000000001ad428e4906ae43d8f9852d0dd6",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "seaport",
+        "schema": [
+            {
+                "description": "",
+                "name": "orderHashes",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "SeaportV14_event_OrdersMatched"
+    }
+}
