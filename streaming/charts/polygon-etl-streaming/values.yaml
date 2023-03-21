@@ -33,7 +33,7 @@ init:
 stream:
   image:
     repository: blockchainetl/polygon-etl
-    tag: 0.3.4
+    tag: 0.3.5
     pullPolicy: IfNotPresent
   resources:
     requests:
