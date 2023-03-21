@@ -5,4 +5,4 @@
 discord-webhook==0.14.0
 eth-rlp==0.2.1             # Fixes install conflicts issue in Composer
 eth-utils==1.8.4           # Fixes install conflicts issue in Composer
-polygon-etl==0.3.3
+polygon-etl==0.3.4

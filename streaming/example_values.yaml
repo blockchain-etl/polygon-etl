@@ -1,7 +1,7 @@
 stream:
   image:
     repository: blockchainetl/polygon-etl
-    tag: 0.3.3
+    tag: 0.3.4
 config:
   PROVIDER_URI: "grpcs://api.mainnet.polygon.one:443"
   STREAM_OUTPUT: "projects/<your_project>/topics/crypto_polygon"
