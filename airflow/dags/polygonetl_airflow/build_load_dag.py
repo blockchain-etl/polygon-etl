@@ -33,6 +33,8 @@ def build_load_dag(
     chain='polygon',
     notification_emails=None,
     load_start_date=datetime(2018, 7, 1),
+    load_end_date=None,
+    load_catchup=False,
     load_schedule_interval='0 0 * * *',
     load_all_partitions=True
 ):
@@ -76,6 +78,7 @@ def build_load_dag(
     default_dag_args = {
         'depends_on_past': False,
         'start_date': load_start_date,
+        'end_date': load_end_date,
         'email_on_failure': True,
         'email_on_retry': False,
         'retries': 5,
@@ -89,7 +92,7 @@ def build_load_dag(
     # Define a DAG (directed acyclic graph) of tasks.
     dag = models.DAG(
         dag_id,
-        catchup=False,
+        catchup=load_catchup,
         schedule_interval=load_schedule_interval,
         default_args=default_dag_args)
 
