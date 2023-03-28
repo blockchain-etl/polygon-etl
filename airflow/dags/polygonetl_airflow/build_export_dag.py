@@ -39,6 +39,7 @@ def build_export_dag(
         provider_uris_archival,
         output_bucket,
         export_start_date,
+        export_end_date=None,
         notification_emails=None,
         export_schedule_interval='0 0 * * *',
         export_max_workers=10,
@@ -52,6 +53,7 @@ def build_export_dag(
     default_dag_args = {
         "depends_on_past": False,
         "start_date": export_start_date,
+        "end_date": export_end_date,
         "email_on_failure": True,
         "email_on_retry": False,
         "retries": export_retries,

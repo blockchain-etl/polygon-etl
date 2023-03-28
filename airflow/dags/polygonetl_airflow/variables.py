@@ -54,7 +54,13 @@ def read_load_dag_vars(var_prefix, **kwargs):
         # 'success_notification_emails': read_var('success_notification_emails', None, False, **kwargs),
         'load_schedule_interval': read_var('load_schedule_interval', var_prefix, True, **kwargs),
         'load_all_partitions': parse_bool(read_var('load_all_partitions', var_prefix, False, **kwargs), default=None),
+        'load_catchup': parse_bool(read_var('load_catchup', var_prefix, False, **kwargs), default=False),
     }
+
+    load_start_date = read_var('load_start_date', var_prefix, False, **kwargs)
+    if load_start_date is not None:
+        load_start_date = datetime.strptime(load_start_date, '%Y-%m-%d')
+        vars['load_start_date'] = load_start_date
 
     load_end_date = read_var('load_end_date', var_prefix, False, **kwargs)
     if load_end_date is not None:
