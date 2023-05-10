@@ -2,7 +2,7 @@
 # During local dev & testing, you can `pip install -e ../cli` first
 # pip will then prioritise the local polygon-etl package over pypi
 
-discord-webhook==0.14.0
-eth-rlp==0.2.1             # Fixes install conflicts issue in Composer
-eth-utils==1.8.4           # Fixes install conflicts issue in Composer
-polygon-etl==0.3.5
+discord-webhook==1.1.0
+eth-hash==0.3.3     # Fixes install conflicts issue in Composer
+polygon-etl==0.3.6
+web3==5.31.0        # Fixes install conflicts issue in Composer

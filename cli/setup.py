@@ -11,7 +11,7 @@ long_description = read("README.md") if os.path.isfile("README.md") else ""
 
 setup(
     name="polygon-etl",
-    version="0.3.5",
+    version="0.3.6",
     author="Evgeny Medvedev",
     author_email="evge.medvedev@gmail.com",
     description="Tools for exporting Polygon blockchain data to CSV or JSON",
@@ -29,29 +29,25 @@ setup(
         "Programming Language :: Python :: 3.9",
     ],
     keywords="polygon",
-    # web3.py doesn't work on 3.5.2 and less (https://github.com/ethereum/web3.py/issues/1012)
-    # google-cloud-pubsub==2.1.0 requires >=3.6 (https://pypi.org/project/google-cloud-pubsub/2.1.0/)
-    # collections.Mapping unsupported in 3.10 (https://bugs.python.org/issue44737)
     python_requires=">=3.7,<3.10",
     install_requires=[
         "base58==2.1.1",
         "blockchain-etl-common==1.6.1",
-        "click>=7.0",
-        "eth-abi==1.3.0",
-        "eth-utils==1.8.4",
-        "ethereum-dasm==0.1.4",
+        "click>=8.0,<9",
+        "eth-abi==2.2.0",  # web3 5.28.0 depends on eth-abi<3.0.0
+        "eth-utils==1.10",  # eth-abi 2.2.0 depends on eth-utils<2.0.0
+        "ethereum-dasm==0.1.5",
         "requests>=2.23",
-        "web3==4.7.2",
+        "six==1.16.0",  # REVIEW: Missing dependency for blockchain-etl-common
+        "web3>=5.29,<6",
     ],
     extras_require={
         "streaming": [
-            "google-cloud-pubsub==2.1.0",
-            "pytz",  # See https://github.com/googleapis/python-pubsub/issues/468
-            "google-cloud-storage==1.33.0",
-            "pg8000==1.13.2",
-            "pytz==2022.1",
-            "sqlalchemy==1.3.13",
-            "timeout-decorator==0.4.1",
+            "google-cloud-pubsub==2.13.5",
+            "google-cloud-storage==2.7.0",
+            "pg8000>=1.16.6",  # SQLAlchemy 1.4.46 requires pg8000>=1.16.6
+            "SQLAlchemy==1.4.46",
+            "timeout-decorator==0.5.0",
         ],
     },
     entry_points={
