@@ -23,7 +23,7 @@ def build_partition_dag(
         public_dataset_name,
         load_dag_id,
         partition_start_date=datetime(2015, 7, 30),
-        partition_schedule_interval='0 0 * * *',
+        partition_schedule='0 0 * * *',
         notification_emails=None,
 ):
 
@@ -44,7 +44,7 @@ def build_partition_dag(
     dag = models.DAG(
         dag_id,
         catchup=False,
-        schedule_interval=partition_schedule_interval,
+        schedule=partition_schedule,
         default_args=default_dag_args)
 
     def add_partition_tasks(task, sql_template, dependencies=None):

@@ -27,7 +27,7 @@ def read_export_dag_vars(var_prefix, **kwargs):
         'output_bucket': read_var('output_bucket', var_prefix, True, **kwargs),
         'export_start_date': export_start_date,
         'export_end_date': export_end_date,
-        'export_schedule_interval': read_var('export_schedule_interval', var_prefix, True, **kwargs),
+        'export_schedule': read_var('export_schedule', var_prefix, True, **kwargs),
         'provider_uris': provider_uris,
         'provider_uris_archival': provider_uris_archival,
         'notification_emails': read_var('notification_emails', None, False, **kwargs),
@@ -52,7 +52,7 @@ def read_load_dag_vars(var_prefix, **kwargs):
         'destination_dataset_project_id': read_var('destination_dataset_project_id', var_prefix, True, **kwargs),
         'notification_emails': read_var('notification_emails', None, False, **kwargs),
         # 'success_notification_emails': read_var('success_notification_emails', None, False, **kwargs),
-        'load_schedule_interval': read_var('load_schedule_interval', var_prefix, True, **kwargs),
+        'load_schedule': read_var('load_schedule', var_prefix, True, **kwargs),
         'load_all_partitions': parse_bool(read_var('load_all_partitions', var_prefix, False, **kwargs), default=None),
         'load_catchup': parse_bool(read_var('load_catchup', var_prefix, False, **kwargs), default=False),
     }
@@ -79,8 +79,8 @@ def read_partition_dag_vars(var_prefix, **kwargs):
         "partitioned_project_id": read_var(
             "partitioned_project_id", var_prefix, True, **kwargs
         ),
-        "partition_schedule_interval": read_var(
-            "partition_schedule_interval", var_prefix, False, **kwargs
+        "partition_schedule": read_var(
+            "partition_schedule", var_prefix, False, **kwargs
         ),
         "notification_emails": read_var("notification_emails", None, False, **kwargs),
     }
@@ -100,7 +100,7 @@ def read_parse_dag_vars(var_prefix, **kwargs):
         # internal_project_id takes its value from partitioned_project_id
         'internal_project_id': read_var('partitioned_project_id', var_prefix, True, **kwargs),
         'parse_destination_dataset_project_id': read_var('parse_destination_dataset_project_id', var_prefix, True, **kwargs),
-        'parse_schedule_interval': read_var('parse_schedule_interval', var_prefix, True, **kwargs),
+        'parse_schedule': read_var('parse_schedule', var_prefix, True, **kwargs),
         'parse_all_partitions': parse_bool(read_var('parse_all_partitions', var_prefix, False), default=None),
         'notification_emails': read_var('notification_emails', None, False, **kwargs),
     }

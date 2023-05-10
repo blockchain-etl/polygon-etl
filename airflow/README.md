@@ -39,7 +39,7 @@ Airflow DAGs for exporting and loading the Polygon blockchain data to Google Big
    gcloud composer environments create \
      ${ENVIRONMENT_NAME} \
      --location=us-central1 \
-     --image-version=composer-2.0.28-airflow-2.2.5 \
+     --image-version=composer-2.1.14-airflow-2.5.1 \
      --environment-size=small \
      --scheduler-cpu=2 \
      --scheduler-memory=4 \
@@ -96,13 +96,13 @@ Note that the variable names must be prefixed with `{chain}_`, e.g. `polygon_out
 | `output_bucket`                  | GCS bucket where exported files with blockchain data will be stored                                                                                             |
 | `export_start_date`              | export start date, default: `2019-04-22`                                                                                                                        |
 | `export_end_date`                | export end date, used for integration testing, default: None                                                                                                    |
-| `export_schedule_interval`       | export cron schedule, default: `0 1 * * *`                                                                                                                      |
+| `export_schedule`                | export cron schedule, default: `0 1 * * *`                                                                                                                      |
 | `provider_uris`                  | comma-separated list of provider URIs for [polygon-etl](https://polygon-etl.readthedocs.io/en/latest/commands) command                                          |
 | `notification_emails`            | comma-separated list of emails where notifications on DAG failures, retries and successes will be delivered. This variable must not be prefixed with `{chain}_` |
 | `export_max_active_runs`         | max active DAG runs for export, default: `3`                                                                                                                    |
 | `export_max_workers`             | max workers for [polygon-etl](https://polygon-etl.readthedocs.io/en/latest/commands) command, default: `5`                                                      |
 | `destination_dataset_project_id` | GCS project id where destination BigQuery dataset is                                                                                                            |
-| `load_schedule_interval`         | load cron schedule, default: `0 2 * * *`                                                                                                                        |
+| `load_schedule`                  | load cron schedule, default: `0 2 * * *`                                                                                                                        |
 | `load_end_date`                  | load end date, used for integration testing, default: None                                                                                                      |
 
 ### Creating a Cloud Source Repository for Configuration Files

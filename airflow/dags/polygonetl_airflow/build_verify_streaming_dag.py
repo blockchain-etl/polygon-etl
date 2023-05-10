@@ -19,7 +19,7 @@ def build_verify_streaming_dag(
         chain='polygon',
         notification_emails=None,
         start_date=datetime(2018, 7, 1),
-        schedule_interval='*/10 * * * *',
+        schedule='*/10 * * * *',
         max_lag_in_minutes=15):
     dataset_name = 'crypto_{}'.format(chain)
 
@@ -46,7 +46,7 @@ def build_verify_streaming_dag(
     dag = DAG(
         dag_id,
         catchup=False,
-        schedule_interval=schedule_interval,
+        schedule=schedule,
         default_args=default_dag_args)
 
     dags_folder = os.environ.get('DAGS_FOLDER', '/home/airflow/gcs/dags')
