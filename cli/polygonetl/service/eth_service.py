@@ -26,9 +26,10 @@ from datetime import datetime, timezone
 from polygonetl.service.graph_operations import GraphOperations, OutOfBoundsError, Point
 from web3.middleware import geth_poa_middleware
 
+
 class EthService(object):
     def __init__(self, web3):
-        web3.middleware_stack.inject(geth_poa_middleware, layer=0)
+        web3.middleware_onion.inject(geth_poa_middleware, layer=0)
         graph = BlockTimestampGraph(web3)
         self._graph_operations = GraphOperations(graph)
 
@@ -72,7 +73,7 @@ class BlockTimestampGraph(object):
 
     def get_first_point(self):
         # Ignore the genesis block as its timestamp is 0
-        return block_to_point(self._web3.eth.getBlock(1))
+        return block_to_point(self._web3.eth.get_block(1))
 
     def get_last_point(self):
         return block_to_point(self._web3.eth.getBlock('latest'))

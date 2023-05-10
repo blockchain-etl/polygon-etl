@@ -21,7 +21,7 @@
 # SOFTWARE.
 import logging
 
-from web3.exceptions import BadFunctionCallOutput
+from web3.exceptions import BadFunctionCallOutput, ContractLogicError
 
 from polygonetl.domain.token import EthToken
 from polygonetl.erc20_abi import ERC20_ABI
@@ -65,7 +65,7 @@ class EthTokenService(object):
         # OverflowError exception happens if the return type of the function doesn't match the expected type
         result = call_contract_function(
             func=func,
-            ignore_errors=(BadFunctionCallOutput, OverflowError, ValueError),
+            ignore_errors=(BadFunctionCallOutput, ContractLogicError, OverflowError, ValueError),
             default_value=None)
 
         if self._function_call_result_transformer is not None:

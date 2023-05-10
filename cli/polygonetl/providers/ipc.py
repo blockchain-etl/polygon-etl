@@ -24,10 +24,8 @@
 import json
 import socket
 
+from web3._utils.threads import Timeout
 from web3.providers.ipc import IPCProvider
-from web3.utils.threads import (
-    Timeout,
-)
 
 try:
     from json import JSONDecodeError
