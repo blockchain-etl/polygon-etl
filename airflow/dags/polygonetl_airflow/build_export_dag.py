@@ -7,7 +7,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from airflow import DAG, configuration
-from airflow.operators.dummy import DummyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
 
 from polygonetl.cli import (
@@ -345,7 +345,7 @@ def build_export_dag(
             return None
 
     # Operators
-    export_complete = DummyOperator(task_id="export_complete", dag=dag)
+    export_complete = EmptyOperator(task_id="export_complete", dag=dag)
 
     export_blocks_and_transactions_operator = add_export_task(
         export_blocks_and_transactions_toggle,
