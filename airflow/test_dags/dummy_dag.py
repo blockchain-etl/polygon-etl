@@ -17,7 +17,7 @@ def do_something():
 
 with models.DAG(
     "dummy_dag",
-    schedule_interval=timedelta(days=1),
+    schedule=timedelta(days=1),
     start_date=datetime(2021, 11, 1),
     catchup=False,
     default_args={'on_failure_callback': handle_dag_failure},

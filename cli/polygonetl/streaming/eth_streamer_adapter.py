@@ -34,13 +34,13 @@ class EthStreamerAdapter:
         self.item_id_calculator = EthItemIdCalculator()
         self.item_timestamp_calculator = EthItemTimestampCalculator()
         self.web3 = Web3(self.batch_web3_provider)
-        self.web3.middleware_stack.inject(geth_poa_middleware, layer=0)
+        self.web3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
     def open(self):
         self.item_exporter.open()
 
     def get_current_block_number(self):
-        return int(self.web3.eth.getBlock("latest").number)
+        return int(self.web3.eth.get_block("latest").number)
 
     def export_all(self, start_block, end_block):
         # Export blocks and transactions

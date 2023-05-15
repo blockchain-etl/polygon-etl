@@ -35,7 +35,7 @@ def build_load_dag(
     load_start_date=datetime(2018, 7, 1),
     load_end_date=None,
     load_catchup=False,
-    load_schedule_interval='0 0 * * *',
+    load_schedule='0 0 * * *',
     load_all_partitions=True
 ):
     # The following datasets must be created in BigQuery:
@@ -93,7 +93,7 @@ def build_load_dag(
     dag = models.DAG(
         dag_id,
         catchup=load_catchup,
-        schedule_interval=load_schedule_interval,
+        schedule=load_schedule,
         default_args=default_dag_args)
 
     dags_folder = os.environ.get('DAGS_FOLDER', '/home/airflow/gcs/dags')

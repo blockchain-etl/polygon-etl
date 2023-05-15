@@ -14,6 +14,6 @@ DAG = build_load_dag(
     chain='polygon',
     **read_load_dag_vars(
         var_prefix='polygon_',
-        load_schedule_interval='0 7 * * *'
+        load_schedule='0 7 * * *'
     )
 )

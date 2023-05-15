@@ -2,5 +2,5 @@
 # At the moment, we are *only formatting any changed or added files*
 # We have not implemented any sort of automation (e.g. pre-commit)
 
-black
-isort
+black==22.12.0      # google-cloud-bigquery 2.34.4 requires packaging<22.0dev
+isort==5.12.0

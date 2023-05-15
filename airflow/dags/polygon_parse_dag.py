@@ -17,7 +17,7 @@ var_prefix = 'polygon_'
 
 parse_dag_vars = read_parse_dag_vars(
     var_prefix=var_prefix,
-    parse_schedule_interval='30 8 * * *'
+    parse_schedule='30 8 * * *'
 )
 
 for folder in glob(table_definitions_folder):

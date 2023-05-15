@@ -7,7 +7,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from airflow import DAG, configuration
-from airflow.operators.dummy import DummyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
 
 from polygonetl.cli import (
@@ -34,21 +34,21 @@ TEMP_DIR = COMPOSER_DATA_FOLDER if COMPOSER_DATA_FOLDER.exists() else None
 
 
 def build_export_dag(
-        dag_id,
-        provider_uris,
-        provider_uris_archival,
-        output_bucket,
-        export_start_date,
-        export_end_date=None,
-        notification_emails=None,
-        export_schedule_interval='0 0 * * *',
-        export_max_workers=10,
-        export_traces_max_workers=10,
-        export_batch_size=200,
-        export_max_active_runs=None,
-        export_max_active_tasks=None,
-        export_retries=5,
-        **kwargs
+    dag_id,
+    provider_uris,
+    provider_uris_archival,
+    output_bucket,
+    export_start_date,
+    export_end_date=None,
+    notification_emails=None,
+    export_schedule='0 0 * * *',
+    export_max_workers=10,
+    export_traces_max_workers=10,
+    export_batch_size=200,
+    export_max_active_runs=None,
+    export_max_active_tasks=None,
+    export_retries=5,
+    **kwargs
 ):
     default_dag_args = {
         "depends_on_past": False,
@@ -82,7 +82,7 @@ def build_export_dag(
 
     dag = DAG(
         dag_id,
-        schedule_interval=export_schedule_interval,
+        schedule=export_schedule,
         default_args=default_dag_args,
         max_active_runs=export_max_active_runs,
         max_active_tasks=export_max_active_tasks,
@@ -345,7 +345,7 @@ def build_export_dag(
             return None
 
     # Operators
-    export_complete = DummyOperator(task_id="export_complete", dag=dag)
+    export_complete = EmptyOperator(task_id="export_complete", dag=dag)
 
     export_blocks_and_transactions_operator = add_export_task(
         export_blocks_and_transactions_toggle,

@@ -33,7 +33,7 @@ def build_parse_dag(
         internal_project_id,
         notification_emails=None,
         parse_start_date=datetime(2020, 5, 30),
-        parse_schedule_interval='0 0 * * *',
+        parse_schedule='0 0 * * *',
         parse_all_partitions=None,
 ):
 
@@ -57,7 +57,7 @@ def build_parse_dag(
     dag = models.DAG(
         dag_id,
         catchup=False,
-        schedule_interval=parse_schedule_interval,
+        schedule=parse_schedule,
         default_args=default_dag_args)
 
     def create_parse_task():

@@ -25,7 +25,7 @@ import time
 from json.decoder import JSONDecodeError
 
 from requests.exceptions import Timeout as RequestsTimeout, HTTPError, TooManyRedirects, ConnectionError as RequestsConnectionError
-from web3.utils.threads import Timeout as Web3Timeout
+from web3._utils.threads import Timeout as Web3Timeout
 
 from polygonetl.executors.bounded_executor import BoundedExecutor
 from polygonetl.executors.fail_safe_executor import FailSafeExecutor
