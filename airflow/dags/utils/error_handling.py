@@ -40,7 +40,15 @@ def handle_dag_failure(context: Dict) -> None:
     override_owner_ids = json.loads(Variable.get(f"{platform}_alerts_dag_owners", "{}"))
     relevant_user_ids_string = override_owner_ids.get(dag_id, default_user_id)
     relevant_user_ids = relevant_user_ids_string.split(",")
-    owner_tags = [f"<@{relevant_user_id}>" for relevant_user_id in relevant_user_ids]
+
+    # Mention by user or user group
+    # https://api.slack.com/reference/surfaces/formatting#basics
+    owner_tags = [
+        f"<!subteam^{relevant_user_id}>"
+        if relevant_user_id.startswith("S")
+        else f"<@{relevant_user_id}>"
+        for relevant_user_id in relevant_user_ids
+    ]
     owner_text = ", ".join(owner_tags)
 
     if platform == "discord":
