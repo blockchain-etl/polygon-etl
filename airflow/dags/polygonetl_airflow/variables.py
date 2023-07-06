@@ -43,12 +43,8 @@ def read_export_dag_vars(var_prefix, **kwargs):
 def read_load_dag_vars(var_prefix, **kwargs):
     """Read Airflow variables for Load DAG"""
     output_bucket = read_var('output_bucket', var_prefix, True, **kwargs)
-    checkpoint_bucket = read_var('checkpoint_bucket', var_prefix, False, **kwargs)
-    if not checkpoint_bucket:
-        checkpoint_bucket = output_bucket
     vars = {
         'output_bucket': output_bucket,
-        'checkpoint_bucket': checkpoint_bucket,
         'destination_dataset_project_id': read_var('destination_dataset_project_id', var_prefix, True, **kwargs),
         'notification_emails': read_var('notification_emails', None, False, **kwargs),
         # 'success_notification_emails': read_var('success_notification_emails', None, False, **kwargs),
