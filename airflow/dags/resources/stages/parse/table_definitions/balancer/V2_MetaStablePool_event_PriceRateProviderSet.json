@@ -5,50 +5,50 @@
             "inputs": [
                 {
                     "indexed": true,
-                    "internalType": "int256",
-                    "name": "current",
-                    "type": "int256"
+                    "internalType": "contract IERC20",
+                    "name": "token",
+                    "type": "address"
                 },
                 {
                     "indexed": true,
-                    "internalType": "uint256",
-                    "name": "roundId",
-                    "type": "uint256"
+                    "internalType": "contract IRateProvider",
+                    "name": "provider",
+                    "type": "address"
                 },
                 {
                     "indexed": false,
                     "internalType": "uint256",
-                    "name": "updatedAt",
+                    "name": "cacheDuration",
                     "type": "uint256"
                 }
             ],
-            "name": "AnswerUpdated",
+            "name": "PriceRateProviderSet",
             "type": "event"
         },
-        "contract_address": "SELECT contract_address FROM ref('view_AccessControlledOffchainAggregator_info')",
+        "contract_address": "SELECT pool FROM ref('V2_MetaStablePoolFactory_event_PoolCreated')",
         "field_mapping": {},
         "type": "log"
     },
     "table": {
-        "dataset_name": "chainlink",
+        "dataset_name": "balancer",
         "schema": [
             {
                 "description": "",
-                "name": "current",
+                "name": "token",
                 "type": "STRING"
             },
             {
                 "description": "",
-                "name": "roundId",
+                "name": "provider",
                 "type": "STRING"
             },
             {
                 "description": "",
-                "name": "updatedAt",
+                "name": "cacheDuration",
                 "type": "STRING"
             }
         ],
         "table_description": "",
-        "table_name": "AccessControlledOffchainAggregator_event_AnswerUpdated"
+        "table_name": "V2_MetaStablePool_event_PriceRateProviderSet"
     }
 }

@@ -5,50 +5,50 @@
             "inputs": [
                 {
                     "indexed": true,
-                    "internalType": "int256",
-                    "name": "current",
-                    "type": "int256"
+                    "internalType": "address",
+                    "name": "owner",
+                    "type": "address"
                 },
                 {
                     "indexed": true,
-                    "internalType": "uint256",
-                    "name": "roundId",
-                    "type": "uint256"
+                    "internalType": "address",
+                    "name": "spender",
+                    "type": "address"
                 },
                 {
                     "indexed": false,
                     "internalType": "uint256",
-                    "name": "updatedAt",
+                    "name": "value",
                     "type": "uint256"
                 }
             ],
-            "name": "AnswerUpdated",
+            "name": "Approval",
             "type": "event"
         },
-        "contract_address": "SELECT contract_address FROM ref('view_AccessControlledOffchainAggregator_info')",
+        "contract_address": "SELECT pool FROM ref('V2_MetaStablePoolFactory_event_PoolCreated')",
         "field_mapping": {},
         "type": "log"
     },
     "table": {
-        "dataset_name": "chainlink",
+        "dataset_name": "balancer",
         "schema": [
             {
                 "description": "",
-                "name": "current",
+                "name": "owner",
                 "type": "STRING"
             },
             {
                 "description": "",
-                "name": "roundId",
+                "name": "spender",
                 "type": "STRING"
             },
             {
                 "description": "",
-                "name": "updatedAt",
+                "name": "value",
                 "type": "STRING"
             }
         ],
         "table_description": "",
-        "table_name": "AccessControlledOffchainAggregator_event_AnswerUpdated"
+        "table_name": "V2_MetaStablePool_event_Approval"
     }
 }
