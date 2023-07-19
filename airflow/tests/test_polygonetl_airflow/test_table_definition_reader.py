@@ -7,7 +7,7 @@ from polygonetl_airflow.parse.table_definition_reader import read_table_definiti
     toposort_and_read_table_definition_states
 from test_polygonetl_airflow.mock_parse_state_manager import MockParseStateManager
 
-table_definitions_folder = 'dags/resources/stages/parse/table_definitions'
+table_definitions_folder = 'airflow/dags/resources/stages/parse/table_definitions'
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s [%(levelname)s] - %(message)s')
 
