@@ -14,6 +14,7 @@ from google.cloud import bigquery
 from polygonetl_airflow.bigquery_utils import share_dataset_all_users_read
 from polygonetl_airflow.common import read_json_file, get_list_of_files
 from polygonetl_airflow.parse.parse_dataset_folder_logic import parse_dataset_folder
+from polygonetl_airflow.parse.parse_state_manager import ParseStateManager
 
 from utils.error_handling import handle_dag_failure
 
@@ -25,6 +26,7 @@ dags_folder = os.environ.get('DAGS_FOLDER', '/home/airflow/gcs/dags')
 
 def build_parse_dag(
         dag_id,
+        output_bucket,
         dataset_folder,
         parse_destination_dataset_project_id,
         source_project_id,
@@ -73,6 +75,7 @@ def build_parse_dag(
                 source_dataset_name=source_dataset_name,
                 destination_project_id=parse_destination_dataset_project_id,
                 internal_project_id=internal_project_id,
+                parse_state_manager=ParseStateManager(dataset_name, output_bucket, 'parse/state'),
                 sqls_folder=os.path.join(dags_folder, 'resources/stages/parse/sqls'),
                 parse_all_partitions=parse_all_partitions
             )

@@ -92,6 +92,7 @@ def read_partition_dag_vars(var_prefix, **kwargs):
 def read_parse_dag_vars(var_prefix, **kwargs):
     vars = {
         # source_project_id takes its value from destination_dataset_project_id
+        'output_bucket': read_var('output_bucket', var_prefix, True, **kwargs),
         'source_project_id': read_var('destination_dataset_project_id', var_prefix, True, **kwargs),
         # internal_project_id takes its value from partitioned_project_id
         'internal_project_id': read_var('partitioned_project_id', var_prefix, True, **kwargs),
