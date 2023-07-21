@@ -28,5 +28,6 @@ def test_read_table_definition_states(dataset_folder):
 
     assert updated_table_definitions == [
         'AccessControlledOffchainAggregator_event_AnswerUpdated',
+        'EACAggregatorProxy_call_confirmAggregator',
         'view_AccessControlledOffchainAggregator_info'
     ]
