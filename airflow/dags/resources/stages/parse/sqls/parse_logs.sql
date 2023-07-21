@@ -22,7 +22,6 @@ WHERE
   {% if 'avoid correlated subquery error' in parser.contract_address_sql %}
   true
   {% elif parser.contract_address_sql %}
-  {% if parser.contract_address_sql %}
   address in ({{parser.contract_address_sql}})
   {% elif parser.contract_address is none %}
   true
