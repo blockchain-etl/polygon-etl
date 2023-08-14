@@ -50,5 +50,6 @@
         ],
         "table_description": "",
         "table_name": "EURS_event_Transfer"
-    }
+    },
+    "version": "1"
 }
