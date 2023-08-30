@@ -1,0 +1,127 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "uint256",
+                    "name": "id",
+                    "type": "uint256"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "seller",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "buyer",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "contract IERC20",
+                            "name": "currency",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "price",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "netPrice",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "deadline",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint8",
+                            "name": "kind",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "uint8",
+                            "name": "status",
+                            "type": "uint8"
+                        }
+                    ],
+                    "indexed": false,
+                    "internalType": "struct MarketNG.Inventory",
+                    "name": "inventory",
+                    "type": "tuple"
+                }
+            ],
+            "name": "EvInventoryUpdate",
+            "type": "event"
+        },
+        "contract_address": "0x7bc8b1b5aba4df3be9f9a32dae501214dc0e4f3f",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "polygon_tofuNFT",
+        "schema": [
+            {
+                "description": "",
+                "name": "id",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "fields": [
+                    {
+                        "description": "",
+                        "name": "seller",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "buyer",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "currency",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "price",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "netPrice",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "deadline",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "kind",
+                        "type": "STRING"
+                    },
+                    {
+                        "description": "",
+                        "name": "status",
+                        "type": "STRING"
+                    }
+                ],
+                "name": "inventory",
+                "type": "RECORD"
+            }
+        ],
+        "table_description": "",
+        "table_name": "MarketNG_event_EvInventoryUpdate"
+    }
+}
