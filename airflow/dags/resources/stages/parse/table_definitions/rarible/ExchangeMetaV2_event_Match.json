@@ -31,7 +31,7 @@
             "name": "Match",
             "type": "event"
         },
-        "contract_address": "0x12b3897a36fDB436ddE2788C06Eff0ffD997066e",
+        "contract_address": "0x12b3897a36fdb436dde2788c06eff0ffd997066e",
         "field_mapping": {},
         "type": "log"
     },
