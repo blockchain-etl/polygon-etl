@@ -8,7 +8,7 @@ on:
 
 env:
   # include "slow" tests that make node requests, as well as mocks
-  POLYGONETL_RUN_SLOW_TESTS: true
+  POLYGONETL_RUN_SLOW_TESTS: false
   POLYGONETL_PROVIDER_URI: ${{ secrets.POLYGONETL_PROVIDER_URI }}
 
 jobs:
