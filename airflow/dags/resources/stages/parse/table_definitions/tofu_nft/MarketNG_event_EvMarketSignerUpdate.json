@@ -6,11 +6,17 @@
                 {
                     "indexed": false,
                     "internalType": "address",
-                    "name": "account",
+                    "name": "addr",
                     "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bool",
+                    "name": "isRemoval",
+                    "type": "bool"
                 }
             ],
-            "name": "Paused",
+            "name": "EvMarketSignerUpdate",
             "type": "event"
         },
         "contract_address": "0x7bc8b1b5aba4df3be9f9a32dae501214dc0e4f3f",
@@ -18,15 +24,20 @@
         "type": "log"
     },
     "table": {
-        "dataset_name": "tofuNFT",
+        "dataset_name": "tofu_nft",
         "schema": [
             {
                 "description": "",
-                "name": "account",
+                "name": "addr",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "isRemoval",
                 "type": "STRING"
             }
         ],
         "table_description": "",
-        "table_name": "MarketNG_event_Paused"
+        "table_name": "MarketNG_event_EvMarketSignerUpdate"
     }
 }

@@ -5,24 +5,18 @@
             "inputs": [
                 {
                     "indexed": true,
-                    "internalType": "uint256",
-                    "name": "id",
-                    "type": "uint256"
-                },
-                {
-                    "indexed": false,
                     "internalType": "address",
-                    "name": "bidder",
+                    "name": "previousOwner",
                     "type": "address"
                 },
                 {
-                    "indexed": false,
-                    "internalType": "uint256",
-                    "name": "refund",
-                    "type": "uint256"
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "newOwner",
+                    "type": "address"
                 }
             ],
-            "name": "EvAuctionRefund",
+            "name": "OwnershipTransferred",
             "type": "event"
         },
         "contract_address": "0x7bc8b1b5aba4df3be9f9a32dae501214dc0e4f3f",
@@ -30,25 +24,20 @@
         "type": "log"
     },
     "table": {
-        "dataset_name": "tofuNFT",
+        "dataset_name": "tofu_nft",
         "schema": [
             {
                 "description": "",
-                "name": "id",
+                "name": "previousOwner",
                 "type": "STRING"
             },
             {
                 "description": "",
-                "name": "bidder",
-                "type": "STRING"
-            },
-            {
-                "description": "",
-                "name": "refund",
+                "name": "newOwner",
                 "type": "STRING"
             }
         ],
         "table_description": "",
-        "table_name": "MarketNG_event_EvAuctionRefund"
+        "table_name": "MarketNG_event_OwnershipTransferred"
     }
 }

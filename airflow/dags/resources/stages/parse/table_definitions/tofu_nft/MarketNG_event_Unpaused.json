@@ -18,7 +18,7 @@
         "type": "log"
     },
     "table": {
-        "dataset_name": "tofuNFT",
+        "dataset_name": "tofu_nft",
         "schema": [
             {
                 "description": "",

@@ -11,7 +11,7 @@
         "type": "log"
     },
     "table": {
-        "dataset_name": "tofuNFT",
+        "dataset_name": "tofu_nft",
         "schema": [],
         "table_description": "",
         "table_name": "MarketNG_event_EvSettingsUpdated"
