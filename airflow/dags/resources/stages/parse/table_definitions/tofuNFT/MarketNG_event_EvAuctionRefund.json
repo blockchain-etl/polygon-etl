@@ -30,7 +30,7 @@
         "type": "log"
     },
     "table": {
-        "dataset_name": "polygon_tofuNFT",
+        "dataset_name": "tofuNFT",
         "schema": [
             {
                 "description": "",
