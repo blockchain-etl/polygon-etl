@@ -1,0 +1,65 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "leftHash",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bytes32",
+                    "name": "rightHash",
+                    "type": "bytes32"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "newLeftFill",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "newRightFill",
+                    "type": "uint256"
+                }
+            ],
+            "name": "Match",
+            "type": "event"
+        },
+        "contract_address": "0x12b3897a36fDB436ddE2788C06Eff0ffD997066e",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "rarible",
+        "schema": [
+            {
+                "description": "",
+                "name": "leftHash",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "rightHash",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "newLeftFill",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "newRightFill",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "ExchangeMetaV2_event_Match"
+    }
+}
