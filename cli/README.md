@@ -84,4 +84,3 @@ For the latest version, check out the repo and call
         > docker run polygon-etl:latest stream --start-block 500000 --log-file log.txt
         > echo "Stream to Pub/Sub"
         > docker run -v /path_to_credentials_file/:/polygon-etl/ --env GOOGLE_APPLICATION_CREDENTIALS=/polygon-etl/credentials_file.json polygon-etl:latest stream --start-block 500000 --output projects/<your-project>/topics/mainnet
-
