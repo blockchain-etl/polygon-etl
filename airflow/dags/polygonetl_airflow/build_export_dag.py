@@ -48,6 +48,7 @@ def build_export_dag(
     export_max_active_runs=None,
     export_max_active_tasks=None,
     export_retries=5,
+    backfill=False,
     **kwargs
 ):
     default_dag_args = {
@@ -347,26 +348,27 @@ def build_export_dag(
     # Operators
     export_complete = EmptyOperator(task_id="export_complete", dag=dag)
 
-    export_blocks_and_transactions_operator = add_export_task(
-        export_blocks_and_transactions_toggle,
-        "export_blocks_and_transactions",
-        add_provider_uri_fallback_loop(export_blocks_and_transactions_command, provider_uris),
-    )
+    if not backfill:
+        export_blocks_and_transactions_operator = add_export_task(
+            export_blocks_and_transactions_toggle,
+            "export_blocks_and_transactions",
+            add_provider_uri_fallback_loop(export_blocks_and_transactions_command, provider_uris),
+        )
 
-    export_receipts_and_logs_operator = add_export_task(
-        export_receipts_and_logs_toggle,
-        "export_receipts_and_logs",
-        add_provider_uri_fallback_loop(export_receipts_and_logs_command, provider_uris),
-        dependencies=[export_blocks_and_transactions_operator],
-    )
+        export_receipts_and_logs_operator = add_export_task(
+            export_receipts_and_logs_toggle,
+            "export_receipts_and_logs",
+            add_provider_uri_fallback_loop(export_receipts_and_logs_command, provider_uris),
+            dependencies=[export_blocks_and_transactions_operator],
+        )
 
-    extract_token_transfers_operator = add_export_task(
-        extract_token_transfers_toggle,
-        "extract_token_transfers",
-        extract_token_transfers_command,
-        dependencies=[export_receipts_and_logs_operator],
-    )
-    extract_token_transfers_operator >> export_complete
+        extract_token_transfers_operator = add_export_task(
+            extract_token_transfers_toggle,
+            "extract_token_transfers",
+            extract_token_transfers_command,
+            dependencies=[export_receipts_and_logs_operator],
+        )
+        extract_token_transfers_operator >> export_complete
 
     for hour in range(24):
         export_traces_operator = add_export_task(
@@ -379,22 +381,23 @@ def build_export_dag(
             op_kwargs={"hour": hour},
         )
 
-        extract_contracts_operator = add_export_task(
-            extract_contracts_toggle,
-            f"extract_contracts_{hour:02}",
-            extract_contracts_command,
-            op_kwargs={"hour": hour},
-            dependencies=[export_traces_operator],
-        )
+        if not backfill:
+            extract_contracts_operator = add_export_task(
+                extract_contracts_toggle,
+                f"extract_contracts_{hour:02}",
+                extract_contracts_command,
+                op_kwargs={"hour": hour},
+                dependencies=[export_traces_operator],
+            )
 
-        extract_tokens_operator = add_export_task(
-            extract_tokens_toggle,
-            f"extract_tokens_{hour:02}",
-            add_provider_uri_fallback_loop(extract_tokens_command, provider_uris),
-            op_kwargs={"hour": hour},
-            dependencies=[extract_contracts_operator],
-        )
-        extract_tokens_operator >> export_complete
+            extract_tokens_operator = add_export_task(
+                extract_tokens_toggle,
+                f"extract_tokens_{hour:02}",
+                add_provider_uri_fallback_loop(extract_tokens_command, provider_uris),
+                op_kwargs={"hour": hour},
+                dependencies=[extract_contracts_operator],
+            )
+            extract_tokens_operator >> export_complete
 
     return dag
 
