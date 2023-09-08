@@ -25,7 +25,7 @@
             "name": "SetTargetReserves",
             "type": "event"
         },
-        "contract_address": "0x9c4ec768c28520B50860ea7a15bd7213a9fF58bf",
+        "contract_address": "0x9c4ec768c28520b50860ea7a15bd7213a9ff58bf",
         "field_mapping": {},
         "type": "log"
     },
