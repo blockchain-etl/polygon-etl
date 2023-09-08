@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "operator",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "bool",
+                    "name": "isOperator",
+                    "type": "bool"
+                }
+            ],
+            "name": "SetOperator",
+            "type": "event"
+        },
+        "contract_address": "0xfbf4c42bb3981e6d5b85ad340d7f0213db7b132c",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "bitkeep",
+        "schema": [
+            {
+                "description": "",
+                "name": "operator",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "isOperator",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "BKExchangeRouter_event_SetOperator"
+    }
+}

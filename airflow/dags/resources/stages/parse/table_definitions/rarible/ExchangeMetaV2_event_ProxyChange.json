@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "bytes4",
+                    "name": "assetType",
+                    "type": "bytes4"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "proxy",
+                    "type": "address"
+                }
+            ],
+            "name": "ProxyChange",
+            "type": "event"
+        },
+        "contract_address": "0x12b3897a36fdb436dde2788c06eff0ffd997066e",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "rarible",
+        "schema": [
+            {
+                "description": "",
+                "name": "assetType",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "proxy",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "ExchangeMetaV2_event_ProxyChange"
+    }
+}
