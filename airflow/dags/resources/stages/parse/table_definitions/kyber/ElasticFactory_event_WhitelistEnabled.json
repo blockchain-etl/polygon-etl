@@ -1,0 +1,19 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [],
+            "name": "WhitelistEnabled",
+            "type": "event"
+        },
+        "contract_address": "0xc7a590291e07b9fe9e64b86c58fd8fc764308c4a",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "kyber",
+        "schema": [],
+        "table_description": "",
+        "table_name": "ElasticFactory_event_WhitelistEnabled"
+    }
+}

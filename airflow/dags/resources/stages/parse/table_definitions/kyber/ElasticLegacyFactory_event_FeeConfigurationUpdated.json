@@ -6,20 +6,20 @@
                 {
                     "indexed": false,
                     "internalType": "address",
-                    "name": "oldConfigMaster",
+                    "name": "feeTo",
                     "type": "address"
                 },
                 {
                     "indexed": false,
-                    "internalType": "address",
-                    "name": "newConfigMaster",
-                    "type": "address"
+                    "internalType": "uint24",
+                    "name": "governmentFeeUnits",
+                    "type": "uint24"
                 }
             ],
-            "name": "ConfigMasterUpdated",
+            "name": "FeeConfigurationUpdated",
             "type": "event"
         },
-        "contract_address": "0xc7a590291e07b9fe9e64b86c58fd8fc764308c4a",
+        "contract_address": "0x5f1dddbf348ac2fbe22a163e30f99f9ece3dd50a",
         "field_mapping": {},
         "type": "log"
     },
@@ -28,16 +28,16 @@
         "schema": [
             {
                 "description": "",
-                "name": "oldConfigMaster",
+                "name": "feeTo",
                 "type": "STRING"
             },
             {
                 "description": "",
-                "name": "newConfigMaster",
+                "name": "governmentFeeUnits",
                 "type": "STRING"
             }
         ],
         "table_description": "",
-        "table_name": "ElasticFactory_event_ConfigMasterUpdated"
+        "table_name": "ElasticLegacyFactory_event_FeeConfigurationUpdated"
     }
 }

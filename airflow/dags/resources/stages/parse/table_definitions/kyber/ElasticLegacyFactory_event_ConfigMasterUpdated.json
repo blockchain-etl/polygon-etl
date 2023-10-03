@@ -19,7 +19,7 @@
             "name": "ConfigMasterUpdated",
             "type": "event"
         },
-        "contract_address": "0xc7a590291e07b9fe9e64b86c58fd8fc764308c4a",
+        "contract_address": "0x5f1dddbf348ac2fbe22a163e30f99f9ece3dd50a",
         "field_mapping": {},
         "type": "log"
     },
@@ -38,6 +38,6 @@
             }
         ],
         "table_description": "",
-        "table_name": "ElasticFactory_event_ConfigMasterUpdated"
+        "table_name": "ElasticLegacyFactory_event_ConfigMasterUpdated"
     }
 }
