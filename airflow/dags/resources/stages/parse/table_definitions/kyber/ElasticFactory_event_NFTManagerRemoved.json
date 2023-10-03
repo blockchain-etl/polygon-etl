@@ -6,17 +6,17 @@
                 {
                     "indexed": false,
                     "internalType": "address",
-                    "name": "oldConfigMaster",
+                    "name": "_nftManager",
                     "type": "address"
                 },
                 {
                     "indexed": false,
-                    "internalType": "address",
-                    "name": "newConfigMaster",
-                    "type": "address"
+                    "internalType": "bool",
+                    "name": "removed",
+                    "type": "bool"
                 }
             ],
-            "name": "ConfigMasterUpdated",
+            "name": "NFTManagerRemoved",
             "type": "event"
         },
         "contract_address": "0xc7a590291e07b9fe9e64b86c58fd8fc764308c4a",
@@ -28,16 +28,16 @@
         "schema": [
             {
                 "description": "",
-                "name": "oldConfigMaster",
+                "name": "_nftManager",
                 "type": "STRING"
             },
             {
                 "description": "",
-                "name": "newConfigMaster",
+                "name": "removed",
                 "type": "STRING"
             }
         ],
         "table_description": "",
-        "table_name": "ElasticFactory_event_ConfigMasterUpdated"
+        "table_name": "ElasticFactory_event_NFTManagerRemoved"
     }
 }

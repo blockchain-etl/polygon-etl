@@ -5,21 +5,21 @@
             "inputs": [
                 {
                     "indexed": false,
-                    "internalType": "address",
-                    "name": "oldConfigMaster",
-                    "type": "address"
+                    "internalType": "uint160",
+                    "name": "sqrtP",
+                    "type": "uint160"
                 },
                 {
                     "indexed": false,
-                    "internalType": "address",
-                    "name": "newConfigMaster",
-                    "type": "address"
+                    "internalType": "int24",
+                    "name": "tick",
+                    "type": "int24"
                 }
             ],
-            "name": "ConfigMasterUpdated",
+            "name": "Initialize",
             "type": "event"
         },
-        "contract_address": "0xc7a590291e07b9fe9e64b86c58fd8fc764308c4a",
+        "contract_address": "SELECT pool FROM ref('ElasticLegacyFactory_event_PoolCreated')",
         "field_mapping": {},
         "type": "log"
     },
@@ -28,16 +28,16 @@
         "schema": [
             {
                 "description": "",
-                "name": "oldConfigMaster",
+                "name": "sqrtP",
                 "type": "STRING"
             },
             {
                 "description": "",
-                "name": "newConfigMaster",
+                "name": "tick",
                 "type": "STRING"
             }
         ],
         "table_description": "",
-        "table_name": "ElasticFactory_event_ConfigMasterUpdated"
+        "table_name": "ElasticLegacyPool_event_Initialize"
     }
 }

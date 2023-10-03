@@ -4,22 +4,28 @@
             "anonymous": false,
             "inputs": [
                 {
-                    "indexed": false,
+                    "indexed": true,
                     "internalType": "address",
-                    "name": "oldConfigMaster",
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "to",
                     "type": "address"
                 },
                 {
                     "indexed": false,
-                    "internalType": "address",
-                    "name": "newConfigMaster",
-                    "type": "address"
+                    "internalType": "uint256",
+                    "name": "value",
+                    "type": "uint256"
                 }
             ],
-            "name": "ConfigMasterUpdated",
+            "name": "Transfer",
             "type": "event"
         },
-        "contract_address": "0xc7a590291e07b9fe9e64b86c58fd8fc764308c4a",
+        "contract_address": "SELECT pool FROM ref('ElasticLegacyFactory_event_PoolCreated')",
         "field_mapping": {},
         "type": "log"
     },
@@ -28,16 +34,21 @@
         "schema": [
             {
                 "description": "",
-                "name": "oldConfigMaster",
+                "name": "from",
                 "type": "STRING"
             },
             {
                 "description": "",
-                "name": "newConfigMaster",
+                "name": "to",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "value",
                 "type": "STRING"
             }
         ],
         "table_description": "",
-        "table_name": "ElasticFactory_event_ConfigMasterUpdated"
+        "table_name": "ElasticLegacyPool_event_Transfer"
     }
 }
