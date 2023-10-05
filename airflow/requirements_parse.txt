@@ -1,5 +1,5 @@
 eth-hash==0.3.3                             # Fixes install conflicts issue in Composer
-polygon-etl==0.3.7
+polygon-etl==0.3.8
 web3==5.31.0                                # Fixes install conflicts issue in Composer
 
 google-api-core==2.8.1                      # matches `composer-2.1.14-airflow-2.5.1`
