@@ -23,12 +23,13 @@
 import json
 import logging
 
-from polygonetl.executors.batch_work_executor import BatchWorkExecutor
-from polygonetl.json_rpc_requests import generate_trace_block_by_number_json_rpc
+from polygonetl_modified.executors.batch_work_executor import BatchWorkExecutor
+from polygonetl_modified.json_rpc_requests import generate_trace_block_by_number_json_rpc
 from blockchainetl_common.jobs.base_job import BaseJob
-from polygonetl.mappers.geth_trace_mapper import EthGethTraceMapper
-from polygonetl.utils import validate_range, rpc_response_to_result
-from polygonetl.misc.retriable_value_error import RetriableValueError
+from polygonetl_modified.mappers.geth_trace_mapper import EthGethTraceMapper
+from polygonetl_modified.utils import validate_range, rpc_response_to_result
+from polygonetl_modified.misc.retriable_value_error import RetriableValueError
+
 
 # Exports geth traces
 class ExportGethTracesJob(BaseJob):
@@ -39,7 +40,8 @@ class ExportGethTracesJob(BaseJob):
             batch_size,
             batch_web3_provider,
             max_workers,
-            item_exporter):
+            item_exporter,
+            tracer='callTracer'):
         validate_range(start_block, end_block)
         self.start_block = start_block
         self.end_block = end_block
@@ -50,6 +52,8 @@ class ExportGethTracesJob(BaseJob):
         self.batch_work_executor = BatchWorkExecutor(batch_size, max_workers)
         self.item_exporter = item_exporter
 
+        self.tracer = tracer
+
         self.geth_trace_mapper = EthGethTraceMapper()
 
     def _check_result(self, result, block_number):
@@ -57,17 +61,8 @@ class ExportGethTracesJob(BaseJob):
             if tx_trace.get('result') is None:
                 raise RetriableValueError(
                     'Error for trace in block {block}. Need to retry. Error: {err}, trace: {trace}'
-                        .format(block=block_number, trace=json.dumps(tx_trace), err=tx_trace.get('error'))
+                    .format(block=block_number, trace=json.dumps(tx_trace), err=tx_trace.get('error'))
                 )
-            elif (
-                tx_trace.get('result').get('error') is None
-                and tx_trace.get('result').get('output') is None
-            ):
-                err = '`output` fields missing in traces file'
-                raise RetriableValueError(
-                    'Error for trace in block {block}. Need to retry. Error: {err}, result: {result}'
-                        .format(block=block_number, err=err, result=result)
-                )      
 
     def _start(self):
         self.item_exporter.open()
@@ -80,7 +75,15 @@ class ExportGethTracesJob(BaseJob):
         )
 
     def _export_batch(self, block_number_batch):
-        trace_block_rpc = list(generate_trace_block_by_number_json_rpc(block_number_batch))
+        tracer_config = None
+        if self.tracer == 'prestateTracer':
+            tracer_config = {"diffMode": True}
+
+        trace_block_rpc = list(generate_trace_block_by_number_json_rpc(
+            block_number_batch,
+            tracer=self.tracer,
+            tracer_config=tracer_config
+        ))
 
         # For nodes that don't support batch debug_traceBlockByNumber
         if self.batch_size == 1:
@@ -89,6 +92,9 @@ class ExportGethTracesJob(BaseJob):
         else:
             request = json.dumps(trace_block_rpc)
             response = self.batch_web3_provider.make_batch_request(request)
+
+        logging.info(request)
+        logging.info(json.dumps(response)[0:200])
 
         for response_item in response:
             block_number = response_item.get('id')
