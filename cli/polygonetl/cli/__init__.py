@@ -42,7 +42,7 @@ from polygonetl.cli.stream import stream
 
 
 @click.group()
-@click.version_option(version="0.3.9")
+@click.version_option(version="0.4.0")
 @click.pass_context
 def cli(ctx):
     pass
