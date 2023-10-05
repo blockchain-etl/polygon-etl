@@ -59,15 +59,6 @@ class ExportGethTracesJob(BaseJob):
                     'Error for trace in block {block}. Need to retry. Error: {err}, trace: {trace}'
                         .format(block=block_number, trace=json.dumps(tx_trace), err=tx_trace.get('error'))
                 )
-            elif (
-                tx_trace.get('result').get('error') is None
-                and tx_trace.get('result').get('output') is None
-            ):
-                err = '`output` fields missing in traces file'
-                raise RetriableValueError(
-                    'Error for trace in block {block}. Need to retry. Error: {err}, result: {result}'
-                        .format(block=block_number, err=err, result=result)
-                )      
 
     def _start(self):
         self.item_exporter.open()
