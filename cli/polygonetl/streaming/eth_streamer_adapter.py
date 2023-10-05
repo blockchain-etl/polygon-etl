@@ -99,8 +99,7 @@ class EthStreamerAdapter:
             enriched_contracts + \
             enriched_tokens
 
-        self.calculate_item_ids(all_items)
-        self.calculate_item_timestamps(all_items)
+        self.update_item_metadata(all_items)
 
         self.item_exporter.export_items(all_items)
 
@@ -226,13 +225,11 @@ class EthStreamerAdapter:
 
         raise ValueError('Unexpected entity type ' + entity_type)
 
-    def calculate_item_ids(self, items):
+    def update_item_metadata(self, items):
         for item in items:
             item['item_id'] = self.item_id_calculator.calculate(item)
-
-    def calculate_item_timestamps(self, items):
-        for item in items:
             item['item_timestamp'] = self.item_timestamp_calculator.calculate(item)
+            item["chain"] = 'polygon'
 
     def close(self):
         self.item_exporter.close()
