@@ -27,6 +27,9 @@ from ethereum_dasm.evmdasm import EvmCode, Contract
 class EthContractService:
 
     def get_function_sighashes(self, bytecode):
+        if not bytecode:
+            return []
+
         bytecode = clean_bytecode(bytecode)
         if bytecode is not None:
             evm_code = EvmCode(contract=Contract(bytecode=bytecode), static_analysis=False, dynamic_analysis=False)
