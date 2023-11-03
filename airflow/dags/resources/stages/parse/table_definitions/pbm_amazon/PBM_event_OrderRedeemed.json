@@ -1,0 +1,43 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "customer",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "orderId",
+                    "type": "string"
+                }
+            ],
+            "name": "OrderRedeemed",
+            "type": "event"
+        },
+        "contract_address": "0x28c96a719edc7c1ba3fb1bafcadf470ace9dfd75",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "pbm_amazon",
+        "schema": [
+            {
+                "description": "",
+                "name": "customer",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "orderId",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "PBM_event_OrderRedeemed"
+    }
+}

@@ -1,0 +1,65 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "beneficiary",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "PBMTokenId",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "ERC20Token",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "ERC20TokenValue",
+                    "type": "uint256"
+                }
+            ],
+            "name": "PBMrevokeWithdraw",
+            "type": "event"
+        },
+        "contract_address": "0xd2d74e2136d60a3c0d252c6de4102a82f2511def",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "pbm_grab",
+        "schema": [
+            {
+                "description": "",
+                "name": "beneficiary",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "PBMTokenId",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "ERC20Token",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "ERC20TokenValue",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "PBM_event_PBMrevokeWithdraw"
+    }
+}

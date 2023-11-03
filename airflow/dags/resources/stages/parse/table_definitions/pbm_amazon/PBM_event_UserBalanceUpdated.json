@@ -1,0 +1,65 @@
+{
+    "parser": {
+        "abi": {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "tokenId",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "newWalletBalance",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "newAvailableBalance",
+                    "type": "uint256"
+                }
+            ],
+            "name": "UserBalanceUpdated",
+            "type": "event"
+        },
+        "contract_address": "0x28c96a719edc7c1ba3fb1bafcadf470ace9dfd75",
+        "field_mapping": {},
+        "type": "log"
+    },
+    "table": {
+        "dataset_name": "pbm_amazon",
+        "schema": [
+            {
+                "description": "",
+                "name": "user",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "tokenId",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "newWalletBalance",
+                "type": "STRING"
+            },
+            {
+                "description": "",
+                "name": "newAvailableBalance",
+                "type": "STRING"
+            }
+        ],
+        "table_description": "",
+        "table_name": "PBM_event_UserBalanceUpdated"
+    }
+}
