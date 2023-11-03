@@ -42,7 +42,7 @@
         "type": "log"
     },
     "table": {
-        "dataset_name": "pbm_mas",
+        "dataset_name": "pbm_grab",
         "schema": [
             {
                 "description": "",
