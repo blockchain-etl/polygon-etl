@@ -60,7 +60,7 @@ Airflow DAGs for exporting and loading the Polygon blockchain data to Google Big
 
    Note that if Composer API is not enabled the command above will auto prompt to enable it.
 
-3. This will be a good time to go to the bigquery console and cretae 3 new datasets under your project.
+3. This will be a good time to go to the bigquery console and create 3 new datasets under your project.
 
    1. crypto_polygon
    2. crypto_polygon_raw
