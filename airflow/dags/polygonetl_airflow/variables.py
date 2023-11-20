@@ -112,6 +112,11 @@ def read_parse_dag_vars(var_prefix, **kwargs):
 def read_verify_streaming_dag_vars(var_prefix, **kwargs):
     vars = {
         'destination_dataset_project_id': read_var('destination_dataset_project_id', var_prefix, True, **kwargs),
+        # Comma separated list of fully qualified BigQuery table names e.g. myproject.streamers.blocks1,myproject.streamers.blocks2
+        # Each table must have a column data containing a JSON object with field timestamp containing unix seconds
+        # Used in combination with https://cloud.google.com/blog/products/data-analytics/pub-sub-launches-direct-path-to-bigquery-for-streaming-analytics
+        # to verify lag of streaming jobs that output to Pub/Sub
+        'extra_streaming_tables': read_var('extra_streaming_tables', var_prefix, False, **kwargs),
         'notification_emails': read_var('notification_emails', None, False, **kwargs),
     }
 
