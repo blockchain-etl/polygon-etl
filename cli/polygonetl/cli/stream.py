@@ -47,11 +47,12 @@ from polygonetl.thread_local_proxy import ThreadLocalProxy
 @click.option('--period-seconds', default=10, show_default=True, type=int, help='How many seconds to sleep between syncs')
 @click.option('-b', '--batch-size', default=10, show_default=True, type=int, help='How many blocks to batch in single request')
 @click.option('-B', '--block-batch-size', default=1, show_default=True, type=int, help='How many blocks to batch in single sync round')
+@click.option('-r', '--ramp-up-blocks', default=0, show_default=True, type=int, help='Specifies the count of initial blocks to be processed one by one before switching to batch processing. This approach is particularly beneficial for mitigating issues like Out-of-Memory (OOM) errors when dealing with large batches')
 @click.option('-w', '--max-workers', default=5, show_default=True, type=int, help='The number of workers')
 @click.option('--log-file', default=None, show_default=True, type=str, help='Log file')
 @click.option('--pid-file', default=None, show_default=True, type=str, help='pid file')
 def stream(last_synced_block_file, lag, provider_uri, output, start_block, entity_types,
-           period_seconds=10, batch_size=2, block_batch_size=10, max_workers=5, log_file=None, pid_file=None):
+           period_seconds=10, batch_size=2, block_batch_size=10, ramp_up_blocks=0, max_workers=5, log_file=None, pid_file=None):
     """Streams all data types to console or Google Pub/Sub."""
     configure_logging(log_file)
     configure_signals()
@@ -80,6 +81,7 @@ def stream(last_synced_block_file, lag, provider_uri, output, start_block, entit
         start_block=start_block,
         period_seconds=period_seconds,
         block_batch_size=block_batch_size,
+        ramp_up_blocks=ramp_up_blocks,
         pid_file=pid_file
     )
     streamer.stream()

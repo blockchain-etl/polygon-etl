@@ -32,7 +32,7 @@ setup(
     python_requires=">=3.7,<3.10",
     install_requires=[
         "base58==2.1.1",
-        "blockchain-etl-common==1.6.1",
+        "blockchain-etl-common==1.7.1",
         "click>=8.0,<9",
         "eth-abi==2.2.0",  # web3 5.28.0 depends on eth-abi<3.0.0
         "eth-utils==1.10",  # eth-abi 2.2.0 depends on eth-utils<2.0.0
