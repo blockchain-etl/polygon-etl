@@ -86,6 +86,7 @@ spec:
             - "--max-workers={{ .Values.config.MAX_WORKERS }}"
             - "--batch-size={{ .Values.config.BATCH_SIZE }}"
             - "--block-batch-size={{ .Values.config.BLOCK_BATCH_SIZE }}"
+            - "--ramp-up-blocks={{ .Values.config.BLOCK_BATCH_SIZE }}"
             - "--pid-file={{ .Values.lsb_path }}/{{ .Values.pid_file }}"
           resources:
             {{- toYaml .Values.stream.resources | nindent 12 }}
