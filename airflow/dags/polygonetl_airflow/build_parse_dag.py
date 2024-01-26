@@ -57,7 +57,7 @@ def build_parse_dag(
 
     dag = models.DAG(
         dag_id,
-        catchup=False,
+        catchup=True,
         schedule=parse_schedule,
         default_args=default_dag_args)
 

@@ -43,7 +43,7 @@ def build_partition_dag(
     # Define a DAG (directed acyclic graph) of tasks.
     dag = models.DAG(
         dag_id,
-        catchup=False,
+        catchup=True,
         schedule=partition_schedule,
         default_args=default_dag_args)
 
