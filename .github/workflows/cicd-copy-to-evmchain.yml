@@ -1,0 +1,23 @@
+---
+  name: Copy Table Definitions to evmchain
+  on:
+    push:
+      branches: [main]
+
+  jobs:
+    upload-to-gcs:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout repo
+          uses: actions/checkout@v4
+
+        - name: Authenticate with Google Cloud
+          uses: google-github-actions/auth@v2
+          with:
+            workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+            service_account: ${{ secrets.SERVICE_ACCOUNT }}
+
+        - name: Upload to GCS
+          run: |
+            gsutil cp -r ./airflow/dags/resources/stages/parse/table_definitions/ gs://nansen-blockchain-etl-prod/us-central1-evmchain-etl-pr-9f8a234b-bucket/dags/resources/stages/parse/table_definitions_polygon/
