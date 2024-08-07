@@ -3,3 +3,4 @@
 jsonschema==3.2.0   # matches `composer-2.1.14-airflow-2.5.1`
 pytest==7.3.1
 tox==4.0.0          # google-cloud-bigquery 2.34.4 requires packaging<22.0dev
+pendulum~=2.0.0     # pendulum.tz.timezone is removed in pendulum 3.0.0 which causes TypeError: 'module' object is not callable
