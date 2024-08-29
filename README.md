@@ -5,6 +5,25 @@
 Polygon ETL allows you to setup an ETL pipeline in Google Cloud Platform for ingesting Polygon blockchain data
 into BigQuery and Pub/Sub. It comes with [CLI tools](/cli) for exporting Polygon data into convenient formats like CSVs and relational databases.
 
+
+## Status Update (2024-08-29)
+
+### This repo
+- Nansen has decided to step back from its role as major contributor to this repo.
+- Nansen would like to thank all contributors to this repo, with best wishes for the future.
+
+### Raw data
+- Polygon continues to batch load daily to BigQuery dataset `public-data-finance.crypto_polygon`.
+- However, streaming to this dataset is currently disabled in Polygon's GCP infra.
+- Nansen will no longer be maintaining this dataset; it's up to Polygon what happens next.
+
+### Parsed data
+- This repo's [table_definitions folder](./airflow/dags/resources/stages/parse/table_definitions) is now archived. Please do not add table definitions there!
+- Nansen continues to batch load daily to BigQuery datasets `blockchain-etl.polygon_*`.
+- Nansen will be maintaining this dataset for the foreseeable future.
+- If you wish to contribute table definitions, please raise PRs in [nansen-ai/evm-table-definitions](https://github.com/nansen-ai/evm-table-definitions).
+
+
 ## Architecture
 
 ![polygon_etl_architecture.svg](polygon_etl_architecture.svg)
