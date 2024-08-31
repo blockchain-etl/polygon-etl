@@ -21,7 +21,7 @@ into BigQuery and Pub/Sub. It comes with [CLI tools](/cli) for exporting Polygon
 - This repo's [table_definitions folder](./airflow/dags/resources/stages/parse/table_definitions) is now archived. Please do not add table definitions there!
 - Nansen continues to batch load daily to BigQuery datasets `blockchain-etl.polygon_*`.
 - Nansen will be maintaining this dataset for the foreseeable future.
-- If you wish to contribute table definitions, please raise PRs in [nansen-ai/evm-table-definitions](https://github.com/nansen-ai/evm-table-definitions).
+- If you wish to contribute table definitions, please raise PRs in [nansen-ai/evmchain-etl-table-definitions](https://github.com/nansen-ai/evmchain-etl-table-definitions).
 
 
 ## Architecture
