@@ -21,6 +21,8 @@ parse_dag_vars = read_parse_dag_vars(
 )
 
 for folder in glob(table_definitions_folder):
+    if not os.path.isdir(folder):
+        continue
     dataset = folder.split('/')[-1]
 
     dag_id = f'polygon_parse_{dataset}_dag'
