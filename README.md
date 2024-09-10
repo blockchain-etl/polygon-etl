@@ -13,9 +13,9 @@ into BigQuery and Pub/Sub. It comes with [CLI tools](/cli) for exporting Polygon
 - Nansen would like to thank all contributors to this repo, with best wishes for the future.
 
 ### Raw data
-- Polygon continues to batch load daily to BigQuery dataset `public-data-finance.crypto_polygon`.
-- However, streaming to this dataset is currently disabled in Polygon's GCP infra.
-- Nansen will no longer be maintaining this dataset; it's up to Polygon what happens next.
+- BigQuery dataset `public-data-finance.crypto_polygon` has not been updated since 2024-09-01.
+- Both batch loading and streaming to this dataset are currently disabled in Polygon's GCP infra.
+- Nansen are no longer be maintaining this dataset; it's up to Polygon what happens next.
 
 ### Parsed data
 - This repo's [table_definitions folder](./airflow/dags/resources/stages/parse/table_definitions) is now archived. Please do not add table definitions there!
